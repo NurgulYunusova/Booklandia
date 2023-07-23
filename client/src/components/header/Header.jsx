@@ -19,8 +19,8 @@ function Header() {
           </div>
 
           <div className="authButtons">
-            <button className="login">Log In</button>
-            <button className="register">Register</button>
+            <button className="login">LOG IN</button>
+            <button className="register">REGISTER</button>
           </div>
 
           {/* <div className="userIcons">

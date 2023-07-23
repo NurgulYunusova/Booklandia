@@ -22,7 +22,7 @@ function Slider() {
             modules={[EffectCards, Autoplay]}
             className="mySwiper"
             autoplay={{
-              delay: 2500,
+              delay: 3000,
               disableOnInteraction: false,
             }}
           >
