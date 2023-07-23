@@ -1,0 +1,30 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+.pages {
+  width: 100%;
+  background-color: $base-color2;
+  margin-top: 70px;
+
+  &Container {
+    margin: 0 auto;
+    color: $base-color1;
+    padding: 25px 0;
+
+    ul {
+      @include center();
+      list-style: none;
+      font-family: $base-font2;
+      font-weight: 600;
+
+      li {
+        cursor: pointer;
+        padding: 0 50px;
+
+        &:not(:last-child) {
+          border-right: 1px solid #0033667d;
+        }
+      }
+    }
+  }
+}

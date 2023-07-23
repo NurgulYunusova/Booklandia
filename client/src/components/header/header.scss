@@ -5,14 +5,14 @@ header {
   width: 100%;
   position: fixed;
   top: 0;
-  left: 0;
-  z-index: 999;
+  z-index: 100;
+  background-color: $base-color2;
 
   .headerContainer {
     width: 80%;
     margin: 0 auto;
     @include center($justify-content: space-between);
-    padding: 15px 0;
+    padding: 20px 0;
 
     .logo {
       h1 {
