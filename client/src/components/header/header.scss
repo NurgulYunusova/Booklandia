@@ -3,11 +3,13 @@
 
 header {
   width: 100%;
-  background-color: $base-color2;
-  position: sticky;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
 
   .headerContainer {
-    width: 90%;
+    width: 80%;
     margin: 0 auto;
     @include center($justify-content: space-between);
     padding: 15px 0;
@@ -61,20 +63,7 @@ header {
 
       .login,
       .register {
-        padding: 8px 25px;
-        font-family: $base-font2;
-        color: $base-color1;
-        border: 2px solid $base-color1;
-        font-weight: 500;
-        background-color: transparent;
-        font-size: 15px;
-        cursor: pointer;
-        transition: all 0.2s ease-in-out;
-
-        &:hover {
-          background-color: $base-color1;
-          color: $base-color2;
-        }
+        @include button();
       }
     }
 

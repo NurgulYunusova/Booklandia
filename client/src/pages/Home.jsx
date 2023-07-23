@@ -1,9 +1,9 @@
-import IntroSection from "../components/introSection/IntroSection";
+import Intro from "../components/intro/Intro";
 
 function Home() {
   return (
     <>
-      <IntroSection />
+      <Intro />
     </>
   );
 }
