@@ -1,5 +1,11 @@
+import IntroSection from "../components/introSection/IntroSection";
+
 function Home() {
-  return <></>;
+  return (
+    <>
+      <IntroSection />
+    </>
+  );
 }
 
 export default Home;
