@@ -1,10 +1,10 @@
 // import NotFoundPage from "../pages/NotFoundPage";
-import Home from "../pages/Home";
+import HomePage from "../pages/HomePage";
 
 export const routes = [
   {
     path: "/",
-    element: <Home />,
+    element: <HomePage />,
   },
   // {
   //   path: "*",
