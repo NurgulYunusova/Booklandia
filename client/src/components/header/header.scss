@@ -24,7 +24,7 @@ header {
 
     .searchBar {
       width: 35%;
-      background-color: #fff;
+      background-color: #f0f0f0;
       @include center();
       padding: 10px 0;
 
@@ -34,7 +34,7 @@ header {
         border: none;
         font-size: 15px;
         font-family: $base-font2;
-        background-color: #fff;
+        background-color: #f0f0f0;
         color: $base-color1;
 
         &::placeholder {
