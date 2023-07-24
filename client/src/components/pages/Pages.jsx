@@ -6,10 +6,18 @@ function Pages() {
       <div className="pages">
         <div className="pagesContainer">
           <ul>
-            <li>HOME</li>
-            <li>ABOUT US</li>
-            <li>BOOKS</li>
-            <li>CONTACT US</li>
+            <li>
+              <a href="#">HOME</a>
+            </li>
+            <li>
+              <a href="#">ABOUT US</a>
+            </li>
+            <li>
+              <a href="#">BOOKS</a>
+            </li>
+            <li>
+              <a href="#">CONTACT US</a>
+            </li>
           </ul>
         </div>
       </div>
