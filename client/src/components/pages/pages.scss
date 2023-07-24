@@ -3,30 +3,31 @@
 
 .pages {
   width: 100%;
-  background-color: $base-color2;
-  margin-top: 70px;
+  height: 5%;
+  background-color: $base-color1;
+  margin-top: 88px;
 
   &Container {
     margin: 0 auto;
-    color: $base-color1;
-    padding: 25px 0;
+    @include center();
 
     ul {
       @include center();
       list-style: none;
       font-family: $base-font2;
-      font-weight: 600;
+      font-weight: 400;
+      margin: 8px 0;
 
       li {
         padding: 0 50px;
 
         &:not(:last-child) {
-          border-right: 1px solid #0033667d;
+          border-right: 1px solid #bdc9d47d;
         }
 
         a {
           text-decoration: none;
-          color: $base-color3;
+          color: $base-color2;
           cursor: pointer;
         }
       }
