@@ -15,12 +15,19 @@
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
-  @include hoverEffect;
+  @include buttonHoverEffect;
 }
 
-@mixin hoverEffect() {
+@mixin buttonHoverEffect() {
   &:hover {
     background-color: $base-color1;
     color: $base-color2;
   }
 }
+
+// @mixin linkHoverEffect {
+//   &:hover {
+//     color: #002255;
+//     text-decoration: underline;
+//   }
+// }
