@@ -1,0 +1,62 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+.bestsellers {
+  width: 100%;
+
+  &Container {
+    width: 80%;
+    margin: 80px auto;
+    font-family: $base-font2;
+    @include center($align-items: flex-start, $justify-content: space-between);
+
+    .heading {
+      width: 23%;
+
+      h1 {
+        color: $base-color3;
+      }
+    }
+
+    .books {
+      width: 75%;
+      color: $base-color3;
+      @include center($justify-content: space-between);
+      flex-wrap: wrap;
+
+      .book {
+        @include center($align-items: flex-start);
+        flex-direction: column;
+        gap: 20px;
+        width: 280px;
+        height: 380px;
+        padding: 25px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 10px 36px 0px,
+          rgba(0, 0, 0, 0.06) 0px 0px 0px 1px;
+
+        .bookInfo {
+          font-weight: 500;
+
+          .title {
+            font-size: 22px;
+          }
+
+          .author {
+            font-size: 14px;
+            margin: 2px 0 8px;
+          }
+        }
+
+        .bookImage {
+          width: 100%;
+          @include center();
+
+          img {
+            width: 75%;
+            aspect-ratio: 2/2.5;
+          }
+        }
+      }
+    }
+  }
+}
