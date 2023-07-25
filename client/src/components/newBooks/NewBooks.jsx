@@ -30,7 +30,7 @@ function NewBooks() {
                   <h3>The Best New Books of August</h3>
                 </div>
                 <div className="textsRightSide">
-                  <h5>Hurry the deals run out soon.</h5>
+                  <h5>Hurry the deals run out soon</h5>
                   <CountdownTimer endTime={endTime} />
                 </div>
               </div>

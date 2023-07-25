@@ -10,6 +10,7 @@ import "swiper/css/effect-cards";
 import { EffectCards, Autoplay } from "swiper/modules";
 import "./slider.scss";
 import { useState } from "react";
+import img from "../../assets/images/anna_karenina.jpg";
 
 function Slider() {
   return (
@@ -26,11 +27,21 @@ function Slider() {
               disableOnInteraction: false,
             }}
           >
-            <SwiperSlide></SwiperSlide>
-            <SwiperSlide></SwiperSlide>
-            <SwiperSlide></SwiperSlide>
-            <SwiperSlide></SwiperSlide>
-            <SwiperSlide> </SwiperSlide>
+            <SwiperSlide>
+              <img src={img} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src={img} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src={img} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src={img} alt="" />
+            </SwiperSlide>
+            <SwiperSlide>
+              <img src={img} alt="" />
+            </SwiperSlide>
           </Swiper>
         </div>
       </div>
