@@ -1,6 +1,7 @@
 import Intro from "../components/intro/Intro";
 import Pages from "../components/pages/Pages";
 import Categories from "../components/categories/Categories";
+import Bestsellers from "../components/bestsellers/Bestsellers";
 
 function HomePage() {
   return (
@@ -8,6 +9,7 @@ function HomePage() {
       <Pages />
       <Intro />
       <Categories />
+      <Bestsellers />
     </>
   );
 }
