@@ -1,0 +1,63 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+// WishlistTable.scss
+
+.wishlistTable {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: $base-font2;
+  margin-bottom: 80px;
+
+  th,
+  td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: center;
+  }
+
+  .bookInfo {
+    font-size: 14px;
+    color: $base-color3;
+  }
+
+  .bookName {
+    font-weight: 700;
+    letter-spacing: 0.8px;
+  }
+
+  .price,
+  .addedDate {
+    font-weight: 600;
+    color: rgba(0, 0, 17, 0.6);
+  }
+
+  .price {
+    margin: 5px 0;
+  }
+
+  img {
+    width: 80px;
+    height: auto;
+  }
+
+  .addToCart {
+    @include button();
+  }
+
+  .deleteColumn {
+    width: 5%;
+
+    .delete {
+      border: none;
+      background-color: transparent;
+      outline: none;
+      transition: all 0.2s ease-in-out;
+      cursor: pointer;
+
+      &:hover {
+        color: rgb(207, 24, 24);
+      }
+    }
+  }
+}

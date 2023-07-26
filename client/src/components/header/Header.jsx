@@ -3,8 +3,11 @@ import "./header.scss";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import { useNavigate } from "react-router-dom";
 
 function Header() {
+  const navigate = useNavigate();
+
   return (
     <>
       <header>
@@ -18,13 +21,13 @@ function Header() {
             <i className="fas fa-search"></i>
           </div>
 
-          <div className="authButtons">
+          {/* <div className="authButtons">
             <button className="login">LOG IN</button>
             <button className="register">REGISTER</button>
-          </div>
+          </div> */}
 
-          {/* <div className="userIcons">
-            <span>
+          <div className="userIcons">
+            <span onClick={() => navigate("/wishlist")}>
               <FavoriteBorderOutlinedIcon sx={{ fontSize: "20px" }} />
               WISHLIST
             </span>
@@ -36,7 +39,7 @@ function Header() {
               <PersonOutlineOutlinedIcon sx={{ fontSize: "23px" }} />
               ACCOUNT
             </span>
-          </div> */}
+          </div>
         </div>
       </header>
     </>
