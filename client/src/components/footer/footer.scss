@@ -1,0 +1,154 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+footer {
+  width: 100%;
+  background-color: $base-color1;
+
+  .footerContainer {
+    width: 80%;
+    margin: 0 auto;
+    // color: #c4c4c4;
+    color: #999;
+    padding: 50px 0;
+    font-family: $base-font2;
+
+    .top {
+      @include center(
+        $justify-content: space-between,
+        $align-items: flex-start
+      );
+      border-bottom: 1px solid #e7e6dd7b;
+      padding-bottom: 30px;
+
+      .leftSide {
+        width: 15%;
+
+        .logo {
+          h1 {
+            font-family: $base-font1;
+            font-size: 28px;
+            color: $base-color2;
+          }
+        }
+
+        .location {
+          font-size: 14px;
+          margin: 20px 0 15px;
+          font-weight: 500;
+        }
+
+        .map {
+          color: $base-color2;
+          font-size: 12px;
+          font-weight: 700;
+          letter-spacing: 1px;
+        }
+
+        .socialMedias {
+          margin-top: 30px;
+
+          ul {
+            list-style: none;
+            @include center($justify-content: flex-start);
+            gap: 20px;
+
+            li {
+              font-size: 18px;
+
+              a {
+                color: $base-color2;
+              }
+            }
+          }
+        }
+      }
+
+      .rightSide {
+        @include center(
+          $justify-content: space-between,
+          $align-items: flex-start
+        );
+        width: 80%;
+
+        .headingText {
+          font-size: 16px;
+          font-weight: 700;
+          color: $base-color2;
+          letter-spacing: 0.7px;
+        }
+
+        .helpSection {
+          border-left: 1px solid #e7e6dd7b;
+          padding-left: 35px;
+
+          .number {
+            margin: 10px 0 25px;
+
+            a {
+              color: $base-color2;
+              font-size: 28px;
+              font-weight: 700;
+              text-decoration: none;
+            }
+          }
+
+          .time {
+            p {
+              font-size: 14px;
+              font-weight: 500;
+            }
+          }
+
+          .mail {
+            margin-top: 25px;
+
+            a {
+              font-size: 18px;
+              color: $base-color2;
+              text-decoration: none;
+              font-weight: 600;
+            }
+          }
+        }
+
+        .exploreSection,
+        .serviceSection,
+        .categoriesSection {
+          ul {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            li {
+              font-size: 14px;
+              font-weight: 500;
+              cursor: pointer;
+
+              &:nth-child(1) {
+                margin-top: 15px;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .bottom {
+      @include center($justify-content: space-between);
+      margin-top: 40px;
+
+      p {
+        font-size: 14px;
+        color: $base-color2;
+        letter-spacing: 0.7px;
+
+        a {
+          color: $base-color2;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
