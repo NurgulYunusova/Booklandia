@@ -1,0 +1,56 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+.popularAuthors {
+  width: 100%;
+
+  &Container {
+    width: 80%;
+    margin: 40px auto;
+
+    .heading {
+      @include center($justify-content: space-between);
+
+      h1 {
+        font-family: $base-font2;
+        color: $base-color3;
+        font-size: 36px;
+      }
+
+      .divider {
+        width: 55%;
+        height: 0.7px;
+        background-color: $base-color3;
+        opacity: 0.3;
+      }
+
+      button {
+        @include buttonSecond();
+      }
+    }
+
+    .swiper {
+      width: 100%;
+      height: 100%;
+      padding: 50px 10px;
+
+      .author {
+        @include center();
+        flex-direction: column;
+        gap: 25px;
+        padding: 50px 10px;
+        box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+        img {
+          width: 60%;
+          border-radius: 50%;
+        }
+
+        h3 {
+          color: $base-color3;
+          font-family: $base-font2;
+        }
+      }
+    }
+  }
+}
