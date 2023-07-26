@@ -47,14 +47,14 @@ function Testimonials() {
                   <p className="title">What people saying!</p>
                   <div className="divider"></div>
                   <p className="content">
-                    "I am so happy to find a site where I can shop for unusual
-                    items. The packaging was phenomenal and my book arrived on
-                    time in perfect condition."
+                    "Excellent service. The books were wrapped securely and
+                    arrived in pristine condition. I sent an email after to
+                    books arrived to ask about the author."
                   </p>
                   <div className="quote-icon">
                     <i class="fas fa-quote-left"></i>
                   </div>
-                  <p className="details">JOEL M / NEW YORK</p>
+                  <p className="details">ELLIE A / BARCELONA</p>
                 </div>
               </SwiperSlide>
 
@@ -63,78 +63,14 @@ function Testimonials() {
                   <p className="title">What people saying!</p>
                   <div className="divider"></div>
                   <p className="content">
-                    "I am so happy to find a site where I can shop for unusual
-                    items. The packaging was phenomenal and my book arrived on
-                    time in perfect condition."
+                    "This is the best book store! A wide variety. The prices are
+                    great, and there is always a sale of some kind going on. You
+                    can find just what you are looking for here."
                   </p>
                   <div className="quote-icon">
                     <i class="fas fa-quote-left"></i>
                   </div>
-                  <p className="details">JOEL M / NEW YORK</p>
-                </div>
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <div className="testimonial">
-                  <p className="title">What people saying!</p>
-                  <div className="divider"></div>
-                  <p className="content">
-                    "I am so happy to find a site where I can shop for unusual
-                    items. The packaging was phenomenal and my book arrived on
-                    time in perfect condition."
-                  </p>
-                  <div className="quote-icon">
-                    <i class="fas fa-quote-left"></i>
-                  </div>
-                  <p className="details">JOEL M / NEW YORK</p>
-                </div>
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <div className="testimonial">
-                  <p className="title">What people saying!</p>
-                  <div className="divider"></div>
-                  <p className="content">
-                    "I am so happy to find a site where I can shop for unusual
-                    items. The packaging was phenomenal and my book arrived on
-                    time in perfect condition."
-                  </p>
-                  <div className="quote-icon">
-                    <i class="fas fa-quote-left"></i>
-                  </div>
-                  <p className="details">JOEL M / NEW YORK</p>
-                </div>
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <div className="testimonial">
-                  <p className="title">What people saying!</p>
-                  <div className="divider"></div>
-                  <p className="content">
-                    "I am so happy to find a site where I can shop for unusual
-                    items. The packaging was phenomenal and my book arrived on
-                    time in perfect condition."
-                  </p>
-                  <div className="quote-icon">
-                    <i class="fas fa-quote-left"></i>
-                  </div>
-                  <p className="details">JOEL M / NEW YORK</p>
-                </div>
-              </SwiperSlide>
-
-              <SwiperSlide>
-                <div className="testimonial">
-                  <p className="title">What people saying!</p>
-                  <div className="divider"></div>
-                  <p className="content">
-                    "I am so happy to find a site where I can shop for unusual
-                    items. The packaging was phenomenal and my book arrived on
-                    time in perfect condition."
-                  </p>
-                  <div className="quote-icon">
-                    <i class="fas fa-quote-left"></i>
-                  </div>
-                  <p className="details">JOEL M / NEW YORK</p>
+                  <p className="details">PAM PRUITT / BERLIN</p>
                 </div>
               </SwiperSlide>
             </Swiper>
