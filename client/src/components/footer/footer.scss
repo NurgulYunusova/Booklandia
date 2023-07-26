@@ -10,7 +10,7 @@ footer {
     margin: 0 auto;
     // color: #c4c4c4;
     color: #999;
-    padding: 50px 0;
+    padding: 50px 0 20px;
     font-family: $base-font2;
 
     .top {
@@ -137,7 +137,7 @@ footer {
 
     .bottom {
       @include center($justify-content: space-between);
-      margin-top: 40px;
+      margin-top: 20px;
 
       p {
         font-size: 14px;
