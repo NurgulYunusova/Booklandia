@@ -1,6 +1,9 @@
+import { useNavigate } from "react-router-dom";
 import "./pages.scss";
 
 function Pages() {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="pages">
@@ -13,7 +16,7 @@ function Pages() {
               <a href="#">ABOUT US</a>
             </li>
             <li>
-              <a href="#">BOOKS</a>
+              <a onClick={() => navigate("/books")}>BOOKS</a>
             </li>
             <li>
               <a href="#">CONTACT US</a>
