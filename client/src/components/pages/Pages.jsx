@@ -13,7 +13,7 @@ function Pages() {
               <a href="#">HOME</a>
             </li>
             <li>
-              <a href="#">ABOUT US</a>
+              <a onClick={() => navigate("/aboutUs")}>ABOUT US</a>
             </li>
             <li>
               <a onClick={() => navigate("/books")}>BOOKS</a>
