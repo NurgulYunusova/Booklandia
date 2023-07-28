@@ -1,4 +1,5 @@
 // import NotFoundPage from "../pages/NotFoundPage";
+import AboutUsPage from "../pages/aboutUs/AboutUsPage";
 import BasketPage from "../pages/basket/BasketPage";
 import BooksPage from "../pages/books/BooksPage";
 import ContactUsPage from "../pages/contactUs/ContactusPage";
@@ -25,6 +26,10 @@ export const routes = [
   {
     path: "/contactUs",
     element: <ContactUsPage />,
+  },
+  {
+    path: "/aboutUs",
+    element: <AboutUsPage />,
   },
   // {
   //   path: "*",
