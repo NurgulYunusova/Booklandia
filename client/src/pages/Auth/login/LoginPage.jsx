@@ -7,7 +7,7 @@ function LoginPage() {
       <div className="login">
         <div className="loginContainer">
           <div className="image">
-            <img src={image} alt="" />
+            <img src={image} alt="Books" />
           </div>
 
           <div className="form">

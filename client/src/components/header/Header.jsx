@@ -25,7 +25,9 @@ function Header() {
             <button className="login" onClick={() => navigate("/login")}>
               LOG IN
             </button>
-            <button className="register">REGISTER</button>
+            <button className="register" onClick={() => navigate("/register")}>
+              REGISTER
+            </button>
           </div>
 
           {/* <div className="userIcons">
