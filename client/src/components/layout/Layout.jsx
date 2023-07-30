@@ -6,10 +6,10 @@ import Pages from "../pages/Pages";
 function Layout({ children }) {
   return (
     <div>
-      <Header />
-      <Pages />
+      {/* <Header />
+      <Pages /> */}
       {children}
-      <Footer />
+      {/* <Footer /> */}
     </div>
   );
 }

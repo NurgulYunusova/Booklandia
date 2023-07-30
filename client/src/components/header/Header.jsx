@@ -21,12 +21,14 @@ function Header() {
             <i className="fas fa-search"></i>
           </div>
 
-          {/* <div className="authButtons">
-            <button className="login">LOG IN</button>
+          <div className="authButtons">
+            <button className="login" onClick={() => navigate("/login")}>
+              LOG IN
+            </button>
             <button className="register">REGISTER</button>
-          </div> */}
+          </div>
 
-          <div className="userIcons">
+          {/* <div className="userIcons">
             <span onClick={() => navigate("/wishlist")}>
               <FavoriteBorderOutlinedIcon sx={{ fontSize: "20px" }} />
               WISHLIST
@@ -39,7 +41,7 @@ function Header() {
               <PersonOutlineOutlinedIcon sx={{ fontSize: "23px" }} />
               ACCOUNT
             </span>
-          </div>
+          </div> */}
         </div>
       </header>
     </>
