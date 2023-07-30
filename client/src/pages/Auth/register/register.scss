@@ -58,6 +58,20 @@
           @include button();
         }
       }
+
+      .loginLink {
+        margin-top: 20px;
+        font-size: 13px;
+        text-align: center;
+        color: $base-color3;
+        font-weight: 400;
+
+        a {
+          color: $base-color1;
+          font-weight: 700;
+          cursor: pointer;
+        }
+      }
     }
   }
 }
