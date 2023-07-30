@@ -1,0 +1,48 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+.cards {
+  width: 100%;
+
+  &Container {
+    width: 80%;
+    margin: 100px auto;
+    @include center($justify-content: space-between);
+
+    .card {
+      @include center($justify-content: space-between);
+      gap: 30px;
+      padding: 40px;
+      font-family: $base-font2;
+      box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+
+      .icon {
+        background-color: #003366;
+        color: $base-color2;
+        font-size: 35px;
+        width: 80px;
+        height: 80px;
+        padding: 15px;
+        border-radius: 50%;
+        @include center();
+      }
+
+      .numbers {
+        @include center($align-items: flex-start);
+        flex-direction: column;
+        gap: 10px;
+
+        h2 {
+          font-size: 28px;
+          color: $base-color3;
+        }
+
+        p {
+          color: #001a4082;
+          font-size: 12px;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}

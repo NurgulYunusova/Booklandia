@@ -1,0 +1,41 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+.intro {
+  width: 100%;
+  background-color: $base-color2;
+
+  &Container {
+    width: 80%;
+    margin: 0 auto;
+    @include center($justify-content: space-between);
+    padding: 60px 0 68px;
+
+    .firstSide {
+      width: 38%;
+      color: $base-color3;
+
+      h1 {
+        font-size: 72px;
+        font-family: $base-font1;
+      }
+
+      p {
+        font-size: 20px;
+        font-family: $base-font2;
+        letter-spacing: 1px;
+        margin: 15px 0 30px;
+      }
+
+      button {
+        @include center();
+        gap: 10px;
+        @include button();
+      }
+    }
+
+    .secondSide {
+      padding-right: 50px;
+    }
+  }
+}

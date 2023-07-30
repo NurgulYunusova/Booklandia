@@ -1,0 +1,93 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+header {
+  width: 100%;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  background-color: $base-color2;
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 6px -1px,
+    rgba(0, 0, 0, 0.06) 0px 2px 4px -1px;
+
+  .headerContainer {
+    width: 80%;
+    margin: 0 auto;
+    @include center($justify-content: space-between);
+    padding: 20px 0;
+
+    .logo {
+      h1 {
+        font-family: $base-font1;
+        color: $base-color1;
+        font-size: 36px;
+      }
+    }
+
+    .searchBar {
+      width: 35%;
+      background-color: #f0f0f0;
+      @include center();
+      padding: 10px 0;
+
+      input {
+        width: 85%;
+        outline: none;
+        border: none;
+        font-size: 15px;
+        font-family: $base-font2;
+        background-color: #f0f0f0;
+        color: $base-color1;
+
+        &::placeholder {
+          font-size: 15px;
+          font-family: $base-font2;
+          color: rgba(0, 51, 102, 0.7);
+        }
+      }
+
+      .fa-search {
+        margin-left: 5px;
+        font-size: 18px;
+        color: $base-color1;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+
+        &:hover {
+          color: #002255;
+        }
+      }
+    }
+
+    .authButtons {
+      display: flex;
+      gap: 15px;
+
+      .login,
+      .register {
+        @include button();
+      }
+    }
+
+    .userIcons {
+      @include center($justify-content: space-between);
+      gap: 20px;
+
+      span {
+        color: $base-color1;
+        cursor: pointer;
+        font-family: $base-font2;
+        @include center($justify-content: space-between);
+        gap: 6px;
+        font-size: 13px;
+        font-weight: 400;
+      }
+
+      .cart {
+        border-left: 1px solid #0033667d;
+        border-right: 1px solid #0033667d;
+        padding: 0 20px;
+      }
+    }
+  }
+}
