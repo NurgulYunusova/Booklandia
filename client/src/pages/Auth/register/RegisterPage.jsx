@@ -1,7 +1,10 @@
 import "./register.scss";
 import image from "../../../assets/images/login-image9.png";
+import { useNavigate } from "react-router-dom";
 
 function RegisterPage() {
+  const navigate = useNavigate();
+
   return (
     <>
       <div className="register">
@@ -13,6 +16,7 @@ function RegisterPage() {
           <div className="form">
             <h3>REGISTER FORM</h3>
             <p>Required fields are marked *</p>
+
             <form>
               <input type="text" placeholder="Name *" /> <br />
               <input type="email" id="email" placeholder="Email *" /> <br />
@@ -31,6 +35,11 @@ function RegisterPage() {
               />
               <button type="submit">REGISTER</button>
             </form>
+
+            <p className="loginLink">
+              Already have an account?{" "}
+              <a onClick={() => navigate("/login")}>Login.</a>
+            </p>
           </div>
         </div>
       </div>

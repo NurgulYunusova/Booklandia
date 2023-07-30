@@ -1,4 +1,5 @@
 // import NotFoundPage from "../pages/NotFoundPage";
+import ForgotPasswordPage from "../pages/Auth/forgotPassword/ForgotPasswordPage";
 import LoginPage from "../pages/Auth/login/LoginPage";
 import RegisterPage from "../pages/Auth/register/RegisterPage";
 import AboutUsPage from "../pages/aboutUs/AboutUsPage";
@@ -40,6 +41,10 @@ export const routes = [
   {
     path: "/register",
     element: <RegisterPage />,
+  },
+  {
+    path: "/forgotPassword",
+    element: <ForgotPasswordPage />,
   },
 
   // {
