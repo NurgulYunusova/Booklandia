@@ -1,5 +1,5 @@
 import "./login.scss";
-import loginImg from "../../../assets/images/login-image.png";
+import loginBackgroundImage from "../../../assets/images/login-image.png";
 
 function LoginPage() {
   return (
@@ -7,7 +7,7 @@ function LoginPage() {
       <div className="login">
         <div className="loginContainer">
           <div className="image">
-            <img src={loginImg} alt="" />
+            <img src={loginBackgroundImage} alt="" />
           </div>
 
           <div className="form">
