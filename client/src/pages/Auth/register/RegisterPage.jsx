@@ -29,8 +29,8 @@ function RegisterPage() {
               <br />
               <input
                 type="password"
-                name="password"
-                id="password"
+                name="confirmPassword"
+                id="confirmPassword"
                 placeholder="Confirm password *"
               />
               <button type="submit">REGISTER</button>
