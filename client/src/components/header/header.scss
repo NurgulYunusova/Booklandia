@@ -63,8 +63,8 @@ header {
       display: flex;
       gap: 15px;
 
-      .login,
-      .register {
+      .loginButton,
+      .registerButton {
         @include button();
       }
     }
