@@ -1,0 +1,74 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+.commentSection {
+  font-family: $base-font2;
+  color: $base-color3;
+
+  h2 {
+    font-size: 28px;
+  }
+
+  .addComment {
+    .ratingDiv {
+      @include center($justify-content: flex-start);
+      gap: 15px;
+      margin-top: 25px;
+    }
+
+    textarea {
+      width: 100%;
+      padding: 12px 22px;
+      margin: 20px 0;
+      font-size: 14px;
+      outline: none;
+      background: transparent;
+      border: 1px solid #ccc;
+
+      &::placeholder {
+        font-size: 14px;
+        font-family: $base-font2;
+        font-weight: 500;
+      }
+    }
+
+    .addButton {
+      @include center($justify-content: flex-end);
+
+      button {
+        @include button();
+      }
+    }
+  }
+
+  .allComments {
+    margin-top: 30px;
+
+    h3 {
+      font-size: 24px;
+    }
+
+    .reviews {
+      .review {
+        display: flex;
+        gap: 20px;
+        margin: 50px 0;
+
+        .rightSide {
+          .nameAndTime {
+            @include center($justify-content: space-between);
+
+            .name,
+            .time {
+              font-weight: 600;
+            }
+
+            .time {
+              color: #001a408d;
+            }
+          }
+        }
+      }
+    }
+  }
+}

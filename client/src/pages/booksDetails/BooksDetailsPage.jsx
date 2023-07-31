@@ -7,6 +7,7 @@ import "./booksdetails.scss";
 import { useState } from "react";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import Comment from "../../components/comment/Comment";
 
 function BooksDetailsPage() {
   const navigate = useNavigate();
@@ -42,7 +43,7 @@ function BooksDetailsPage() {
             </div>
           </div>
 
-          <div className="bottom">
+          <div className="middle">
             <div className="left">
               <div className="bookImage">
                 <img src={img} alt="Anna Karenina" />
@@ -177,6 +178,10 @@ function BooksDetailsPage() {
                 </div>
               </div>
             </div>
+          </div>
+
+          <div className="bottom">
+            <Comment />
           </div>
         </div>
       </div>
