@@ -69,7 +69,7 @@ function Comment() {
             // value={newComment}
             // onChange={handleCommentChange}
             placeholder="Your review *"
-            rows="10"
+            rows="8"
           />
           {/* <button onClick={handleAddComment}>Add Comment</button> */}
           <div className="addButton">

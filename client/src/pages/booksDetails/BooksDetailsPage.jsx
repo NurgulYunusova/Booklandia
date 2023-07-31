@@ -183,6 +183,149 @@ function BooksDetailsPage() {
           <div className="bottom">
             <Comment />
           </div>
+
+          <div className="relatedBooks">
+            <div className="heading">
+              <h1>Related Books</h1>
+              <div className="divider"></div>
+            </div>
+            <div className="books">
+              <div className="book">
+                <div className="bookInfo">
+                  <p className="title">Anna Karenina</p>
+                  <p className="author">Leo Tolstoy</p>
+                  <Rating
+                    name="book-rating"
+                    precision={0.5}
+                    value={4.5}
+                    icon={
+                      <StarRoundedIcon
+                        style={{ color: "#de723c", fontSize: "20px" }}
+                      />
+                    } // Change the star icon color
+                    emptyIcon={
+                      <StarRoundedIcon
+                        style={{ color: "#bab6b6", fontSize: "20px" }}
+                      />
+                    }
+                    readOnly
+                    // onChange={handleBookRatingChange}
+                  />
+                </div>
+                <div className="bookImage">
+                  <img src={img} alt="" />
+                </div>
+              </div>
+
+              <div className="book">
+                <div className="bookInfo">
+                  <p className="title">Anna Karenina</p>
+                  <p className="author">Leo Tolstoy</p>
+                  <Rating
+                    name="book-rating"
+                    precision={0.5}
+                    value={4.5}
+                    icon={
+                      <StarRoundedIcon
+                        style={{ color: "#de723c", fontSize: "20px" }}
+                      />
+                    } // Change the star icon color
+                    emptyIcon={
+                      <StarRoundedIcon
+                        style={{ color: "#bab6b6", fontSize: "20px" }}
+                      />
+                    }
+                    readOnly
+                    // onChange={handleBookRatingChange}
+                  />
+                </div>
+                <div className="bookImage">
+                  <img src={img} alt="" />
+                </div>
+              </div>
+
+              <div className="book">
+                <div className="bookInfo">
+                  <p className="title">Anna Karenina</p>
+                  <p className="author">Leo Tolstoy</p>
+                  <Rating
+                    name="book-rating"
+                    precision={0.5}
+                    value={4.5}
+                    icon={
+                      <StarRoundedIcon
+                        style={{ color: "#de723c", fontSize: "20px" }}
+                      />
+                    } // Change the star icon color
+                    emptyIcon={
+                      <StarRoundedIcon
+                        style={{ color: "#bab6b6", fontSize: "20px" }}
+                      />
+                    }
+                    readOnly
+                    // onChange={handleBookRatingChange}
+                  />
+                </div>
+                <div className="bookImage">
+                  <img src={img} alt="" />
+                </div>
+              </div>
+
+              <div className="book">
+                <div className="bookInfo">
+                  <p className="title">Anna Karenina</p>
+                  <p className="author">Leo Tolstoy</p>
+                  <Rating
+                    name="book-rating"
+                    precision={0.5}
+                    value={4.5}
+                    icon={
+                      <StarRoundedIcon
+                        style={{ color: "#de723c", fontSize: "20px" }}
+                      />
+                    } // Change the star icon color
+                    emptyIcon={
+                      <StarRoundedIcon
+                        style={{ color: "#bab6b6", fontSize: "20px" }}
+                      />
+                    }
+                    readOnly
+                    // onChange={handleBookRatingChange}
+                  />
+                </div>
+                <div className="bookImage">
+                  <img src={img} alt="" />
+                </div>
+              </div>
+
+              <div className="book">
+                <div className="bookInfo">
+                  <p className="title">Anna Karenina</p>
+                  <p className="author">Leo Tolstoy</p>
+                  <Rating
+                    name="book-rating"
+                    precision={0.5}
+                    value={4.5}
+                    icon={
+                      <StarRoundedIcon
+                        style={{ color: "#de723c", fontSize: "20px" }}
+                      />
+                    } // Change the star icon color
+                    emptyIcon={
+                      <StarRoundedIcon
+                        style={{ color: "#bab6b6", fontSize: "20px" }}
+                      />
+                    }
+                    readOnly
+                    // onChange={handleBookRatingChange}
+                  />
+                </div>
+                <div className="bookImage">
+                  <img src={img} alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </>
