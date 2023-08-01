@@ -9,6 +9,7 @@ import BooksPage from "../pages/books/BooksPage";
 import BooksDetailsPage from "../pages/booksDetails/BooksDetailsPage";
 import ContactUsPage from "../pages/contactUs/ContactusPage";
 import HomePage from "../pages/home/HomePage";
+import ProfilePage from "../pages/profile/ProfilePage";
 import WishlistPage from "../pages/wishlist/WishlistPage";
 
 export const routes = [
@@ -55,6 +56,10 @@ export const routes = [
   {
     path: "/booksDetails",
     element: <BooksDetailsPage />,
+  },
+  {
+    path: "/profilePage",
+    element: <ProfilePage />,
   },
 
   // {
