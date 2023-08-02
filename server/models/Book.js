@@ -15,10 +15,12 @@ const bookSchema = new mongoose.Schema(
       ref: "Author",
       required: true,
     },
-    rating: {
-      type: Number,
-      required: true,
-    },
+    ratings: [
+      {
+        type: Number,
+        required: false,
+      },
+    ],
     description: {
       type: String,
       required: true,
@@ -44,7 +46,7 @@ const bookSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Review",
-        required: true,
+        required: false,
       },
     ],
     image: { type: String, get: baseUrl },
