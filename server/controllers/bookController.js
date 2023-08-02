@@ -1,4 +1,5 @@
 const { Book } = require("../models/Book");
+const { Category } = require("../models/Category");
 
 const bookController = {
   getAllBooks: async (req, res) => {

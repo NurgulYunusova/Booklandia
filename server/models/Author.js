@@ -10,10 +10,10 @@ const authorSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    books: [
+    authorBooks: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Book",
+        ref: "AuthorBook",
         required: true,
       },
     ],
