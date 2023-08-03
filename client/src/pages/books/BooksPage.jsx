@@ -1,5 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import "./books.scss";
+import book from "../../assets/images/anna_karenina.jpg";
+import Rating from "@mui/material/Rating";
+import StarRoundedIcon from "@mui/icons-material/StarRounded";
 
 function BooksPage() {
   const navigate = useNavigate();
@@ -19,55 +22,314 @@ function BooksPage() {
             </div>
           </div>
 
-          <div className="leftSection">
-            <div className="genres">
-              <h3>Genre</h3>
-              <div className="genresList">
-                <ul>
-                  <li>Action & Adventure</li>
-                  <li>Activity Books</li>
-                  <li>Animals</li>
-                  <li>Anthologies</li>
-                  <li>Arts & Literature</li>
-                  <li>Cars & Trucks</li>
-                  <li>Classics</li>
-                  <li>Cultural</li>
-                </ul>
+          <div className="bottom">
+            <div className="leftSection">
+              <div className="genres">
+                <h3>Genre</h3>
+                <div className="genresList">
+                  <ul>
+                    <li>
+                      <div className="square"></div> Action & Adventure
+                    </li>
+                    <li>
+                      <div className="square"></div> Activity Books
+                    </li>
+                    <li>
+                      <div className="square"></div> Animals
+                    </li>
+                    <li>
+                      <div className="square"></div> Anthologies
+                    </li>
+                    <li>
+                      <div className="square"></div> Arts & Literature
+                    </li>
+                    <li>
+                      <div className="square"></div> Cars & Trucks
+                    </li>
+                    <li>
+                      <div className="square"></div> Classics
+                    </li>
+                    <li>
+                      <div className="square"></div> Cultural
+                    </li>
+                  </ul>
+                </div>
               </div>
+
+              <div className="authors">
+                <h3>Authors</h3>
+                <div className="authorsList">
+                  <ul>
+                    <li>
+                      <div className="square"></div> Arthur Gonzalez
+                    </li>
+                    <li>
+                      <div className="square"></div> Dana Chambers
+                    </li>
+                    <li>
+                      <div className="square"></div> Ernesto Wade
+                    </li>
+                    <li>
+                      <div className="square"></div> Karla Newman
+                    </li>
+                    <li>
+                      <div className="square"></div> Misty Figueroa
+                    </li>
+                    <li>
+                      <div className="square"></div> Rita James
+                    </li>
+                    <li>
+                      <div className="square"></div> Suzanne Casey
+                    </li>
+                  </ul>
+                </div>
+              </div>
+
+              {/* <div class="price-content">
+                <div>
+                  <label>Min</label>
+                  <p id="min-value">$50</p>
+                </div>
+
+                <div>
+                  <label>Max</label>
+                  <p id="max-value">$500</p>
+                </div>
+              </div>
+
+              <div className="range-slider">
+                <input
+                  type="range"
+                  className="min-price"
+                  value="100"
+                  min="10"
+                  max="500"
+                  step="10"
+                />
+                <input
+                  type="range"
+                  className="max-price"
+                  value="250"
+                  min="10"
+                  max="500"
+                  step="10"
+                />
+              </div> */}
             </div>
 
-            <div className="authors">
-              <h3>Authors</h3>
-              <div className="authorsList">
-                <ul>
-                  <li>Arthur Gonzalez</li>
-                  <li>Dana Chambers</li>
-                  <li>Ernesto Wade</li>
-                  <li>Karla Newman</li>
-                  <li>Misty Figueroa</li>
-                  <li>Rita James</li>
-                  <li>Suzanne Casey</li>
-                </ul>
+            <div className="rightSection">
+              <div className="books">
+                <div className="book">
+                  <div className="bookImage">
+                    <img src={book} alt="" />
+                  </div>
+
+                  <div className="bookInfo">
+                    <p className="bookTitle">Anna Karenina</p>
+                    <Rating
+                      name="book-rating"
+                      precision={0.5}
+                      value={4.5}
+                      sx={{ marginLeft: "-2px" }}
+                      icon={
+                        <StarRoundedIcon
+                          style={{ color: "#de723c", fontSize: "20px" }}
+                        />
+                      }
+                      emptyIcon={
+                        <StarRoundedIcon
+                          style={{ color: "#bab6b6", fontSize: "20px" }}
+                        />
+                      }
+                      readOnly
+                      // onChange={handleBookRatingChange}
+                    />
+                    <p className="bookAuthor">LEO TOLSTOY</p>
+                    <p className="price">$50.89</p>
+                  </div>
+                </div>
+
+                <div className="book">
+                  <div className="bookImage">
+                    <img src={book} alt="" />
+                  </div>
+
+                  <div className="bookInfo">
+                    <p className="bookTitle">Anna Karenina</p>
+                    <Rating
+                      name="book-rating"
+                      precision={0.5}
+                      value={4.5}
+                      sx={{ marginLeft: "-2px" }}
+                      icon={
+                        <StarRoundedIcon
+                          style={{ color: "#de723c", fontSize: "20px" }}
+                        />
+                      }
+                      emptyIcon={
+                        <StarRoundedIcon
+                          style={{ color: "#bab6b6", fontSize: "20px" }}
+                        />
+                      }
+                      readOnly
+                      // onChange={handleBookRatingChange}
+                    />
+                    <p className="bookAuthor">LEO TOLSTOY</p>
+                    <p className="price">$50.89</p>
+                  </div>
+                </div>
+
+                <div className="book">
+                  <div className="bookImage">
+                    <img src={book} alt="" />
+                  </div>
+
+                  <div className="bookInfo">
+                    <p className="bookTitle">Anna Karenina</p>
+                    <Rating
+                      name="book-rating"
+                      precision={0.5}
+                      value={4.5}
+                      sx={{ marginLeft: "-2px" }}
+                      icon={
+                        <StarRoundedIcon
+                          style={{ color: "#de723c", fontSize: "20px" }}
+                        />
+                      }
+                      emptyIcon={
+                        <StarRoundedIcon
+                          style={{ color: "#bab6b6", fontSize: "20px" }}
+                        />
+                      }
+                      readOnly
+                      // onChange={handleBookRatingChange}
+                    />
+                    <p className="bookAuthor">LEO TOLSTOY</p>
+                    <p className="price">$50.89</p>
+                  </div>
+                </div>
+
+                <div className="book">
+                  <div className="bookImage">
+                    <img src={book} alt="" />
+                  </div>
+
+                  <div className="bookInfo">
+                    <p className="bookTitle">Anna Karenina</p>
+                    <Rating
+                      name="book-rating"
+                      precision={0.5}
+                      value={4.5}
+                      sx={{ marginLeft: "-2px" }}
+                      icon={
+                        <StarRoundedIcon
+                          style={{ color: "#de723c", fontSize: "20px" }}
+                        />
+                      }
+                      emptyIcon={
+                        <StarRoundedIcon
+                          style={{ color: "#bab6b6", fontSize: "20px" }}
+                        />
+                      }
+                      readOnly
+                      // onChange={handleBookRatingChange}
+                    />
+                    <p className="bookAuthor">LEO TOLSTOY</p>
+                    <p className="price">$50.89</p>
+                  </div>
+                </div>
+
+                <div className="book">
+                  <div className="bookImage">
+                    <img src={book} alt="" />
+                  </div>
+
+                  <div className="bookInfo">
+                    <p className="bookTitle">Anna Karenina</p>
+                    <Rating
+                      name="book-rating"
+                      precision={0.5}
+                      value={4.5}
+                      sx={{ marginLeft: "-2px" }}
+                      icon={
+                        <StarRoundedIcon
+                          style={{ color: "#de723c", fontSize: "20px" }}
+                        />
+                      }
+                      emptyIcon={
+                        <StarRoundedIcon
+                          style={{ color: "#bab6b6", fontSize: "20px" }}
+                        />
+                      }
+                      readOnly
+                      // onChange={handleBookRatingChange}
+                    />
+                    <p className="bookAuthor">LEO TOLSTOY</p>
+                    <p className="price">$50.89</p>
+                  </div>
+                </div>
+
+                <div className="book">
+                  <div className="bookImage">
+                    <img src={book} alt="" />
+                  </div>
+
+                  <div className="bookInfo">
+                    <p className="bookTitle">Anna Karenina</p>
+                    <Rating
+                      name="book-rating"
+                      precision={0.5}
+                      value={4.5}
+                      sx={{ marginLeft: "-2px" }}
+                      icon={
+                        <StarRoundedIcon
+                          style={{ color: "#de723c", fontSize: "20px" }}
+                        />
+                      }
+                      emptyIcon={
+                        <StarRoundedIcon
+                          style={{ color: "#bab6b6", fontSize: "20px" }}
+                        />
+                      }
+                      readOnly
+                      // onChange={handleBookRatingChange}
+                    />
+                    <p className="bookAuthor">LEO TOLSTOY</p>
+                    <p className="price">$50.89</p>
+                  </div>
+                </div>
+
+                <div className="book">
+                  <div className="bookImage">
+                    <img src={book} alt="" />
+                  </div>
+
+                  <div className="bookInfo">
+                    <p className="bookTitle">Anna Karenina</p>
+                    <Rating
+                      name="book-rating"
+                      precision={0.5}
+                      value={4.5}
+                      sx={{ marginLeft: "-2px" }}
+                      icon={
+                        <StarRoundedIcon
+                          style={{ color: "#de723c", fontSize: "20px" }}
+                        />
+                      }
+                      emptyIcon={
+                        <StarRoundedIcon
+                          style={{ color: "#bab6b6", fontSize: "20px" }}
+                        />
+                      }
+                      readOnly
+                      // onChange={handleBookRatingChange}
+                    />
+                    <p className="bookAuthor">LEO TOLSTOY</p>
+                    <p className="price">$50.89</p>
+                  </div>
+                </div>
               </div>
             </div>
-
-            {/* <div className="priceFilter">
-              <div className="price-inputs">
-                <input
-                  type="number"
-                  placeholder="Min Price"
-                  value={minPrice}
-                  onChange={(e) => handlePriceFilter("min", e.target.value)}
-                />
-                <span>-</span>
-                <input
-                  type="number"
-                  placeholder="Max Price"
-                  value={maxPrice}
-                  onChange={(e) => handlePriceFilter("max", e.target.value)}
-                />
-              </div>
-            </div> */}
           </div>
         </div>
       </div>
