@@ -29,6 +29,11 @@
           background-repeat: no-repeat;
           height: 100%;
           cursor: pointer;
+          transition: all 0.2s ease-in-out;
+
+          &:hover:not(.explore) {
+            transform: scale(1.03);
+          }
 
           h4 {
             width: 100%;
@@ -60,27 +65,27 @@
           }
         }
 
-        .education {
-          background-image: url("../../assets/images/kimberly-farmer-lUaaKCUANVI-unsplash.jpg");
+        .romance {
+          background-image: url("../../assets/images/romance.png");
         }
 
-        .management {
-          background-image: url("../../assets/images/jexo-oydF7IKn6Bk-unsplash.jpg");
+        .thriller {
+          background-image: url("../../assets/images/thriller.png");
           background-size: cover;
         }
 
-        .finance {
-          background-image: url("../../assets/images/finance.jpg");
+        .fantasy {
+          background-image: url("../../assets/images/fantasy.png");
           background-size: cover;
         }
 
-        .engineering {
-          background-image: url("../../assets/images/recommendedbooks.jpg");
+        .history {
+          background-image: url("../../assets/images/history.jpg");
           background-size: cover;
         }
 
-        .commerce {
-          background-image: url("../../assets/images/commerce.jpg");
+        .selfHelp {
+          background-image: url("../../assets/images/selfHelp.jpg");
           background-size: cover;
         }
       }

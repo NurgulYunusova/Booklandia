@@ -13,7 +13,7 @@ function Header() {
       <header>
         <div className="headerContainer">
           <div className="logo">
-            <h1>Booklandia.</h1>
+            <h1 onClick={() => navigate("/")}>Booklandia.</h1>
           </div>
 
           <div className="searchBar">
@@ -42,7 +42,7 @@ function Header() {
               <AddShoppingCartOutlinedIcon sx={{ fontSize: "20px" }} />
               CART
             </span>
-            <span>
+            <span onClick={() => navigate("/profilePage")}>
               <PersonOutlineOutlinedIcon sx={{ fontSize: "23px" }} />
               ACCOUNT
             </span>
