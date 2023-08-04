@@ -3,6 +3,11 @@ const { db } = require("./config/db");
 
 const app = express();
 
+const fileUpload = require("express-fileupload");
+app.use(fileUpload());
+
+app.use(express.static("authorImages"));
+
 const cors = require("cors");
 
 // const { userRoutes } = require("./routes/userRoute");

@@ -14,14 +14,14 @@ const authorSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "AuthorBook",
-        required: true,
+        required: false,
       },
     ],
     about: {
       type: String,
       required: true,
     },
-    image: { type: String, get: baseUrl },
+    image: { type: String, get: baseUrl, required: true },
   },
   { timestamps: true }
 );

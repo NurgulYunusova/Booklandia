@@ -1,4 +1,5 @@
 const { Author } = require("../models/Author");
+const { v4: uuidv4 } = require("uuid");
 
 const authorController = {
   getAllAuthors: async (req, res) => {
@@ -22,13 +23,30 @@ const authorController = {
     }
   },
   createAuthor: async (req, res) => {
-    const { name, about } = req.body;
     try {
-      const newAuthor = await Author.create({ name, about });
-      res.status(201).json(newAuthor);
-    } catch (error) {
-      res.status(400).json({ message: "Failed to create author", error });
-    }
+      let file = req.files.photo;
+      const { name, about } = req.body;
+
+      let fileExt = file.name.substring(file.name.lastIndexOf("."));
+
+      let path = uuidv4() + fileExt;
+      console.log(path);
+
+      file.mv("authorImages/" + path, function (err) {
+        if (!err) res.send("Success!");
+        else res.status(500).json(err);
+      });
+
+      let author = new Author({
+        name: name,
+        about: about,
+        image: path,
+      });
+
+      author.save();
+
+      res.json(author);
+    } catch (error) {}
   },
   updateAuthor: async (req, res) => {
     const authorId = req.params.id;
