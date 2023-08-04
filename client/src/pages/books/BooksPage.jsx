@@ -1,11 +1,30 @@
+/* eslint-disable no-unused-vars */
 import { useNavigate } from "react-router-dom";
 import "./books.scss";
 import book from "../../assets/images/anna_karenina.jpg";
 import Rating from "@mui/material/Rating";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
+import { useEffect } from "react";
+import { useState } from "react";
+import axios from "axios";
 
 function BooksPage() {
   const navigate = useNavigate();
+  const [categories, setCategories] = useState([]);
+  const [authors, setAuthors] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/category")
+      .then((res) => setCategories(res.data));
+
+    axios
+      .get("http://localhost:8080/api/author")
+      .then((res) => setAuthors(res.data));
+
+    setLoading(false);
+  }, []);
 
   return (
     <>
@@ -27,32 +46,15 @@ function BooksPage() {
               <div className="genres">
                 <h3>Genre</h3>
                 <div className="genresList">
-                  <ul>
-                    <li>
-                      <div className="square"></div> Action & Adventure
-                    </li>
-                    <li>
-                      <div className="square"></div> Activity Books
-                    </li>
-                    <li>
-                      <div className="square"></div> Animals
-                    </li>
-                    <li>
-                      <div className="square"></div> Anthologies
-                    </li>
-                    <li>
-                      <div className="square"></div> Arts & Literature
-                    </li>
-                    <li>
-                      <div className="square"></div> Cars & Trucks
-                    </li>
-                    <li>
-                      <div className="square"></div> Classics
-                    </li>
-                    <li>
-                      <div className="square"></div> Cultural
-                    </li>
-                  </ul>
+                  {categories &&
+                    categories.map((q, key) => (
+                      <ul key={key}>
+                        <li>
+                          <div className="square"></div>
+                          {q.name}
+                        </li>
+                      </ul>
+                    ))}
                 </div>
               </div>
 
