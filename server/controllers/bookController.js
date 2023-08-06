@@ -1,5 +1,5 @@
+const { Author } = require("../models/Author");
 const { Book } = require("../models/Book");
-const { Category } = require("../models/Category");
 
 const bookController = {
   getAllBooks: async (req, res) => {
@@ -36,33 +36,46 @@ const bookController = {
     }
   },
   createBook: async (req, res) => {
-    const {
-      name,
-      author,
-      averageRating,
-      description,
-      category,
-      isbn,
-      pages,
-      language,
-      reviews,
-      image,
-    } = req.body;
-
     try {
-      const newBook = await Book.create({
+      let file = req.files.photo;
+      const { name, author, description, category, isbn, pages, language } =
+        req.body;
+
+      const uploadFile = () => {
+        return new Promise((resolve, reject) => {
+          const path = "bookImages/" + file.name;
+          file.mv(path, function (err) {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(path);
+            }
+          });
+        });
+      };
+
+      const imagePath = await uploadFile();
+
+      const book = new Book({
         name,
         author,
-        averageRating,
         description,
         category,
         isbn,
         pages,
         language,
-        reviews,
-        image,
+        image: imagePath,
       });
-      res.status(201).json(newBook);
+
+      await book.save();
+
+      await Author.findByIdAndUpdate(
+        author,
+        { $push: { authorsBooks: book._id } },
+        { new: true }
+      );
+
+      res.status(201).json({ message: "Book created successfully" });
     } catch (error) {
       res.status(400).json({ message: "Failed to create book", error });
     }
