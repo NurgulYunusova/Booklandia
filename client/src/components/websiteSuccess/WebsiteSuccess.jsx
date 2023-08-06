@@ -12,7 +12,13 @@ function WebsiteSuccess() {
             </div>
             <div className="numbers">
               <h2>
-                <CountUp start={0} end={15254} duration={5} separator="," />
+                <CountUp
+                  start={0}
+                  end={15254}
+                  duration={5}
+                  enableScrollSpy={true}
+                  separator=","
+                />
               </h2>
               <p>TOTAL BOOKS</p>
             </div>
@@ -24,7 +30,13 @@ function WebsiteSuccess() {
             </div>
             <div className="numbers">
               <h2>
-                <CountUp start={0} end={1287} duration={5} separator="," />
+                <CountUp
+                  start={0}
+                  end={1287}
+                  duration={5}
+                  enableScrollSpy={true}
+                  separator=","
+                />
               </h2>
               <p>AUTHORS</p>
             </div>
@@ -36,7 +48,13 @@ function WebsiteSuccess() {
             </div>
             <div className="numbers">
               <h2>
-                <CountUp start={0} end={7589} duration={5} separator="," />
+                <CountUp
+                  start={0}
+                  end={7589}
+                  duration={5}
+                  enableScrollSpy={true}
+                  separator=","
+                />
               </h2>
               <p>BOOKS SOLD</p>
             </div>
@@ -48,7 +66,13 @@ function WebsiteSuccess() {
             </div>
             <div className="numbers">
               <h2>
-                <CountUp start={0} end={97} duration={5} />%
+                <CountUp
+                  start={0}
+                  end={97}
+                  enableScrollSpy={true}
+                  duration={5}
+                />
+                %
               </h2>
               <p>HAPPY CUSTOMER</p>
             </div>
