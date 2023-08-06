@@ -3,9 +3,25 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
 import { Pagination, Autoplay } from "swiper/modules";
-import author from "../../assets/images/author.jpg";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function PopularAuthors() {
+  const navigate = useNavigate();
+  const [authors, setAuthors] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/author")
+      .then((res) => setAuthors(res.data.slice(0, 6)));
+  }, []);
+
+  const handleAuthorClick = (authorId) => {
+    navigate(`/authorDetails/${authorId}`);
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <div className="popularAuthors">
@@ -32,42 +48,18 @@ function PopularAuthors() {
               }}
               className="mySwiper"
             >
-              <SwiperSlide>
-                <div className="author">
-                  <img src={author} alt="" />
-                  <h3>Suzanne Casey</h3>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="author">
-                  <img src={author} alt="" />
-                  <h3>Suzanne Casey</h3>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="author">
-                  <img src={author} alt="" />
-                  <h3>Suzanne Casey</h3>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="author">
-                  <img src={author} alt="" />
-                  <h3>Suzanne Casey</h3>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="author">
-                  <img src={author} alt="" />
-                  <h3>Suzanne Casey</h3>
-                </div>
-              </SwiperSlide>
-              <SwiperSlide>
-                <div className="author">
-                  <img src={author} alt="" />
-                  <h3>Suzanne Casey</h3>
-                </div>
-              </SwiperSlide>
+              {authors &&
+                authors.map((q, key) => (
+                  <SwiperSlide
+                    key={key}
+                    onClick={() => handleAuthorClick(q._id)}
+                  >
+                    <div className="author">
+                      <img src={q.image} alt={q.name} />
+                      <h3>{q.name}</h3>
+                    </div>
+                  </SwiperSlide>
+                ))}
             </Swiper>
           </div>
         </div>
