@@ -18,7 +18,6 @@ const bookController = {
         return res.status(404).json({ message: "Book not found" });
       }
 
-      // Calculate average rating
       const totalRatings = book.ratings.length;
       const sumRatings = book.ratings.reduce(
         (total, rating) => total + rating,
@@ -26,7 +25,6 @@ const bookController = {
       );
       const averageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
 
-      // Add average rating to the book object
       const bookWithAverageRating = {
         ...book.toObject(),
         averageRating,
@@ -50,6 +48,7 @@ const bookController = {
       reviews,
       image,
     } = req.body;
+
     try {
       const newBook = await Book.create({
         name,

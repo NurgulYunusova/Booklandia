@@ -61,29 +61,15 @@ function BooksPage() {
               <div className="authors">
                 <h3>Authors</h3>
                 <div className="authorsList">
-                  <ul>
-                    <li>
-                      <div className="square"></div> Arthur Gonzalez
-                    </li>
-                    <li>
-                      <div className="square"></div> Dana Chambers
-                    </li>
-                    <li>
-                      <div className="square"></div> Ernesto Wade
-                    </li>
-                    <li>
-                      <div className="square"></div> Karla Newman
-                    </li>
-                    <li>
-                      <div className="square"></div> Misty Figueroa
-                    </li>
-                    <li>
-                      <div className="square"></div> Rita James
-                    </li>
-                    <li>
-                      <div className="square"></div> Suzanne Casey
-                    </li>
-                  </ul>
+                  {authors &&
+                    authors.map((q, key) => (
+                      <ul key={key}>
+                        <li>
+                          <div className="square"></div>
+                          {q.name}
+                        </li>
+                      </ul>
+                    ))}
                 </div>
               </div>
 
