@@ -11,6 +11,7 @@ import BooksDetailsPage from "../pages/booksDetails/BooksDetailsPage";
 import ContactUsPage from "../pages/contactUs/ContactusPage";
 import HomePage from "../pages/home/HomePage";
 import ProfilePage from "../pages/profile/ProfilePage";
+import QuizPage from "../pages/quiz/QuizPage";
 import WishlistPage from "../pages/wishlist/WishlistPage";
 
 export const routes = [
@@ -65,6 +66,10 @@ export const routes = [
   {
     path: "/profilePage",
     element: <ProfilePage />,
+  },
+  {
+    path: "/quiz",
+    element: <QuizPage />,
   },
 
   // {
