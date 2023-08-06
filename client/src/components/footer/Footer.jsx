@@ -106,11 +106,11 @@ function Footer() {
               <div className="categoriesSection">
                 <h3 className="headingText">Categories</h3>
                 <ul>
-                  <li>Action</li>
-                  <li>Comedy</li>
-                  <li>Drama</li>
-                  <li>Horror</li>
-                  <li>Kids</li>
+                  <li>Romance</li>
+                  <li>Thriller</li>
+                  <li>Fantasy</li>
+                  <li>Self-Help</li>
+                  <li>History</li>
                 </ul>
               </div>
             </div>

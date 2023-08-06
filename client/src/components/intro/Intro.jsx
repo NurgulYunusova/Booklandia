@@ -1,8 +1,16 @@
 import Slider from "../slider/Slider";
 import ArrowOutwardOutlinedIcon from "@mui/icons-material/ArrowOutwardOutlined";
 import "./intro.scss";
+import { useNavigate } from "react-router-dom";
 
 function Intro() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/books");
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <div className="intro">
@@ -10,7 +18,7 @@ function Intro() {
           <div className="firstSide">
             <h1>The easiest way to find the best book!</h1>
             <p>Not sure what to read next? Explore our catalog of books.</p>
-            <button>
+            <button onClick={() => handleClick()}>
               EXPLORE NOW
               <span style={{ display: "flex", alignItems: "center" }}>
                 <ArrowOutwardOutlinedIcon />

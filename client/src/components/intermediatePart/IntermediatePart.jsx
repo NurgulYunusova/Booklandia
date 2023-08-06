@@ -1,7 +1,15 @@
 import "./intermediatePart.scss";
 import img from "../../assets/images/intermediatePart.jpg";
+import { useNavigate } from "react-router-dom";
 
 function IntermediatePart() {
+  const navigate = useNavigate();
+
+  const handleClick = () => {
+    navigate("/books");
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <div className="intermediatePart">
@@ -16,7 +24,7 @@ function IntermediatePart() {
               Browse the collection of our best selling and top interesting
               books.
             </p>
-            <button>SEE OUR BOOKS</button>
+            <button onClick={() => handleClick()}>SEE OUR BOOKS</button>
           </div>
         </div>
       </div>

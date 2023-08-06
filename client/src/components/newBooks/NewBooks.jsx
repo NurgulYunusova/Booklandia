@@ -5,9 +5,16 @@ import moment from "moment";
 import book from "../../assets/images/anna_karenina.jpg";
 import Rating from "@mui/material/Rating";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
+import { useNavigate } from "react-router-dom";
 
 function NewBooks() {
+  const navigate = useNavigate();
   const endTime = moment().add(3, "day");
+
+  const handleClick = () => {
+    navigate("/books");
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -16,7 +23,7 @@ function NewBooks() {
           <div className="heading">
             <h1>Deals Of The Week</h1>
             <div className="divider"></div>
-            <button>VIEW ALL</button>
+            <button onClick={() => handleClick()}>VIEW ALL</button>
           </div>
 
           <div className="bottom">
