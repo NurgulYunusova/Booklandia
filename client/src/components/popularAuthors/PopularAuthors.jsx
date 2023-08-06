@@ -13,7 +13,6 @@ function PopularAuthors() {
           <div className="heading">
             <h1>Popular Authors</h1>
             <div className="divider"></div>
-            <button>VIEW ALL</button>
           </div>
 
           <div className="authors">

@@ -18,14 +18,10 @@
       }
 
       .divider {
-        width: 55%;
+        width: 70%;
         height: 0.7px;
         background-color: $base-color3;
         opacity: 0.3;
-      }
-
-      button {
-        @include buttonSecond();
       }
     }
 
