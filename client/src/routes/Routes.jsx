@@ -4,6 +4,7 @@ import ForgotPasswordPage from "../pages/Auth/forgotPassword/ForgotPasswordPage"
 import LoginPage from "../pages/Auth/login/LoginPage";
 import RegisterPage from "../pages/Auth/register/RegisterPage";
 import AboutUsPage from "../pages/aboutUs/AboutUsPage";
+import AuthorDetailsPage from "../pages/authorDetails/AuthorDetailsPage";
 import BasketPage from "../pages/basket/BasketPage";
 import BooksPage from "../pages/books/BooksPage";
 import BooksDetailsPage from "../pages/booksDetails/BooksDetailsPage";
@@ -56,6 +57,10 @@ export const routes = [
   {
     path: "/booksDetails",
     element: <BooksDetailsPage />,
+  },
+  {
+    path: "/authorDetails/:id",
+    element: <AuthorDetailsPage />,
   },
   {
     path: "/profilePage",
