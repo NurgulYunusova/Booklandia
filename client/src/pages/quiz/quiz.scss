@@ -83,18 +83,26 @@
 
     .result {
       h3 {
-        font-size: 24px;
-        letter-spacing: 1.4px;
+        font-size: 34px;
         text-align: center;
+        margin-bottom: 25px;
+        color: $base-color3;
       }
 
       p {
-        font-size: 16px;
+        font-size: 21px;
         font-weight: 500;
+        color: $base-color3;
+        letter-spacing: 0.5px;
+
+        &:not(:last-child) {
+          margin-bottom: 15px;
+        }
 
         span {
-          color: #800080;
-          font-size: 22px;
+          color: $base-color1;
+          font-size: 24px;
+          font-weight: 700;
         }
       }
     }
