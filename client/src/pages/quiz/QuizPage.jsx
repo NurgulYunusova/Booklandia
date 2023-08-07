@@ -108,7 +108,7 @@ function QuizPage() {
                 Total Question: <span>{questions.length}</span>
               </p>
               <p>
-                Total Score:<span> {result.score}</span>
+                Total Score:<span> {result.score} / 40</span>
               </p>
               <p>
                 Correct Answers:<span> {result.correctAnswers}</span>
