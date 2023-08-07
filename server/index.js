@@ -14,6 +14,8 @@ const cors = require("cors");
 const { bookRoutes } = require("./routes/bookRoute");
 const { authorRoutes } = require("./routes/authorRoute");
 const { categoryRoutes } = require("./routes/categoryRoute");
+const { quizRoutes } = require("./routes/quizRoute");
+const { questionRoutes } = require("./routes/questionRoute");
 
 require("dotenv").config();
 
@@ -26,6 +28,8 @@ app.use(cors());
 app.use("/api/book", bookRoutes);
 app.use("/api/author", authorRoutes);
 app.use("/api/category", categoryRoutes);
+app.use("/api/question", questionRoutes);
+app.use("/api/quiz", quizRoutes);
 
 app.listen(8080, () => {
   console.log("Server listening on port 8080");
