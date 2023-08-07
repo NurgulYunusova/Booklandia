@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { quiz } from "./quiz";
+import { useEffect, useState } from "react";
+import axios from "axios";
 import "./quiz.scss";
 
 function QuizPage() {
+  const [quiz, setQuiz] = useState([]);
   const [activeQuestion, setActiveQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState("");
   const [showResult, setShowResult] = useState(false);
@@ -13,7 +14,24 @@ function QuizPage() {
     wrongAnswers: 0,
   });
 
-  const { questions } = quiz;
+  console.log(quiz);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/quiz")
+      .then((res) => setQuiz(res.data));
+  }, []);
+
+  const questions = quiz.length > 0 ? quiz[0].questions : [];
+
+  console.log(questions);
+
+  const totalQuestions = quiz.length > 0 ? quiz[0].totalQuestions : 0;
+
+  if (questions.length === 0 || activeQuestion >= totalQuestions) {
+    return <div>Loading or No questions available</div>;
+  }
+
   const { question, choices, correctAnswer } = questions[activeQuestion];
 
   const onClickNext = () => {

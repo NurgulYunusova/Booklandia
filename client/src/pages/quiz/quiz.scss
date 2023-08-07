@@ -3,19 +3,20 @@
 
 .quiz {
   width: 100%;
+  height: 100vh;
+  @include center();
+  background-image: url("../../assets/images/quizBackground.jpg");
 
   &Container {
     width: 80%;
-    margin: 100px auto;
-    max-width: 500px;
-    min-width: 250px;
-    background: #ffffff;
-    border-radius: 4px;
+    max-width: 600px;
+    min-width: 300px;
+    background: #dfdfdf;
     padding: 30px 60px;
     font-family: $base-font2;
 
     .activeQuestionNo {
-      font-size: 32px;
+      font-size: 38px;
       font-weight: 500;
       color: $base-color1;
     }
@@ -23,52 +24,54 @@
     .totalQuestion {
       font-size: 16px;
       font-weight: 500;
-      color: #e0dee3;
+      color: #0033667e;
     }
 
     h2 {
       font-size: 20px;
       font-weight: 500;
-      margin: 0;
+      margin: 15px 0 20px;
+      color: $base-color3;
     }
 
     ul {
-      margin-top: 20px;
-      margin-left: -40px;
-
       li {
         text-decoration: none;
         list-style: none;
-        color: #2d264b;
-        font-size: 16px;
-        background: #ffffff;
-        border: 1px solid #eaeaea;
-        border-radius: 16px;
-        padding: 11px;
-        margin-top: 15px;
+        color: $base-color1;
+        font-size: 15px;
+        background: #dfdfdf;
+        border: 1px solid $base-color3;
+        padding: 15px 25px;
+        margin-top: 20px;
         cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          background-color: #cbcbcb;
+        }
       }
     }
 
     .selectedAnswer {
-      background: #7ba5e3;
+      background-color: #003366;
+      color: #e7e6dd;
       border: 1px solid $base-color1;
+
+      &:hover {
+        background-color: #003366;
+      }
     }
 
     button {
-      background: linear-gradient(90.04deg, #800080 0.03%, #ffc0cb 99.96%);
-      border-radius: 9px;
-      font-size: 18px;
-      color: #ffffff;
-      padding: 10px 42px;
-      outline: none;
-      border: none;
-      cursor: pointer;
-      margin-top: 15px;
+      @include button();
+      margin-top: 20px;
+      font-size: 17px;
 
       &:disabled {
         background: #e7e8e9;
         color: #9fa3a9;
+        border: 2px solid #cbcbcb;
         cursor: not-allowed;
       }
     }
