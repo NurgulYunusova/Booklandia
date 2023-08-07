@@ -4,7 +4,7 @@ const { Book } = require("../models/Book");
 const bookController = {
   getAllBooks: async (req, res) => {
     try {
-      const books = await Book.find().populate("reviews");
+      const books = await Book.find().populate("author category");
       res.status(200).json(books);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch books", error });
@@ -71,7 +71,7 @@ const bookController = {
 
       await Author.findByIdAndUpdate(
         author,
-        { $push: { authorsBooks: book._id } },
+        { $push: { authorBooks: book._id } },
         { new: true }
       );
 

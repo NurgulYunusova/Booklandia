@@ -46,6 +46,7 @@ const bookSchema = new mongoose.Schema(
       {
         type: mongoose.Schema.Types.ObjectId,
         ref: "Review",
+        required: false,
       },
     ],
     image: { type: String, get: baseUrl, required: true },
