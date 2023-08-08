@@ -3,7 +3,7 @@ const { Author } = require("../models/Author");
 const authorController = {
   getAllAuthors: async (req, res) => {
     try {
-      const authors = await Author.find();
+      const authors = await Author.find().populate("authorBooks");
       res.status(200).json(authors);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch authors", error });
@@ -12,7 +12,7 @@ const authorController = {
   getAuthorById: async (req, res) => {
     const authorId = req.params.id;
     try {
-      const author = await Author.findById(authorId);
+      const author = await Author.findById(authorId).populate("authorBooks");
       if (!author) {
         return res.status(404).json({ message: "Author not found" });
       }

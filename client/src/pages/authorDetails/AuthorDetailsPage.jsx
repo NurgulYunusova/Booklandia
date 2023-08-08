@@ -1,7 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import "./authorDetails.scss";
 import Rating from "@mui/material/Rating";
-import img from "../../assets/images/anna_karenina.jpg";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import axios from "axios";
 import { useEffect, useState } from "react";
@@ -16,6 +15,11 @@ function AuthorDetailsPage() {
       .get(`http://localhost:8080/api/author/${id}`)
       .then((res) => setAuthor(res.data));
   }, [id]);
+
+  const handleBookClick = (bookId) => {
+    navigate(`/booksDetails/${bookId}`);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -58,32 +62,39 @@ function AuthorDetailsPage() {
               <div className="divider"></div>
             </div>
             <div className="books">
-              <div className="book">
-                <div className="bookInfo">
-                  <p className="title">Anna Karenina</p>
-                  <p className="author">Leo Tolstoy</p>
-                  <Rating
-                    name="book-rating"
-                    precision={0.5}
-                    value={4.5}
-                    icon={
-                      <StarRoundedIcon
-                        style={{ color: "#de723c", fontSize: "20px" }}
+              {author.authorBooks &&
+                author.authorBooks.map((q, key) => (
+                  <div
+                    className="book"
+                    key={key}
+                    onClick={() => handleBookClick(q._id)}
+                  >
+                    <div className="bookInfo">
+                      <p className="title">{q.name}</p>
+                      <p className="author">{author.name}</p>
+                      <Rating
+                        name="book-rating"
+                        precision={0.5}
+                        value={4.5}
+                        icon={
+                          <StarRoundedIcon
+                            style={{ color: "#de723c", fontSize: "20px" }}
+                          />
+                        } // Change the star icon color
+                        emptyIcon={
+                          <StarRoundedIcon
+                            style={{ color: "#bab6b6", fontSize: "20px" }}
+                          />
+                        }
+                        readOnly
+                        // onChange={handleBookRatingChange}
                       />
-                    } // Change the star icon color
-                    emptyIcon={
-                      <StarRoundedIcon
-                        style={{ color: "#bab6b6", fontSize: "20px" }}
-                      />
-                    }
-                    readOnly
-                    // onChange={handleBookRatingChange}
-                  />
-                </div>
-                <div className="bookImage">
-                  <img src={img} alt="" />
-                </div>
-              </div>
+                    </div>
+                    <div className="bookImage">
+                      <img src={q.image} alt="" />
+                    </div>
+                  </div>
+                ))}
             </div>
           </div>
         </div>
