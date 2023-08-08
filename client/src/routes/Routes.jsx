@@ -56,7 +56,7 @@ export const routes = [
     element: <ChangePasswordPage />,
   },
   {
-    path: "/booksDetails",
+    path: "/booksDetails/:id",
     element: <BooksDetailsPage />,
   },
   {

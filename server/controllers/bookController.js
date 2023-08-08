@@ -13,24 +13,24 @@ const bookController = {
   getBookById: async (req, res) => {
     const bookId = req.params.id;
     try {
-      const book = await Book.findById(bookId);
+      const book = await Book.findById(bookId).populate("author category");
       if (!book) {
         return res.status(404).json({ message: "Book not found" });
       }
 
-      const totalRatings = book.ratings.length;
-      const sumRatings = book.ratings.reduce(
-        (total, rating) => total + rating,
-        0
-      );
-      const averageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
+      // const totalRatings = book.ratings.length;
+      // const sumRatings = book.ratings.reduce(
+      //   (total, rating) => total + rating,
+      //   0
+      // );
+      // const averageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
 
-      const bookWithAverageRating = {
-        ...book.toObject(),
-        averageRating,
-      };
+      // const bookWithAverageRating = {
+      //   ...book.toObject(),
+      //   averageRating,
+      // };
 
-      res.status(200).json(bookWithAverageRating);
+      res.status(200).json(book);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch book", error });
     }
