@@ -16,6 +16,9 @@ function PopularAuthors() {
       .get("http://localhost:8080/api/author")
       .then((res) => setAuthors(res.data.slice(0, 6)));
   }, []);
+  if (authors.length > 0) {
+    console.log(authors.image);
+  }
 
   const handleAuthorClick = (authorId) => {
     navigate(`/authorDetails/${authorId}`);

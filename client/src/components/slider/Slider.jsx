@@ -1,18 +1,20 @@
-/* eslint-disable react/jsx-key */
-/* eslint-disable no-unused-vars */
 import { Swiper, SwiperSlide } from "swiper/react";
-
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/effect-cards";
-
-// import required modules
 import { EffectCards, Autoplay } from "swiper/modules";
 import "./slider.scss";
-import { useState } from "react";
-import img from "../../assets/images/anna_karenina.jpg";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function Slider() {
+  const [books, setBooks] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:8080/api/book")
+      .then((res) => setBooks(res.data.slice(0, 5)));
+  }, []);
+
   return (
     <>
       <div className="slider">
@@ -27,21 +29,12 @@ function Slider() {
               disableOnInteraction: false,
             }}
           >
-            <SwiperSlide>
-              <img src={img} alt="" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={img} alt="" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={img} alt="" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={img} alt="" />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img src={img} alt="" />
-            </SwiperSlide>
+            {books &&
+              books.map((q, key) => (
+                <SwiperSlide key={key}>
+                  <img src={q.image} alt={q.name} />
+                </SwiperSlide>
+              ))}
           </Swiper>
         </div>
       </div>
