@@ -36,7 +36,7 @@ function Testimonials() {
                     time in perfect condition."
                   </p>
                   <div className="quote-icon">
-                    <i class="fas fa-quote-left"></i>
+                    <i className="fas fa-quote-left"></i>
                   </div>
                   <p className="details">JOEL M / NEW YORK</p>
                 </div>
@@ -52,7 +52,7 @@ function Testimonials() {
                     books arrived to ask about the author."
                   </p>
                   <div className="quote-icon">
-                    <i class="fas fa-quote-left"></i>
+                    <i className="fas fa-quote-left"></i>
                   </div>
                   <p className="details">ELLIE A / BARCELONA</p>
                 </div>
@@ -68,7 +68,7 @@ function Testimonials() {
                     can find just what you are looking for here."
                   </p>
                   <div className="quote-icon">
-                    <i class="fas fa-quote-left"></i>
+                    <i className="fas fa-quote-left"></i>
                   </div>
                   <p className="details">PAM PRUITT / BERLIN</p>
                 </div>

@@ -7,6 +7,7 @@ const fileUpload = require("express-fileupload");
 app.use(fileUpload());
 
 app.use(express.static("authorImages"));
+app.use("/bookImages", express.static("bookImages"));
 
 const cors = require("cors");
 
