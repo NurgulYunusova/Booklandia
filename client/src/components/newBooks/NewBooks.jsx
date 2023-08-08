@@ -2,19 +2,40 @@ import "./newBooks.scss";
 import img from "../../assets/images/BookDesign-Simple.png";
 import CountdownTimer from "../countdownTimer/CountdownTimer";
 import moment from "moment";
-import book from "../../assets/images/anna_karenina.jpg";
 import Rating from "@mui/material/Rating";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import axios from "axios";
 
 function NewBooks() {
   const navigate = useNavigate();
+  const [books, setBooks] = useState([]);
+
   const endTime = moment().add(3, "day");
+
+  useEffect(() => {
+    axios.get("http://localhost:8080/api/book").then((res) => {
+      const sortedBooks = res.data.sort(
+        (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
+      );
+
+      const latestThreeBooks = sortedBooks.slice(0, 3);
+      setBooks(latestThreeBooks);
+    });
+  }, []);
 
   const handleClick = () => {
     navigate("/books");
     window.scrollTo(0, 0);
   };
+
+  function getRandomPrice() {
+    const randomDollar = Math.floor(Math.random() * 100);
+    const randomCent = Math.floor(Math.random() * 100);
+    const price = `${randomDollar}.${randomCent < 10 ? "0" : ""}${randomCent}`;
+    return price;
+  }
 
   return (
     <>
@@ -45,95 +66,38 @@ function NewBooks() {
 
             <div className="rightSide">
               <div className="books">
-                <div className="book">
-                  <div className="bookImage">
-                    <img src={book} alt="" />
-                  </div>
+                {books &&
+                  books.map((q, key) => (
+                    <div className="book" key={key}>
+                      <div className="bookImage">
+                        <img src={q.image} alt={q.image} />
+                      </div>
 
-                  <div className="bookInfo">
-                    <p className="bookTitle">Anna Karenina</p>
-                    <Rating
-                      name="book-rating"
-                      precision={0.5}
-                      value={4.5}
-                      sx={{ marginLeft: "-2px" }}
-                      icon={
-                        <StarRoundedIcon
-                          style={{ color: "#de723c", fontSize: "16px" }}
+                      <div className="bookInfo">
+                        <p className="bookTitle">{q.name}</p>
+                        <Rating
+                          name="book-rating"
+                          precision={0.5}
+                          value={4.5}
+                          sx={{ marginLeft: "-2px" }}
+                          icon={
+                            <StarRoundedIcon
+                              style={{ color: "#de723c", fontSize: "16px" }}
+                            />
+                          }
+                          emptyIcon={
+                            <StarRoundedIcon
+                              style={{ color: "#bab6b6", fontSize: "16px" }}
+                            />
+                          }
+                          readOnly
+                          // onChange={handleBookRatingChange}
                         />
-                      } // Change the star icon color
-                      emptyIcon={
-                        <StarRoundedIcon
-                          style={{ color: "#bab6b6", fontSize: "16px" }}
-                        />
-                      }
-                      readOnly
-                      // onChange={handleBookRatingChange}
-                    />
-                    <p className="bookAuthor">LEO TOLSTOY</p>
-                    <p className="price">$50.89</p>
-                  </div>
-                </div>
-
-                <div className="book">
-                  <div className="bookImage">
-                    <img src={book} alt="" />
-                  </div>
-
-                  <div className="bookInfo">
-                    <p className="bookTitle">Anna Karenina</p>
-                    <Rating
-                      name="book-rating"
-                      precision={0.5}
-                      value={4.5}
-                      sx={{ marginLeft: "-2px" }}
-                      icon={
-                        <StarRoundedIcon
-                          style={{ color: "#de723c", fontSize: "16px" }}
-                        />
-                      } // Change the star icon color
-                      emptyIcon={
-                        <StarRoundedIcon
-                          style={{ color: "#bab6b6", fontSize: "16px" }}
-                        />
-                      }
-                      readOnly
-                      // onChange={handleBookRatingChange}
-                    />
-                    <p className="bookAuthor">LEO TOLSTOY</p>
-                    <p className="price">$50.89</p>
-                  </div>
-                </div>
-
-                <div className="book">
-                  <div className="bookImage">
-                    <img src={book} alt="" />
-                  </div>
-
-                  <div className="bookInfo">
-                    <p className="bookTitle">Anna Karenina</p>
-                    <Rating
-                      name="book-rating"
-                      precision={0.5}
-                      value={4.5}
-                      sx={{ marginLeft: "-2px" }}
-                      icon={
-                        <StarRoundedIcon
-                          style={{ color: "#de723c", fontSize: "16px" }}
-                        />
-                      } // Change the star icon color
-                      emptyIcon={
-                        <StarRoundedIcon
-                          style={{ color: "#bab6b6", fontSize: "16px" }}
-                        />
-                      }
-                      readOnly
-                      // onChange={handleBookRatingChange}
-                    />
-                    <p className="bookAuthor">LEO TOLSTOY</p>
-                    <p className="price">$50.89</p>
-                  </div>
-                </div>
+                        <p className="bookAuthor">{q.author.name}</p>
+                        <p className="price">${getRandomPrice()}</p>
+                      </div>
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
