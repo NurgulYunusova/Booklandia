@@ -1,7 +1,6 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useNavigate, useParams } from "react-router-dom";
 import Rating from "@mui/material/Rating";
-import img from "../../assets/images/anna_karenina.jpg";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import "./booksdetails.scss";
 import { useEffect, useState } from "react";
@@ -14,7 +13,7 @@ function BooksDetailsPage() {
   const navigate = useNavigate();
   const { id } = useParams();
   const [book, setBook] = useState(null);
-
+  const [relatedBooks, setRelatedBooks] = useState([]);
   const [currentQuantity, setCurrentQuantity] = useState(1);
 
   const handleDecrease = () => {
@@ -34,6 +33,24 @@ function BooksDetailsPage() {
       .get(`http://localhost:8080/api/book/${id}`)
       .then((res) => setBook(res.data));
   }, [id]);
+
+  useEffect(() => {
+    if (book) {
+      axios.get("http://localhost:8080/api/book").then((res) => {
+        const filteredRelatedBooks = res.data.filter(
+          (relatedBook) =>
+            relatedBook.category.id === book.category.id &&
+            relatedBook.id !== book.id
+        );
+        setRelatedBooks(filteredRelatedBooks);
+      });
+    }
+  }, [book]);
+
+  const handleBookClick = (bookId) => {
+    navigate(`/booksDetails/${bookId}`);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -182,140 +199,39 @@ function BooksDetailsPage() {
                 <div className="divider"></div>
               </div>
               <div className="books">
-                <div className="book">
-                  <div className="bookInfo">
-                    <p className="title">Anna Karenina</p>
-                    <p className="author">Leo Tolstoy</p>
-                    <Rating
-                      name="book-rating"
-                      precision={0.5}
-                      value={4.5}
-                      icon={
-                        <StarRoundedIcon
-                          style={{ color: "#de723c", fontSize: "20px" }}
+                {relatedBooks &&
+                  relatedBooks.map((q, key) => (
+                    <div
+                      className="book"
+                      key={key}
+                      onClick={() => handleBookClick(q._id)}
+                    >
+                      <div className="bookInfo">
+                        <p className="title">{q.name}</p>
+                        <p className="author">{q.author.name}</p>
+                        <Rating
+                          name="book-rating"
+                          precision={0.5}
+                          value={4.5}
+                          icon={
+                            <StarRoundedIcon
+                              style={{ color: "#de723c", fontSize: "20px" }}
+                            />
+                          }
+                          emptyIcon={
+                            <StarRoundedIcon
+                              style={{ color: "#bab6b6", fontSize: "20px" }}
+                            />
+                          }
+                          readOnly
+                          // onChange={handleBookRatingChange}
                         />
-                      } // Change the star icon color
-                      emptyIcon={
-                        <StarRoundedIcon
-                          style={{ color: "#bab6b6", fontSize: "20px" }}
-                        />
-                      }
-                      readOnly
-                      // onChange={handleBookRatingChange}
-                    />
-                  </div>
-                  <div className="bookImage">
-                    <img src={img} alt="" />
-                  </div>
-                </div>
-
-                <div className="book">
-                  <div className="bookInfo">
-                    <p className="title">Anna Karenina</p>
-                    <p className="author">Leo Tolstoy</p>
-                    <Rating
-                      name="book-rating"
-                      precision={0.5}
-                      value={4.5}
-                      icon={
-                        <StarRoundedIcon
-                          style={{ color: "#de723c", fontSize: "20px" }}
-                        />
-                      } // Change the star icon color
-                      emptyIcon={
-                        <StarRoundedIcon
-                          style={{ color: "#bab6b6", fontSize: "20px" }}
-                        />
-                      }
-                      readOnly
-                      // onChange={handleBookRatingChange}
-                    />
-                  </div>
-                  <div className="bookImage">
-                    <img src={img} alt="" />
-                  </div>
-                </div>
-
-                <div className="book">
-                  <div className="bookInfo">
-                    <p className="title">Anna Karenina</p>
-                    <p className="author">Leo Tolstoy</p>
-                    <Rating
-                      name="book-rating"
-                      precision={0.5}
-                      value={4.5}
-                      icon={
-                        <StarRoundedIcon
-                          style={{ color: "#de723c", fontSize: "20px" }}
-                        />
-                      } // Change the star icon color
-                      emptyIcon={
-                        <StarRoundedIcon
-                          style={{ color: "#bab6b6", fontSize: "20px" }}
-                        />
-                      }
-                      readOnly
-                      // onChange={handleBookRatingChange}
-                    />
-                  </div>
-                  <div className="bookImage">
-                    <img src={img} alt="" />
-                  </div>
-                </div>
-
-                <div className="book">
-                  <div className="bookInfo">
-                    <p className="title">Anna Karenina</p>
-                    <p className="author">Leo Tolstoy</p>
-                    <Rating
-                      name="book-rating"
-                      precision={0.5}
-                      value={4.5}
-                      icon={
-                        <StarRoundedIcon
-                          style={{ color: "#de723c", fontSize: "20px" }}
-                        />
-                      } // Change the star icon color
-                      emptyIcon={
-                        <StarRoundedIcon
-                          style={{ color: "#bab6b6", fontSize: "20px" }}
-                        />
-                      }
-                      readOnly
-                      // onChange={handleBookRatingChange}
-                    />
-                  </div>
-                  <div className="bookImage">
-                    <img src={img} alt="" />
-                  </div>
-                </div>
-
-                <div className="book">
-                  <div className="bookInfo">
-                    <p className="title">Anna Karenina</p>
-                    <p className="author">Leo Tolstoy</p>
-                    <Rating
-                      name="book-rating"
-                      precision={0.5}
-                      value={4.5}
-                      icon={
-                        <StarRoundedIcon
-                          style={{ color: "#de723c", fontSize: "20px" }}
-                        />
-                      } // Change the star icon color
-                      emptyIcon={
-                        <StarRoundedIcon
-                          style={{ color: "#bab6b6", fontSize: "20px" }}
-                        />
-                      }
-                      readOnly
-                      // onChange={handleBookRatingChange}
-                    />
-                  </div>
-                  <div className="bookImage">
-                    <img src={img} alt="" />
-                  </div>
-                </div>
+                      </div>
+                      <div className="bookImage">
+                        <img src={q.image} alt={q.name} />
+                      </div>
+                    </div>
+                  ))}
               </div>
             </div>
           </div>
