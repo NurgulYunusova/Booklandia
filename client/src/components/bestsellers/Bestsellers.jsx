@@ -3,6 +3,7 @@ import "./bestsellers.scss";
 import Rating from "@mui/material/Rating";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import axios from "axios";
+import { useNavigate } from "react-router";
 
 function Bestsellers() {
   // const [bookRating, setBookRating] = useState(0);
@@ -11,7 +12,7 @@ function Bestsellers() {
   // const handleBookRatingChange = (event, newRating) => {
   //   setBookRating(newRating);
   // };
-
+  const navigate = useNavigate();
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
@@ -19,6 +20,11 @@ function Bestsellers() {
       .get("http://localhost:8080/api/book")
       .then((res) => setBooks(res.data.slice(13, 16)));
   }, []);
+
+  const handleBookClick = (bookId) => {
+    navigate(`/booksDetails/${bookId}`);
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -31,7 +37,11 @@ function Bestsellers() {
           <div className="books">
             {books &&
               books.map((q, key) => (
-                <div className="book" key={key}>
+                <div
+                  className="book"
+                  key={key}
+                  onClick={() => handleBookClick(q._id)}
+                >
                   <div className="bookInfo">
                     <p className="title">{q.name}</p>
                     <p className="author">{q.author.name}</p>

@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { useNavigate } from "react-router-dom";
 import "./books.scss";
-import book from "../../assets/images/anna_karenina.jpg";
 import Rating from "@mui/material/Rating";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import { useEffect } from "react";
@@ -13,7 +12,36 @@ function BooksPage() {
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [books, setBooks] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedAuthor, setSelectedAuthor] = useState("All");
+  const [selectedSorting, setSelectedSorting] = useState("1");
+
+  // const category = ["All", ...new Set(books.map((item) => item.category.name))];
+  // const author = ["All", ...new Set(books.map((item) => item.author.name))];
+
+  const filteredItems = books
+    .filter(
+      (item) =>
+        (selectedCategory === "All" ||
+          item.category.name === selectedCategory) &&
+        (selectedAuthor === "All" || item.author.name === selectedAuthor)
+    )
+    .sort((a, b) => {
+      switch (selectedSorting) {
+        case "1":
+          return a.name.localeCompare(b.name);
+        case "2":
+          return b.name.localeCompare(a.name);
+        case "3":
+          return a.price - b.price;
+        case "4":
+          return b.price - a.price;
+        default:
+          return 0;
+      }
+    });
+
+  console.log(filteredItems);
 
   useEffect(() => {
     axios
@@ -27,8 +55,6 @@ function BooksPage() {
     axios
       .get("http://localhost:8080/api/book")
       .then((res) => setBooks(res.data));
-
-    setLoading(false);
   }, []);
 
   const handleBookClick = (bookId) => {
@@ -56,30 +82,100 @@ function BooksPage() {
               <div className="genres">
                 <h3>Genre</h3>
                 <div className="genresList">
-                  {categories &&
-                    categories.map((q, key) => (
-                      <ul key={key}>
-                        <li>
-                          <div className="square"></div>
+                  <ul>
+                    <li
+                      onClick={() => setSelectedCategory("All")}
+                      style={{
+                        color:
+                          selectedCategory === "All" ? "#001a40" : "#001a40aa",
+                      }}
+                    >
+                      <div
+                        className="square"
+                        style={{
+                          backgroundColor:
+                            selectedCategory === "All"
+                              ? "#003366"
+                              : "transparent",
+                        }}
+                      ></div>
+                      All
+                    </li>
+                    {categories &&
+                      categories.map((q, key) => (
+                        <li
+                          key={key}
+                          onClick={() => setSelectedCategory(q.name)}
+                          style={{
+                            color:
+                              selectedCategory === q.name
+                                ? "#001a40"
+                                : "#001a40aa",
+                          }}
+                        >
+                          <div
+                            className="square"
+                            style={{
+                              backgroundColor:
+                                selectedCategory === q.name
+                                  ? "#003366"
+                                  : "transparent",
+                            }}
+                          ></div>
                           {q.name}
                         </li>
-                      </ul>
-                    ))}
+                      ))}
+                  </ul>
                 </div>
               </div>
 
               <div className="authors">
                 <h3>Authors</h3>
                 <div className="authorsList">
-                  {authors &&
-                    authors.map((q, key) => (
-                      <ul key={key}>
-                        <li>
-                          <div className="square"></div>
+                  <ul>
+                    <li
+                      onClick={() => setSelectedAuthor("All")}
+                      style={{
+                        color:
+                          selectedAuthor === "All" ? "#001a40" : "#001a40aa",
+                      }}
+                    >
+                      <div
+                        className="square"
+                        style={{
+                          backgroundColor:
+                            selectedAuthor === "All"
+                              ? "#003366"
+                              : "transparent",
+                        }}
+                      ></div>
+                      All
+                    </li>
+                    {authors &&
+                      authors.map((q, key) => (
+                        <li
+                          key={key}
+                          onClick={() => setSelectedAuthor(q.name)}
+                          style={{
+                            color:
+                              selectedAuthor === q.name
+                                ? "#001a40"
+                                : "#001a40aa",
+                          }}
+                        >
+                          <div
+                            className="square"
+                            style={{
+                              backgroundColor:
+                                selectedAuthor === q.name
+                                  ? "#003366"
+                                  : "transparent",
+                            }}
+                          ></div>
                           {q.name}
                         </li>
-                      </ul>
-                    ))}
+                      ))}
+                  </ul>
                 </div>
               </div>
 
@@ -116,9 +212,24 @@ function BooksPage() {
             </div>
 
             <div className="rightSection">
+              <div className="dropdown">
+                <h3>Sort by: </h3>
+                <select
+                  onChange={(e) => setSelectedSorting(e.target.value)}
+                  value={selectedSorting}
+                >
+                  <option value="1" defaultValue>
+                    Product Name (A-Z)
+                  </option>
+                  <option value="2">Product Name (Z-A)</option>
+                  <option value="3">Price (Low to High)</option>
+                  <option value="4">Price (High to Low)</option>
+                </select>
+              </div>
+
               <div className="books">
-                {books &&
-                  books.map((q, key) => (
+                {filteredItems &&
+                  filteredItems.map((q, key) => (
                     <div
                       className="book"
                       key={key}

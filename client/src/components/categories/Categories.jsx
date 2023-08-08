@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 function Categories() {
   const navigate = useNavigate();
 
+  const handleClick = () => {
+    navigate("/books");
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <div className="categories">
@@ -17,7 +22,7 @@ function Categories() {
             <div className="col big">
               <div className="box explore">
                 <h3>Explore Our Top Categories</h3>
-                <button onClick={() => navigate("/books")}>VIEW ALL</button>
+                <button onClick={() => handleClick()}>VIEW ALL</button>
               </div>
             </div>
             <div className="col">

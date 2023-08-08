@@ -90,14 +90,6 @@
                   border: 1px solid #003366;
                   transition: all 0.1s ease-in-out;
                 }
-
-                &:hover {
-                  color: #001a40;
-
-                  .square {
-                    background-color: #003366;
-                  }
-                }
               }
             }
           }
@@ -140,6 +132,45 @@
 
       .rightSection {
         width: 76%;
+
+        .dropdown {
+          margin-bottom: 30px;
+          @include center($justify-content: flex-start);
+          gap: 15px;
+
+          h3 {
+            font-family: $base-font2;
+            font-size: 18px;
+            font-weight: 700;
+          }
+
+          select {
+            appearance: none;
+            font-family: $base-font2;
+            font-weight: 500;
+            border: 1px solid #ccc;
+            outline: 0;
+            background: transparent;
+            color: $base-color3;
+            cursor: pointer;
+            font-size: 15px;
+            padding: 10px 15px;
+            width: 200px;
+
+            option {
+              color: $base-color1;
+              background-color: transparent;
+            }
+
+            &:focus {
+              outline: none;
+            }
+
+            &::-ms-expand {
+              display: none;
+            }
+          }
+        }
 
         .books {
           @include center(

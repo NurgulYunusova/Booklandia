@@ -30,6 +30,11 @@ function NewBooks() {
     window.scrollTo(0, 0);
   };
 
+  const handleBookClick = (bookId) => {
+    navigate(`/booksDetails/${bookId}`);
+    window.scrollTo(0, 0);
+  };
+
   function getRandomPrice() {
     const randomDollar = Math.floor(Math.random() * 100);
     const randomCent = Math.floor(Math.random() * 100);
@@ -68,7 +73,11 @@ function NewBooks() {
               <div className="books">
                 {books &&
                   books.map((q, key) => (
-                    <div className="book" key={key}>
+                    <div
+                      className="book"
+                      key={key}
+                      onClick={() => handleBookClick(q._id)}
+                    >
                       <div className="bookImage">
                         <img src={q.image} alt={q.image} />
                       </div>

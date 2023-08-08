@@ -21,6 +21,9 @@ function Pages() {
             <li>
               <a onClick={() => navigate("/contactUs")}>CONTACT US</a>
             </li>
+            <li>
+              <a onClick={() => navigate("/quiz")}>QUIZ</a>
+            </li>
           </ul>
         </div>
       </div>
