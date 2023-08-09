@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import "./books.scss";
 import Rating from "@mui/material/Rating";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
@@ -9,10 +9,17 @@ import axios from "axios";
 
 function BooksPage() {
   const navigate = useNavigate();
+  const location = useLocation();
+
+  const selectedCategoryFromLocation =
+    location.state?.selectedCategory || "All";
+
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
   const [books, setBooks] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState(
+    selectedCategoryFromLocation
+  );
   const [selectedAuthor, setSelectedAuthor] = useState("All");
   const [selectedSorting, setSelectedSorting] = useState("1");
 
