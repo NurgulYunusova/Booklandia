@@ -11,6 +11,7 @@ const userController = {
 
     if (userExists) {
       res.status(400).json({ msg: "User already exists" });
+      return;
     }
 
     const confirmCode = Math.floor(Math.random() * 10000);
@@ -54,6 +55,10 @@ const userController = {
               name: user.name,
               email: user.email,
               isAdmin: user.isAdmin,
+              profileImage: user.profileImage,
+              wishlist: user.wishlist,
+              basket: user.basket,
+              orders: user.orders,
             });
           } else {
             res.status(500).json({ message: "Expire Date Error!" });
@@ -83,6 +88,10 @@ const userController = {
         name: user.name,
         email: user.email,
         isAdmin: user.isAdmin,
+        profileImage: user.profileImage,
+        wishlist: user.wishlist,
+        basket: user.basket,
+        orders: user.orders,
       });
     } else {
       res.status(401);
@@ -100,6 +109,7 @@ const userController = {
     const user = await User.findById(req.user._id).populate(
       "wishlist basket orders"
     );
+
     if (user) {
       res.json({
         _id: user._id,

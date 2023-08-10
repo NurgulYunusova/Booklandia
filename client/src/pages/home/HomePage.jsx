@@ -17,7 +17,7 @@ function HomePage() {
       <NewBooks />
       <Testimonials />
       <PopularAuthors />
-      <WebsiteSuccess />
+      {/* <WebsiteSuccess /> */}
     </>
   );
 }
