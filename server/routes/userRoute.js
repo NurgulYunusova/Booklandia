@@ -1,29 +1,21 @@
 const express = require("express");
 const { userController } = require("../controllers/userController");
-// import { protect, admin } from "../middleware/authMiddleware.js";
+const { protect, admin } = require("../middleware/authMiddleware.js");
 
 const userRoutes = express.Router();
 
-// userRoutes.get("/", userController.getAllCategories);
-// userRoutes.get("/:id", userController.getUserProfile);
+userRoutes.get("/profile", protect, userController.getUserProfile);
 userRoutes.post("/register", userController.registerUser);
 userRoutes.post("/confirm", userController.confirmUser);
 userRoutes.post("/login", userController.loginUser);
-// userRoutes.put("/:id", userController.updateCategory);
-// userRoutes.delete("/:id", userController.deleteCategory);
+userRoutes.post("/logout", userController.logoutUser);
+userRoutes.put("/profile", protect, userController.updateUserProfile);
 
-// userRoutes.route("/").post(registerUser).get(protect, admin, getUsers);
-// userRoutes.post("/auth", authUser);
-// userRoutes.post("/logout", logoutUser);
-// userRoutes
-//   .route("/profile")
-//   .get(protect, getUserProfile)
-//   .put(protect, updateUserProfile);
-// userRoutes
-//   .route("/:id")
-//   .delete(protect, admin, deleteUser)
-//   .get(protect, admin, getUserById)
-//   .put(protect, admin, updateUser);
+// Admin routes
+userRoutes.get("/", protect, admin, userController.getUsers);
+userRoutes.get("/:id", protect, admin, userController.getUserById);
+userRoutes.put("/:id", protect, admin, userController.updateUser);
+userRoutes.delete("/:id", protect, admin, userController.deleteUser);
 
 module.exports = {
   userRoutes,
