@@ -17,6 +17,7 @@
     "@tanstack/react-query": "^4.32.5",
     "antd": "^5.7.3",
     "axios": "^1.4.0",
+    "formik": "^2.4.3",
     "moment": "^2.29.4",
     "rc-slider": "^10.2.1",
     "react": "^18.2.0",
@@ -28,7 +29,8 @@
     "react-redux": "^8.1.1",
     "react-router-dom": "^6.14.2",
     "sass": "^1.64.1",
-    "swiper": "^10.0.4"
+    "swiper": "^10.0.4",
+    "yup": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

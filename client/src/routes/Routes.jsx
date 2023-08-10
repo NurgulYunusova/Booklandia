@@ -3,6 +3,7 @@ import ChangePasswordPage from "../pages/Auth/changePassword/ChangePasswordPage"
 import ForgotPasswordPage from "../pages/Auth/forgotPassword/ForgotPasswordPage";
 import LoginPage from "../pages/Auth/login/LoginPage";
 import RegisterPage from "../pages/Auth/register/RegisterPage";
+import VerifyPage from "../pages/Auth/verify/VerifyPage";
 import AboutUsPage from "../pages/aboutUs/AboutUsPage";
 import AuthorDetailsPage from "../pages/authorDetails/AuthorDetailsPage";
 import BasketPage from "../pages/basket/BasketPage";
@@ -46,6 +47,10 @@ export const routes = [
   {
     path: "/register",
     element: <RegisterPage />,
+  },
+  {
+    path: "/verify",
+    element: <VerifyPage />,
   },
   {
     path: "/forgotPassword",

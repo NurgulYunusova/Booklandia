@@ -1,13 +1,14 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useNavigate } from "react-router-dom";
 import "./profile.scss";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Tab, Tabs } from "@mui/material";
-import userImage from "../../assets/images/userImage.jpg";
-import img from "../../assets/images/anna_karenina.jpg";
+import img from "../../assets/images/ay-isigi-sokagi.png";
+import { UserContext } from "../../context/UserContext";
 
 function ProfilePage() {
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
 
   const [activeTab, setActiveTab] = useState(0);
 
@@ -75,8 +76,8 @@ function ProfilePage() {
                         </div>
 
                         <div className="datas">
-                          <p>John</p>
-                          <p>johndoe@gmail.com</p>
+                          <p>{user.name}</p>
+                          <p>{user.email}</p>
                           <p>*********</p>
                         </div>
                       </div>
@@ -88,7 +89,7 @@ function ProfilePage() {
 
                     <div className="rightSide">
                       <p>Profile image</p>
-                      <img src={userImage} alt="" />
+                      <img src={user.profileImage} alt="" />
                       <button>UPLOAD NEW</button>
                     </div>
                   </div>

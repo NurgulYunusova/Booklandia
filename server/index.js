@@ -11,6 +11,7 @@ app.use(fileUpload());
 
 app.use(express.static("authorImages"));
 app.use("/bookImages", express.static("bookImages"));
+app.use("/userProfileImages", express.static("userProfileImages"));
 
 const { userRoutes } = require("./routes/userRoute");
 const { bookRoutes } = require("./routes/bookRoute");
