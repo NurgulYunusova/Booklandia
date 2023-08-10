@@ -1,4 +1,4 @@
-// var cookieparser = require("cookieparser");
+const cookieParser = require("cookie-parser");
 const express = require("express");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
@@ -24,9 +24,9 @@ require("dotenv").config();
 db.connect();
 
 app.use(express.json());
-// app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cors());
-// app.use(cookieParser());
+app.use(cookieParser());
 
 app.use("/api/user", userRoutes);
 app.use("/api/book", bookRoutes);
