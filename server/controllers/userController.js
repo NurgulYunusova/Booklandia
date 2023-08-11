@@ -31,7 +31,7 @@ const userController = {
 
     res.json({
       message:
-        "Registration successful. Please check your email for confirmation.",
+        "Registration is successful. Please check your email for verification code.",
     });
   },
   confirmUser: (req, res) => {
@@ -44,22 +44,13 @@ const userController = {
       } else {
         if (user.confirmCode == confirmCode) {
           if (user.codeExpire > moment()) {
-            generateToken(res, user._id);
+            const token = generateToken(res, user._id);
 
             user.isActive = true;
             user.codeCounter = 3;
 
             user.save();
-            res.status(201).json({
-              _id: user._id,
-              name: user.name,
-              email: user.email,
-              isAdmin: user.isAdmin,
-              profileImage: user.profileImage,
-              wishlist: user.wishlist,
-              basket: user.basket,
-              orders: user.orders,
-            });
+            res.status(201).json(token);
           } else {
             res.status(500).json({ message: "Expire Date Error!" });
           }
@@ -80,46 +71,51 @@ const userController = {
 
     const user = await User.findOne({ email: email });
 
-    if (user && (await user.matchPassword(password))) {
-      generateToken(res, user._id);
+    if (user) {
+      console.log(user);
 
-      res.json({
-        _id: user._id,
-        name: user.name,
-        email: user.email,
-        isAdmin: user.isAdmin,
-        profileImage: user.profileImage,
-        wishlist: user.wishlist,
-        basket: user.basket,
-        orders: user.orders,
-      });
+      if (!user.isActive) {
+        const confirmCode = Math.floor(Math.random() * 10000);
+        const codeExpire = moment().add(89, "seconds");
+
+        user.confirmCode = confirmCode;
+        user.codeExpire = codeExpire;
+
+        user.save();
+
+        sendConfirmEmail(email, confirmCode);
+        res.status(203).json({
+          message:
+            "Login is successful. Please check your email for verification code.",
+        });
+      } else if (await user.matchPassword(password)) {
+        const token = generateToken(res, user._id);
+        // 5 deq evvel isleyirdi, sene copy edib atdim error geldi, deyesen neyise silimisem
+        res.json({
+          token: token,
+        });
+      }
     } else {
       res.status(401);
       throw new Error("Invalid email or password");
     }
   },
-  logoutUser: (req, res) => {
-    res.cookie("jwt", "", {
-      httpOnly: true,
-      expires: new Date(0),
-    });
-    res.status(200).json({ message: "Logged out successfully" });
-  },
   getUserProfile: async (req, res) => {
-    const user = await User.findById(req.user._id).populate(
-      "wishlist basket orders"
-    );
+    const userId = req.userId;
 
-    if (user) {
+    try {
+      const user = await User.findById(userId);
+
+      if (!user) {
+        res.status(404).json({ message: "User not found" });
+      }
+
       res.json({
-        _id: user._id,
         name: user.name,
         email: user.email,
-        isAdmin: user.isAdmin,
       });
-    } else {
-      res.status(404);
-      throw new Error("User not found");
+    } catch {
+      res.status(500).json({ message: "Server error" });
     }
   },
   updateUserProfile: async (req, res) => {
@@ -164,61 +160,6 @@ const userController = {
       throw new Error("User not found");
     }
   },
-  // Admin
-  getUsers: async (req, res) => {
-    try {
-      const users = await User.find();
-      res.status(200).json(users);
-    } catch (error) {
-      res.status(500).json({ message: "Failed to fetch users", error });
-    }
-  },
-  deleteUser: async (req, res) => {
-    const user = await User.findById(req.params.id);
-
-    if (user) {
-      if (user.isAdmin) {
-        res.status(400);
-        throw new Error("You can'not delete admin user");
-      }
-      await User.deleteOne({ _id: user._id });
-      res.json({ message: "User removed" });
-    } else {
-      res.status(404);
-      throw new Error("User not found");
-    }
-  },
-  getUserById: async (req, res) => {
-    const user = await User.findById(req.params.id).select("-password");
-
-    if (user) {
-      res.json(user);
-    } else {
-      res.status(404);
-      throw new Error("User not found");
-    }
-  },
-  updateUser: async (req, res) => {
-    const user = await User.findById(req.params.id);
-
-    if (user) {
-      user.name = req.body.name || user.name;
-      user.email = req.body.email || user.email;
-      user.isAdmin = Boolean(req.body.isAdmin);
-
-      const updatedUser = await user.save();
-
-      res.json({
-        _id: updatedUser._id,
-        name: updatedUser.name,
-        email: updatedUser.email,
-        isAdmin: updatedUser.isAdmin,
-      });
-    } else {
-      res.status(404);
-      throw new Error("User not found");
-    }
-  },
 };
 
 const transporter = nodemailer.createTransport({
@@ -245,3 +186,59 @@ function sendConfirmEmail(to, code) {
 module.exports = {
   userController,
 };
+
+// Admin
+// getUsers: async (req, res) => {
+//   try {
+//     const users = await User.find();
+//     res.status(200).json(users);
+//   } catch (error) {
+//     res.status(500).json({ message: "Failed to fetch users", error });
+//   }
+// },
+// deleteUser: async (req, res) => {
+//   const user = await User.findById(req.params.id);
+
+//   if (user) {
+//     if (user.isAdmin) {
+//       res.status(400);
+//       throw new Error("You can'not delete admin user");
+//     }
+//     await User.deleteOne({ _id: user._id });
+//     res.json({ message: "User removed" });
+//   } else {
+//     res.status(404);
+//     throw new Error("User not found");
+//   }
+// },
+// getUserById: async (req, res) => {
+//   const user = await User.findById(req.params.id).select("-password");
+
+//   if (user) {
+//     res.json(user);
+//   } else {
+//     res.status(404);
+//     throw new Error("User not found");
+//   }
+// },
+// updateUser: async (req, res) => {
+//   const user = await User.findById(req.params.id);
+
+//   if (user) {
+//     user.name = req.body.name || user.name;
+//     user.email = req.body.email || user.email;
+//     user.isAdmin = Boolean(req.body.isAdmin);
+
+//     const updatedUser = await user.save();
+
+//     res.json({
+//       _id: updatedUser._id,
+//       name: updatedUser.name,
+//       email: updatedUser.email,
+//       isAdmin: updatedUser.isAdmin,
+//     });
+//   } else {
+//     res.status(404);
+//     throw new Error("User not found");
+//   }
+// },

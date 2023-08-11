@@ -8,6 +8,9 @@ import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutl
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import Comment from "../../components/comment/Comment";
 import axios from "axios";
+import Footer from "../../components/footer/Footer";
+import Pages from "../../components/pages/Pages";
+import Header from "../../components/header/Header";
 
 function BooksDetailsPage() {
   const navigate = useNavigate();
@@ -54,6 +57,8 @@ function BooksDetailsPage() {
 
   return (
     <>
+      <Header />
+      <Pages />
       {book && (
         <div className="booksDetails">
           <div className="booksDetailsContainer">
@@ -237,6 +242,7 @@ function BooksDetailsPage() {
           </div>
         </div>
       )}
+      <Footer />
     </>
   );
 }

@@ -9,7 +9,7 @@ import { UserContext } from "../../context/UserContext";
 
 function Header() {
   const navigate = useNavigate();
-  const { isLoggedIn } = useContext(UserContext);
+  const isLoggedIn = useContext(UserContext);
 
   return (
     <>

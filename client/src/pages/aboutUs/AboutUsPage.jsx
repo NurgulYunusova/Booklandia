@@ -3,12 +3,17 @@ import "./aboutUs.scss";
 import about from "../../assets/images/about.png";
 import bookstoreImage from "../../assets/images/aboutBookstore.jpg";
 import { useNavigate } from "react-router-dom";
+import Header from "../../components/header/Header";
+import Pages from "../../components/pages/Pages";
+import Footer from "../../components/footer/Footer";
 
 function AboutUsPage() {
   const navigate = useNavigate();
 
   return (
     <>
+      <Header />
+      <Pages />
       <div className="aboutUs">
         <div className="aboutUsContainer">
           <div className="top">
@@ -86,6 +91,7 @@ function AboutUsPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

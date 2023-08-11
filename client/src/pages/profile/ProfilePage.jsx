@@ -5,10 +5,13 @@ import { useContext, useState } from "react";
 import { Tab, Tabs } from "@mui/material";
 import img from "../../assets/images/ay-isigi-sokagi.png";
 import { UserContext } from "../../context/UserContext";
+import Header from "../../components/header/Header";
+import Pages from "../../components/pages/Pages";
+import Footer from "../../components/footer/Footer";
 
 function ProfilePage() {
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
+  const user = useContext(UserContext);
 
   const [activeTab, setActiveTab] = useState(0);
 
@@ -18,6 +21,8 @@ function ProfilePage() {
 
   return (
     <>
+      <Header />
+      <Pages />
       <div className="profile">
         <div className="profileContainer">
           <div className="top">
@@ -182,6 +187,7 @@ function ProfilePage() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

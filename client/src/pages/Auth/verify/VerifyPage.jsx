@@ -12,7 +12,7 @@ import { UserContext } from "../../../context/UserContext";
 function VerifyPage() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { handlerLogInOut } = useContext(UserContext);
+  const { setIsLoggedIn } = useContext(UserContext);
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
@@ -30,7 +30,10 @@ function VerifyPage() {
         );
 
         alert("You verified successfully");
-        handlerLogInOut(true, navigate("/"), response.data);
+        const token = response.data;
+        localStorage.setItem("token", token);
+        setIsLoggedIn(true);
+        navigate("/");
       } catch (error) {
         console.log(error);
       }
@@ -50,7 +53,8 @@ function VerifyPage() {
             <p className="info">
               We've sent a verification code to your email.{" "}
               <span style={{ fontWeight: 600 }}>
-                If you don't see the verify code, check your spam folder.
+                If you don't see the verify code, check your spam folder. Verify
+                code is valid for 90 seconds.
               </span>
             </p>
 
