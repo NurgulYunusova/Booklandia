@@ -104,16 +104,13 @@ const userController = {
     const userId = req.userId;
 
     try {
-      const user = await User.findById(userId);
+      const user = await User.findById(userId).select("-password  ");
 
       if (!user) {
         res.status(404).json({ message: "User not found" });
       }
 
-      res.json({
-        name: user.name,
-        email: user.email,
-      });
+      res.json(user);
     } catch {
       res.status(500).json({ message: "Server error" });
     }

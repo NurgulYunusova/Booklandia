@@ -3,13 +3,21 @@ import "./header.scss";
 import PersonOutlineOutlinedIcon from "@mui/icons-material/PersonOutlineOutlined";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import LogoutOutlinedIcon from "@mui/icons-material/LogoutOutlined";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../context/UserContext";
 
 function Header() {
   const navigate = useNavigate();
-  const isLoggedIn = useContext(UserContext);
+  const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
+
+  const handleLogOut = () => {
+    localStorage.removeItem("token");
+    setIsLoggedIn(false);
+    navigate("/");
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -37,6 +45,9 @@ function Header() {
               <span onClick={() => navigate("/profilePage")}>
                 <PersonOutlineOutlinedIcon sx={{ fontSize: "23px" }} />
                 ACCOUNT
+              </span>
+              <span onClick={() => handleLogOut()}>
+                <LogoutOutlinedIcon sx={{ fontSize: "30px" }} />
               </span>
             </div>
           ) : (
