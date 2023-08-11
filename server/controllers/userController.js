@@ -72,8 +72,6 @@ const userController = {
     const user = await User.findOne({ email: email });
 
     if (user) {
-      console.log(user);
-
       if (!user.isActive) {
         const confirmCode = Math.floor(Math.random() * 10000);
         const codeExpire = moment().add(89, "seconds");
@@ -90,10 +88,7 @@ const userController = {
         });
       } else if (await user.matchPassword(password)) {
         const token = generateToken(res, user._id);
-        // 5 deq evvel isleyirdi, sene copy edib atdim error geldi, deyesen neyise silimisem
-        res.json({
-          token: token,
-        });
+        res.json(token);
       }
     } else {
       res.status(401);

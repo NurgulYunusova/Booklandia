@@ -3,7 +3,6 @@ const { User } = require("../models/User");
 
 // User must be authenticated
 const protect = async (req, res, next) => {
-  console.log(req.headers);
   const token = req.headers.authorization;
 
   if (!token) {
