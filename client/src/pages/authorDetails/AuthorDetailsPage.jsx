@@ -4,6 +4,9 @@ import Rating from "@mui/material/Rating";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import axios from "axios";
 import { useEffect, useState } from "react";
+import Header from "../../components/header/Header";
+import Pages from "../../components/pages/Pages";
+import Footer from "../../components/footer/Footer";
 
 function AuthorDetailsPage() {
   const navigate = useNavigate();
@@ -23,6 +26,8 @@ function AuthorDetailsPage() {
 
   return (
     <>
+      <Header />
+      <Pages />
       <div className="authorDetails">
         <div className="authorDetailsContainer">
           <div className="top">
@@ -99,6 +104,7 @@ function AuthorDetailsPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

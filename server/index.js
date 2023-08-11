@@ -26,7 +26,12 @@ db.connect();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(cors());
+app.use(
+  cors({
+    origin: "http://localhost:5173", // Replace with your client's origin
+    credentials: true, // Allow cookies and headers to be sent with the request
+  })
+);
 app.use(cookieParser());
 
 app.use("/api/user", userRoutes);

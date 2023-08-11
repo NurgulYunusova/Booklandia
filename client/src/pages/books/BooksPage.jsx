@@ -6,6 +6,9 @@ import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
+import Footer from "../../components/footer/Footer";
+import Pages from "../../components/pages/Pages";
+import Header from "../../components/header/Header";
 
 function BooksPage() {
   const navigate = useNavigate();
@@ -48,8 +51,6 @@ function BooksPage() {
       }
     });
 
-  console.log(filteredItems);
-
   useEffect(() => {
     axios
       .get("http://localhost:8080/api/category")
@@ -71,6 +72,8 @@ function BooksPage() {
 
   return (
     <>
+      <Header />
+      <Pages />
       <div className="books">
         <div className="booksContainer">
           <div className="top">
@@ -276,6 +279,7 @@ function BooksPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

@@ -3,6 +3,9 @@ import { useNavigate } from "react-router-dom";
 import "./wishlistPage.scss";
 import WishlistTable from "../../components/wishlistTable/WishlistTable";
 import { useState } from "react";
+import Header from "../../components/header/Header";
+import Pages from "../../components/pages/Pages";
+import Footer from "../../components/footer/Footer";
 
 function WishlistPage() {
   const navigate = useNavigate();
@@ -92,6 +95,8 @@ function WishlistPage() {
 
   return (
     <>
+      <Header />
+      <Pages />
       <div className="wishlist">
         <div className="wishlistContainer">
           <div className="top">
@@ -112,6 +117,7 @@ function WishlistPage() {
           />
         </div>
       </div>
+      <Footer />
     </>
   );
 }
