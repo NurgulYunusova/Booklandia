@@ -11,8 +11,7 @@ import Footer from "../../components/footer/Footer";
 
 function ProfilePage() {
   const navigate = useNavigate();
-  const user = useContext(UserContext);
-
+  const { user } = useContext(UserContext);
   const [activeTab, setActiveTab] = useState(0);
 
   const handleTabChange = (event, newTab) => {
@@ -81,8 +80,8 @@ function ProfilePage() {
                         </div>
 
                         <div className="datas">
-                          <p>{user.name}</p>
-                          <p>{user.email}</p>
+                          <p>{user?.name}</p>
+                          <p>{user?.email}</p>
                           <p>*********</p>
                         </div>
                       </div>
@@ -94,7 +93,15 @@ function ProfilePage() {
 
                     <div className="rightSide">
                       <p>Profile image</p>
-                      <img src={user.profileImage} alt="" />
+                      {user?.profileImage ? (
+                        <img
+                          src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+                          alt={user?.name}
+                        />
+                      ) : (
+                        <img src={user?.profileImage} alt={user?.name} />
+                      )}
+
                       <button>UPLOAD NEW</button>
                     </div>
                   </div>
