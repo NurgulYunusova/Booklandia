@@ -32,7 +32,7 @@ export const UserProvider = ({ children }) => {
     }
   }, [token]);
 
-  console.log("USER info: ", user?.name);
+  console.log("USER info: ", user?._id);
 
   return (
     <UserContext.Provider value={{ user, setUser, isLoggedIn, setIsLoggedIn }}>
