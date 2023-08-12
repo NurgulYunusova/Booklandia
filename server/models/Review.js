@@ -2,11 +2,15 @@ const { default: mongoose } = require("mongoose");
 
 const reviewSchema = new mongoose.Schema(
   {
-    review: {
+    rating: {
+      type: Number,
+      required: true,
+    },
+    reviewText: {
       type: String,
       required: true,
     },
-    reviewBook: {
+    book: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "Book",
       required: true,

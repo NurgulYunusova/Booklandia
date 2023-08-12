@@ -12,7 +12,7 @@ import { UserContext } from "../../../context/UserContext";
 function VerifyPage() {
   const { state } = useLocation();
   const navigate = useNavigate();
-  const setIsLoggedIn = useContext(UserContext);
+  const { setIsLoggedIn } = useContext(UserContext);
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {

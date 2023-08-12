@@ -32,9 +32,17 @@ function BooksDetailsPage() {
   };
 
   useEffect(() => {
-    axios
-      .get(`http://localhost:8080/api/book/${id}`)
-      .then((res) => setBook(res.data));
+    async function getBooksDetails() {
+      try {
+        axios
+          .get(`http://localhost:8080/api/book/${id}`)
+          .then((res) => setBook(res.data));
+      } catch (error) {
+        console.log(error);
+      }
+    }
+
+    getBooksDetails();
   }, [id]);
 
   useEffect(() => {

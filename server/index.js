@@ -19,6 +19,7 @@ const { authorRoutes } = require("./routes/authorRoute");
 const { categoryRoutes } = require("./routes/categoryRoute");
 const { quizRoutes } = require("./routes/quizRoute");
 const { questionRoutes } = require("./routes/questionRoute");
+const { reviewRoutes } = require("./routes/reviewRoute");
 
 require("dotenv").config();
 
@@ -28,8 +29,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "http://localhost:5173", // Replace with your client's origin
-    credentials: true, // Allow cookies and headers to be sent with the request
+    origin: "http://localhost:5173",
+    credentials: true,
   })
 );
 app.use(cookieParser());
@@ -40,6 +41,7 @@ app.use("/api/author", authorRoutes);
 app.use("/api/category", categoryRoutes);
 app.use("/api/question", questionRoutes);
 app.use("/api/quiz", quizRoutes);
+app.use("/api/review", reviewRoutes);
 
 app.listen(8080, () => {
   console.log("Server listening on port 8080");
