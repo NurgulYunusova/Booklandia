@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import "./booksdetails.scss";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import Comment from "../../components/comment/Comment";
@@ -11,6 +11,7 @@ import axios from "axios";
 import Footer from "../../components/footer/Footer";
 import Pages from "../../components/pages/Pages";
 import Header from "../../components/header/Header";
+import { WishlistContext } from "../../context/WishlistContext";
 
 function BooksDetailsPage() {
   const navigate = useNavigate();
@@ -18,6 +19,7 @@ function BooksDetailsPage() {
   const [book, setBook] = useState(null);
   const [relatedBooks, setRelatedBooks] = useState([]);
   const [currentQuantity, setCurrentQuantity] = useState(1);
+  const { addToWishlist } = useContext(WishlistContext);
 
   const handleDecrease = () => {
     if (currentQuantity > 1) {
@@ -110,7 +112,6 @@ function BooksDetailsPage() {
                         <StarRoundedIcon style={{ color: "#bab6b6" }} />
                       }
                       readOnly
-                      // onChange={handleBookRatingChange}
                     />
                   </div>
 
@@ -134,7 +135,10 @@ function BooksDetailsPage() {
                         Add to cart
                       </button>
 
-                      <button className="wishlist">
+                      <button
+                        className="wishlist"
+                        onClick={() => addToWishlist(book._id)}
+                      >
                         <FavoriteBorderOutlinedIcon sx={{ fontSize: "18px" }} />{" "}
                         Add to wishlist
                       </button>
