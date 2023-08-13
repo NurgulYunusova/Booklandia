@@ -1,5 +1,5 @@
 const { Wishlist } = require("../models/Wishlist");
-const { User } = require("../models/User");
+const { default: mongoose } = require("mongoose");
 
 const wishlistController = {
   addToWishlist: async (req, res) => {
@@ -22,16 +22,9 @@ const wishlistController = {
 
       await wishlist.save();
 
-      await User.findByIdAndUpdate(
-        userId,
-        { $push: { wishlist: wishlist._id } },
-        { new: true }
-      );
-
       res.status(201).json({ message: "Item added to wishlist" });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Server error" });
+      res.status(500).json({ message: "Error adding book to wishlist" });
     }
   },
   getWishlistByUser: async (req, res) => {
@@ -39,7 +32,7 @@ const wishlistController = {
       const userId = req.params.id;
 
       const wishlist = await Wishlist.find({ user: userId })
-        .populate("book", "title author")
+        .populate("book", "name image createdAt")
         .select("-user");
 
       res.status(200).json({ wishlist });
@@ -50,37 +43,35 @@ const wishlistController = {
   },
   removeFromWishlist: async (req, res) => {
     try {
-      const { userId, bookId } = req.body;
+      const bookId = req.params.id;
+      const { userId } = req.body;
 
-      const wishlistEntry = await Wishlist.findOne({ user: userId });
-
-      if (!wishlistEntry) {
-        return res.status(404).json({ message: "Wishlist not found" });
+      if (
+        !mongoose.Types.ObjectId.isValid(userId) ||
+        !mongoose.Types.ObjectId.isValid(bookId)
+      ) {
+        return res
+          .status(400)
+          .json({ message: "Invalid userId or bookId format" });
       }
 
-      const bookIndex = wishlistEntry.book.indexOf(bookId);
+      const removedBook = await Wishlist.findOneAndDelete({
+        user: userId,
+        book: bookId,
+      });
 
-      if (bookIndex === -1) {
-        return res.status(404).json({ message: "Book not found in wishlist" });
+      if (removedBook) {
+        res.status(200).json({ message: "Book removed from wishlist" });
+      } else {
+        res.status(404).json({ message: "Book not found in wishlist" });
       }
-
-      wishlistEntry.book.splice(bookIndex, 1);
-      await wishlistEntry.save();
-
-      const updatedUser = await User.findByIdAndUpdate(
-        userId,
-        { $pull: { wishlist: bookId } },
-        { new: true }
-      );
-
-      if (!updatedUser) {
-        return res.status(404).json({ message: "User not found" });
-      }
-
-      res.status(200).json({ message: "Book removed from wishlist" });
     } catch (error) {
-      console.error(error);
-      res.status(500).json({ message: "Server error" });
+      if (error instanceof mongoose.Error.CastError) {
+        res.status(400).json({ message: "Invalid userId or bookId format" });
+      } else {
+        console.error(error);
+        res.status(500).json({ message: "Server error" });
+      }
     }
   },
 };

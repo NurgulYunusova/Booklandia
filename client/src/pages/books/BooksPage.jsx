@@ -9,6 +9,12 @@ import axios from "axios";
 import Footer from "../../components/footer/Footer";
 import Pages from "../../components/pages/Pages";
 import Header from "../../components/header/Header";
+import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import Checkbox from "@mui/material/Checkbox";
+import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
+import Favorite from "@mui/icons-material/Favorite";
+
+const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function BooksPage() {
   const navigate = useNavigate();
