@@ -14,6 +14,7 @@ import HomePage from "../pages/home/HomePage";
 import ProfilePage from "../pages/profile/ProfilePage";
 import QuizPage from "../pages/quiz/QuizPage";
 import WishlistPage from "../pages/wishlist/WishlistPage";
+import NotFoundPage from "../pages/notFound/NotFoundPage";
 
 export const routes = [
   {
@@ -76,9 +77,8 @@ export const routes = [
     path: "/quiz",
     element: <QuizPage />,
   },
-
-  // {
-  //   path: "*",
-  //   element: <NotFoundPage />,
-  // },
+  {
+    path: "*",
+    element: <NotFoundPage />,
+  },
 ];
