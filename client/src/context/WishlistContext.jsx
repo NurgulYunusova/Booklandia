@@ -13,6 +13,7 @@ export const WishlistProvider = ({ children }) => {
   const addToWishlist = async (bookId) => {
     try {
       setWishlist([...wishlist, { _id: bookId, productId: bookId }]);
+
       axios
         .post("http://localhost:8080/api/wishlist", {
           userId: user._id,
