@@ -38,7 +38,7 @@ function Header() {
                 <FavoriteBorderOutlinedIcon sx={{ fontSize: "20px" }} />
                 WISHLIST
               </span>
-              <span className="cart" onClick={() => navigate("/basket")}>
+              <span className="cart" onClick={() => navigate("/cart")}>
                 <AddShoppingCartOutlinedIcon sx={{ fontSize: "20px" }} />
                 CART
               </span>

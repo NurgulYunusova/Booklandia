@@ -12,12 +12,12 @@ const WishlistTable = () => {
     <table className="wishlistTable">
       <thead>
         <tr>
-          <th>Book Image</th>
-          <th>Book Name</th>
+          <th>Book</th>
+          <th>Title</th>
           <th>Price</th>
           <th>Added Date</th>
           <th>Add to Cart</th>
-          <th>Delete Book</th>
+          <th>Remove</th>
         </tr>
       </thead>
       <tbody>
