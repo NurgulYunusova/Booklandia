@@ -1,0 +1,139 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+.cart {
+  width: 100%;
+  @include center($justify-content: space-between, $align-items: flex-start);
+  font-family: $base-font2;
+
+  .basketTable {
+    width: 70%;
+    border-collapse: collapse;
+    margin-bottom: 80px;
+
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    th {
+      color: $base-color3;
+    }
+
+    .deleteColumn {
+      width: 5%;
+
+      .delete {
+        border: none;
+        background-color: transparent;
+        outline: none;
+        transition: all 0.2s ease-in-out;
+        cursor: pointer;
+        color: $base-color3;
+
+        &:hover {
+          color: rgb(207, 24, 24);
+        }
+      }
+    }
+
+    .bookInfo {
+      font-size: 16px;
+      color: $base-color3;
+    }
+
+    .bookName {
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+
+    .price,
+    .addedDate {
+      font-weight: 600;
+      color: rgba(0, 0, 17, 0.6);
+    }
+
+    .price {
+      margin: 5px 0;
+    }
+
+    img {
+      width: 80px;
+      height: auto;
+    }
+
+    .quantity {
+      width: 200px;
+
+      .quantityComponent {
+        margin: 0 auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100px;
+        border: 1px solid $base-color1;
+        border-radius: 20px;
+
+        button {
+          cursor: pointer;
+          background-color: $base-color1;
+          border: none;
+          padding: 5px 10px;
+          font-size: 18px;
+          color: $base-color2;
+          border-radius: 50%;
+          width: 30px;
+          height: 30px;
+        }
+
+        span {
+          font-size: 16px;
+          font-weight: bold;
+        }
+      }
+    }
+
+    .subTotal {
+      font-weight: 600;
+      font-size: 16px;
+    }
+  }
+
+  .cartTotals {
+    width: 25%;
+    color: $base-color3;
+
+    h2 {
+      padding-bottom: 25px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .subtotal,
+    .delivery,
+    .total {
+      @include center($justify-content: space-between);
+
+      p {
+        font-weight: 500;
+      }
+    }
+
+    .delivery {
+      padding: 20px 0;
+      margin: 20px 0;
+      border-top: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+    }
+
+    .checkoutButton {
+      .checkout {
+        @include button();
+        margin-top: 30px;
+        width: 100%;
+      }
+    }
+  }
+}

@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
 import { useNavigate } from "react-router-dom";
 import "./wishlistPage.scss";
 import WishlistTable from "../../components/wishlistTable/WishlistTable";
-import { useState } from "react";
 import Header from "../../components/header/Header";
 import Pages from "../../components/pages/Pages";
 import Footer from "../../components/footer/Footer";
@@ -27,10 +25,7 @@ function WishlistPage() {
             </div>
           </div>
 
-          <WishlistTable
-          // handleAddToCart={handleAddToCart}
-          // handleDeleteItem={handleDeleteItem}
-          />
+          <WishlistTable />
         </div>
       </div>
       <Footer />
