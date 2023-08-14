@@ -45,8 +45,15 @@ function ContactUsPage() {
                 marked *
               </p>
               <form>
-                <input type="text" id="name" placeholder="Name *" /> <br />
-                <input type="email" id="email" placeholder="Email *" /> <br />
+                <input type="text" id="name" placeholder="Name *" required />{" "}
+                <br />
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Email *"
+                  required
+                />{" "}
+                <br />
                 <textarea
                   id="message"
                   rows="6"

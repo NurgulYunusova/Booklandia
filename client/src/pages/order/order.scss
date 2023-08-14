@@ -1,7 +1,7 @@
 @import "../../assets/sass/variables.scss";
 @import "../../assets/sass/mixins.scss";
 
-.contactUs {
+.order {
   width: 100%;
 
   &Container {
@@ -43,21 +43,14 @@
     }
 
     .bottom {
-      @include center(
-        $justify-content: space-between,
-        $align-items: flex-start
-      );
+      @include center($justify-content: space-between);
 
-      .leftSide {
-        width: 50%;
-      }
-
-      .rightSide {
-        width: 45%;
+      .bottomLeft {
         font-family: $base-font2;
         color: $base-color3;
+        width: 100%;
 
-        h3 {
+        h2 {
           font-size: 26px;
         }
 
@@ -70,9 +63,22 @@
           display: flex;
           flex-direction: column;
           gap: 5px;
+          width: 100%;
+
+          #fullName,
+          #message {
+            width: 81%;
+          }
+
+          .addressCity,
+          .postalCodeCountry {
+            @include center($justify-content: flex-start);
+            gap: 1%;
+          }
 
           input,
           textarea {
+            width: 40%;
             padding: 16px 22px;
             font-size: 14px;
             outline: none;
@@ -90,6 +96,12 @@
             max-width: max-content;
             @include button();
           }
+        }
+      }
+
+      .bottomRight {
+        img {
+          width: 450px;
         }
       }
     }
