@@ -273,10 +273,9 @@ function BooksPage() {
                             />
                           }
                           readOnly
-                          // onChange={handleBookRatingChange}
                         />
                         <p className="bookAuthor">{q.author.name}</p>
-                        <p className="price">$50.89</p>
+                        <p className="price">${q.price}</p>
                       </div>
                     </div>
                   ))}

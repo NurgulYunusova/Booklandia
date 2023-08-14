@@ -83,6 +83,7 @@ const bookController = {
   updateBook: async (req, res) => {
     const bookId = req.params.id;
     const updatedData = req.body;
+
     try {
       const updatedBook = await Book.findByIdAndUpdate(bookId, updatedData, {
         new: true,

@@ -32,7 +32,7 @@ const basketController = {
       const userId = req.params.id;
 
       const basket = await Basket.find({ user: userId })
-        .populate("book", "name image createdAt")
+        .populate("book", "name image createdAt price")
         .select("-user");
 
       res.status(200).json({ basket });
