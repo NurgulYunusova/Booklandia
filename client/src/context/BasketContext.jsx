@@ -8,19 +8,25 @@ export const BasketContext = createContext();
 
 export const BasketProvider = ({ children }) => {
   const [basket, setBasket] = useState([]);
+  const [bookQuantities, setBookQuantities] = useState({});
   const { user } = useContext(UserContext);
 
-  const addToBasket = async (bookId) => {
+  const addToBasket = async (bookId, quantity) => {
     try {
       setBasket([...basket, { _id: bookId, productId: bookId }]);
 
       axios
-        .post("http://localhost:8080/api/wishlist", {
+        .post("http://localhost:8080/api/basket", {
           userId: user._id,
           bookId: bookId,
+          quantity: quantity,
         })
         .then((response) => {
           alert(response.data.message);
+          setBookQuantities((prevQuantities) => ({
+            ...prevQuantities,
+            [bookId]: quantity,
+          }));
           getBasket();
         })
         .catch((error) => {
@@ -69,7 +75,14 @@ export const BasketProvider = ({ children }) => {
 
   return (
     <BasketContext.Provider
-      value={{ basket, setBasket, addToBasket, removeFromBasket }}
+      value={{
+        basket,
+        setBasket,
+        bookQuantities,
+        setBookQuantities,
+        addToBasket,
+        removeFromBasket,
+      }}
     >
       {children}
     </BasketContext.Provider>

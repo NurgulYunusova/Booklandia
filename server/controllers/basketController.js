@@ -4,11 +4,12 @@ const { default: mongoose } = require("mongoose");
 const basketController = {
   addToBasket: async (req, res) => {
     try {
-      const { userId, bookId } = req.body;
+      const { userId, bookId, quantity } = req.body;
 
       const existingBasketEntry = await Basket.findOne({
         user: userId,
         book: bookId,
+        quantity: quantity,
       });
 
       if (existingBasketEntry) {
@@ -18,6 +19,7 @@ const basketController = {
       const basket = new Basket({
         user: userId,
         book: bookId,
+        quantity: quantity,
       });
 
       await basket.save();

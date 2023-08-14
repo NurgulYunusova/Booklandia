@@ -1,31 +1,35 @@
 /* eslint-disable react/prop-types */
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import "./basketTable.scss";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { BasketContext } from "../../context/BasketContext";
 
 const BasketTable = () => {
-  const { basket, removeFromBasket } = useContext(BasketContext);
-  const [bookQuantities, setBookQuantities] = useState({});
+  const { basket, removeFromBasket, bookQuantities, setBookQuantities } =
+    useContext(BasketContext);
 
   const handleDecrease = (bookId) => {
     if (bookQuantities[bookId] > 1) {
-      setBookQuantities((prevQuantities) => ({
-        ...prevQuantities,
-        [bookId]: prevQuantities[bookId] - 1,
-      }));
+      const newQuantities = {
+        ...bookQuantities,
+        [bookId]: bookQuantities[bookId] - 1,
+      };
+
+      setBookQuantities(newQuantities);
     }
   };
 
   const handleIncrease = (bookId) => {
-    setBookQuantities((prevQuantities) => ({
-      ...prevQuantities,
-      [bookId]: (prevQuantities[bookId] || 1) + 1,
-    }));
+    const newQuantities = {
+      ...bookQuantities,
+      [bookId]: (bookQuantities[bookId] || 1) + 1,
+    };
+
+    setBookQuantities(newQuantities);
   };
 
   const totalSubtotal = basket.reduce((total, q) => {
-    const quantity = bookQuantities[q.book._id] || 0;
+    const quantity = bookQuantities[q.book._id] || 1;
     return total + q.book.price * quantity;
   }, 0);
 
@@ -75,7 +79,7 @@ const BasketTable = () => {
                     $
                     {Number(
                       (
-                        q.book.price * (bookQuantities[q.book._id] || 0)
+                        q.book.price * (bookQuantities[q.book._id] || 1)
                       ).toFixed(2)
                     )}
                   </td>
