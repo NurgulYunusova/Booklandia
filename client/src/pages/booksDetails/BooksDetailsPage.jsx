@@ -12,6 +12,7 @@ import Footer from "../../components/footer/Footer";
 import Pages from "../../components/pages/Pages";
 import Header from "../../components/header/Header";
 import { WishlistContext } from "../../context/WishlistContext";
+import { BasketContext } from "../../context/BasketContext";
 
 function BooksDetailsPage() {
   const navigate = useNavigate();
@@ -20,6 +21,7 @@ function BooksDetailsPage() {
   const [relatedBooks, setRelatedBooks] = useState([]);
   const [currentQuantity, setCurrentQuantity] = useState(1);
   const { addToWishlist } = useContext(WishlistContext);
+  const { addToBasket } = useContext(BasketContext);
 
   const handleDecrease = () => {
     if (currentQuantity > 1) {
@@ -128,7 +130,10 @@ function BooksDetailsPage() {
                         <button onClick={handleIncrease}>+</button>
                       </div>
 
-                      <button className="cart">
+                      <button
+                        className="cart"
+                        onClick={() => addToBasket(book._id, currentQuantity)}
+                      >
                         <AddShoppingCartOutlinedIcon
                           sx={{ fontSize: "20px" }}
                         />{" "}

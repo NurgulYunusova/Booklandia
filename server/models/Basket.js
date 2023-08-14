@@ -10,6 +10,10 @@ const basketSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Book",
     },
+    quantity: {
+      type: Number,
+      default: 1,
+    },
   },
   { timestamps: true }
 );
