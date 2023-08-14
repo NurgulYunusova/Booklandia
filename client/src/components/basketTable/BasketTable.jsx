@@ -6,19 +6,28 @@ import { BasketContext } from "../../context/BasketContext";
 
 const BasketTable = () => {
   const { basket, removeFromBasket } = useContext(BasketContext);
-  const [currentQuantity, setCurrentQuantity] = useState(1);
+  const [bookQuantities, setBookQuantities] = useState({});
 
-  const handleDecrease = () => {
-    if (currentQuantity > 1) {
-      const newQuantity = currentQuantity - 1;
-      setCurrentQuantity(newQuantity);
+  const handleDecrease = (bookId) => {
+    if (bookQuantities[bookId] > 1) {
+      setBookQuantities((prevQuantities) => ({
+        ...prevQuantities,
+        [bookId]: prevQuantities[bookId] - 1,
+      }));
     }
   };
 
-  const handleIncrease = () => {
-    const newQuantity = currentQuantity + 1;
-    setCurrentQuantity(newQuantity);
+  const handleIncrease = (bookId) => {
+    setBookQuantities((prevQuantities) => ({
+      ...prevQuantities,
+      [bookId]: (prevQuantities[bookId] || 1) + 1,
+    }));
   };
+
+  const totalSubtotal = basket.reduce((total, q) => {
+    const quantity = bookQuantities[q.book._id] || 0;
+    return total + q.book.price * quantity;
+  }, 0);
 
   return (
     <>
@@ -50,15 +59,26 @@ const BasketTable = () => {
                     <img src={q.book?.image} alt={q.book?.name} />
                   </td>
                   <td className="bookName bookInfo">{q.book?.name}</td>
-                  <td className="price bookInfo">{q.book?.price}</td>
+                  <td className="price bookInfo">${q.book?.price}</td>
                   <td className="quantity">
                     <div className="quantityComponent">
-                      <button onClick={handleDecrease}>-</button>
-                      <span>{currentQuantity}</span>
-                      <button onClick={handleIncrease}>+</button>
+                      <button onClick={() => handleDecrease(q.book._id)}>
+                        -
+                      </button>
+                      <span>{bookQuantities[q.book._id] || 1}</span>
+                      <button onClick={() => handleIncrease(q.book._id)}>
+                        +
+                      </button>
                     </div>
                   </td>
-                  <td className="subTotal">{q.book.price}</td>
+                  <td className="subTotal">
+                    $
+                    {Number(
+                      (
+                        q.book.price * (bookQuantities[q.book._id] || 0)
+                      ).toFixed(2)
+                    )}
+                  </td>
                 </tr>
               ))}
           </tbody>
@@ -68,7 +88,7 @@ const BasketTable = () => {
           <h2>Cart totals</h2>
           <div className="subtotal">
             <h4>Subtotal</h4>
-            <p>$500</p>
+            <p>${totalSubtotal.toFixed(2)}</p>
           </div>
           <div className="delivery">
             <h4>Delivery</h4>
@@ -76,7 +96,7 @@ const BasketTable = () => {
           </div>
           <div className="total">
             <h4>Total</h4>
-            <p>$500</p>
+            <p>${totalSubtotal.toFixed(2)}</p>
           </div>
 
           <div className="checkoutButton">
