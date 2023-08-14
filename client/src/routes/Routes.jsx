@@ -15,6 +15,7 @@ import ProfilePage from "../pages/profile/ProfilePage";
 import QuizPage from "../pages/quiz/QuizPage";
 import WishlistPage from "../pages/wishlist/WishlistPage";
 import NotFoundPage from "../pages/notFound/NotFoundPage";
+import OrderPage from "../pages/order/OrderPage";
 
 export const routes = [
   {
@@ -76,6 +77,10 @@ export const routes = [
   {
     path: "/quiz",
     element: <QuizPage />,
+  },
+  {
+    path: "/order",
+    element: <OrderPage />,
   },
   {
     path: "*",
