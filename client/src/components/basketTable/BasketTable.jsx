@@ -22,7 +22,7 @@ const BasketTable = () => {
 
   return (
     <>
-      <div className="cart">
+      <div className="basket">
         <table className="basketTable">
           <thead>
             <tr>
@@ -50,7 +50,7 @@ const BasketTable = () => {
                     <img src={q.book?.image} alt={q.book?.name} />
                   </td>
                   <td className="bookName bookInfo">{q.book?.name}</td>
-                  <td className="price bookInfo">$58</td>
+                  <td className="price bookInfo">{q.book?.price}</td>
                   <td className="quantity">
                     <div className="quantityComponent">
                       <button onClick={handleDecrease}>-</button>
@@ -58,7 +58,7 @@ const BasketTable = () => {
                       <button onClick={handleIncrease}>+</button>
                     </div>
                   </td>
-                  <td className="subTotal">$58</td>
+                  <td className="subTotal">{q.book.price}</td>
                 </tr>
               ))}
           </tbody>

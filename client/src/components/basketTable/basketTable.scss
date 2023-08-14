@@ -1,12 +1,12 @@
 @import "../../assets/sass/variables.scss";
 @import "../../assets/sass/mixins.scss";
 
-.cart {
+.basket {
   width: 100%;
   @include center($justify-content: space-between, $align-items: flex-start);
   font-family: $base-font2;
 
-  .basketTable {
+  &Table {
     width: 70%;
     border-collapse: collapse;
     margin-bottom: 80px;

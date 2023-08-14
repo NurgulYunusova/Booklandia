@@ -35,13 +35,6 @@ function NewBooks() {
     window.scrollTo(0, 0);
   };
 
-  function getRandomPrice() {
-    const randomDollar = Math.floor(Math.random() * 100);
-    const randomCent = Math.floor(Math.random() * 100);
-    const price = `${randomDollar}.${randomCent < 10 ? "0" : ""}${randomCent}`;
-    return price;
-  }
-
   return (
     <>
       <div className="newBooks">
@@ -100,10 +93,9 @@ function NewBooks() {
                             />
                           }
                           readOnly
-                          // onChange={handleBookRatingChange}
                         />
                         <p className="bookAuthor">{q.author.name}</p>
-                        <p className="price">${getRandomPrice()}</p>
+                        <p className="price">${q.price}</p>
                       </div>
                     </div>
                   ))}
