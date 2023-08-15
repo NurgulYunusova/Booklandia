@@ -62,6 +62,8 @@ function BooksDetailsPage() {
     }
   }, [book]);
 
+  console.log(book);
+
   const handleBookClick = (bookId) => {
     navigate(`/booksDetails/${bookId}`);
     window.scrollTo(0, 0);
@@ -90,7 +92,10 @@ function BooksDetailsPage() {
             <div className="middle">
               <div className="left">
                 <div className="bookImage">
-                  <img src={book.image} alt={book.name} />
+                  <img
+                    src={`http://localhost:8080/${book.image}`}
+                    alt={book.name}
+                  />
                 </div>
               </div>
 
@@ -108,7 +113,7 @@ function BooksDetailsPage() {
                     <Rating
                       name="book-rating"
                       precision={0.5}
-                      value={4.5}
+                      value={book.averageRating}
                       icon={<StarRoundedIcon style={{ color: "#de723c" }} />}
                       emptyIcon={
                         <StarRoundedIcon style={{ color: "#bab6b6" }} />

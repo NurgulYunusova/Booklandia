@@ -32,9 +32,6 @@ function BooksPage() {
   const [selectedAuthor, setSelectedAuthor] = useState("All");
   const [selectedSorting, setSelectedSorting] = useState("1");
 
-  // const category = ["All", ...new Set(books.map((item) => item.category.name))];
-  // const author = ["All", ...new Set(books.map((item) => item.author.name))];
-
   const filteredItems = books
     .filter(
       (item) =>
@@ -252,7 +249,10 @@ function BooksPage() {
                       onClick={() => handleBookClick(q._id)}
                     >
                       <div className="bookImage">
-                        <img src={q.image} alt={q.name} />
+                        <img
+                          src={`http://localhost:8080/${q.image}`}
+                          alt={q.name}
+                        />
                       </div>
 
                       <div className="bookInfo">
@@ -260,7 +260,7 @@ function BooksPage() {
                         <Rating
                           name="book-rating"
                           precision={0.5}
-                          value={4.5}
+                          value={q.averageRating}
                           sx={{ marginLeft: "-2px" }}
                           icon={
                             <StarRoundedIcon

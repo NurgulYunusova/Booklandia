@@ -32,7 +32,7 @@ function Slider() {
             {books &&
               books.map((q, key) => (
                 <SwiperSlide key={key}>
-                  <img src={q.image} alt={q.name} />
+                  <img src={`http://localhost:8080/${q.image}`} alt={q.name} />
                 </SwiperSlide>
               ))}
           </Swiper>

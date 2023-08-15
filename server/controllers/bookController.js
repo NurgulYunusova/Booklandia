@@ -1,11 +1,35 @@
 const { Author } = require("../models/Author");
 const { Book } = require("../models/Book");
+const { Review } = require("../models/Review");
 
 const bookController = {
   getAllBooks: async (req, res) => {
     try {
       const books = await Book.find().populate("author category");
-      res.status(200).json(books);
+
+      const booksWithAverageRating = await Promise.all(
+        books.map(async (book) => {
+          const reviews = await Review.find({ book: book._id });
+
+          let totalRatings = 0;
+          let sumRatings = 0;
+
+          reviews.forEach((review) => {
+            totalRatings++;
+            sumRatings += review.rating;
+          });
+
+          const averageRating =
+            totalRatings > 0 ? sumRatings / totalRatings : 2.5;
+
+          return {
+            ...book.toObject(),
+            averageRating,
+          };
+        })
+      );
+
+      res.status(200).json(booksWithAverageRating);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch books", error });
     }
@@ -18,19 +42,24 @@ const bookController = {
         return res.status(404).json({ message: "Book not found" });
       }
 
-      // const totalRatings = book.ratings.length;
-      // const sumRatings = book.ratings.reduce(
-      //   (total, rating) => total + rating,
-      //   0
-      // );
-      // const averageRating = totalRatings > 0 ? sumRatings / totalRatings : 0;
+      const reviews = await Review.find({ book: bookId });
 
-      // const bookWithAverageRating = {
-      //   ...book.toObject(),
-      //   averageRating,
-      // };
+      let totalRatings = 0;
+      let sumRatings = 0;
 
-      res.status(200).json(book);
+      reviews.forEach((review) => {
+        totalRatings++;
+        sumRatings += review.rating;
+      });
+
+      const averageRating = totalRatings > 0 ? sumRatings / totalRatings : 2.5;
+
+      const bookWithAverageRating = {
+        ...book.toObject(),
+        averageRating,
+      };
+
+      res.status(200).json(bookWithAverageRating);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch book", error });
     }

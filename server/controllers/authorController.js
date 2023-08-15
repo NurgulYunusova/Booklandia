@@ -1,4 +1,5 @@
 const { Author } = require("../models/Author");
+const { Review } = require("../models/Review");
 
 const authorController = {
   getAllAuthors: async (req, res) => {
@@ -16,7 +17,36 @@ const authorController = {
       if (!author) {
         return res.status(404).json({ message: "Author not found" });
       }
-      res.status(200).json(author);
+      const authorBooks = author.authorBooks;
+
+      const booksWithAverageRating = await Promise.all(
+        authorBooks.map(async (book) => {
+          const reviews = await Review.find({ book: book._id });
+
+          let totalRatings = 0;
+          let sumRatings = 0;
+
+          reviews.forEach((review) => {
+            totalRatings++;
+            sumRatings += review.rating;
+          });
+
+          const averageRating =
+            totalRatings > 0 ? sumRatings / totalRatings : 2.5;
+
+          return {
+            ...book.toObject(),
+            averageRating,
+          };
+        })
+      );
+
+      const authorWithAverageRating = {
+        ...author.toObject(),
+        booksWithAverageRating,
+      };
+
+      res.status(200).json(authorWithAverageRating);
     } catch (error) {
       res.status(500).json({ message: "Failed to fetch author", error });
     }
