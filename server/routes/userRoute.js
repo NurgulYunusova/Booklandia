@@ -8,7 +8,7 @@ userRoutes.get("/profile", protect, userController.getUserProfile);
 userRoutes.post("/register", userController.registerUser);
 userRoutes.post("/confirm", userController.confirmUser);
 userRoutes.post("/login", userController.loginUser);
-userRoutes.put("/profile", protect, userController.updateUserProfile);
+userRoutes.put("/profile/:id", userController.updateUserProfile);
 
 // Admin routes
 // userRoutes.get("/", protect, admin, userController.getUsers);
