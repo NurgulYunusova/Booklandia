@@ -72,7 +72,10 @@ function NewBooks() {
                       onClick={() => handleBookClick(q._id)}
                     >
                       <div className="bookImage">
-                        <img src={q.image} alt={q.image} />
+                        <img
+                          src={`http://localhost:8080/${q.image}`}
+                          alt={q.image}
+                        />
                       </div>
 
                       <div className="bookInfo">
@@ -80,7 +83,7 @@ function NewBooks() {
                         <Rating
                           name="book-rating"
                           precision={0.5}
-                          value={4.5}
+                          value={q.averageRating}
                           sx={{ marginLeft: "-2px" }}
                           icon={
                             <StarRoundedIcon

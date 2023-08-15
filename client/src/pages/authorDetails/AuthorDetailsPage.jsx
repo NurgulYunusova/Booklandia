@@ -24,6 +24,8 @@ function AuthorDetailsPage() {
     window.scrollTo(0, 0);
   };
 
+  console.log(author);
+
   return (
     <>
       <Header />
@@ -46,7 +48,10 @@ function AuthorDetailsPage() {
           <div className="middle">
             <div className="left">
               <div className="authorImage">
-                <img src={author.image} alt={author.name} />
+                <img
+                  src={`http://localhost:8080/${author.image}`}
+                  alt={author.name}
+                />
               </div>
             </div>
 
@@ -67,8 +72,8 @@ function AuthorDetailsPage() {
               <div className="divider"></div>
             </div>
             <div className="books">
-              {author.authorBooks &&
-                author.authorBooks.map((q, key) => (
+              {author.booksWithAverageRating &&
+                author.booksWithAverageRating.map((q, key) => (
                   <div
                     className="book"
                     key={key}
@@ -80,23 +85,25 @@ function AuthorDetailsPage() {
                       <Rating
                         name="book-rating"
                         precision={0.5}
-                        value={4.5}
+                        value={q.averageRating}
                         icon={
                           <StarRoundedIcon
                             style={{ color: "#de723c", fontSize: "20px" }}
                           />
-                        } // Change the star icon color
+                        }
                         emptyIcon={
                           <StarRoundedIcon
                             style={{ color: "#bab6b6", fontSize: "20px" }}
                           />
                         }
                         readOnly
-                        // onChange={handleBookRatingChange}
                       />
                     </div>
                     <div className="bookImage">
-                      <img src={q.image} alt="" />
+                      <img
+                        src={`http://localhost:8080/${q.image}`}
+                        alt={q.name}
+                      />
                     </div>
                   </div>
                 ))}

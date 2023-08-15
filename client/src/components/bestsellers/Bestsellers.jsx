@@ -6,12 +6,6 @@ import axios from "axios";
 import { useNavigate } from "react-router";
 
 function Bestsellers() {
-  // const [bookRating, setBookRating] = useState(0);
-
-  // // Function to handle the book rating change
-  // const handleBookRatingChange = (event, newRating) => {
-  //   setBookRating(newRating);
-  // };
   const navigate = useNavigate();
   const [books, setBooks] = useState([]);
 
@@ -48,7 +42,7 @@ function Bestsellers() {
                     <Rating
                       name="book-rating"
                       precision={0.5}
-                      value={4.5}
+                      value={q.averageRating}
                       sx={{ marginLeft: "-2px" }}
                       icon={<StarRoundedIcon style={{ color: "#de723c" }} />}
                       emptyIcon={
@@ -59,7 +53,10 @@ function Bestsellers() {
                     />
                   </div>
                   <div className="bookImage">
-                    <img src={q.image} alt={q.name} />
+                    <img
+                      src={`http://localhost:8080/${q.image}`}
+                      alt={q.name}
+                    />
                   </div>
                 </div>
               ))}
