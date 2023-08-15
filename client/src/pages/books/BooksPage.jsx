@@ -33,6 +33,9 @@ function BooksPage() {
   const [selectedAuthor, setSelectedAuthor] = useState("All");
   const [selectedSorting, setSelectedSorting] = useState("1");
   const [isLoading, setIsLoading] = useState(true);
+  const [minPrice, setMinPrice] = useState("");
+  const [maxPrice, setMaxPrice] = useState("");
+  const [filteredPriceItems, setFilteredPriceItems] = useState([]);
 
   const filteredItems = books
     .filter(
@@ -41,6 +44,13 @@ function BooksPage() {
           item.category.name === selectedCategory) &&
         (selectedAuthor === "All" || item.author.name === selectedAuthor)
     )
+    .filter((item) => {
+      const itemPrice = item.price;
+      const isWithinPriceRange =
+        (minPrice === "" || itemPrice >= minPrice) &&
+        (maxPrice === "" || itemPrice <= maxPrice);
+      return isWithinPriceRange;
+    })
     .sort((a, b) => {
       switch (selectedSorting) {
         case "1":
@@ -212,6 +222,27 @@ function BooksPage() {
                           ))}
                       </ul>
                     </div>
+                  </div>
+
+                  <div className="dropdown">
+                    <h3>Price Range: </h3>
+                    <input
+                      type="number"
+                      placeholder="Min Price"
+                      value={minPrice}
+                      onChange={(e) => setMinPrice(e.target.value)}
+                    />
+                    <input
+                      type="number"
+                      placeholder="Max Price"
+                      value={maxPrice}
+                      onChange={(e) => setMaxPrice(e.target.value)}
+                    />
+                    <button
+                      onClick={() => setFilteredPriceItems(filteredItems)}
+                    >
+                      FILTER
+                    </button>
                   </div>
                 </div>
 

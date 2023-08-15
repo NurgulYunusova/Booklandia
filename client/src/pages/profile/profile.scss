@@ -91,6 +91,33 @@
               }
             }
 
+            form {
+              font-family: $base-font2;
+              color: $base-color3;
+              display: flex;
+              flex-direction: column;
+
+              input {
+                padding: 16px 22px;
+                font-size: 14px;
+                width: 300px;
+                outline: none;
+                background: transparent;
+                border: 1px solid #ccc;
+
+                &::placeholder {
+                  font-size: 14px;
+                  font-family: $base-font2;
+                  font-weight: 500;
+                }
+              }
+
+              button {
+                margin-top: 30px;
+                @include button();
+              }
+            }
+
             .editButton {
               button {
                 @include button();
@@ -113,6 +140,7 @@
               width: 150px;
               height: 150px;
               margin: 10px 0 20px;
+              object-fit: cover;
             }
 
             button {

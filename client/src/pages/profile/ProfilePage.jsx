@@ -8,11 +8,67 @@ import { UserContext } from "../../context/UserContext";
 import Header from "../../components/header/Header";
 import Pages from "../../components/pages/Pages";
 import Footer from "../../components/footer/Footer";
+import * as Yup from "yup";
+import { useFormik } from "formik";
+import axios from "axios";
 
 function ProfilePage() {
   const navigate = useNavigate();
   const { user } = useContext(UserContext);
   const [activeTab, setActiveTab] = useState(0);
+  const [isEditMode, setIsEditMode] = useState(false);
+
+  const userProfileSchema = Yup.object({
+    name: Yup.string().max(20, "Maximum 30 character"),
+    email: Yup.string().email("Invalid email"),
+    password: Yup.string()
+      .matches(
+        /^(?=.*[A-Z])(?=.*\d).+/,
+        "Password must start with an uppercase letter and contain at least one number"
+      )
+      .min(8, "Password must be at least 8 characters"),
+    confirmPassword: Yup.string().oneOf(
+      [Yup.ref("password"), null],
+      "Passwords must match"
+    ),
+  });
+
+  if (user?.length > 0) {
+    console.log(user);
+  }
+
+  const { handleSubmit, handleChange, values, errors } = useFormik({
+    initialValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
+    validationSchema: userProfileSchema,
+    onSubmit: async ({ name, email, password }) => {
+      const requestData = {};
+
+      if (name) {
+        requestData.name = name;
+      }
+      if (email) {
+        requestData.email = email;
+      }
+      if (password) {
+        requestData.password = password;
+      }
+
+      await axios
+        .put(`http://localhost:8080/api/user/profile/${user._id}`, requestData)
+        .then((res) => {
+          if (res.status == 200) {
+            alert("Profile successfully edited");
+            setIsEditMode(false);
+            console.log(res.data);
+          }
+        });
+    },
+  });
 
   const handleTabChange = (event, newTab) => {
     setActiveTab(newTab);
@@ -72,34 +128,118 @@ function ProfilePage() {
                 {activeTab === 0 && (
                   <div className="profile">
                     <div className="leftSide">
-                      <div className="infos">
-                        <div className="dataNames">
-                          <p>Name</p>
-                          <p>Email</p>
-                          <p>Password</p>
-                        </div>
+                      {isEditMode ? (
+                        <form onSubmit={handleSubmit}>
+                          <input
+                            type="text"
+                            id="name"
+                            placeholder="Name"
+                            onChange={handleChange}
+                            value={values.name}
+                          />
+                          <p
+                            style={{
+                              color: "red",
+                              fontSize: "12px",
+                              marginTop: "10px",
+                            }}
+                          >
+                            {errors?.name}
+                          </p>
 
-                        <div className="datas">
-                          <p>{user?.name}</p>
-                          <p>{user?.email}</p>
-                          <p>*********</p>
+                          <br />
+
+                          <input
+                            type="email"
+                            id="email"
+                            placeholder="Email"
+                            onChange={handleChange}
+                            value={values.email}
+                          />
+                          <p
+                            style={{
+                              color: "red",
+                              fontSize: "12px",
+                              marginTop: "10px",
+                            }}
+                          >
+                            {errors?.email}
+                          </p>
+
+                          <br />
+
+                          <input
+                            type="password"
+                            id="password"
+                            placeholder="Password"
+                            onChange={handleChange}
+                            value={values.password}
+                          />
+                          <p
+                            style={{
+                              color: "red",
+                              fontSize: "12px",
+                              marginTop: "10px",
+                            }}
+                          >
+                            {errors?.password}
+                          </p>
+
+                          <br />
+
+                          <input
+                            type="password"
+                            id="confirmPassword"
+                            placeholder="Confirm Password"
+                            onChange={handleChange}
+                            value={values.confirmPassword}
+                          />
+                          <p
+                            style={{
+                              color: "red",
+                              fontSize: "12px",
+                              marginTop: "10px",
+                            }}
+                          >
+                            {errors?.confirmPassword}
+                          </p>
+
+                          <button type="submit">Save</button>
+                        </form>
+                      ) : (
+                        <div className="infos">
+                          <div className="dataNames">
+                            <p>Name</p>
+                            <p>Email</p>
+                            <p>Password</p>
+                          </div>
+                          <div className="datas">
+                            <p>{user?.name}</p>
+                            <p>{user?.email}</p>
+                            <p>*********</p>
+                          </div>
                         </div>
-                      </div>
+                      )}
 
                       <div className="editButton">
-                        <button>EDIT PROFILE</button>
+                        <button onClick={() => setIsEditMode(!isEditMode)}>
+                          {isEditMode ? "Cancel" : "EDIT PROFILE"}
+                        </button>
                       </div>
                     </div>
 
                     <div className="rightSide">
                       <p>Profile image</p>
-                      {user?.profileImage ? (
+                      {user?.profileImage.length == 0 ? (
                         <img
                           src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
                           alt={user?.name}
                         />
                       ) : (
-                        <img src={user?.profileImage} alt={user?.name} />
+                        <img
+                          src={` http://localhost:8080/${user?.profileImage}`}
+                          alt={user?.name}
+                        />
                       )}
 
                       <button>UPLOAD NEW</button>

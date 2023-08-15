@@ -111,13 +111,19 @@ const userController = {
     }
   },
   updateUserProfile: async (req, res) => {
-    let file = req.files.photo;
+    let file = req.files?.photo;
+    const userId = req.params.id;
 
-    const user = await User.findById(req.user._id);
+    const user = await User.findById(userId);
 
     if (user) {
       const uploadFile = () => {
         return new Promise((resolve, reject) => {
+          if (!file) {
+            resolve(null);
+            return;
+          }
+
           const path = "userProfileImages/" + file.name;
           file.mv(path, function (err) {
             if (err) {
@@ -133,7 +139,10 @@ const userController = {
 
       user.name = req.body.name || user.name;
       user.email = req.body.email || user.email;
-      user.profileImage = imagePath || user.profileImage;
+
+      if (imagePath) {
+        user.profileImage = imagePath;
+      }
 
       if (req.body.password) {
         user.password = req.body.password;
@@ -147,6 +156,12 @@ const userController = {
         email: updatedUser.email,
         isAdmin: updatedUser.isAdmin,
       });
+      // const updatedUser = await user.save();
+
+      // const updatedUserWithoutPassword = { ...updatedUser.toObject() };
+      // delete updatedUserWithoutPassword.password;
+
+      // res.json(updatedUserWithoutPassword);
     } else {
       res.status(404);
       throw new Error("User not found");
