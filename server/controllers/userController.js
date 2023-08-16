@@ -182,7 +182,11 @@ const userController = {
         html: `<p>If you want to change your password, click here <a href="http://localhost:5173/changePassword?userId=${user._id}">change your password</a></p>`,
       });
 
-      return res.status(200).json("Email sent successfully");
+      return res
+        .status(200)
+        .json(
+          "Email sent successfully. To change your password check the email"
+        );
     } catch (error) {
       console.log(error);
     }
