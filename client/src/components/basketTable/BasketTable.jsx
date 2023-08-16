@@ -3,10 +3,12 @@ import { useContext } from "react";
 import "./basketTable.scss";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { BasketContext } from "../../context/BasketContext";
+import { useNavigate } from "react-router-dom";
 
 const BasketTable = () => {
   const { basket, removeFromBasket, bookQuantities, setBookQuantities } =
     useContext(BasketContext);
+  const navigate = useNavigate();
 
   const handleDecrease = (bookId) => {
     if (bookQuantities[bookId] > 1) {
@@ -32,6 +34,11 @@ const BasketTable = () => {
     const quantity = bookQuantities[q.book._id] || 1;
     return total + q.book.price * quantity;
   }, 0);
+
+  const handleOrderPageClick = () => {
+    navigate("/order");
+    window.scrollTo(0, 0);
+  };
 
   return (
     <>
@@ -104,7 +111,9 @@ const BasketTable = () => {
           </div>
 
           <div className="checkoutButton">
-            <button className="checkout">CHECKOUT</button>
+            <button className="checkout" onClick={() => handleOrderPageClick()}>
+              CHECKOUT
+            </button>
           </div>
         </div>
       </div>
