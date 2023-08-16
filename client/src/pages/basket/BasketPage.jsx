@@ -8,6 +8,11 @@ import BasketTable from "../../components/basketTable/BasketTable";
 function BasketPage() {
   const navigate = useNavigate();
 
+  const handleHomePageClick = () => {
+    navigate("/");
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <Header />
@@ -18,7 +23,7 @@ function BasketPage() {
             <div className="breadCrumb">
               <i
                 className="fa-solid fa-house"
-                onClick={() => navigate("/")}
+                onClick={handleHomePageClick}
               ></i>
               <i className="fa-solid fa-angle-right"></i>
               <p>CART</p>

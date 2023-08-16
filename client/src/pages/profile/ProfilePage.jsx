@@ -31,45 +31,56 @@ function ProfilePage() {
       [Yup.ref("password"), null],
       "Passwords must match"
     ),
+    profileImage: Yup.mixed().test(
+      "fileType",
+      "Unsupported File Format",
+      (value) => {
+        if (!value) return true;
+        const supportedFormats = ["image/jpeg", "image/png", "image/jpg"];
+        return supportedFormats.includes(value.type);
+      }
+    ),
   });
 
   if (user?.length > 0) {
     console.log(user);
   }
 
-  const { handleSubmit, handleChange, values, errors } = useFormik({
-    initialValues: {
-      name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    },
-    validationSchema: userProfileSchema,
-    onSubmit: async ({ name, email, password }) => {
-      const requestData = {};
+  const handleFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    console.log(selectedFile);
+    setFieldValue("profileImage", selectedFile);
+  };
 
-      if (name) {
-        requestData.name = name;
-      }
-      if (email) {
-        requestData.email = email;
-      }
-      if (password) {
-        requestData.password = password;
-      }
+  const { handleSubmit, handleChange, setFieldValue, values, errors } =
+    useFormik({
+      initialValues: {
+        name: "",
+        email: "",
+        password: "",
+        confirmPassword: "",
+        profileImage: "",
+      },
+      validationSchema: userProfileSchema,
+      onSubmit: async ({ name, email, password, profileImage }) => {
+        const formData = new FormData();
+        formData.append("name", name);
+        formData.append("email", email);
+        formData.append("password", password);
+        formData.append("photo", profileImage);
 
-      await axios
-        .put(`http://localhost:8080/api/user/profile/${user._id}`, requestData)
-        .then((res) => {
-          if (res.status == 200) {
-            alert("Profile successfully edited");
-            setIsEditMode(false);
-            updateUser();
-            console.log(res.data);
-          }
-        });
-    },
-  });
+        await axios
+          .put(`http://localhost:8080/api/user/profile/${user._id}`, formData)
+          .then((res) => {
+            if (res.status == 200) {
+              alert("Profile successfully edited");
+              setIsEditMode(false);
+              updateUser();
+              console.log(res.data);
+            }
+          });
+      },
+    });
 
   const handleTabChange = (event, newTab) => {
     setActiveTab(newTab);
@@ -205,6 +216,15 @@ function ProfilePage() {
                             {errors?.confirmPassword}
                           </p>
 
+                          <div>
+                            <p>Profile image</p>
+                            <input
+                              type="file"
+                              accept="image/*"
+                              onChange={handleFileChange}
+                            />
+                          </div>
+
                           <button type="submit">Save</button>
                         </form>
                       ) : (
@@ -230,17 +250,21 @@ function ProfilePage() {
                     </div>
 
                     <div className="rightSide">
-                      <p>Profile image</p>
-                      {user?.profileImage.length === 0 ? (
-                        <img
-                          src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
-                          alt={user?.name}
-                        />
+                      {isEditMode ? (
+                        <></>
                       ) : (
-                        <img src={user?.profileImage} alt={user?.name} />
+                        <>
+                          <p>Profile image</p>
+                          {user?.profileImage !== null ? (
+                            <img src={user?.profileImage} alt={user?.name} />
+                          ) : (
+                            <img
+                              src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
+                              alt={user?.name}
+                            />
+                          )}
+                        </>
                       )}
-
-                      <button>UPLOAD NEW</button>
                     </div>
                   </div>
                 )}
