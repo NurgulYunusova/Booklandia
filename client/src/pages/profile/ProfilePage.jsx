@@ -14,7 +14,7 @@ import axios from "axios";
 
 function ProfilePage() {
   const navigate = useNavigate();
-  const { user } = useContext(UserContext);
+  const { user, updateUser } = useContext(UserContext);
   const [activeTab, setActiveTab] = useState(0);
   const [isEditMode, setIsEditMode] = useState(false);
 
@@ -64,6 +64,7 @@ function ProfilePage() {
           if (res.status == 200) {
             alert("Profile successfully edited");
             setIsEditMode(false);
+            updateUser();
             console.log(res.data);
           }
         });
@@ -230,16 +231,13 @@ function ProfilePage() {
 
                     <div className="rightSide">
                       <p>Profile image</p>
-                      {user?.profileImage.length == 0 ? (
+                      {user?.profileImage.length === 0 ? (
                         <img
                           src="https://icon-library.com/images/anonymous-avatar-icon/anonymous-avatar-icon-25.jpg"
                           alt={user?.name}
                         />
                       ) : (
-                        <img
-                          src={` http://localhost:8080/${user?.profileImage}`}
-                          alt={user?.name}
-                        />
+                        <img src={user?.profileImage} alt={user?.name} />
                       )}
 
                       <button>UPLOAD NEW</button>

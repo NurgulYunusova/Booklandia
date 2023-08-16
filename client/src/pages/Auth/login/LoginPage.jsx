@@ -41,7 +41,7 @@ function LoginPage() {
           navigate("/");
         }
       } catch (error) {
-        console.log(error);
+        alert("Invalid email or password");
       }
     },
   });

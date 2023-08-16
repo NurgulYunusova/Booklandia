@@ -89,10 +89,15 @@ const userController = {
       } else if (await user.matchPassword(password)) {
         const token = generateToken(res, user._id);
         res.json(token);
+      } else {
+        res.status(401).json({
+          message: "Invalid email or password",
+        });
       }
     } else {
-      res.status(401);
-      throw new Error("Invalid email or password");
+      res.status(404).json({
+        message: "User not found",
+      });
     }
   },
   getUserProfile: async (req, res) => {
