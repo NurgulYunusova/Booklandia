@@ -166,6 +166,45 @@ const userController = {
       throw new Error("User not found");
     }
   },
+  forgotPassword: async (req, res) => {
+    const email = req.body.email;
+    try {
+      const user = await User.findOne({ email });
+
+      if (!user) {
+        return res.status(404).json("User not found");
+      }
+
+      transporter.sendMail({
+        from: "c8657545@gmail.com",
+        to: email,
+        subject: "Reset Password Link",
+        html: `<p>If you want to change your password, click here <a href="http://localhost:5173/changePassword?userId=${user._id}">change your password</a></p>`,
+      });
+
+      return res.status(200).json("Email sent successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  },
+  changePassword: async (req, res) => {
+    const { userId, password } = req.body;
+
+    try {
+      const user = await User.findById(userId);
+
+      if (!user) {
+        res.status(404).json("User not found");
+      }
+
+      user.password = password;
+
+      await user.save();
+      res.status(200).json("Password changed successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  },
 };
 
 const transporter = nodemailer.createTransport({
