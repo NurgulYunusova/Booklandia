@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import CircularProgress from "@mui/material/CircularProgress";
@@ -13,7 +14,7 @@ export const UserProvider = ({ children }) => {
 
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
+  const updateUser = async () => {
     if (token) {
       axios
         .get("http://localhost:8080/api/user/profile", {
@@ -30,12 +31,18 @@ export const UserProvider = ({ children }) => {
 
       setIsLoggedIn(true);
     }
+  };
+
+  useEffect(() => {
+    updateUser();
   }, [token]);
 
-  // console.log("USER info: ", user?._id);
+  console.log("USER info: ", user);
 
   return (
-    <UserContext.Provider value={{ user, setUser, isLoggedIn, setIsLoggedIn }}>
+    <UserContext.Provider
+      value={{ user, setUser, isLoggedIn, setIsLoggedIn, updateUser }}
+    >
       {children}
     </UserContext.Provider>
   );
