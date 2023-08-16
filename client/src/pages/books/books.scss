@@ -94,6 +94,39 @@
             }
           }
         }
+
+        .filterByPrice {
+          border: 1px solid #ccc;
+          padding: 15px 25px;
+          font-family: $base-font2;
+
+          h3 {
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 24px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 15px;
+          }
+
+          .minPrice {
+            margin-bottom: 15px;
+          }
+
+          input {
+            width: 100%;
+            padding: 16px 22px;
+            font-size: 15px;
+            outline: none;
+            background: transparent;
+            border: 1px solid #ccc;
+
+            &::placeholder {
+              font-size: 14px;
+              font-family: $base-font2;
+              font-weight: 500;
+            }
+          }
+        }
       }
 
       .rightSection {

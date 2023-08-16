@@ -224,25 +224,24 @@ function BooksPage() {
                     </div>
                   </div>
 
-                  <div className="dropdown">
-                    <h3>Price Range: </h3>
+                  <div className="filterByPrice">
+                    <h3>Filter By Price</h3>
                     <input
                       type="number"
                       placeholder="Min Price"
                       value={minPrice}
+                      className="minPrice"
+                      min={0}
                       onChange={(e) => setMinPrice(e.target.value)}
                     />
                     <input
                       type="number"
                       placeholder="Max Price"
                       value={maxPrice}
+                      className="maxPrice"
+                      max={200}
                       onChange={(e) => setMaxPrice(e.target.value)}
                     />
-                    <button
-                      onClick={() => setFilteredPriceItems(filteredItems)}
-                    >
-                      FILTER
-                    </button>
                   </div>
                 </div>
 
