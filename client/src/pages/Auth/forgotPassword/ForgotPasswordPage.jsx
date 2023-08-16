@@ -1,9 +1,32 @@
 import "./forgotPassword.scss";
 import image from "../../../assets/images/forgot-password.png";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import axios from "axios";
 
 function ForgotPasswordPage() {
   const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:8080/api/user/forgotPassword",
+        {
+          email: email,
+        }
+      );
+      console.log(response);
+      if (response.status === 200) {
+        alert(response.data);
+        setEmail("");
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <>
@@ -15,8 +38,15 @@ function ForgotPasswordPage() {
               Please enter your email. You will receive an email message for
               reset your password.
             </p>
-            <form>
-              <input type="email" id="email" placeholder="Email" />
+            <form onSubmit={handleSubmit}>
+              <input
+                type="email"
+                id="email"
+                value={email}
+                placeholder="Email"
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
               <button type="submit">GET NEW PASSWORD</button>
             </form>
             <a onClick={() => navigate("/login")}>
