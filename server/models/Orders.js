@@ -7,14 +7,27 @@ const orderSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     books: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Book",
-        required: true,
+        book: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "Book",
+        },
+        quantity: {
+          type: Number,
+          default: 1,
+        },
       },
     ],
-    totalAmount: {
+    address: {
+      type: String,
+      required: true,
+    },
+    totalPrice: {
       type: Number,
       required: true,
     },

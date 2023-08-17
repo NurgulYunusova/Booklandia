@@ -20,35 +20,19 @@ const protect = async (req, res, next) => {
   });
 };
 
-module.exports = {
-  protect,
+// User must be an admin
+const admin = async (req, res, next) => {
+  const user = await User.findById(req.userId);
+
+  if (user && user.isAdmin == true) {
+    next();
+  } else {
+    res.status(401);
+    throw new Error("Not authorized as an admin");
+  }
 };
 
-// User must be an admin
-// const admin = (req, res, next) => {
-//   if (req.user && req.user.isAdmin) {
-//     next();
-//   } else {
-//     res.status(401);
-//     throw new Error("Not authorized as an admin");
-//   }
-// };
-
-// token = req.headers.authorization;
-
-// if (token) {
-//   try {
-//     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-
-//     req.user = await User.findById(decoded.userId).select("-password");
-
-//     next();
-//   } catch (error) {
-//     console.error(error);
-//     res.status(401);
-//     throw new Error("Not authorized, token failed");
-//   }
-// } else {
-//   res.status(401);
-//   throw new Error("Not authorized, no token");
-// }
+module.exports = {
+  protect,
+  admin,
+};

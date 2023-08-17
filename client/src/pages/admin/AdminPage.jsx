@@ -1,17 +1,46 @@
-import { useState } from "react";
+/* eslint-disable no-unused-vars */
+import { useContext, useEffect, useState } from "react";
 import { Tab, Tabs } from "@mui/material";
+import axios from "axios";
+import { BookContext } from "../../context/BookContext";
+import "./admin.scss";
 
 function AdminPage() {
   const [activeTab, setActiveTab] = useState(0);
+  const [users, setUsers] = useState([]);
+  const { books } = useContext(BookContext);
 
   const handleTabChange = (event, newTab) => {
     setActiveTab(newTab);
   };
 
+  console.log(books);
+
+  const token = localStorage.getItem("token");
+
+  const getUsers = async () => {
+    axios
+      .get("http://localhost:8080/api/user", {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching users", error);
+      });
+  };
+
+  useEffect(() => {
+    getUsers();
+  }, [token]);
+
   return (
     <>
-      <div className="adminPage">
-        <div className="adminPageContainer">
+      <div className="admin">
+        <div className="adminContainer">
           <div className="leftSide">
             <div className="logo">
               <h1>Booklandia.</h1>
@@ -63,16 +92,86 @@ function AdminPage() {
                   }}
                 />
               </Tabs>
+            </div>
+          </div>
 
-              <div className="tabContent">
-                {activeTab === 0 && <div className="users"></div>}
+          <div className="rightSide">
+            <div className="tabContent">
+              {activeTab === 0 && (
+                <div className="users">
+                  <div className="top">
+                    <button>NEW USER</button>
+                  </div>
 
-                {activeTab === 1 && <div className="products"></div>}
+                  <div className="bottom">
+                    <h2>Users List</h2>
+                    <div className="table">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>NAME</th>
+                            <th>EMAIL</th>
+                            <th>ADMIN</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {users &&
+                            users.map((user) => (
+                              <tr key={user._id}>
+                                <td>{user._id}</td>
+                                <td>{user.name}</td>
+                                <td>{user.email}</td>
+                                <td>{user.isAdmin ? "Yes" : "No"}</td>
+                              </tr>
+                            ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              )}
 
-                {activeTab === 2 && <div className="orders"></div>}
+              {activeTab === 1 && (
+                <div className="products">
+                  <div className="top">
+                    <button>NEW PRODUCT</button>
+                  </div>
 
-                {activeTab === 3 && <div className="account"></div>}
-              </div>
+                  <div className="bottom">
+                    <h2>Products List</h2>
+                    <div className="table">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>NAME & AUTHOR</th>
+                            <th>CATEGORY</th>
+                            <th>RATING</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {books &&
+                            books.map((book) => (
+                              <tr key={book._id}>
+                                <td>{book._id}</td>
+                                <td>
+                                  {book.name} - {book.author.name}
+                                </td>
+                                <td>{book.category.name}</td>
+                                <td>{book.averageRating}</td>
+                              </tr>
+                            ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 2 && <div className="orders"></div>}
+
+              {activeTab === 3 && <div className="account"></div>}
             </div>
           </div>
         </div>

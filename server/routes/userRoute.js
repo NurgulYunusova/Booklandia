@@ -1,6 +1,6 @@
 const express = require("express");
 const { userController } = require("../controllers/userController");
-const { protect } = require("../middleware/authMiddleware.js");
+const { protect, admin } = require("../middleware/authMiddleware.js");
 
 const userRoutes = express.Router();
 
@@ -13,10 +13,10 @@ userRoutes.post("/changePassword", userController.changePassword);
 userRoutes.put("/profile/:id", userController.updateUserProfile);
 
 // Admin routes
-// userRoutes.get("/", protect, admin, userController.getUsers);
-// userRoutes.get("/:id", protect, admin, userController.getUserById);
-// userRoutes.put("/:id", protect, admin, userController.updateUser);
-// userRoutes.delete("/:id", protect, admin, userController.deleteUser);
+userRoutes.get("/", protect, admin, userController.getUsers);
+userRoutes.get("/:id", protect, admin, userController.getUserById);
+userRoutes.put("/:id", protect, admin, userController.updateUser);
+userRoutes.delete("/:id", protect, admin, userController.deleteUser);
 
 module.exports = {
   userRoutes,
