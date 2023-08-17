@@ -49,7 +49,6 @@ function Bestsellers() {
                         <StarRoundedIcon style={{ color: "#bab6b6" }} />
                       }
                       readOnly
-                      // onChange={handleBookRatingChange}
                     />
                   </div>
                   <div className="bookImage">
