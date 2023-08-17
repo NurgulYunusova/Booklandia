@@ -15,8 +15,6 @@ export const BookProvider = ({ children }) => {
       .then((res) => setBooks(res.data));
   }, []);
 
-  console.log(books);
-
   return (
     <BookContext.Provider value={{ books }}>{children}</BookContext.Provider>
   );
