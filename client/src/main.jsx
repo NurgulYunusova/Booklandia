@@ -6,16 +6,19 @@ import "./index.css";
 import { UserProvider } from "./context/UserContext.jsx";
 import { WishlistProvider } from "./context/WishlistContext.jsx";
 import { BasketProvider } from "./context/BasketContext.jsx";
+import { BookProvider } from "./context/BookContext.jsx";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <WishlistProvider>
-          <BasketProvider>
-            <App />
-          </BasketProvider>
-        </WishlistProvider>
+        <BookProvider>
+          <WishlistProvider>
+            <BasketProvider>
+              <App />
+            </BasketProvider>
+          </WishlistProvider>
+        </BookProvider>
       </UserProvider>
     </BrowserRouter>
   </React.StrictMode>
