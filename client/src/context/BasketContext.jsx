@@ -38,6 +38,32 @@ export const BasketProvider = ({ children }) => {
     }
   };
 
+  const updateQuantityOnServer = async (bookId, quantity) => {
+    try {
+      const basketItemToUpdate = basket.find(
+        (item) => item.book._id === bookId
+      );
+
+      if (!basketItemToUpdate) {
+        console.error("Basket item not found.");
+        return;
+      }
+
+      const basketId = basketItemToUpdate._id;
+
+      await axios.put(`http://localhost:8080/api/basket/${basketId}`, {
+        quantity: quantity,
+      });
+
+      setBookQuantities((prevQuantities) => ({
+        ...prevQuantities,
+        [bookId]: quantity,
+      }));
+    } catch (error) {
+      console.error("Error updating quantity on server:", error);
+    }
+  };
+
   const removeFromBasket = async (bookId) => {
     try {
       const response = await axios.delete(
@@ -82,6 +108,7 @@ export const BasketProvider = ({ children }) => {
         setBookQuantities,
         addToBasket,
         removeFromBasket,
+        updateQuantityOnServer,
       }}
     >
       {children}

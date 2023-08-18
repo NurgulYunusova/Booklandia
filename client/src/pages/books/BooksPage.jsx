@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import "./books.scss";
 import Rating from "@mui/material/Rating";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
 import Footer from "../../components/footer/Footer";
@@ -14,19 +14,21 @@ import Checkbox from "@mui/material/Checkbox";
 import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
 import Favorite from "@mui/icons-material/Favorite";
 import Loading from "../../components/loading/Loading";
+import { BookContext } from "../../context/BookContext";
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
 
 function BooksPage() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { books } = useContext(BookContext);
 
   const selectedCategoryFromLocation =
     location.state?.selectedCategory || "All";
 
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
-  const [books, setBooks] = useState([]);
+
   const [selectedCategory, setSelectedCategory] = useState(
     selectedCategoryFromLocation
   );
@@ -79,17 +81,10 @@ function BooksPage() {
         .then((res) => setAuthors(res.data));
     }
 
-    async function getBooks() {
-      await axios
-        .get("http://localhost:8080/api/book")
-        .then((res) => setBooks(res.data));
-
-      setIsLoading(false);
-    }
+    setIsLoading(false);
 
     getCategories();
     getAuthors();
-    getBooks();
   }, []);
 
   const handleBookClick = (bookId) => {

@@ -76,6 +76,26 @@ const basketController = {
       }
     }
   },
+  updateBasket: async (req, res) => {
+    const basketId = req.params.id;
+    const updatedData = req.body;
+
+    try {
+      const updatedBasket = await Basket.findByIdAndUpdate(
+        basketId,
+        updatedData,
+        { new: true }
+      );
+
+      if (!updatedBasket) {
+        return res.status(404).json({ message: "Basket not found" });
+      }
+
+      res.json(updatedBasket);
+    } catch (error) {
+      res.status(500).json({ error: "Internal server error" });
+    }
+  },
 };
 
 module.exports = {

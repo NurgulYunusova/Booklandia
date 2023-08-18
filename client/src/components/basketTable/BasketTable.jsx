@@ -6,8 +6,13 @@ import { BasketContext } from "../../context/BasketContext";
 import { useNavigate } from "react-router-dom";
 
 const BasketTable = () => {
-  const { basket, removeFromBasket, bookQuantities, setBookQuantities } =
-    useContext(BasketContext);
+  const {
+    basket,
+    removeFromBasket,
+    bookQuantities,
+    setBookQuantities,
+    updateQuantityOnServer,
+  } = useContext(BasketContext);
   const navigate = useNavigate();
 
   const handleDecrease = (bookId) => {
@@ -35,9 +40,17 @@ const BasketTable = () => {
     return total + q.book.price * quantity;
   }, 0);
 
-  const handleOrderPageClick = () => {
-    navigate("/order");
-    window.scrollTo(0, 0);
+  const handleOrderPageClick = async () => {
+    try {
+      for (const bookId in bookQuantities) {
+        await updateQuantityOnServer(bookId, bookQuantities[bookId]);
+      }
+
+      navigate("/order");
+      window.scrollTo(0, 0);
+    } catch (error) {
+      console.error("Error updating quantities:", error);
+    }
   };
 
   return (
