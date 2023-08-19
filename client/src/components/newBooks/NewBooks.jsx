@@ -5,25 +5,27 @@ import moment from "moment";
 import Rating from "@mui/material/Rating";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { BookContext } from "../../context/BookContext";
 
 function NewBooks() {
   const navigate = useNavigate();
-  const [books, setBooks] = useState([]);
+  const { books } = useContext(BookContext);
+  const [newBooks, setNewBooks] = useState([]);
 
   const endTime = moment().add(3, "day");
 
   useEffect(() => {
-    axios.get("http://localhost:8080/api/book").then((res) => {
-      const sortedBooks = res.data.sort(
+    if (books) {
+      const sortedBooks = books.sort(
         (a, b) => new Date(b.createdAt) - new Date(a.createdAt)
       );
 
       const latestThreeBooks = sortedBooks.slice(0, 3);
-      setBooks(latestThreeBooks);
-    });
-  }, []);
+
+      setNewBooks(latestThreeBooks);
+    }
+  }, [books]);
 
   const handleClick = () => {
     navigate("/books");
@@ -64,8 +66,8 @@ function NewBooks() {
 
             <div className="rightSide">
               <div className="books">
-                {books &&
-                  books.map((q, key) => (
+                {newBooks &&
+                  newBooks.map((q, key) => (
                     <div
                       className="book"
                       key={key}

@@ -3,17 +3,18 @@ import "swiper/css";
 import "swiper/css/effect-cards";
 import { EffectCards, Autoplay } from "swiper/modules";
 import "./slider.scss";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import { useContext, useEffect, useState } from "react";
+import { BookContext } from "../../context/BookContext";
 
 function Slider() {
-  const [books, setBooks] = useState([]);
+  const { books } = useContext(BookContext);
+  const [sliderBooks, setSliderBooks] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/book")
-      .then((res) => setBooks(res.data.slice(0, 5)));
-  }, []);
+    if (books) {
+      setSliderBooks(books.slice(0, 5));
+    }
+  }, [books]);
 
   return (
     <>
@@ -29,8 +30,8 @@ function Slider() {
               disableOnInteraction: false,
             }}
           >
-            {books &&
-              books.map((q, key) => (
+            {sliderBooks &&
+              sliderBooks.map((q, key) => (
                 <SwiperSlide key={key}>
                   <img src={`http://localhost:8080/${q.image}`} alt={q.name} />
                 </SwiperSlide>

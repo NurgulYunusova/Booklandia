@@ -1,19 +1,20 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "./bestsellers.scss";
 import Rating from "@mui/material/Rating";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
-import axios from "axios";
 import { useNavigate } from "react-router";
+import { BookContext } from "../../context/BookContext";
 
 function Bestsellers() {
   const navigate = useNavigate();
-  const [books, setBooks] = useState([]);
+  const { books } = useContext(BookContext);
+  const [bestsellerBooks, setBestsellerBooks] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/book")
-      .then((res) => setBooks(res.data.slice(13, 16)));
-  }, []);
+    if (books) {
+      setBestsellerBooks(books.slice(13, 16));
+    }
+  }, [books]);
 
   const handleBookClick = (bookId) => {
     navigate(`/booksDetails/${bookId}`);
@@ -29,8 +30,8 @@ function Bestsellers() {
           </div>
 
           <div className="books">
-            {books &&
-              books.map((q, key) => (
+            {bestsellerBooks &&
+              bestsellerBooks.map((q, key) => (
                 <div
                   className="book"
                   key={key}
