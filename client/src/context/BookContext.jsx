@@ -8,14 +8,26 @@ export const BookContext = createContext();
 
 export const BookProvider = ({ children }) => {
   const [books, setBooks] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8080/api/book")
-      .then((res) => setBooks(res.data));
+    getBooks();
   }, []);
 
+  const getBooks = async () => {
+    const response = await axios.get("http://localhost:8080/api/book");
+
+    if (response.status == 200) {
+      setBooks(response.data);
+      setIsLoading(false);
+    }
+  };
+
+  console.log(books);
+
   return (
-    <BookContext.Provider value={{ books }}>{children}</BookContext.Provider>
+    <BookContext.Provider value={{ books, isLoading }}>
+      {children}
+    </BookContext.Provider>
   );
 };

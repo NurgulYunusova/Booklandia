@@ -10,10 +10,33 @@ import WebsiteSuccess from "../../components/websiteSuccess/WebsiteSuccess";
 import Header from "../../components/header/Header";
 import Pages from "../../components/pages/Pages";
 import Footer from "../../components/footer/Footer";
+import { useContext } from "react";
+import { BookContext } from "../../context/BookContext";
+import Loading from "../../components/loading/Loading";
 
 function HomePage() {
+  const { isLoading } = useContext(BookContext);
+
   return (
     <>
+      {/* {isLoading ? (
+        <Loading />
+      ) : (
+        <>
+          <Header />
+          <Pages />
+          <Intro />
+          <Categories />
+          <Bestsellers />
+          <IntermediatePart />
+          <NewBooks />
+          <Testimonials />
+          <PopularAuthors />
+          <WebsiteSuccess />
+          <Footer />
+        </>
+      )} */}
+
       <Header />
       <Pages />
       <Intro />
@@ -23,7 +46,7 @@ function HomePage() {
       <NewBooks />
       <Testimonials />
       <PopularAuthors />
-      {/* <WebsiteSuccess /> */}
+      <WebsiteSuccess />
       <Footer />
     </>
   );
