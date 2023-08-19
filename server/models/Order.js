@@ -5,11 +5,6 @@ const orderSchema = new mongoose.Schema(
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
-    },
-    user: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
     },
     books: [
       {
@@ -29,6 +24,10 @@ const orderSchema = new mongoose.Schema(
     },
     totalPrice: {
       type: Number,
+      required: true,
+    },
+    orderNumber: {
+      type: String,
       required: true,
     },
   },
