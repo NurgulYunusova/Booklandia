@@ -53,6 +53,11 @@ function Header() {
     window.scrollTo(0, 0);
   };
 
+  const handleCartClick = () => {
+    navigate("/cart");
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <header>
@@ -128,7 +133,7 @@ function Header() {
                 <FavoriteBorderOutlinedIcon sx={{ fontSize: "20px" }} />
                 WISHLIST
               </span>
-              <span className="cart" onClick={() => navigate("/cart")}>
+              <span className="cart" onClick={() => handleCartClick()}>
                 <AddShoppingCartOutlinedIcon sx={{ fontSize: "20px" }} />
                 CART
               </span>

@@ -62,8 +62,6 @@ function BooksDetailsPage() {
     }
   }, [book]);
 
-  console.log(book);
-
   const handleBookClick = (bookId) => {
     navigate(`/booksDetails/${bookId}`);
     window.scrollTo(0, 0);

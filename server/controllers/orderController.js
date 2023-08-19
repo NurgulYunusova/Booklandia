@@ -30,11 +30,22 @@ const orderController = {
     }
   },
   createOrder: async (req, res) => {
+    const { user, books, address, totalPrice, orderNumber } = req.body;
+
     try {
-      const newOrderData = req.body;
-      const newOrder = new Order(newOrderData);
-      const savedOrder = await newOrder.save();
-      res.status(201).json(savedOrder);
+      const newOrder = new Order({
+        user,
+        books,
+        address,
+        totalPrice,
+        orderNumber,
+      });
+
+      await newOrder.save();
+
+      res
+        .status(201)
+        .json({ message: "Order created successfully", order: newOrder });
     } catch (error) {
       res
         .status(400)
