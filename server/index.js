@@ -22,6 +22,7 @@ const { questionRoutes } = require("./routes/questionRoute");
 const { reviewRoutes } = require("./routes/reviewRoute");
 const { wishlistRoutes } = require("./routes/wishlistRoute");
 const { basketRoutes } = require("./routes/basketRoute");
+const { orderRoutes } = require("./routes/orderRoute");
 
 require("dotenv").config();
 
@@ -46,6 +47,7 @@ app.use("/api/quiz", quizRoutes);
 app.use("/api/review", reviewRoutes);
 app.use("/api/wishlist", wishlistRoutes);
 app.use("/api/basket", basketRoutes);
+app.use("/api/order", orderRoutes);
 
 app.listen(8080, () => {
   console.log("Server listening on port 8080");
