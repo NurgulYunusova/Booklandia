@@ -13,15 +13,18 @@ const orderController = {
         .json({ message: "Error getting orders", error: error.message });
     }
   },
-  getOrderById: async (req, res) => {
-    const orderId = req.params.id;
+  getOrderByUser: async (req, res) => {
+    const userId = req.params.id;
+
     try {
-      const order = await Order.findById(orderId)
+      const order = await Order.find({ user: userId })
         .populate("user", "username email")
-        .populate("books.book", "title author");
+        .populate("books.book", "image");
+
       if (!order) {
         return res.status(404).json({ message: "Order not found" });
       }
+
       res.status(200).json(order);
     } catch (error) {
       res
