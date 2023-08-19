@@ -1,9 +1,8 @@
 /* eslint-disable react/no-unescaped-entities */
 import { useNavigate } from "react-router-dom";
 import "./profile.scss";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Tab, Tabs } from "@mui/material";
-import img from "../../assets/images/ay-isigi-sokagi.png";
 import { UserContext } from "../../context/UserContext";
 import Header from "../../components/header/Header";
 import Pages from "../../components/pages/Pages";
@@ -11,12 +10,14 @@ import Footer from "../../components/footer/Footer";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import axios from "axios";
+import moment from "moment";
 
 function ProfilePage() {
   const navigate = useNavigate();
   const { user, updateUser } = useContext(UserContext);
   const [activeTab, setActiveTab] = useState(0);
   const [isEditMode, setIsEditMode] = useState(false);
+  const [orders, setOrders] = useState([]);
 
   const userProfileSchema = Yup.object({
     name: Yup.string().max(20, "Maximum 30 character"),
@@ -41,10 +42,6 @@ function ProfilePage() {
       }
     ),
   });
-
-  if (user?.length > 0) {
-    console.log(user);
-  }
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
@@ -85,6 +82,16 @@ function ProfilePage() {
   const handleTabChange = (event, newTab) => {
     setActiveTab(newTab);
   };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:8080/api/order/${user?._id}`)
+      .then((res) => setOrders(res.data));
+  }, [user]);
+
+  if (orders) {
+    console.log(orders);
+  }
 
   return (
     <>
@@ -271,84 +278,37 @@ function ProfilePage() {
 
                 {activeTab === 1 && (
                   <div className="orders">
-                    <div className="order">
-                      <div className="images">
-                        <img src={img} alt="" />
-                        <img src={img} alt="" />
-                        <img src={img} alt="" />
-                      </div>
+                    {orders &&
+                      orders.map((q) => (
+                        <div className="order" key={q._id}>
+                          <div className="images">
+                            {q.books.map((book) => (
+                              <img
+                                src={book.book.image}
+                                alt=""
+                                key={book._id}
+                              />
+                            ))}
+                          </div>
 
-                      <div className="infosAboutOrder">
-                        <div className="orderNumber">
-                          <h4>Order number</h4>
-                          <p>7681029</p>
+                          <div className="infosAboutOrder">
+                            <div className="orderNumber">
+                              <h4>Order number</h4>
+                              <p>{q.orderNumber}</p>
+                            </div>
+
+                            <div className="orderDate">
+                              <h4>Order date</h4>
+                              <p>{moment(q.createdAt).format("D MMMM YYYY")}</p>
+                            </div>
+
+                            <div className="total">
+                              <h4>Total</h4>
+                              <p>${q.totalPrice.toFixed(2)}</p>
+                            </div>
+                          </div>
                         </div>
-
-                        <div className="orderDate">
-                          <h4>Order date</h4>
-                          <p>30 March 2019</p>
-                        </div>
-
-                        <div className="total">
-                          <h4>Total</h4>
-                          <p>$78.00</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="order">
-                      <div className="images">
-                        <img src={img} alt="" />
-                        <img src={img} alt="" />
-                      </div>
-
-                      <div className="infosAboutOrder">
-                        <div className="orderNumber">
-                          <h4>Order number</h4>
-                          <p>7681029</p>
-                        </div>
-
-                        <div className="orderDate">
-                          <h4>Order date</h4>
-                          <p>30 March 2019</p>
-                        </div>
-
-                        <div className="total">
-                          <h4>Total</h4>
-                          <p>$78.00</p>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="order">
-                      <div className="images">
-                        <img src={img} alt="" />
-                        <img src={img} alt="" />
-                        <img src={img} alt="" />
-                        <img src={img} alt="" />
-                        <img src={img} alt="" />
-                        <img src={img} alt="" />
-                        <img src={img} alt="" />
-                        <img src={img} alt="" />
-                      </div>
-
-                      <div className="infosAboutOrder">
-                        <div className="orderNumber">
-                          <h4>Order number</h4>
-                          <p>7681029</p>
-                        </div>
-
-                        <div className="orderDate">
-                          <h4>Order date</h4>
-                          <p>30 March 2019</p>
-                        </div>
-
-                        <div className="total">
-                          <h4>Total</h4>
-                          <p>$78.00</p>
-                        </div>
-                      </div>
-                    </div>
+                      ))}
                   </div>
                 )}
               </div>
