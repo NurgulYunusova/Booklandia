@@ -1,12 +1,15 @@
-import "./basketPage.scss";
+import "./basket.scss";
 import Header from "../../components/header/Header";
 import Pages from "../../components/pages/Pages";
 import Footer from "../../components/footer/Footer";
 import { useNavigate } from "react-router-dom";
 import BasketTable from "../../components/basketTable/BasketTable";
+import { BasketContext } from "../../context/BasketContext";
+import { useContext } from "react";
 
 function BasketPage() {
   const navigate = useNavigate();
+  const { basket } = useContext(BasketContext);
 
   const handleHomePageClick = () => {
     navigate("/");
@@ -30,7 +33,11 @@ function BasketPage() {
             </div>
           </div>
 
-          <BasketTable />
+          {basket.length == 0 ? (
+            <h1 className="noCart">There is no product in your cart</h1>
+          ) : (
+            <BasketTable />
+          )}
         </div>
       </div>
       <Footer />
