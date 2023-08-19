@@ -46,7 +46,9 @@ const BasketTable = () => {
         await updateQuantityOnServer(bookId, bookQuantities[bookId]);
       }
 
-      navigate("/order");
+      navigate("/order", {
+        state: totalSubtotal,
+      });
       window.scrollTo(0, 0);
     } catch (error) {
       console.error("Error updating quantities:", error);
