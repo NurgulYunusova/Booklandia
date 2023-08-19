@@ -54,10 +54,12 @@ export const WishlistProvider = ({ children }) => {
 
   const getWishlist = async () => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/api/wishlist/${user._id}`
-      );
-      setWishlist(response.data.wishlist);
+      if (user) {
+        const response = await axios.get(
+          `http://localhost:8080/api/wishlist/${user._id}`
+        );
+        setWishlist(response.data.wishlist);
+      }
     } catch (error) {
       console.error("Error fetching wishlist:", error);
     }

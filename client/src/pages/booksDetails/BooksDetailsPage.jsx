@@ -54,8 +54,8 @@ function BooksDetailsPage() {
       axios.get("http://localhost:8080/api/book").then((res) => {
         const filteredRelatedBooks = res.data.filter(
           (relatedBook) =>
-            relatedBook.category.id === book.category.id &&
-            relatedBook.id !== book.id
+            relatedBook.category._id === book.category._id &&
+            relatedBook._id !== book._id
         );
         setRelatedBooks(filteredRelatedBooks);
       });
@@ -249,11 +249,13 @@ function BooksDetailsPage() {
                             />
                           }
                           readOnly
-                          // onChange={handleBookRatingChange}
                         />
                       </div>
                       <div className="bookImage">
-                        <img src={q.image} alt={q.name} />
+                        <img
+                          src={`http://localhost:8080/${q.image}`}
+                          alt={q.name}
+                        />
                       </div>
                     </div>
                   ))}
