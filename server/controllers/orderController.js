@@ -19,7 +19,7 @@ const orderController = {
     try {
       const order = await Order.find({ user: userId })
         .populate("user", "username email")
-        .populate("books.book", "image");
+        .populate("books.book", "image name author");
 
       if (!order) {
         return res.status(404).json({ message: "Order not found" });
