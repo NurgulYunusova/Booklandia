@@ -4,17 +4,17 @@ import { Tab, Tabs } from "@mui/material";
 import axios from "axios";
 import { BookContext } from "../../context/BookContext";
 import "./admin.scss";
+import moment from "moment";
 
 function AdminPage() {
+  const { books } = useContext(BookContext);
   const [activeTab, setActiveTab] = useState(0);
   const [users, setUsers] = useState([]);
-  const { books } = useContext(BookContext);
+  const [orders, setOrders] = useState([]);
 
   const handleTabChange = (event, newTab) => {
     setActiveTab(newTab);
   };
-
-  console.log(books);
 
   const token = localStorage.getItem("token");
 
@@ -33,9 +33,27 @@ function AdminPage() {
       });
   };
 
+  const getOrders = async () => {
+    axios
+      .get("http://localhost:8080/api/order", {
+        headers: {
+          Authorization: token,
+        },
+      })
+      .then((response) => {
+        setOrders(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching users", error);
+      });
+  };
+
   useEffect(() => {
     getUsers();
+    getOrders();
   }, [token]);
+
+  console.log(orders);
 
   return (
     <>
@@ -169,7 +187,48 @@ function AdminPage() {
                 </div>
               )}
 
-              {activeTab === 2 && <div className="orders"></div>}
+              {activeTab === 2 && (
+                <div className="orders">
+                  <div className="ordersDiv">
+                    <h2>Orders List</h2>
+                    <div className="table">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>ID</th>
+                            <th>USER</th>
+                            <th>BOOKS & QUANTITY</th>
+                            <th>ADDRESS</th>
+                            <th>TOTAL PRICE</th>
+                            <th>ORDER NUMBER</th>
+                            <th>ORDER DATE</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {orders &&
+                            orders.map((order) => (
+                              <tr key={order._id}>
+                                <td>{order._id}</td>
+                                <td>{order.user._id}</td>
+                                <td>
+                                  {order.books?.map((book) => book.author)}
+                                </td>
+                                <td>{order.address}</td>
+                                <td>{order.totalPrice.toFixed(2)}</td>
+                                <td>{order.orderNumber}</td>
+                                <td>
+                                  {moment(order.createdAt).format(
+                                    "D MMMM YYYY HH:mm"
+                                  )}
+                                </td>
+                              </tr>
+                            ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              )}
 
               {activeTab === 3 && <div className="account"></div>}
             </div>

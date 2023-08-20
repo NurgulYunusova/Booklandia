@@ -106,6 +106,46 @@
             }
           }
         }
+
+        .orders {
+          box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+          padding: 30px;
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
+
+          h2 {
+            font-size: 30px;
+          }
+
+          .table {
+            max-height: 380px;
+            overflow-y: scroll;
+
+            table {
+              width: 100%;
+              border-collapse: collapse;
+              margin-bottom: 80px;
+              table-layout: fixed;
+
+              thead th {
+                background-color: #ccc;
+                position: sticky;
+                top: -0.1px;
+                z-index: 1;
+              }
+
+              th,
+              td {
+                padding: 15px 20px;
+                border: 1px solid #ccc;
+                text-align: center;
+                font-size: 14px;
+                overflow: hidden;
+              }
+            }
+          }
+        }
       }
     }
   }
