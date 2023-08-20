@@ -15,6 +15,26 @@
     padding: 30px 60px;
     font-family: $base-font2;
 
+    .userGreeting {
+      @include center();
+      flex-direction: column;
+      color: $base-color3;
+
+      p {
+        font-weight: 700;
+        font-size: 24px;
+        margin-bottom: 30px;
+      }
+    }
+
+    .buttonDiv {
+      @include center();
+
+      .startButton {
+        @include button();
+      }
+    }
+
     .activeQuestionNo {
       font-size: 38px;
       font-weight: 500;
@@ -63,7 +83,7 @@
       }
     }
 
-    button {
+    .next {
       @include button();
       margin-top: 20px;
       font-size: 17px;
