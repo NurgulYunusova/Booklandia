@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 import "./aboutUs.scss";
 import about from "../../assets/images/about.png";
@@ -12,8 +13,8 @@ function AboutUsPage() {
 
   return (
     <>
-      <Header />
-      <Pages />
+      {/* <Header />
+      <Pages /> */}
       <div className="aboutUs">
         <div className="aboutUsContainer">
           <div className="top">
@@ -91,40 +92,9 @@ function AboutUsPage() {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
 
 export default AboutUsPage;
-
-{
-  /* <h2>About Us</h2>
-        <p>
-          Welcome to Booklandia, your one-stop destination for all things books!
-          We are a passionate team of book lovers dedicated to providing the
-          best selection of books across various genres.
-        </p>
-        <p>
-          At Booklandia, we believe in the power of books to inspire, educate,
-          and entertain. Whether you are a lifelong reader or just starting your
-          reading journey, we have something for everyone.
-        </p>
-        <p>
-          Our bookstore offers a wide range of titles, from classic literature
-          to contemporary bestsellers. We carefully curate our collection to
-          ensure that every book lover can find their next favorite read.
-        </p>
-        <p>
-          In addition to our extensive book selection, we also host book clubs,
-          author events, and other literary gatherings. We believe in fostering
-          a vibrant reading community and connecting readers with the authors
-          they love.
-        </p>
-        <p>
-          Thank you for choosing Booklandia as your go-to bookstore. We hope you
-          enjoy exploring our shelves and discovering new worlds through the
-          pages of our books.
-        </p>
-        <p>Happy reading!</p> */
-}
