@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 import "./aboutUs.scss";
 import about from "../../assets/images/about.png";
@@ -13,8 +12,8 @@ function AboutUsPage() {
 
   return (
     <>
-      {/* <Header />
-      <Pages /> */}
+      <Header />
+      <Pages />
       <div className="aboutUs">
         <div className="aboutUsContainer">
           <div className="top">
@@ -92,7 +91,7 @@ function AboutUsPage() {
           </div>
         </div>
       </div>
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
