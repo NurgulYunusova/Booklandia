@@ -1,22 +1,30 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
-import { Tab, Tabs } from "@mui/material";
+import { Box, Modal, Tab, Tabs, Typography } from "@mui/material";
 import axios from "axios";
 import { BookContext } from "../../context/BookContext";
 import "./admin.scss";
 import moment from "moment";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 
 function AdminPage() {
   const { books } = useContext(BookContext);
   const [activeTab, setActiveTab] = useState(0);
   const [users, setUsers] = useState([]);
   const [orders, setOrders] = useState([]);
+  const [categories, setCategories] = useState([]);
+  const [authors, setAuthors] = useState([]);
+  const [isClickedCategory, setIsClickedCategory] = useState(false);
+  const [categoryName, setCategoryName] = useState([]);
+
+  const token = localStorage.getItem("token");
 
   const handleTabChange = (event, newTab) => {
     setActiveTab(newTab);
   };
-
-  const token = localStorage.getItem("token");
 
   const getUsers = async () => {
     axios
@@ -48,12 +56,60 @@ function AdminPage() {
       });
   };
 
+  const getCategories = async () => {
+    axios
+      .get("http://localhost:8080/api/category")
+      .then((response) => {
+        setCategories(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching users", error);
+      });
+  };
+
+  const getAuthors = async () => {
+    axios
+      .get("http://localhost:8080/api/author")
+      .then((response) => {
+        setAuthors(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching authors", error);
+      });
+  };
+
+  const handleCategorySubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await axios.post("http://localhost:8080/api/category", {
+      name: categoryName,
+    });
+
+    if (response.status == 201) {
+      alert("New category added succesfully");
+      setIsClickedCategory(false);
+      setCategoryName("");
+      getCategories();
+    }
+  };
+
+  const deleteCategory = async (id) => {
+    const response = await axios.delete(
+      `http://localhost:8080/api/category/${id}`
+    );
+
+    if (response.status == 200) {
+      alert(response.data.message);
+      getCategories();
+    }
+  };
+
   useEffect(() => {
     getUsers();
     getOrders();
+    getCategories();
+    getAuthors();
   }, [token]);
-
-  console.log(orders);
 
   return (
     <>
@@ -94,7 +150,7 @@ function AdminPage() {
                   }}
                 />
                 <Tab
-                  label="Orders"
+                  label="Categories"
                   className="tab"
                   style={{
                     color: activeTab === 2 ? "#003366" : "#001a40",
@@ -102,11 +158,27 @@ function AdminPage() {
                   }}
                 />
                 <Tab
-                  label="My Account"
+                  label="Authors"
                   className="tab"
                   style={{
                     color: activeTab === 3 ? "#003366" : "#001a40",
                     fontWeight: activeTab === 3 ? "bold" : "normal",
+                  }}
+                />
+                <Tab
+                  label="Orders"
+                  className="tab"
+                  style={{
+                    color: activeTab === 4 ? "#003366" : "#001a40",
+                    fontWeight: activeTab === 4 ? "bold" : "normal",
+                  }}
+                />
+                <Tab
+                  label="My Account"
+                  className="tab"
+                  style={{
+                    color: activeTab === 5 ? "#003366" : "#001a40",
+                    fontWeight: activeTab === 5 ? "bold" : "normal",
                   }}
                 />
               </Tabs>
@@ -117,35 +189,29 @@ function AdminPage() {
             <div className="tabContent">
               {activeTab === 0 && (
                 <div className="users">
-                  <div className="top">
-                    <button>NEW USER</button>
-                  </div>
-
-                  <div className="bottom">
-                    <h2>Users List</h2>
-                    <div className="table">
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>ID</th>
-                            <th>NAME</th>
-                            <th>EMAIL</th>
-                            <th>ADMIN</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {users &&
-                            users.map((user) => (
-                              <tr key={user._id}>
-                                <td>{user._id}</td>
-                                <td>{user.name}</td>
-                                <td>{user.email}</td>
-                                <td>{user.isAdmin ? "Yes" : "No"}</td>
-                              </tr>
-                            ))}
-                        </tbody>
-                      </table>
-                    </div>
+                  <h2>Users List</h2>
+                  <div className="table">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>NAME</th>
+                          <th>EMAIL</th>
+                          <th>ADMIN</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {users &&
+                          users.map((user) => (
+                            <tr key={user._id}>
+                              <td>{user._id}</td>
+                              <td>{user.name}</td>
+                              <td>{user.email}</td>
+                              <td>{user.isAdmin ? "Yes" : "No"}</td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
                   </div>
                 </div>
               )}
@@ -166,6 +232,7 @@ function AdminPage() {
                             <th>NAME & AUTHOR</th>
                             <th>CATEGORY</th>
                             <th>RATING</th>
+                            <th>PRICE</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -174,10 +241,12 @@ function AdminPage() {
                               <tr key={book._id}>
                                 <td>{book._id}</td>
                                 <td>
-                                  {book.name} - {book.author.name}
+                                  <p>{book.name}</p>
+                                  <p>{book.author.name}</p>
                                 </td>
                                 <td>{book.category.name}</td>
                                 <td>{book.averageRating}</td>
+                                <td>${book.price}</td>
                               </tr>
                             ))}
                         </tbody>
@@ -188,38 +257,114 @@ function AdminPage() {
               )}
 
               {activeTab === 2 && (
-                <div className="orders">
-                  <div className="ordersDiv">
-                    <h2>Orders List</h2>
+                <div className="categories">
+                  <div className="top">
+                    {isClickedCategory ? (
+                      <div className="newCategory">
+                        <h3>New Category</h3>
+
+                        <form onSubmit={handleCategorySubmit}>
+                          <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            placeholder="Category name *"
+                            required
+                            value={categoryName}
+                            onChange={(e) => setCategoryName(e.target.value)}
+                          />
+
+                          <br />
+
+                          <div className="buttons">
+                            <a onClick={() => setIsClickedCategory(false)}>
+                              back
+                            </a>
+                            <button type="submit">CREATE</button>
+                          </div>
+                        </form>
+                      </div>
+                    ) : (
+                      <button onClick={() => setIsClickedCategory(true)}>
+                        NEW CATEGORY
+                      </button>
+                    )}
+                  </div>
+
+                  <div className="bottom">
+                    <h2>Categories List</h2>
+                    <div className="table">
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Delete</th>
+                            <th>Edit</th>
+                            <th>ID</th>
+                            <th>NAME</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {categories &&
+                            categories.map((category) => (
+                              <tr key={category._id}>
+                                <td className="deleteColumn">
+                                  <button
+                                    onClick={() => deleteCategory(category._id)}
+                                    className="delete"
+                                  >
+                                    <DeleteIcon />
+                                  </button>
+                                </td>
+                                <td className="editColumn">
+                                  <button
+                                    onClick={() => editCategory(category._id)}
+                                    className="edit"
+                                  >
+                                    <EditIcon />
+                                  </button>
+                                </td>
+                                <td>{category._id}</td>
+                                <td>{category.name}</td>
+                              </tr>
+                            ))}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 3 && (
+                <div className="authors">
+                  <div className="top">
+                    <button>NEW AUTHOR</button>
+                  </div>
+
+                  <div className="bottom">
+                    <h2>Authors List</h2>
                     <div className="table">
                       <table>
                         <thead>
                           <tr>
                             <th>ID</th>
-                            <th>USER</th>
-                            <th>BOOKS & QUANTITY</th>
-                            <th>ADDRESS</th>
-                            <th>TOTAL PRICE</th>
-                            <th>ORDER NUMBER</th>
-                            <th>ORDER DATE</th>
+                            <th>NAME</th>
+                            <th>IMAGE</th>
+                            <th>AUTHOR'S BOOKS</th>
                           </tr>
                         </thead>
                         <tbody>
-                          {orders &&
-                            orders.map((order) => (
-                              <tr key={order._id}>
-                                <td>{order._id}</td>
-                                <td>{order.user._id}</td>
+                          {authors &&
+                            authors.map((author) => (
+                              <tr key={author._id}>
+                                <td>{author._id}</td>
+                                <td>{author.name}</td>
                                 <td>
-                                  {order.books?.map((book) => book.author)}
+                                  <img src={author.image} alt={author.name} />
                                 </td>
-                                <td>{order.address}</td>
-                                <td>{order.totalPrice.toFixed(2)}</td>
-                                <td>{order.orderNumber}</td>
                                 <td>
-                                  {moment(order.createdAt).format(
-                                    "D MMMM YYYY HH:mm"
-                                  )}
+                                  {author.authorBooks.map((q) => (
+                                    <p key={q._id}>{q.name}</p>
+                                  ))}
                                 </td>
                               </tr>
                             ))}
@@ -230,7 +375,53 @@ function AdminPage() {
                 </div>
               )}
 
-              {activeTab === 3 && <div className="account"></div>}
+              {activeTab === 4 && (
+                <div className="orders">
+                  <h2>Orders List</h2>
+                  <div className="table">
+                    <table>
+                      <thead>
+                        <tr>
+                          <th>ID</th>
+                          <th>USER</th>
+                          <th>BOOKS & QUANTITY</th>
+                          <th>ADDRESS</th>
+                          <th>TOTAL PRICE</th>
+                          <th>ORDER DATE</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {orders &&
+                          orders.map((order) => (
+                            <tr key={order._id}>
+                              <td>{order._id}</td>
+                              <td>{order.user._id}</td>
+                              <td>
+                                {order.books?.map((book) => (
+                                  <p key={book._id}>
+                                    {book.book.name} -{" "}
+                                    <span style={{ fontWeight: 500 }}>
+                                      {book.quantity}
+                                    </span>
+                                  </p>
+                                ))}
+                              </td>
+                              <td>{order.address}</td>
+                              <td>${order.totalPrice.toFixed(2)}</td>
+                              <td>
+                                {moment(order.createdAt).format(
+                                  "D MMMM YYYY HH:mm"
+                                )}
+                              </td>
+                            </tr>
+                          ))}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 5 && <div className="account"></div>}
             </div>
           </div>
         </div>

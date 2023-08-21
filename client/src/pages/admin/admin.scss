@@ -55,8 +55,9 @@
       color: $base-color3;
 
       .tabContent {
-        .users,
-        .products {
+        .products,
+        .authors,
+        .categories {
           display: flex;
           flex-direction: column;
           gap: 50px;
@@ -64,6 +65,57 @@
           .top {
             button {
               @include button();
+            }
+
+            .newCategory {
+              width: 400px;
+              padding: 30px;
+              box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+              display: flex;
+              flex-direction: column;
+              gap: 25px;
+
+              h3 {
+                font-size: 26px;
+              }
+
+              form {
+                display: flex;
+                flex-direction: column;
+                width: 100%;
+
+                input {
+                  padding: 16px 22px;
+                  font-size: 14px;
+                  outline: none;
+                  background: transparent;
+                  border: 1px solid #ccc;
+
+                  &::placeholder {
+                    font-size: 14px;
+                    font-family: $base-font2;
+                    font-weight: 500;
+                  }
+                }
+
+                .buttons {
+                  @include center(
+                    $justify-content: flex-end,
+                    $align-items: flex-end
+                  );
+                  gap: 20px;
+
+                  button {
+                    width: max-content;
+                  }
+
+                  a {
+                    text-decoration: underline;
+                    color: #001a407b;
+                    cursor: pointer;
+                  }
+                }
+              }
             }
           }
 
@@ -80,10 +132,10 @@
 
             .table {
               max-height: 380px;
-              overflow-y: scroll;
+              overflow: auto;
 
               table {
-                width: 100%;
+                min-width: 100%;
                 border-collapse: collapse;
                 margin-bottom: 80px;
                 table-layout: fixed;
@@ -102,12 +154,52 @@
                   text-align: center;
                   font-size: 14px;
                 }
+
+                .deleteColumn,
+                .editColumn {
+                  width: 5%;
+
+                  .delete {
+                    border: none;
+                    background-color: transparent;
+                    outline: none;
+                    transition: all 0.2s ease-in-out;
+                    cursor: pointer;
+                    color: $base-color3;
+
+                    &:hover {
+                      color: rgb(207, 24, 24);
+                    }
+                  }
+
+                  .edit {
+                    border: none;
+                    background-color: transparent;
+                    outline: none;
+                    transition: all 0.2s ease-in-out;
+                    cursor: pointer;
+                    color: $base-color3;
+
+                    &:hover {
+                      color: #1d69b6;
+                    }
+                  }
+                }
+
+                td {
+                  img {
+                    width: 100px;
+                    height: 100px;
+                    object-fit: cover;
+                  }
+                }
               }
             }
           }
         }
 
-        .orders {
+        .orders,
+        .users {
           box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
           padding: 30px;
           display: flex;
@@ -120,10 +212,10 @@
 
           .table {
             max-height: 380px;
-            overflow-y: scroll;
+            overflow: auto;
 
             table {
-              width: 100%;
+              min-width: 100%;
               border-collapse: collapse;
               margin-bottom: 80px;
               table-layout: fixed;
@@ -141,7 +233,6 @@
                 border: 1px solid #ccc;
                 text-align: center;
                 font-size: 14px;
-                overflow: hidden;
               }
             }
           }
