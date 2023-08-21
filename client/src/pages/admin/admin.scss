@@ -7,7 +7,7 @@
 
   &Container {
     @include center($justify-content: flex-start, $align-items: flex-start);
-    gap: 80px;
+    gap: 70px;
 
     .leftSide {
       padding: 50px 0;
@@ -51,7 +51,7 @@
     .rightSide {
       font-family: $base-font2;
       padding: 60px 0;
-      width: 70%;
+      width: 72%;
       color: $base-color3;
 
       .tabContent {
@@ -131,7 +131,7 @@
             }
 
             .table {
-              max-height: 380px;
+              max-height: 370px;
               overflow: auto;
 
               table {
@@ -211,7 +211,7 @@
           }
 
           .table {
-            max-height: 380px;
+            max-height: 370px;
             overflow: auto;
 
             table {
@@ -233,6 +233,37 @@
                 border: 1px solid #ccc;
                 text-align: center;
                 font-size: 14px;
+              }
+
+              .deleteColumn,
+              .editColumn {
+                width: 5%;
+
+                .delete {
+                  border: none;
+                  background-color: transparent;
+                  outline: none;
+                  transition: all 0.2s ease-in-out;
+                  cursor: pointer;
+                  color: $base-color3;
+
+                  &:hover {
+                    color: rgb(207, 24, 24);
+                  }
+                }
+
+                .edit {
+                  border: none;
+                  background-color: transparent;
+                  outline: none;
+                  transition: all 0.2s ease-in-out;
+                  cursor: pointer;
+                  color: $base-color3;
+
+                  &:hover {
+                    color: #1d69b6;
+                  }
+                }
               }
             }
           }
