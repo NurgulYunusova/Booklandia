@@ -4,8 +4,8 @@ const orderController = {
   getAllOrders: async (req, res) => {
     try {
       const orders = await Order.find()
-        .populate("user", "username email")
-        .populate("books.book", "title author");
+        .populate("user", "name email")
+        .populate("books.book", "name image");
       res.status(200).json(orders);
     } catch (error) {
       res
