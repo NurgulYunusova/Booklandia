@@ -67,8 +67,16 @@ const bookController = {
   createBook: async (req, res) => {
     try {
       let file = req.files.photo;
-      const { name, author, description, category, isbn, pages, language } =
-        req.body;
+      const {
+        name,
+        author,
+        description,
+        category,
+        isbn,
+        pages,
+        language,
+        price,
+      } = req.body;
 
       const uploadFile = () => {
         return new Promise((resolve, reject) => {
@@ -92,6 +100,7 @@ const bookController = {
         category,
         isbn,
         pages,
+        price,
         language,
         image: imagePath,
       });

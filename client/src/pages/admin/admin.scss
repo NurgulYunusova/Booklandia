@@ -67,8 +67,10 @@
               @include button();
             }
 
-            .newCategory {
-              width: 400px;
+            .newCategory,
+            .newAuthor,
+            .newProduct {
+              width: 600px;
               padding: 30px;
               box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
               display: flex;
@@ -84,17 +86,50 @@
                 flex-direction: column;
                 width: 100%;
 
-                input {
+                input,
+                textarea {
                   padding: 16px 22px;
                   font-size: 14px;
                   outline: none;
                   background: transparent;
                   border: 1px solid #ccc;
+                  font-family: $base-font2;
 
                   &::placeholder {
                     font-size: 14px;
                     font-family: $base-font2;
                     font-weight: 500;
+                  }
+                }
+
+                .selectedDiv {
+                  @include center($justify-content: flex-start);
+                  gap: 30px;
+
+                  select {
+                    font-family: $base-font2;
+                    font-weight: 500;
+                    border: 1px solid #ccc;
+                    outline: 0;
+                    background: transparent;
+                    color: $base-color3;
+                    cursor: pointer;
+                    font-size: 15px;
+                    padding: 10px 15px;
+                    width: 200px;
+
+                    option {
+                      color: $base-color1;
+                      background-color: transparent;
+                    }
+
+                    &:focus {
+                      outline: none;
+                    }
+
+                    &::-ms-expand {
+                      display: none;
+                    }
                   }
                 }
 

@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
-import { Box, Modal, Tab, Tabs, Typography } from "@mui/material";
+import { Tab, Tabs } from "@mui/material";
 import axios from "axios";
 import { BookContext } from "../../context/BookContext";
 import "./admin.scss";
@@ -13,12 +13,30 @@ import EditIcon from "@mui/icons-material/Edit";
 function AdminPage() {
   const { books, getBooks } = useContext(BookContext);
   const [activeTab, setActiveTab] = useState(0);
+  // DATA
   const [users, setUsers] = useState([]);
   const [orders, setOrders] = useState([]);
   const [categories, setCategories] = useState([]);
   const [authors, setAuthors] = useState([]);
+  // CATEGORY
   const [isClickedCategory, setIsClickedCategory] = useState(false);
-  const [categoryName, setCategoryName] = useState([]);
+  const [categoryName, setCategoryName] = useState("");
+  // AUTHOR
+  const [isClickedAuthor, setIsClickedAuthor] = useState(false);
+  const [authorName, setAuthorName] = useState("");
+  const [authorAbout, setAuthorAbout] = useState("");
+  const [authorImage, setAuthorImage] = useState(null);
+  // PRODUCT
+  const [isClickedProduct, setIsClickedProduct] = useState(false);
+  const [bookName, setBookName] = useState("");
+  const [bookDescription, setBookDescription] = useState("");
+  const [bookIsbn, setBookIsbn] = useState(0);
+  const [bookPages, setBookPages] = useState(0);
+  const [bookPrice, setBookPrice] = useState(0);
+  const [bookLanguage, setBookLanguage] = useState("");
+  const [bookImage, setBookImage] = useState(null);
+  const [selectedAuthor, setSelectedAuthor] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("");
 
   const token = localStorage.getItem("token");
 
@@ -120,12 +138,70 @@ function AdminPage() {
     }
   };
 
+  const handleProductSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+
+    formData.append("name", bookName);
+    formData.append("author", selectedAuthor);
+    formData.append("description", bookDescription);
+    formData.append("category", selectedCategory);
+    formData.append("isbn", +bookIsbn);
+    formData.append("pages", +bookPages);
+    formData.append("price", +bookPrice);
+    formData.append("language", bookLanguage);
+    formData.append("photo", bookImage);
+
+    const response = await axios.post(
+      "http://localhost:8080/api/book",
+      formData
+    );
+
+    if (response.status == 201) {
+      alert(response.data.message);
+      setIsClickedProduct(false);
+      setBookName("");
+      setBookDescription("");
+      setBookIsbn("");
+      setBookPages(0);
+      setBookLanguage("");
+      setSelectedAuthor("");
+      setSelectedCategory("");
+      setBookImage(null);
+      getBooks();
+    }
+  };
+
   const deleteProduct = async (id) => {
     const response = await axios.delete(`http://localhost:8080/api/book/${id}`);
 
     if (response.status == 200) {
       alert(response.data.message);
       getBooks();
+    }
+  };
+
+  const handleAuthorSubmit = async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData();
+    formData.append("name", authorName);
+    formData.append("about", authorAbout);
+    formData.append("photo", authorImage);
+
+    const response = await axios.post(
+      "http://localhost:8080/api/author",
+      formData
+    );
+
+    if (response.status == 200) {
+      alert(response.data.message);
+      setIsClickedCategory(false);
+      setAuthorName("");
+      setAuthorAbout("");
+      setAuthorImage(null);
+      getAuthors();
     }
   };
 
@@ -273,7 +349,148 @@ function AdminPage() {
               {activeTab === 1 && (
                 <div className="products">
                   <div className="top">
-                    <button>NEW PRODUCT</button>
+                    {isClickedProduct ? (
+                      <div className="newProduct">
+                        <h3>New Product</h3>
+
+                        <form onSubmit={handleProductSubmit}>
+                          <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            placeholder="Name *"
+                            required
+                            value={bookName}
+                            onChange={(e) => setBookName(e.target.value)}
+                          />
+
+                          <br />
+
+                          <div className="selectedDiv">
+                            <label htmlFor="authors">Author: </label>
+
+                            <select
+                              onChange={(e) =>
+                                setSelectedAuthor(e.target.value)
+                              }
+                              value={selectedAuthor}
+                              name="authors"
+                              id="authors"
+                            >
+                              {authors &&
+                                authors.map((q) => (
+                                  <option value={q._id} key={q._id}>
+                                    {q.name}
+                                  </option>
+                                ))}
+                            </select>
+                          </div>
+
+                          <br />
+
+                          <textarea
+                            name="description"
+                            id="description"
+                            cols="30"
+                            rows="10"
+                            required
+                            placeholder="Description *"
+                            onChange={(e) => setBookDescription(e.target.value)}
+                          ></textarea>
+
+                          <br />
+
+                          <input
+                            type="number"
+                            name="isbn"
+                            id="isbn"
+                            placeholder="ISBN *"
+                            required
+                            value={bookIsbn}
+                            onChange={(e) => setBookIsbn(e.target.value)}
+                          />
+
+                          <br />
+
+                          <input
+                            type="number"
+                            name="price"
+                            id="price"
+                            placeholder="Price *"
+                            required
+                            value={bookPrice}
+                            onChange={(e) => setBookPrice(e.target.value)}
+                          />
+
+                          <br />
+
+                          <div className="selectedDiv">
+                            <label htmlFor="categories">Category: </label>
+
+                            <select
+                              onChange={(e) =>
+                                setSelectedCategory(e.target.value)
+                              }
+                              value={selectedCategory}
+                              name="categories"
+                              id="categories"
+                            >
+                              {categories &&
+                                categories.map((q) => (
+                                  <option value={q._id} key={q._id}>
+                                    {q.name}
+                                  </option>
+                                ))}
+                            </select>
+                          </div>
+
+                          <br />
+
+                          <input
+                            type="number"
+                            name="pages"
+                            id="pages"
+                            placeholder="Pages *"
+                            required
+                            value={bookPages}
+                            onChange={(e) => setBookPages(e.target.value)}
+                          />
+
+                          <br />
+
+                          <input
+                            type="text"
+                            name="language"
+                            id="language"
+                            placeholder="Language *"
+                            required
+                            value={bookLanguage}
+                            onChange={(e) => setBookLanguage(e.target.value)}
+                          />
+
+                          <br />
+
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => setBookImage(e.target.files[0])}
+                          />
+
+                          <br />
+
+                          <div className="buttons">
+                            <a onClick={() => setIsClickedProduct(false)}>
+                              back
+                            </a>
+                            <button type="submit">CREATE</button>
+                          </div>
+                        </form>
+                      </div>
+                    ) : (
+                      <button onClick={() => setIsClickedProduct(true)}>
+                        NEW PRODUCT
+                      </button>
+                    )}
                   </div>
 
                   <div className="bottom">
@@ -409,7 +626,56 @@ function AdminPage() {
               {activeTab === 3 && (
                 <div className="authors">
                   <div className="top">
-                    <button>NEW AUTHOR</button>
+                    {isClickedAuthor ? (
+                      <div className="newAuthor">
+                        <h3>New Author</h3>
+
+                        <form onSubmit={handleAuthorSubmit}>
+                          <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            placeholder="Author name *"
+                            required
+                            value={authorName}
+                            onChange={(e) => setAuthorName(e.target.value)}
+                          />
+
+                          <br />
+
+                          <textarea
+                            name="about"
+                            id="about"
+                            cols="30"
+                            rows="10"
+                            required
+                            placeholder="About *"
+                            onChange={(e) => setAuthorAbout(e.target.value)}
+                          ></textarea>
+
+                          <br />
+
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) => setAuthorImage(e.target.files[0])}
+                          />
+
+                          <br />
+
+                          <div className="buttons">
+                            <a onClick={() => setIsClickedAuthor(false)}>
+                              back
+                            </a>
+                            <button type="submit">CREATE</button>
+                          </div>
+                        </form>
+                      </div>
+                    ) : (
+                      <button onClick={() => setIsClickedAuthor(true)}>
+                        NEW AUTHOR
+                      </button>
+                    )}
                   </div>
 
                   <div className="bottom">
@@ -472,8 +738,6 @@ function AdminPage() {
                     <table>
                       <thead>
                         <tr>
-                          <th>DELETE</th>
-                          <th>EDIT</th>
                           <th>ID</th>
                           <th>USER</th>
                           <th>BOOKS & QUANTITY</th>
@@ -486,22 +750,6 @@ function AdminPage() {
                         {orders &&
                           orders.map((order) => (
                             <tr key={order._id}>
-                              <td className="deleteColumn">
-                                <button
-                                  onClick={() => deleteOrder(order._id)}
-                                  className="delete"
-                                >
-                                  <DeleteIcon />
-                                </button>
-                              </td>
-                              <td className="editColumn">
-                                <button
-                                  onClick={() => editOrder(order._id)}
-                                  className="edit"
-                                >
-                                  <EditIcon />
-                                </button>
-                              </td>
                               <td>{order._id}</td>
                               <td>{order.user._id}</td>
                               <td>
