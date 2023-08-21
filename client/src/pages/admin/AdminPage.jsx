@@ -11,7 +11,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 
 function AdminPage() {
-  const { books } = useContext(BookContext);
+  const { books, getBooks } = useContext(BookContext);
   const [activeTab, setActiveTab] = useState(0);
   const [users, setUsers] = useState([]);
   const [orders, setOrders] = useState([]);
@@ -101,6 +101,42 @@ function AdminPage() {
     if (response.status == 200) {
       alert(response.data.message);
       getCategories();
+    }
+  };
+
+  const deleteUser = async (id) => {
+    const response = await axios.delete(
+      `http://localhost:8080/api/user/${id}`,
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+
+    if (response.status == 200) {
+      alert("User deleted succesfully");
+      getUsers();
+    }
+  };
+
+  const deleteProduct = async (id) => {
+    const response = await axios.delete(`http://localhost:8080/api/book/${id}`);
+
+    if (response.status == 200) {
+      alert(response.data.message);
+      getBooks();
+    }
+  };
+
+  const deleteAuthor = async (id) => {
+    const response = await axios.delete(
+      `http://localhost:8080/api/author/${id}`
+    );
+
+    if (response.status == 200) {
+      alert(response.data.message);
+      getAuthors();
     }
   };
 
@@ -194,6 +230,8 @@ function AdminPage() {
                     <table>
                       <thead>
                         <tr>
+                          <th>DELETE</th>
+                          <th>EDIT</th>
                           <th>ID</th>
                           <th>NAME</th>
                           <th>EMAIL</th>
@@ -204,6 +242,22 @@ function AdminPage() {
                         {users &&
                           users.map((user) => (
                             <tr key={user._id}>
+                              <td className="deleteColumn">
+                                <button
+                                  onClick={() => deleteUser(user._id)}
+                                  className="delete"
+                                >
+                                  <DeleteIcon />
+                                </button>
+                              </td>
+                              <td className="editColumn">
+                                <button
+                                  onClick={() => editUser(user._id)}
+                                  className="edit"
+                                >
+                                  <EditIcon />
+                                </button>
+                              </td>
                               <td>{user._id}</td>
                               <td>{user.name}</td>
                               <td>{user.email}</td>
@@ -228,6 +282,8 @@ function AdminPage() {
                       <table>
                         <thead>
                           <tr>
+                            <th>DELETE</th>
+                            <th>EDIT</th>
                             <th>ID</th>
                             <th>NAME & AUTHOR</th>
                             <th>CATEGORY</th>
@@ -239,6 +295,22 @@ function AdminPage() {
                           {books &&
                             books.map((book) => (
                               <tr key={book._id}>
+                                <td className="deleteColumn">
+                                  <button
+                                    onClick={() => deleteProduct(book._id)}
+                                    className="delete"
+                                  >
+                                    <DeleteIcon />
+                                  </button>
+                                </td>
+                                <td className="editColumn">
+                                  <button
+                                    onClick={() => editProduct(book._id)}
+                                    className="edit"
+                                  >
+                                    <EditIcon />
+                                  </button>
+                                </td>
                                 <td>{book._id}</td>
                                 <td>
                                   <p>{book.name}</p>
@@ -297,8 +369,8 @@ function AdminPage() {
                       <table>
                         <thead>
                           <tr>
-                            <th>Delete</th>
-                            <th>Edit</th>
+                            <th>DELETE</th>
+                            <th>EDIT</th>
                             <th>ID</th>
                             <th>NAME</th>
                           </tr>
@@ -346,6 +418,8 @@ function AdminPage() {
                       <table>
                         <thead>
                           <tr>
+                            <th>DELETE</th>
+                            <th>EDIT</th>
                             <th>ID</th>
                             <th>NAME</th>
                             <th>IMAGE</th>
@@ -356,6 +430,22 @@ function AdminPage() {
                           {authors &&
                             authors.map((author) => (
                               <tr key={author._id}>
+                                <td className="deleteColumn">
+                                  <button
+                                    onClick={() => deleteAuthor(author._id)}
+                                    className="delete"
+                                  >
+                                    <DeleteIcon />
+                                  </button>
+                                </td>
+                                <td className="editColumn">
+                                  <button
+                                    onClick={() => editAuthor(author._id)}
+                                    className="edit"
+                                  >
+                                    <EditIcon />
+                                  </button>
+                                </td>
                                 <td>{author._id}</td>
                                 <td>{author.name}</td>
                                 <td>
@@ -382,6 +472,8 @@ function AdminPage() {
                     <table>
                       <thead>
                         <tr>
+                          <th>DELETE</th>
+                          <th>EDIT</th>
                           <th>ID</th>
                           <th>USER</th>
                           <th>BOOKS & QUANTITY</th>
@@ -394,6 +486,22 @@ function AdminPage() {
                         {orders &&
                           orders.map((order) => (
                             <tr key={order._id}>
+                              <td className="deleteColumn">
+                                <button
+                                  onClick={() => deleteOrder(order._id)}
+                                  className="delete"
+                                >
+                                  <DeleteIcon />
+                                </button>
+                              </td>
+                              <td className="editColumn">
+                                <button
+                                  onClick={() => editOrder(order._id)}
+                                  className="edit"
+                                >
+                                  <EditIcon />
+                                </button>
+                              </td>
                               <td>{order._id}</td>
                               <td>{order.user._id}</td>
                               <td>
