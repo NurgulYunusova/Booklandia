@@ -45,8 +45,8 @@ function HomePage() {
       {/* <IntermediatePart /> */}
       {/* <NewBooks /> */}
       {/* <Testimonials /> */}
-      <PopularAuthors />
-      {/* <WebsiteSuccess /> */}
+      {/* <PopularAuthors /> */}
+      <WebsiteSuccess />
       {/* <Footer /> */}
     </>
   );
