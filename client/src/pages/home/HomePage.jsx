@@ -40,8 +40,8 @@ function HomePage() {
       {/* <Header />
       <Pages /> */}
       {/* <Intro /> */}
-      <Categories />
-      {/* <Bestsellers /> */}
+      {/* <Categories /> */}
+      <Bestsellers />
       {/* <IntermediatePart /> */}
       {/* <NewBooks /> */}
       {/* <Testimonials /> */}
