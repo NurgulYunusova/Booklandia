@@ -43,9 +43,9 @@ function HomePage() {
       {/* <Categories /> */}
       {/* <Bestsellers /> */}
       {/* <IntermediatePart /> */}
-      <NewBooks />
+      {/* <NewBooks /> */}
       {/* <Testimonials /> */}
-      {/* <PopularAuthors /> */}
+      <PopularAuthors />
       {/* <WebsiteSuccess /> */}
       {/* <Footer /> */}
     </>

@@ -56,7 +56,7 @@ function PopularAuthors() {
                   >
                     <div className="author">
                       <img src={q.image} alt={q.name} />
-                      <h3>{q.name}</h3>
+                      <h3 className="authorName">{q.name}</h3>
                     </div>
                   </SwiperSlide>
                 ))}
