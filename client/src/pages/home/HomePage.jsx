@@ -37,17 +37,17 @@ function HomePage() {
         </>
       )} */}
 
-      {/* <Header />
-      <Pages /> */}
-      {/* <Intro /> */}
-      {/* <Categories /> */}
-      {/* <Bestsellers /> */}
-      {/* <IntermediatePart /> */}
-      {/* <NewBooks /> */}
-      {/* <Testimonials /> */}
-      {/* <PopularAuthors /> */}
+      <Header />
+      <Pages />
+      <Intro />
+      <Categories />
+      <Bestsellers />
+      <IntermediatePart />
+      <NewBooks />
+      <Testimonials />
+      <PopularAuthors />
       <WebsiteSuccess />
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }

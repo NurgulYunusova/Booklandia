@@ -18,10 +18,12 @@ const style = {
   top: "50%",
   left: "50%",
   transform: "translate(-50%, -50%)",
-  width: 500,
-  bgcolor: "background.paper",
+  width: 400,
+  backgroundColor: " #fffaf5",
+  color: "#2f4f4f",
   boxShadow: 24,
   p: 4,
+  border: "none",
 };
 
 function AdminPage() {
@@ -720,39 +722,38 @@ function AdminPage() {
                             ))}
                         </tbody>
                       </table>
-
-                      <Modal
-                        open={categoryModalOpen}
-                        onClose={closeCategoryModal}
-                        aria-labelledby="edit-modal-title"
-                        className="modal"
-                      >
-                        <Box sx={style} className="box">
-                          <div className="editModal">
-                            <h3 className="modalHeading">Edit Category</h3>
-                            <form onSubmit={handleEditCategorySubmit}>
-                              <TextField
-                                label="Category name"
-                                required
-                                value={editedCategoryName}
-                                onChange={(e) =>
-                                  setEditedCategoryName(e.target.value)
-                                }
-                              />
-
-                              <br />
-
-                              <div className="buttons">
-                                <Button onClick={closeCategoryModal}>
-                                  Cancel
-                                </Button>
-                                <Button type="submit">Save</Button>
-                              </div>
-                            </form>
-                          </div>
-                        </Box>
-                      </Modal>
                     </div>
+
+                    <Modal
+                      open={categoryModalOpen}
+                      onClose={closeCategoryModal}
+                      aria-labelledby="edit-modal-title"
+                    >
+                      <Box sx={style}>
+                        <div className="editModal">
+                          <h3 className="modalHeading">Edit Category</h3>
+                          <form onSubmit={handleEditCategorySubmit}>
+                            <TextField
+                              label="Category name"
+                              required
+                              value={editedCategoryName}
+                              onChange={(e) =>
+                                setEditedCategoryName(e.target.value)
+                              }
+                            />
+
+                            <br />
+
+                            <div className="buttons">
+                              <Button onClick={closeCategoryModal}>
+                                Cancel
+                              </Button>
+                              <Button type="submit">Save</Button>
+                            </div>
+                          </form>
+                        </div>
+                      </Box>
+                    </Modal>
                   </div>
                 </div>
               )}

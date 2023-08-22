@@ -229,9 +229,16 @@
                   }
                 }
               }
+            }
 
-              .modalHeading {
-                font-size: 40px;
+            .MuiTableCell-root {
+              padding: 10px;
+              font-size: 17px;
+              color: #2f4f4f;
+
+              .editModal {
+                .modalHeading {
+                }
               }
             }
           }

@@ -3,6 +3,7 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
+import { toast } from "react-hot-toast";
 
 export const WishlistContext = createContext();
 
@@ -20,7 +21,7 @@ export const WishlistProvider = ({ children }) => {
           bookId: bookId,
         })
         .then((response) => {
-          alert(response.data.message);
+          toast.success(response.data.message);
           getWishlist();
         })
         .catch((error) => {
@@ -45,7 +46,7 @@ export const WishlistProvider = ({ children }) => {
         setWishlist(wishlist.filter((item) => item._id !== bookId));
       }
 
-      alert(response.data.message);
+      toast.success(response.data.message);
       getWishlist();
     } catch (error) {
       console.error("Error removing item from wishlist:", error);

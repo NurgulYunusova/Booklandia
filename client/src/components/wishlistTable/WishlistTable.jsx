@@ -4,6 +4,7 @@ import { WishlistContext } from "../../context/WishlistContext";
 import "./wishlistTable.scss";
 import DeleteIcon from "@mui/icons-material/Delete";
 import moment from "moment";
+import { Toaster } from "react-hot-toast";
 
 const WishlistTable = () => {
   const { wishlist, removeFromWishlist } = useContext(WishlistContext);
@@ -47,6 +48,7 @@ const WishlistTable = () => {
                 >
                   <DeleteIcon />
                 </button>
+                <Toaster position="bottom-right" reverseOrder={false} />
               </td>
             </tr>
           ))}

@@ -3,13 +3,15 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
+import { toast } from "react-hot-toast";
 
 export const BasketContext = createContext();
 
 export const BasketProvider = ({ children }) => {
+  const { user } = useContext(UserContext);
   const [basket, setBasket] = useState([]);
   const [bookQuantities, setBookQuantities] = useState({});
-  const { user } = useContext(UserContext);
+  const [basketClicked, setBasketClicked] = useState(false);
 
   const addToBasket = async (bookId, quantity) => {
     try {
@@ -22,11 +24,12 @@ export const BasketProvider = ({ children }) => {
           quantity: quantity,
         })
         .then((response) => {
-          alert(response.data.message);
+          toast.success(response.data.message);
           setBookQuantities((prevQuantities) => ({
             ...prevQuantities,
             [bookId]: quantity,
           }));
+          setBasketClicked(true);
           getBasket();
         })
         .catch((error) => {
@@ -75,9 +78,10 @@ export const BasketProvider = ({ children }) => {
 
       if (response.status === 200) {
         setBasket(basket.filter((item) => item._id !== bookId));
+        setBasketClicked(false);
       }
 
-      alert(response.data.message);
+      toast.success(response.data.message);
       getBasket();
     } catch (error) {
       console.error("Error removing item from basket:", error);
@@ -111,6 +115,7 @@ export const BasketProvider = ({ children }) => {
         addToBasket,
         removeFromBasket,
         updateQuantityOnServer,
+        basketClicked,
       }}
     >
       {children}

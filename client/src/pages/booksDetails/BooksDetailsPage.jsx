@@ -13,6 +13,7 @@ import Pages from "../../components/pages/Pages";
 import Header from "../../components/header/Header";
 import { WishlistContext } from "../../context/WishlistContext";
 import { BasketContext } from "../../context/BasketContext";
+import { Toaster } from "react-hot-toast";
 
 function BooksDetailsPage() {
   const navigate = useNavigate();
@@ -21,7 +22,8 @@ function BooksDetailsPage() {
   const [relatedBooks, setRelatedBooks] = useState([]);
   const [currentQuantity, setCurrentQuantity] = useState(1);
   const { addToWishlist } = useContext(WishlistContext);
-  const { addToBasket } = useContext(BasketContext);
+  const { addToBasket, basketClicked, removeFromBasket } =
+    useContext(BasketContext);
 
   const handleDecrease = () => {
     if (currentQuantity > 1) {
@@ -132,16 +134,29 @@ function BooksDetailsPage() {
                         <span>{currentQuantity}</span>
                         <button onClick={handleIncrease}>+</button>
                       </div>
+                      {basketClicked ? (
+                        <button
+                          className="cart"
+                          onClick={() => removeFromBasket(book._id)}
+                        >
+                          <AddShoppingCartOutlinedIcon
+                            sx={{ fontSize: "20px" }}
+                          />{" "}
+                          Remove from cart
+                        </button>
+                      ) : (
+                        <button
+                          className="cart"
+                          onClick={() => addToBasket(book._id, currentQuantity)}
+                        >
+                          <AddShoppingCartOutlinedIcon
+                            sx={{ fontSize: "20px" }}
+                          />{" "}
+                          Add to cart
+                        </button>
+                      )}
 
-                      <button
-                        className="cart"
-                        onClick={() => addToBasket(book._id, currentQuantity)}
-                      >
-                        <AddShoppingCartOutlinedIcon
-                          sx={{ fontSize: "20px" }}
-                        />{" "}
-                        Add to cart
-                      </button>
+                      <Toaster position="bottom-right" reverseOrder={false} />
 
                       <button
                         className="wishlist"
