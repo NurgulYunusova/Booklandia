@@ -44,8 +44,8 @@ function HomePage() {
       {/* <Bestsellers /> */}
       {/* <IntermediatePart /> */}
       {/* <NewBooks /> */}
-      <Testimonials />
-      {/* <PopularAuthors /> */}
+      {/* <Testimonials /> */}
+      <PopularAuthors />
       {/* <WebsiteSuccess /> */}
       {/* <Footer /> */}
     </>

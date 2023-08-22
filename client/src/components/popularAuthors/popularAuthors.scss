@@ -56,3 +56,220 @@
     }
   }
 }
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .popularAuthors {
+    &Container {
+      width: 85%;
+
+      .heading {
+        h1 {
+          font-size: 18px;
+        }
+
+        .divider {
+          display: none;
+        }
+      }
+
+      .swiper {
+        padding: 30px 5px;
+
+        .swiper-pagination-bullet {
+          width: 4px;
+          height: 4px;
+        }
+
+        .author {
+          padding: 10px 30px;
+          gap: 10px;
+
+          img {
+            width: 50px;
+          }
+
+          h3 {
+            font-size: 9px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 479px) and (max-width: 767px) {
+  .popularAuthors {
+    &Container {
+      width: 85%;
+
+      .heading {
+        h1 {
+          font-size: 28px;
+        }
+
+        .divider {
+          display: none;
+        }
+      }
+
+      .swiper {
+        padding: 30px 5px;
+        height: 100%;
+
+        .swiper-pagination-bullet {
+          width: 6px;
+          height: 6px;
+        }
+
+        .author {
+          padding: 30px;
+          gap: 25px;
+          height: 200px;
+          justify-content: flex-start;
+
+          img {
+            width: 80px;
+            height: 80px;
+          }
+
+          .authorName {
+            font-size: 12px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .popularAuthors {
+    &Container {
+      width: 85%;
+
+      .heading {
+        h1 {
+          font-size: 28px;
+        }
+
+        .divider {
+          width: 60%;
+        }
+      }
+
+      .swiper {
+        padding: 30px 5px;
+        height: 100%;
+
+        .swiper-pagination-bullet {
+          width: 6px;
+          height: 6px;
+        }
+
+        .author {
+          padding: 30px;
+          gap: 20px;
+          height: 200px;
+          justify-content: flex-start;
+
+          img {
+            width: 110px;
+            height: 110px;
+          }
+
+          .authorName {
+            font-size: 14px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+  .popularAuthors {
+    &Container {
+      width: 85%;
+
+      .heading {
+        h1 {
+          font-size: 28px;
+        }
+
+        .divider {
+          width: 60%;
+        }
+      }
+
+      .swiper {
+        padding: 30px 5px;
+        height: 100%;
+
+        .swiper-pagination-bullet {
+          width: 6px;
+          height: 6px;
+        }
+
+        .author {
+          padding: 30px;
+          gap: 20px;
+          height: 230px;
+          justify-content: flex-start;
+
+          img {
+            width: 120px;
+            height: 120px;
+          }
+
+          .authorName {
+            font-size: 14px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1199px) and (max-width: 1439px) {
+  .popularAuthors {
+    &Container {
+      width: 85%;
+
+      .heading {
+        h1 {
+          font-size: 28px;
+        }
+      }
+
+      .swiper {
+        padding: 30px 5px;
+        height: 100%;
+
+        .swiper-pagination-bullet {
+          width: 6px;
+          height: 6px;
+        }
+
+        .author {
+          padding: 30px;
+          gap: 20px;
+          height: 250px;
+          justify-content: flex-start;
+
+          img {
+            width: 150px;
+            height: 150px;
+          }
+
+          .authorName {
+            font-size: 16px;
+            text-align: center;
+          }
+        }
+      }
+    }
+  }
+}
