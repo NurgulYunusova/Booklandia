@@ -19,7 +19,7 @@ function Categories() {
                 <h4>Romance</h4>
               </div>
             </div>
-            <div className="col big">
+            <div className="col big first">
               <div className="box explore">
                 <h3>Explore Our Top Categories</h3>
                 <button onClick={() => handleClick("All")}>VIEW ALL</button>

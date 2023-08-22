@@ -39,14 +39,14 @@ function HomePage() {
 
       {/* <Header />
       <Pages /> */}
-      <Intro />
-      {/* <Categories />
-      <Bestsellers />
-      <IntermediatePart />
-      <NewBooks />
-      <Testimonials />
-      <PopularAuthors />
-      <WebsiteSuccess /> */}
+      {/* <Intro /> */}
+      <Categories />
+      {/* <Bestsellers /> */}
+      {/* <IntermediatePart /> */}
+      {/* <NewBooks /> */}
+      {/* <Testimonials /> */}
+      {/* <PopularAuthors /> */}
+      {/* <WebsiteSuccess /> */}
       {/* <Footer /> */}
     </>
   );
