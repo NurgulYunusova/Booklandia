@@ -42,8 +42,8 @@ function HomePage() {
       {/* <Intro /> */}
       {/* <Categories /> */}
       {/* <Bestsellers /> */}
-      <IntermediatePart />
-      {/* <NewBooks /> */}
+      {/* <IntermediatePart /> */}
+      <NewBooks />
       {/* <Testimonials /> */}
       {/* <PopularAuthors /> */}
       {/* <WebsiteSuccess /> */}
