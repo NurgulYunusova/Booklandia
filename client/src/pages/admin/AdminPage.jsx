@@ -725,8 +725,9 @@ function AdminPage() {
                         open={categoryModalOpen}
                         onClose={closeCategoryModal}
                         aria-labelledby="edit-modal-title"
+                        className="modal"
                       >
-                        <Box sx={style}>
+                        <Box sx={style} className="box">
                           <div className="editModal">
                             <h3 className="modalHeading">Edit Category</h3>
                             <form onSubmit={handleEditCategorySubmit}>
@@ -738,7 +739,9 @@ function AdminPage() {
                                   setEditedCategoryName(e.target.value)
                                 }
                               />
+
                               <br />
+
                               <div className="buttons">
                                 <Button onClick={closeCategoryModal}>
                                   Cancel

@@ -21,7 +21,7 @@ function Intro() {
             <button onClick={() => handleClick()}>
               EXPLORE NOW
               <span style={{ display: "flex", alignItems: "center" }}>
-                <ArrowOutwardOutlinedIcon />
+                <ArrowOutwardOutlinedIcon className="arrow" />
               </span>
             </button>
           </div>

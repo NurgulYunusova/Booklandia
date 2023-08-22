@@ -8,3 +8,27 @@
     height: 100%;
   }
 }
+
+@media screen and (min-width: 479px) and (max-width: 767px) {
+  .swiper {
+    width: 150px;
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .swiper {
+    width: 180px;
+  }
+}
+
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+  .swiper {
+    width: 250px;
+  }
+}
+
+@media screen and (min-width: 1199px) and (max-width: 1439px) {
+  .swiper {
+    width: 280px;
+  }
+}
