@@ -43,8 +43,8 @@ function HomePage() {
       {/* <Categories /> */}
       {/* <Bestsellers /> */}
       {/* <IntermediatePart /> */}
-      <NewBooks />
-      {/* <Testimonials /> */}
+      {/* <NewBooks /> */}
+      <Testimonials />
       {/* <PopularAuthors /> */}
       {/* <WebsiteSuccess /> */}
       {/* <Footer /> */}

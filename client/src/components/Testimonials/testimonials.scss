@@ -74,3 +74,160 @@
     }
   }
 }
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .testimonials {
+    background-image: none;
+
+    &Container {
+      .card {
+        width: 100%;
+        height: auto;
+        position: static;
+
+        .testimonial {
+          padding: 30px;
+
+          .quote-icon {
+            bottom: 3px;
+            font-size: 60px;
+          }
+
+          .content {
+            font-size: 14px;
+            line-height: 24px;
+            margin: 20px 0 30px;
+          }
+
+          .details {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 479px) and (max-width: 767px) {
+  .testimonials {
+    &Container {
+      .card {
+        width: 330px;
+        height: auto;
+        left: 50px;
+
+        .testimonial {
+          padding: 30px;
+
+          .quote-icon {
+            bottom: 3px;
+            font-size: 60px;
+          }
+
+          .content {
+            font-size: 14px;
+            line-height: 24px;
+            margin: 20px 0 30px;
+          }
+
+          .details {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .testimonials {
+    &Container {
+      .card {
+        width: 330px;
+        height: auto;
+        left: 80px;
+
+        .testimonial {
+          padding: 30px;
+
+          .quote-icon {
+            bottom: 3px;
+            font-size: 60px;
+          }
+
+          .content {
+            font-size: 14px;
+            line-height: 24px;
+            margin: 20px 0 30px;
+          }
+
+          .details {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+  .testimonials {
+    &Container {
+      .card {
+        width: 330px;
+        height: auto;
+        left: 120px;
+
+        .testimonial {
+          padding: 30px;
+
+          .quote-icon {
+            bottom: 3px;
+            font-size: 60px;
+          }
+
+          .content {
+            font-size: 14px;
+            line-height: 24px;
+            margin: 20px 0 30px;
+          }
+
+          .details {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1199px) and (max-width: 1439px) {
+  .testimonials {
+    &Container {
+      .card {
+        width: 330px;
+        height: auto;
+        left: 120px;
+
+        .testimonial {
+          padding: 30px;
+
+          .quote-icon {
+            bottom: 3px;
+            font-size: 60px;
+          }
+
+          .content {
+            font-size: 16px;
+            line-height: 24px;
+            margin: 20px 0 30px;
+          }
+
+          .details {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+}
