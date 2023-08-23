@@ -14,9 +14,11 @@ import {
   Snackbar,
 } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
+import { BasketContext } from "../../context/BasketContext";
 
 const WishlistTable = () => {
   const { wishlist, removeFromWishlist } = useContext(WishlistContext);
+  const { addToBasket } = useContext(BasketContext);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
@@ -42,6 +44,11 @@ const WishlistTable = () => {
 
   const handleAlertClose = () => {
     setShowSuccessAlert(false);
+  };
+
+  const handleAddToBasket = (id) => {
+    addToBasket(id);
+    removeFromWishlist(id);
   };
 
   return (
@@ -71,7 +78,7 @@ const WishlistTable = () => {
                 </td>
                 <td>
                   <button
-                    // onClick={() => handleAddToCart(item.id)}
+                    onClick={() => handleAddToBasket(q.book._id)}
                     className="addToCart"
                   >
                     Add to Cart

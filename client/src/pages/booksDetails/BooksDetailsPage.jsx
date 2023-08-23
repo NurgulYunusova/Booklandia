@@ -150,7 +150,7 @@ function BooksDetailsPage() {
                         >
                           <AddShoppingCartOutlinedIcon
                             sx={{ fontSize: "20px" }}
-                          />{" "}
+                          />
                           ADD TO CART
                         </button>
 
