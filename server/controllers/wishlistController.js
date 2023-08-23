@@ -12,7 +12,7 @@ const wishlistController = {
       });
 
       if (existingWishlistEntry) {
-        return res.status(400).json({ message: "Item already in wishlist" });
+        return res.status(400).json({ message: "Book already in wishlist" });
       }
 
       const wishlist = new Wishlist({
@@ -22,7 +22,7 @@ const wishlistController = {
 
       await wishlist.save();
 
-      res.status(201).json({ message: "Item added to wishlist" });
+      res.status(201).json({ message: "Book added to wishlist" });
     } catch (error) {
       res.status(500).json({ message: "Error adding book to wishlist" });
     }

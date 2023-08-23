@@ -3,7 +3,8 @@
 import axios from "axios";
 import { createContext, useContext, useEffect, useState } from "react";
 import { UserContext } from "./UserContext";
-import { toast } from "react-hot-toast";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 
 export const BasketContext = createContext();
 
@@ -11,34 +12,57 @@ export const BasketProvider = ({ children }) => {
   const { user } = useContext(UserContext);
   const [basket, setBasket] = useState([]);
   const [bookQuantities, setBookQuantities] = useState({});
-  const [basketClicked, setBasketClicked] = useState(false);
+  const [basketTrueAlertOpen, setBasketTrueAlertOpen] = useState(false);
+  const [basketFalseAlertOpen, setBasketFalseAlertOpen] = useState(false);
 
   const addToBasket = async (bookId, quantity) => {
     try {
-      setBasket([...basket, { _id: bookId, productId: bookId }]);
+      const response = await axios.post("http://localhost:8080/api/basket", {
+        userId: user._id,
+        bookId: bookId,
+        quantity: +quantity,
+      });
 
-      axios
-        .post("http://localhost:8080/api/basket", {
-          userId: user._id,
-          bookId: bookId,
-          quantity: quantity,
-        })
-        .then((response) => {
-          toast.success(response.data.message);
-          setBookQuantities((prevQuantities) => ({
-            ...prevQuantities,
-            [bookId]: quantity,
-          }));
-          setBasketClicked(true);
-          getBasket();
-        })
-        .catch((error) => {
-          console.error("Error adding item to basket:", error);
-          setBasket(basket.filter((item) => item._id !== bookId));
-        });
+      if (response.status === 201) {
+        setBasket([...basket, { _id: bookId, productId: bookId }]);
+        setBookQuantities((prevQuantities) => ({
+          ...prevQuantities,
+          [bookId]: quantity,
+        }));
+        setBasketTrueAlertOpen(true);
+        getBasket();
+      } else if (
+        response.status === 400 &&
+        response.data.message === "Book already in cart"
+      ) {
+        console.log("Book already in cart");
+      } else {
+        console.log("Failed to add book to cart");
+      }
     } catch (error) {
-      console.error("Error adding item to basket:", error);
+      if (axios.isAxiosError(error)) {
+        console.error("Error adding book to cart:", error);
+        if (error.response && error.response.status === 400) {
+          setBasketFalseAlertOpen(true);
+        }
+      } else {
+        console.error("Non-Axios error:", error);
+      }
     }
+  };
+
+  const handleCloseTrueBasketAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setBasketTrueAlertOpen(false);
+  };
+
+  const handleCloseFalseBasketAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setBasketFalseAlertOpen(false);
   };
 
   const updateQuantityOnServer = async (bookId, quantity) => {
@@ -78,10 +102,8 @@ export const BasketProvider = ({ children }) => {
 
       if (response.status === 200) {
         setBasket(basket.filter((item) => item._id !== bookId));
-        setBasketClicked(false);
       }
 
-      toast.success(response.data.message);
       getBasket();
     } catch (error) {
       console.error("Error removing item from basket:", error);
@@ -115,10 +137,45 @@ export const BasketProvider = ({ children }) => {
         addToBasket,
         removeFromBasket,
         updateQuantityOnServer,
-        basketClicked,
       }}
     >
       {children}
+
+      <Snackbar
+        open={basketTrueAlertOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseTrueBasketAlert}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+      >
+        <MuiAlert
+          onClose={handleCloseTrueBasketAlert}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Book added to cart!
+        </MuiAlert>
+      </Snackbar>
+
+      <Snackbar
+        open={basketFalseAlertOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseFalseBasketAlert}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+      >
+        <MuiAlert
+          onClose={handleCloseFalseBasketAlert}
+          severity="error"
+          sx={{ width: "100%" }}
+        >
+          Book already in cart!
+        </MuiAlert>
+      </Snackbar>
     </BasketContext.Provider>
   );
 };
