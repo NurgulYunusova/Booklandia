@@ -13,7 +13,7 @@ const basketController = {
       });
 
       if (existingBasketEntry) {
-        return res.status(400).json({ message: "Book already in basket" });
+        return res.status(400).json({ message: "Book already in cart" });
       }
 
       const basket = new Basket({
@@ -24,9 +24,9 @@ const basketController = {
 
       await basket.save();
 
-      res.status(201).json({ message: "Book added to basket" });
+      res.status(201).json({ message: "Book added to cart" });
     } catch (error) {
-      res.status(500).json({ message: "Error adding book to basket" });
+      res.status(500).json({ message: "Error adding book to cart" });
     }
   },
   getBasketByUser: async (req, res) => {
@@ -63,9 +63,9 @@ const basketController = {
       });
 
       if (removedBook) {
-        res.status(200).json({ message: "Book removed from basket" });
+        res.status(200).json({ message: "Book removed from cart" });
       } else {
-        res.status(404).json({ message: "Book not found in basket" });
+        res.status(404).json({ message: "Book not found in cart" });
       }
     } catch (error) {
       if (error instanceof mongoose.Error.CastError) {
@@ -88,7 +88,7 @@ const basketController = {
       );
 
       if (!updatedBasket) {
-        return res.status(404).json({ message: "Basket not found" });
+        return res.status(404).json({ message: "Cart not found" });
       }
 
       res.json(updatedBasket);
