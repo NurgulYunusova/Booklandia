@@ -1,19 +1,55 @@
 /* eslint-disable react/prop-types */
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import "./basketTable.scss";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { BasketContext } from "../../context/BasketContext";
 import { useNavigate } from "react-router-dom";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Snackbar,
+} from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 
 const BasketTable = () => {
   const {
     basket,
-    removeFromBasket,
     bookQuantities,
+    removeFromBasket,
     setBookQuantities,
     updateQuantityOnServer,
   } = useContext(BasketContext);
   const navigate = useNavigate();
+  const [openDialog, setOpenDialog] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState(null);
+  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+
+  const handleDeleteClick = (itemId) => {
+    setSelectedItemId(itemId);
+    setOpenDialog(true);
+  };
+
+  const handleCloseDialog = () => {
+    setSelectedItemId(null);
+    setOpenDialog(false);
+  };
+
+  const handleConfirmDelete = () => {
+    if (selectedItemId) {
+      removeFromBasket(selectedItemId);
+      setSelectedItemId(null);
+      setShowSuccessAlert(true);
+    }
+    setOpenDialog(false);
+  };
+
+  const handleAlertClose = () => {
+    setShowSuccessAlert(false);
+  };
 
   const handleDecrease = (bookId) => {
     if (bookQuantities[bookId] > 1) {
@@ -75,7 +111,7 @@ const BasketTable = () => {
                 <tr key={q._id}>
                   <td className="deleteColumn">
                     <button
-                      onClick={() => removeFromBasket(q.book._id)}
+                      onClick={() => handleDeleteClick(q.book._id)}
                       className="delete"
                     >
                       <DeleteIcon />
@@ -109,6 +145,41 @@ const BasketTable = () => {
               ))}
           </tbody>
         </table>
+
+        <Snackbar
+          open={showSuccessAlert}
+          autoHideDuration={3000}
+          onClose={handleAlertClose}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+        >
+          <MuiAlert
+            onClose={handleAlertClose}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Book removed from cart successfully!
+          </MuiAlert>
+        </Snackbar>
+
+        <Dialog open={openDialog} onClose={handleCloseDialog}>
+          <DialogTitle>Confirm Remove</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              Are you sure you want to remove this book from the cart?
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleCloseDialog} color="primary">
+              Cancel
+            </Button>
+            <Button onClick={handleConfirmDelete} color="primary">
+              Remove
+            </Button>
+          </DialogActions>
+        </Dialog>
 
         <div className="cartTotals">
           <h2>Cart totals</h2>

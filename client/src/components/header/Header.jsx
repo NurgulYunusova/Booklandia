@@ -58,6 +58,11 @@ function Header() {
     window.scrollTo(0, 0);
   };
 
+  const handleWishlistClick = () => {
+    navigate("/wishlist");
+    window.scrollTo(0, 0);
+  };
+
   return (
     <>
       <header>
@@ -129,7 +134,7 @@ function Header() {
 
           {isLoggedIn ? (
             <div className="userIcons">
-              <span onClick={() => navigate("/wishlist")}>
+              <span onClick={() => handleWishlistClick()}>
                 <FavoriteBorderOutlinedIcon sx={{ fontSize: "20px" }} />
                 WISHLIST
               </span>
