@@ -8,7 +8,6 @@ export const BookContext = createContext();
 
 export const BookProvider = ({ children }) => {
   const [books, setBooks] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     getBooks();
@@ -19,12 +18,11 @@ export const BookProvider = ({ children }) => {
 
     if (response.status == 200) {
       setBooks(response.data);
-      setIsLoading(false);
     }
   };
 
   return (
-    <BookContext.Provider value={{ books, isLoading, getBooks }}>
+    <BookContext.Provider value={{ books, getBooks }}>
       {children}
     </BookContext.Provider>
   );

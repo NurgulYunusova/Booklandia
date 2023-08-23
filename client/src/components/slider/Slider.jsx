@@ -12,7 +12,10 @@ function Slider() {
 
   useEffect(() => {
     if (books) {
-      setSliderBooks(books.slice(0, 5));
+      const sortedBooks = books.sort(
+        (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
+      );
+      setSliderBooks(sortedBooks.slice(0, 5));
     }
   }, [books]);
 

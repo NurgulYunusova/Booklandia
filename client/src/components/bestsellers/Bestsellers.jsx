@@ -12,7 +12,14 @@ function Bestsellers() {
 
   useEffect(() => {
     if (books) {
-      setBestsellerBooks(books.slice(13, 16));
+      const sortedBooks = books.sort((a, b) => {
+        if (b.averageRating === a.averageRating) {
+          return a.name.localeCompare(b.name);
+        }
+        return b.averageRating - a.averageRating;
+      });
+
+      setBestsellerBooks(sortedBooks.slice(0, 3));
     }
   }, [books]);
 
