@@ -5,7 +5,9 @@ import StarRoundedIcon from "@mui/icons-material/StarRounded";
 import "./booksdetails.scss";
 import { useContext, useEffect, useState } from "react";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
+import RemoveShoppingCartOutlinedIcon from "@mui/icons-material/RemoveShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import Comment from "../../components/comment/Comment";
 import axios from "axios";
 import Footer from "../../components/footer/Footer";
@@ -16,14 +18,17 @@ import Loading from "../../components/loading/Loading";
 import { BasketContext } from "../../context/BasketContext";
 
 function BooksDetailsPage() {
-  const navigate = useNavigate();
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { addToWishlist, removeFromWishlist, wishlist } =
+    useContext(WishlistContext);
+  const { addToBasket, removeFromBasket, basket } = useContext(BasketContext);
   const [book, setBook] = useState(null);
   const [relatedBooks, setRelatedBooks] = useState([]);
   const [currentQuantity, setCurrentQuantity] = useState(1);
   const [loading, setLoading] = useState(true);
-  const { addToWishlist } = useContext(WishlistContext);
-  const { addToBasket } = useContext(BasketContext);
+  const [isInBasket, setIsInBasket] = useState(false);
+  const [isInWishlist, setIsInWishlist] = useState(false);
 
   const handleDecrease = () => {
     if (currentQuantity > 1) {
@@ -69,6 +74,18 @@ function BooksDetailsPage() {
       });
     }
   }, [book]);
+
+  useEffect(() => {
+    const bookInBasket = basket.some((item) => item.book?._id === book?._id);
+    setIsInBasket(bookInBasket);
+  }, [book, basket]);
+
+  useEffect(() => {
+    const bookInWishlist = wishlist.some(
+      (item) => item.book?._id === book?._id
+    );
+    setIsInWishlist(bookInWishlist);
+  }, [book, wishlist]);
 
   const handleBookClick = (bookId) => {
     navigate(`/booksDetails/${bookId}`);
@@ -144,25 +161,55 @@ function BooksDetailsPage() {
                           <span>{currentQuantity}</span>
                           <button onClick={handleIncrease}>+</button>
                         </div>
-                        <button
-                          className="cart"
-                          onClick={() => addToBasket(book._id)}
-                        >
-                          <AddShoppingCartOutlinedIcon
-                            sx={{ fontSize: "20px" }}
-                          />
-                          ADD TO CART
-                        </button>
 
-                        <button
-                          className="wishlist"
-                          onClick={() => addToWishlist(book._id)}
-                        >
-                          <FavoriteBorderOutlinedIcon
-                            sx={{ fontSize: "18px" }}
-                          />{" "}
-                          Add to wishlist
-                        </button>
+                        {!isInBasket ? (
+                          <button
+                            className="cart"
+                            onClick={() =>
+                              addToBasket(book._id, currentQuantity)
+                            }
+                          >
+                            <AddShoppingCartOutlinedIcon
+                              sx={{ fontSize: "20px" }}
+                            />
+                            ADD TO CART
+                          </button>
+                        ) : (
+                          <button
+                            className="cart"
+                            onClick={() => removeFromBasket(book._id)}
+                          >
+                            <RemoveShoppingCartOutlinedIcon
+                              sx={{ fontSize: "20px" }}
+                            />
+                            REMOVE FROM CART
+                          </button>
+                        )}
+
+                        {!isInWishlist ? (
+                          <button
+                            className="wishlist"
+                            onClick={() => addToWishlist(book._id)}
+                          >
+                            <FavoriteBorderOutlinedIcon
+                              sx={{ fontSize: "18px" }}
+                            />{" "}
+                            Add to wishlist
+                          </button>
+                        ) : (
+                          <button
+                            className="wishlist"
+                            onClick={() => removeFromWishlist(book._id)}
+                          >
+                            <FavoriteIcon
+                              sx={{
+                                fontSize: "18px",
+                                color: "#003366",
+                              }}
+                            />{" "}
+                            Remove from wishlist
+                          </button>
+                        )}
                       </div>
                     </div>
 
