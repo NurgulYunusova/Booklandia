@@ -13,6 +13,7 @@ export const BasketProvider = ({ children }) => {
   const [basket, setBasket] = useState([]);
   const [bookQuantities, setBookQuantities] = useState({});
   const [basketTrueAlertOpen, setBasketTrueAlertOpen] = useState(false);
+  const [basketRemoveAlertOpen, setBasketRemoveAlertOpen] = useState(false);
   const [basketFalseAlertOpen, setBasketFalseAlertOpen] = useState(false);
 
   const addToBasket = async (bookId, quantity) => {
@@ -102,12 +103,19 @@ export const BasketProvider = ({ children }) => {
 
       if (response.status === 200) {
         setBasket(basket.filter((item) => item._id !== bookId));
+        setBasketRemoveAlertOpen(true);
+        getBasket();
       }
-
-      getBasket();
     } catch (error) {
-      console.error("Error removing item from basket:", error);
+      console.error("Error removing item from cart:", error);
     }
+  };
+
+  const handleCloseRemoveBasketAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setBasketRemoveAlertOpen(false);
   };
 
   const getBasket = async () => {
@@ -156,6 +164,24 @@ export const BasketProvider = ({ children }) => {
           sx={{ width: "100%" }}
         >
           Book added to cart!
+        </MuiAlert>
+      </Snackbar>
+
+      <Snackbar
+        open={basketRemoveAlertOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseRemoveBasketAlert}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+      >
+        <MuiAlert
+          onClose={handleCloseRemoveBasketAlert}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Book removed from cart!
         </MuiAlert>
       </Snackbar>
 

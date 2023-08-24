@@ -11,9 +11,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Snackbar,
 } from "@mui/material";
-import MuiAlert from "@mui/material/Alert";
 
 const BasketTable = () => {
   const {
@@ -26,7 +24,6 @@ const BasketTable = () => {
   const navigate = useNavigate();
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   const handleDeleteClick = (itemId) => {
     setSelectedItemId(itemId);
@@ -42,13 +39,8 @@ const BasketTable = () => {
     if (selectedItemId) {
       removeFromBasket(selectedItemId);
       setSelectedItemId(null);
-      setShowSuccessAlert(true);
     }
     setOpenDialog(false);
-  };
-
-  const handleAlertClose = () => {
-    setShowSuccessAlert(false);
   };
 
   const handleDecrease = (bookId) => {
@@ -145,24 +137,6 @@ const BasketTable = () => {
               ))}
           </tbody>
         </table>
-
-        <Snackbar
-          open={showSuccessAlert}
-          autoHideDuration={3000}
-          onClose={handleAlertClose}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "right",
-          }}
-        >
-          <MuiAlert
-            onClose={handleAlertClose}
-            severity="success"
-            sx={{ width: "100%" }}
-          >
-            Book removed from cart successfully!
-          </MuiAlert>
-        </Snackbar>
 
         <Dialog open={openDialog} onClose={handleCloseDialog}>
           <DialogTitle>Confirm Remove</DialogTitle>

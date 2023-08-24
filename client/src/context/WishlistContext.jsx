@@ -12,6 +12,8 @@ export const WishlistProvider = ({ children }) => {
   const [wishlist, setWishlist] = useState([]);
   const { user } = useContext(UserContext);
   const [wishlistTrueAlertOpen, setWishlistTrueAlertOpen] = useState(false);
+  const [wishlistRemoveAlertOpen, setWishlistRemoveAlertOpen] = useState(false);
+
   const [wishlistFalseAlertOpen, setWishlistFalseAlertOpen] = useState(false);
 
   const addToWishlist = async (bookId) => {
@@ -70,12 +72,19 @@ export const WishlistProvider = ({ children }) => {
 
       if (response.status === 200) {
         setWishlist(wishlist.filter((item) => item._id !== bookId));
+        setWishlistRemoveAlertOpen(true);
+        getWishlist();
       }
-
-      getWishlist();
     } catch (error) {
       console.error("Error removing item from wishlist:", error);
     }
+  };
+
+  const handleCloseRemoveWishlistAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setWishlistRemoveAlertOpen(false);
   };
 
   const getWishlist = async () => {
@@ -116,6 +125,24 @@ export const WishlistProvider = ({ children }) => {
           sx={{ width: "100%" }}
         >
           Book added to wishlist!
+        </MuiAlert>
+      </Snackbar>
+
+      <Snackbar
+        open={wishlistRemoveAlertOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseRemoveWishlistAlert}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+      >
+        <MuiAlert
+          onClose={handleCloseRemoveWishlistAlert}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          Book removed from wishlist!
         </MuiAlert>
       </Snackbar>
 
