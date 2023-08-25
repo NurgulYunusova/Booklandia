@@ -95,17 +95,21 @@
             position: relative;
             @include center($justify-content: flex-start);
             gap: 25px;
-            padding: 10px 20px;
+            padding: 8px 20px;
             transition: all 0.2s ease-in-out;
             cursor: pointer;
+            height: 100%;
 
             &:hover {
               box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
             }
 
             .bookImage {
+              height: 165px;
+
               img {
                 width: 110px;
+                height: 100%;
               }
             }
 
