@@ -6,7 +6,7 @@
 
   &Container {
     width: 80%;
-    margin: 0 auto 50px;
+    margin: 0 auto;
 
     .top {
       @include center($justify-content: space-between);

@@ -27,6 +27,7 @@ function WishlistPage() {
               <p>WISHLIST</p>
             </div>
           </div>
+
           {wishlist.length == 0 ? (
             <h1 className="noWishlist">There is no product in your wishlist</h1>
           ) : (
