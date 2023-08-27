@@ -2,7 +2,7 @@
 /* eslint-disable react/no-unescaped-entities */
 /* eslint-disable no-unused-vars */
 import { useContext, useEffect, useState } from "react";
-import { Box, Button, Modal, Tab, Tabs, TextField } from "@mui/material";
+import { Tab, Tabs } from "@mui/material";
 import axios from "axios";
 import { BookContext } from "../../context/BookContext";
 import { UserContext } from "../../context/UserContext";
@@ -39,7 +39,7 @@ function AdminPage() {
   // CATEGORY
   const [isClickedCategory, setIsClickedCategory] = useState(false);
   const [categoryName, setCategoryName] = useState("");
-  const [categoryModalOpen, setCategoryModalOpen] = useState(false);
+  const [categoryEditOpen, setCategoryEditOpen] = useState(false);
   const [editedCategoryName, setEditedCategoryName] = useState("");
   const [editingCategoryId, setEditingCategoryId] = useState(null);
   // AUTHOR
@@ -210,20 +210,34 @@ function AdminPage() {
   const openCategoryModal = (category) => {
     setEditedCategoryName(category.name);
     setEditingCategoryId(category._id);
-    setCategoryModalOpen(true);
+    setCategoryEditOpen(true);
   };
 
   const closeCategoryModal = () => {
     setEditedCategoryName("");
     setEditingCategoryId(null);
-    setCategoryModalOpen(false);
+    setCategoryEditOpen(false);
   };
 
-  const handleEditCategorySubmit = (e) => {
+  const handleEditCategorySubmit = async (e) => {
     e.preventDefault();
 
-    console.log("hello");
+    const updatedData = {
+      name: editedCategoryName,
+    };
+
+    const response = await axios.put(
+      `http://localhost:8080/api/category/${editingCategoryId}`,
+      updatedData
+    );
+
+    console.log(response);
+    if (response.status === 200) {
+      alert(response.data.message);
+    }
+
     closeCategoryModal();
+    getCategories();
   };
 
   // USER
@@ -685,75 +699,76 @@ function AdminPage() {
                   </div>
 
                   <div className="bottom">
-                    <h2>Categories List</h2>
-                    <div className="table">
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>DELETE</th>
-                            <th>EDIT</th>
-                            <th>ID</th>
-                            <th>NAME</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {categories &&
-                            categories.map((category) => (
-                              <tr key={category._id}>
-                                <td className="deleteColumn">
-                                  <button
-                                    onClick={() => deleteCategory(category._id)}
-                                    className="delete"
-                                  >
-                                    <DeleteIcon />
-                                  </button>
-                                </td>
-                                <td className="editColumn">
-                                  <button
-                                    onClick={() => openCategoryModal(category)}
-                                    className="edit"
-                                  >
-                                    <EditIcon />
-                                  </button>
-                                </td>
-                                <td>{category._id}</td>
-                                <td>{category.name}</td>
+                    {categoryEditOpen ? (
+                      <>
+                        <h2>Edit Category</h2>
+                        <form onSubmit={handleEditCategorySubmit}>
+                          <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            placeholder="Category Name *"
+                            required
+                            value={editedCategoryName}
+                            onChange={(e) =>
+                              setEditedCategoryName(e.target.value)
+                            }
+                          />
+
+                          <br />
+
+                          <div className="buttons">
+                            <a onClick={closeCategoryModal}>cancel</a>
+                            <button type="submit">SAVE</button>
+                          </div>
+                        </form>
+                      </>
+                    ) : (
+                      <>
+                        <h2>Categories List</h2>
+                        <div className="table">
+                          <table>
+                            <thead>
+                              <tr>
+                                <th>DELETE</th>
+                                <th>EDIT</th>
+                                <th>ID</th>
+                                <th>NAME</th>
                               </tr>
-                            ))}
-                        </tbody>
-                      </table>
-                    </div>
-
-                    <Modal
-                      open={categoryModalOpen}
-                      onClose={closeCategoryModal}
-                      aria-labelledby="edit-modal-title"
-                    >
-                      <Box sx={style}>
-                        <div className="editModal">
-                          <h3 className="modalHeading">Edit Category</h3>
-                          <form onSubmit={handleEditCategorySubmit}>
-                            <TextField
-                              label="Category name"
-                              required
-                              value={editedCategoryName}
-                              onChange={(e) =>
-                                setEditedCategoryName(e.target.value)
-                              }
-                            />
-
-                            <br />
-
-                            <div className="buttons">
-                              <Button onClick={closeCategoryModal}>
-                                Cancel
-                              </Button>
-                              <Button type="submit">Save</Button>
-                            </div>
-                          </form>
+                            </thead>
+                            <tbody>
+                              {categories &&
+                                categories.map((category) => (
+                                  <tr key={category._id}>
+                                    <td className="deleteColumn">
+                                      <button
+                                        onClick={() =>
+                                          deleteCategory(category._id)
+                                        }
+                                        className="delete"
+                                      >
+                                        <DeleteIcon />
+                                      </button>
+                                    </td>
+                                    <td className="editColumn">
+                                      <button
+                                        onClick={() =>
+                                          openCategoryModal(category)
+                                        }
+                                        className="edit"
+                                      >
+                                        <EditIcon />
+                                      </button>
+                                    </td>
+                                    <td>{category._id}</td>
+                                    <td>{category.name}</td>
+                                  </tr>
+                                ))}
+                            </tbody>
+                          </table>
                         </div>
-                      </Box>
-                    </Modal>
+                      </>
+                    )}
                   </div>
                 </div>
               )}
