@@ -284,6 +284,70 @@
             font-size: 30px;
           }
 
+          form {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 200px;
+
+            input {
+              padding: 16px 22px;
+              font-size: 14px;
+              outline: none;
+              background: transparent;
+              border: 1px solid #ccc;
+
+              &::placeholder {
+                font-size: 14px;
+                font-family: $base-font2;
+                font-weight: 500;
+              }
+            }
+
+            .buttons {
+              @include center(
+                $justify-content: flex-end,
+                $align-items: flex-end
+              );
+              gap: 20px;
+              button {
+                @include button();
+              }
+
+              a {
+                text-decoration: underline;
+                color: #001a407b;
+                cursor: pointer;
+              }
+            }
+          }
+
+          select {
+            font-family: $base-font2;
+            font-weight: 500;
+            border: 1px solid #ccc;
+            outline: 0;
+            background: transparent;
+            color: $base-color3;
+            cursor: pointer;
+            font-size: 15px;
+            padding: 10px 15px;
+            width: 200px;
+
+            option {
+              color: $base-color1;
+              background-color: transparent;
+            }
+
+            &:focus {
+              outline: none;
+            }
+
+            &::-ms-expand {
+              display: none;
+            }
+          }
+
           .table {
             max-height: 370px;
             overflow: auto;

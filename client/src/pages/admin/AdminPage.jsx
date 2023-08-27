@@ -58,6 +58,10 @@ function AdminPage() {
   const [bookImage, setBookImage] = useState(null);
   const [selectedAuthor, setSelectedAuthor] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  // USER
+  const [userEditOpen, setUserEditOpen] = useState(false);
+  const [editedUserIsAdmin, setEditedUserIsAdmin] = useState("");
+  const [editingUserId, setEditingUserId] = useState(null);
 
   const token = localStorage.getItem("token");
 
@@ -258,6 +262,39 @@ function AdminPage() {
     }
   };
 
+  const openUserModal = (user) => {
+    setEditedUserIsAdmin(user.isAdmin);
+    setEditingUserId(user._id);
+    setUserEditOpen(true);
+  };
+
+  const closeUserModal = () => {
+    setEditedUserIsAdmin("");
+    setEditingUserId(null);
+    setUserEditOpen(false);
+  };
+
+  const handleEditUserSubmit = async (e) => {
+    e.preventDefault();
+
+    const response = await axios.put(
+      `http://localhost:8080/api/user/${editingUserId}`,
+      { isAdmin: editedUserIsAdmin === "true" },
+      {
+        headers: {
+          Authorization: token,
+        },
+      }
+    );
+
+    if (response.status === 200) {
+      alert(response.data.message);
+    }
+
+    closeUserModal();
+    getUsers();
+  };
+
   // PRODUCT
 
   const handleProductSubmit = async (e) => {
@@ -425,45 +462,75 @@ function AdminPage() {
             <div className="tabContent">
               {activeTab === 0 && (
                 <div className="users">
-                  <h2>Users List</h2>
-                  <div className="table">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>DELETE</th>
-                          <th>EDIT</th>
-                          <th>ID</th>
-                          <th>NAME</th>
-                          <th>EMAIL</th>
-                          <th>ADMIN</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {users &&
-                          users.map((user) => (
-                            <tr key={user._id}>
-                              <td className="deleteColumn">
-                                <button
-                                  onClick={() => deleteUser(user._id)}
-                                  className="delete"
-                                >
-                                  <DeleteIcon />
-                                </button>
-                              </td>
-                              <td className="editColumn">
-                                <button className="edit">
-                                  <EditIcon />
-                                </button>
-                              </td>
-                              <td>{user._id}</td>
-                              <td>{user.name}</td>
-                              <td>{user.email}</td>
-                              <td>{user.isAdmin ? "Yes" : "No"}</td>
+                  {userEditOpen ? (
+                    <>
+                      <h2>Edit User</h2>
+                      <form onSubmit={handleEditUserSubmit}>
+                        <label htmlFor="values">Is User Admin?</label>
+                        <select
+                          onChange={(e) => setEditedUserIsAdmin(e.target.value)}
+                          value={editedUserIsAdmin}
+                          name="values"
+                          id="values"
+                        >
+                          <option value="false">no</option>
+                          <option value="true">yes</option>
+                        </select>
+
+                        <br />
+
+                        <div className="buttons">
+                          <a onClick={closeUserModal}>cancel</a>
+                          <button type="submit">SAVE</button>
+                        </div>
+                      </form>
+                    </>
+                  ) : (
+                    <>
+                      <h2>Users List</h2>
+                      <div className="table">
+                        <table>
+                          <thead>
+                            <tr>
+                              <th>DELETE</th>
+                              <th>EDIT</th>
+                              <th>ID</th>
+                              <th>NAME</th>
+                              <th>EMAIL</th>
+                              <th>ADMIN</th>
                             </tr>
-                          ))}
-                      </tbody>
-                    </table>
-                  </div>
+                          </thead>
+                          <tbody>
+                            {users &&
+                              users.map((user) => (
+                                <tr key={user._id}>
+                                  <td className="deleteColumn">
+                                    <button
+                                      onClick={() => deleteUser(user._id)}
+                                      className="delete"
+                                    >
+                                      <DeleteIcon />
+                                    </button>
+                                  </td>
+                                  <td className="editColumn">
+                                    <button
+                                      className="edit"
+                                      onClick={() => openUserModal(user)}
+                                    >
+                                      <EditIcon />
+                                    </button>
+                                  </td>
+                                  <td>{user._id}</td>
+                                  <td>{user.name}</td>
+                                  <td>{user.email}</td>
+                                  <td>{user.isAdmin ? "Yes" : "No"}</td>
+                                </tr>
+                              ))}
+                          </tbody>
+                        </table>
+                      </div>
+                    </>
+                  )}
                 </div>
               )}
 
