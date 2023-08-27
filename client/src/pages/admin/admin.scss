@@ -168,6 +168,7 @@
             .table {
               max-height: 370px;
               overflow: auto;
+              width: 100%;
 
               table {
                 min-width: 100%;
@@ -231,13 +232,40 @@
               }
             }
 
-            .MuiTableCell-root {
-              padding: 10px;
-              font-size: 17px;
-              color: #2f4f4f;
+            form {
+              display: flex;
+              flex-direction: column;
+              gap: 5px;
+              width: 400px;
 
-              .editModal {
-                .modalHeading {
+              input {
+                padding: 16px 22px;
+                font-size: 14px;
+                outline: none;
+                background: transparent;
+                border: 1px solid #ccc;
+
+                &::placeholder {
+                  font-size: 14px;
+                  font-family: $base-font2;
+                  font-weight: 500;
+                }
+              }
+
+              .buttons {
+                @include center(
+                  $justify-content: flex-end,
+                  $align-items: flex-end
+                );
+                gap: 20px;
+                button {
+                  @include button();
+                }
+
+                a {
+                  text-decoration: underline;
+                  color: #001a407b;
+                  cursor: pointer;
                 }
               }
             }
