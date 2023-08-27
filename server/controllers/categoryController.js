@@ -42,7 +42,7 @@ const categoryController = {
       if (!updatedCategory) {
         return res.status(404).json({ message: "Category not found" });
       }
-      res.status(200).json({ message: "Category updated!" });
+      res.status(200).json({ message: "Category updated" });
     } catch (error) {
       res.status(400).json({ message: "Failed to update category", error });
     }
