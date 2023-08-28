@@ -10,9 +10,7 @@ import Footer from "../../components/footer/Footer";
 import Pages from "../../components/pages/Pages";
 import Header from "../../components/header/Header";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
-import Checkbox from "@mui/material/Checkbox";
-import FavoriteBorder from "@mui/icons-material/FavoriteBorder";
-import Favorite from "@mui/icons-material/Favorite";
+import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
 import Loading from "../../components/loading/Loading";
 import { BookContext } from "../../context/BookContext";
 
@@ -256,42 +254,64 @@ function BooksPage() {
                     </select>
                   </div>
 
-                  <div className="books">
+                  <div className="booksShop">
                     {filteredItems &&
                       filteredItems.map((q, key) => (
-                        <div
-                          className="book"
-                          key={key}
-                          onClick={() => handleBookClick(q._id)}
-                        >
-                          <div className="bookImage">
-                            <img
-                              src={`http://localhost:8080/${q.image}`}
-                              alt={q.name}
-                            />
-                          </div>
+                        <div key={key} className="booksAndButtons">
+                          <div
+                            className="book"
+                            onClick={() => handleBookClick(q._id)}
+                          >
+                            <div className="bookImage">
+                              <img
+                                src={`http://localhost:8080/${q.image}`}
+                                alt={q.name}
+                              />
+                            </div>
 
-                          <div className="bookInfo">
-                            <p className="bookTitle">{q.name}</p>
-                            <Rating
-                              name="book-rating"
-                              precision={0.5}
-                              value={q.averageRating}
-                              sx={{ marginLeft: "-2px" }}
-                              icon={
-                                <StarRoundedIcon
-                                  style={{ color: "#de723c", fontSize: "20px" }}
-                                />
-                              }
-                              emptyIcon={
-                                <StarRoundedIcon
-                                  style={{ color: "#bab6b6", fontSize: "20px" }}
-                                />
-                              }
-                              readOnly
-                            />
-                            <p className="bookAuthor">{q.author.name}</p>
-                            <p className="price">${q.price}</p>
+                            <div className="bookInfo">
+                              <p className="bookTitle">{q.name}</p>
+                              <Rating
+                                name="book-rating"
+                                precision={0.5}
+                                value={q.averageRating}
+                                sx={{ marginLeft: "-2px" }}
+                                icon={
+                                  <StarRoundedIcon
+                                    style={{
+                                      color: "#de723c",
+                                      fontSize: "20px",
+                                    }}
+                                  />
+                                }
+                                emptyIcon={
+                                  <StarRoundedIcon
+                                    style={{
+                                      color: "#bab6b6",
+                                      fontSize: "20px",
+                                    }}
+                                  />
+                                }
+                                readOnly
+                              />
+                              <p className="bookAuthor">{q.author.name}</p>
+                              <p className="price">${q.price}</p>
+                            </div>
+                          </div>
+                          <div className="buttons">
+                            <button className="cart">
+                              <AddShoppingCartOutlinedIcon
+                                sx={{ fontSize: "25px" }}
+                              />
+                            </button>
+                            <button
+                              className="fav"
+                              onClick={() => alert("hello")}
+                            >
+                              <FavoriteBorderOutlinedIcon
+                                sx={{ fontSize: "25px" }}
+                              />
+                            </button>
                           </div>
                         </div>
                       ))}
