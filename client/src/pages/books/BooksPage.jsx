@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useNavigate, useLocation } from "react-router-dom";
 import "./books.scss";
 import Rating from "@mui/material/Rating";
@@ -11,15 +10,20 @@ import Pages from "../../components/pages/Pages";
 import Header from "../../components/header/Header";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
+import RemoveShoppingCartOutlinedIcon from "@mui/icons-material/RemoveShoppingCartOutlined";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import Loading from "../../components/loading/Loading";
 import { BookContext } from "../../context/BookContext";
-
-const label = { inputProps: { "aria-label": "Checkbox demo" } };
+import { BasketContext } from "../../context/BasketContext";
+import { WishlistContext } from "../../context/WishlistContext";
 
 function BooksPage() {
   const navigate = useNavigate();
   const location = useLocation();
   const { books } = useContext(BookContext);
+  const { addToBasket, removeFromBasket, basket } = useContext(BasketContext);
+  const { addToWishlist, removeFromWishlist, wishlist } =
+    useContext(WishlistContext);
 
   const selectedCategoryFromLocation =
     location.state?.selectedCategory || "All";
@@ -35,7 +39,6 @@ function BooksPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [minPrice, setMinPrice] = useState("");
   const [maxPrice, setMaxPrice] = useState("");
-  const [filteredPriceItems, setFilteredPriceItems] = useState([]);
 
   const filteredItems = books
     .filter(
@@ -256,65 +259,103 @@ function BooksPage() {
 
                   <div className="booksShop">
                     {filteredItems &&
-                      filteredItems.map((q, key) => (
-                        <div key={key} className="booksAndButtons">
-                          <div
-                            className="book"
-                            onClick={() => handleBookClick(q._id)}
-                          >
-                            <div className="bookImage">
-                              <img
-                                src={`http://localhost:8080/${q.image}`}
-                                alt={q.name}
-                              />
-                            </div>
+                      filteredItems.map((q, key) => {
+                        const bookInBasket = basket.some(
+                          (item) => item.book?._id === q._id
+                        );
 
-                            <div className="bookInfo">
-                              <p className="bookTitle">{q.name}</p>
-                              <Rating
-                                name="book-rating"
-                                precision={0.5}
-                                value={q.averageRating}
-                                sx={{ marginLeft: "-2px" }}
-                                icon={
-                                  <StarRoundedIcon
-                                    style={{
-                                      color: "#de723c",
-                                      fontSize: "20px",
-                                    }}
+                        const bookInWishlist = wishlist.some(
+                          (item) => item.book?._id === q?._id
+                        );
+
+                        return (
+                          <div key={key} className="booksAndButtons">
+                            <div
+                              className="book"
+                              onClick={() => handleBookClick(q._id)}
+                            >
+                              <div className="bookImage">
+                                <img
+                                  src={`http://localhost:8080/${q.image}`}
+                                  alt={q.name}
+                                />
+                              </div>
+
+                              <div className="bookInfo">
+                                <p className="bookTitle">{q.name}</p>
+                                <Rating
+                                  name="book-rating"
+                                  precision={0.5}
+                                  value={q.averageRating}
+                                  sx={{ marginLeft: "-2px" }}
+                                  icon={
+                                    <StarRoundedIcon
+                                      style={{
+                                        color: "#de723c",
+                                        fontSize: "20px",
+                                      }}
+                                    />
+                                  }
+                                  emptyIcon={
+                                    <StarRoundedIcon
+                                      style={{
+                                        color: "#bab6b6",
+                                        fontSize: "20px",
+                                      }}
+                                    />
+                                  }
+                                  readOnly
+                                />
+                                <p className="bookAuthor">{q.author.name}</p>
+                                <p className="price">${q.price}</p>
+                              </div>
+                            </div>
+                            <div className="buttons">
+                              {!bookInBasket ? (
+                                <button
+                                  className="cart"
+                                  onClick={() => addToBasket(q._id, 1)}
+                                  title="Add to cart"
+                                >
+                                  <AddShoppingCartOutlinedIcon
+                                    sx={{ fontSize: "25px" }}
                                   />
-                                }
-                                emptyIcon={
-                                  <StarRoundedIcon
-                                    style={{
-                                      color: "#bab6b6",
-                                      fontSize: "20px",
-                                    }}
+                                </button>
+                              ) : (
+                                <button
+                                  className="cart"
+                                  onClick={() => removeFromBasket(q._id, 1)}
+                                  title="Remove from cart"
+                                >
+                                  <RemoveShoppingCartOutlinedIcon
+                                    sx={{ fontSize: "25px" }}
                                   />
-                                }
-                                readOnly
-                              />
-                              <p className="bookAuthor">{q.author.name}</p>
-                              <p className="price">${q.price}</p>
+                                </button>
+                              )}
+
+                              {!bookInWishlist ? (
+                                <button
+                                  className="fav"
+                                  onClick={() => addToWishlist(q._id)}
+                                  title="Add to wishlist"
+                                >
+                                  <FavoriteBorderOutlinedIcon
+                                    sx={{ fontSize: "25px" }}
+                                  />
+                                </button>
+                              ) : (
+                                <button
+                                  className="fav"
+                                  onClick={() => removeFromWishlist(q._id)}
+                                  title="Remove from wishlist"
+                                >
+                                  <FavoriteIcon sx={{ fontSize: "25px" }} />
+                                </button>
+                              )}
                             </div>
                           </div>
-                          <div className="buttons">
-                            <button className="cart">
-                              <AddShoppingCartOutlinedIcon
-                                sx={{ fontSize: "25px" }}
-                              />
-                            </button>
-                            <button
-                              className="fav"
-                              onClick={() => alert("hello")}
-                            >
-                              <FavoriteBorderOutlinedIcon
-                                sx={{ fontSize: "25px" }}
-                              />
-                            </button>
-                          </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                   </div>
                 </div>
               </div>
