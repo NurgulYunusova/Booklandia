@@ -240,12 +240,14 @@
               gap: 5px;
               width: 400px;
 
-              input {
+              input,
+              textarea {
                 padding: 16px 22px;
                 font-size: 14px;
                 outline: none;
                 background: transparent;
                 border: 1px solid #ccc;
+                font-family: $base-font2;
 
                 &::placeholder {
                   font-size: 14px;

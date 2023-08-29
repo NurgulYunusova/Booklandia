@@ -13,19 +13,6 @@ import EditIcon from "@mui/icons-material/Edit";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 
-const style = {
-  position: "absolute",
-  top: "50%",
-  left: "50%",
-  transform: "translate(-50%, -50%)",
-  width: 400,
-  backgroundColor: " #fffaf5",
-  color: "#2f4f4f",
-  boxShadow: 24,
-  p: 4,
-  border: "none",
-};
-
 function AdminPage() {
   const { books, getBooks } = useContext(BookContext);
   const { user, updateUser } = useContext(UserContext);
@@ -47,6 +34,11 @@ function AdminPage() {
   const [authorName, setAuthorName] = useState("");
   const [authorAbout, setAuthorAbout] = useState("");
   const [authorImage, setAuthorImage] = useState(null);
+  const [authorEditOpen, setAuthorEditOpen] = useState(false);
+  const [editedAuthorName, setEditedAuthorName] = useState("");
+  const [editedAuthorAbout, setEditedAuthorAbout] = useState("");
+  const [editingAuthorId, setEditingAuthorId] = useState(null);
+  const [editedAuthorImage, setEditedAuthorImage] = useState(null);
   // PRODUCT
   const [isClickedProduct, setIsClickedProduct] = useState(false);
   const [bookName, setBookName] = useState("");
@@ -130,7 +122,6 @@ function AdminPage() {
     });
 
   // GET DATAS
-
   const getUsers = async () => {
     axios
       .get("http://localhost:8080/api/user", {
@@ -184,7 +175,6 @@ function AdminPage() {
   };
 
   // CATEGORY
-
   const handleCategorySubmit = async (e) => {
     e.preventDefault();
 
@@ -245,7 +235,6 @@ function AdminPage() {
   };
 
   // USER
-
   const deleteUser = async (id) => {
     const response = await axios.delete(
       `http://localhost:8080/api/user/${id}`,
@@ -296,7 +285,6 @@ function AdminPage() {
   };
 
   // PRODUCT
-
   const handleProductSubmit = async (e) => {
     e.preventDefault();
 
@@ -342,7 +330,6 @@ function AdminPage() {
   };
 
   // AUTHOR
-
   const handleAuthorSubmit = async (e) => {
     e.preventDefault();
 
@@ -375,6 +362,45 @@ function AdminPage() {
       alert(response.data.message);
       getAuthors();
     }
+  };
+
+  const openAuthorModal = (author) => {
+    setEditedAuthorName(author.name);
+    setEditedAuthorAbout(author.about);
+    setEditedAuthorImage(author.image);
+    setEditingAuthorId(author._id);
+    setAuthorEditOpen(true);
+  };
+
+  const closeAuthorModal = () => {
+    setEditedAuthorName("");
+    setEditedAuthorAbout("");
+    setEditedAuthorImage(null);
+    setEditingAuthorId(null);
+    setAuthorEditOpen(false);
+  };
+
+  const handleEditAuthorSubmit = async (e) => {
+    e.preventDefault();
+
+    const updatedData = {
+      name: editedAuthorName,
+      about: editedAuthorAbout,
+      // image: editedAuthorImage.name,
+    };
+
+    const response = await axios.put(
+      `http://localhost:8080/api/author/${editingAuthorId}`,
+      updatedData
+    );
+
+    console.log(response);
+    if (response.status === 200) {
+      alert(response.data.message);
+    }
+
+    closeAuthorModal();
+    getAuthors();
   };
 
   useEffect(() => {
@@ -902,55 +928,111 @@ function AdminPage() {
                   </div>
 
                   <div className="bottom">
-                    <h2>Authors List</h2>
-                    <div className="table">
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>DELETE</th>
-                            <th>EDIT</th>
-                            <th>ID</th>
-                            <th>NAME</th>
-                            <th>IMAGE</th>
-                            <th>AUTHOR'S BOOKS</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {authors &&
-                            authors.map((author) => (
-                              <tr key={author._id}>
-                                <td className="deleteColumn">
-                                  <button
-                                    onClick={() => deleteAuthor(author._id)}
-                                    className="delete"
-                                  >
-                                    <DeleteIcon />
-                                  </button>
-                                </td>
-                                <td className="editColumn">
-                                  <button className="edit">
-                                    <EditIcon />
-                                  </button>
-                                </td>
-                                <td>{author._id}</td>
-                                <td>{author.name}</td>
-                                <td>
-                                  <img
-                                    src={author.image}
-                                    alt={author.name}
-                                    className="authorImage"
-                                  />
-                                </td>
-                                <td>
-                                  {author.authorBooks.map((q) => (
-                                    <p key={q._id}>{q.name}</p>
-                                  ))}
-                                </td>
+                    {authorEditOpen ? (
+                      <>
+                        <h2>Edit Author</h2>
+                        <form onSubmit={handleEditAuthorSubmit}>
+                          <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            placeholder="Author Name *"
+                            required
+                            value={editedAuthorName}
+                            onChange={(e) =>
+                              setEditedAuthorName(e.target.value)
+                            }
+                          />
+
+                          <br />
+
+                          <textarea
+                            name="about"
+                            id="about"
+                            cols="30"
+                            rows="10"
+                            required
+                            value={editedAuthorAbout}
+                            placeholder="About *"
+                            onChange={(e) =>
+                              setEditedAuthorAbout(e.target.value)
+                            }
+                          ></textarea>
+
+                          <br />
+
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) =>
+                              setEditedAuthorImage(e.target.files[0])
+                            }
+                          />
+
+                          <br />
+
+                          <div className="buttons">
+                            <a onClick={closeAuthorModal}>cancel</a>
+                            <button type="submit">SAVE</button>
+                          </div>
+                        </form>
+                      </>
+                    ) : (
+                      <>
+                        <h2>Authors List</h2>
+                        <div className="table">
+                          <table>
+                            <thead>
+                              <tr>
+                                <th>DELETE</th>
+                                <th>EDIT</th>
+                                <th>ID</th>
+                                <th>NAME</th>
+                                <th>IMAGE</th>
+                                <th>AUTHOR'S BOOKS</th>
                               </tr>
-                            ))}
-                        </tbody>
-                      </table>
-                    </div>
+                            </thead>
+                            <tbody>
+                              {authors &&
+                                authors.map((author) => (
+                                  <tr key={author._id}>
+                                    <td className="deleteColumn">
+                                      <button
+                                        onClick={() => deleteAuthor(author._id)}
+                                        className="delete"
+                                      >
+                                        <DeleteIcon />
+                                      </button>
+                                    </td>
+                                    <td className="editColumn">
+                                      <button
+                                        className="edit"
+                                        onClick={() => openAuthorModal(author)}
+                                      >
+                                        <EditIcon />
+                                      </button>
+                                    </td>
+                                    <td>{author._id}</td>
+                                    <td>{author.name}</td>
+                                    <td>
+                                      <img
+                                        src={author.image}
+                                        alt={author.name}
+                                        className="authorImage"
+                                      />
+                                    </td>
+                                    <td>
+                                      {author.authorBooks.map((q) => (
+                                        <p key={q._id}>{q.name}</p>
+                                      ))}
+                                    </td>
+                                  </tr>
+                                ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               )}
