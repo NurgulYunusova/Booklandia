@@ -50,6 +50,11 @@ function AdminPage() {
   const [bookImage, setBookImage] = useState(null);
   const [selectedAuthor, setSelectedAuthor] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("");
+  const [bookEditOpen, setBookEditOpen] = useState(false);
+  const [editedBookName, setEditedBookName] = useState("");
+  const [editedBookDescription, setEditedBookDescription] = useState("");
+  const [editingBookId, setEditingBookId] = useState(null);
+  const [editedBookImage, setEditedBookImage] = useState(null);
   // USER
   const [userEditOpen, setUserEditOpen] = useState(false);
   const [editedUserIsAdmin, setEditedUserIsAdmin] = useState("");
@@ -327,6 +332,45 @@ function AdminPage() {
       alert(response.data.message);
       getBooks();
     }
+  };
+
+  const openBookModal = (book) => {
+    setEditedBookName(book.name);
+    setEditedBookDescription(book.description);
+    setEditedBookImage(book.image);
+    setEditingBookId(book._id);
+    setBookEditOpen(true);
+  };
+
+  const closeBookModal = () => {
+    setEditedBookName("");
+    setEditedBookDescription("");
+    setEditedBookImage(null);
+    setEditingBookId(null);
+    setBookEditOpen(false);
+  };
+
+  const handleEditBookSubmit = async (e) => {
+    e.preventDefault();
+
+    const updatedData = {
+      name: editedBookName,
+      description: editedBookDescription,
+      // image: editedAuthorImage.name,
+    };
+
+    const response = await axios.put(
+      `http://localhost:8080/api/author/${editingAuthorId}`,
+      updatedData
+    );
+
+    console.log(response);
+    if (response.status === 200) {
+      alert(response.data.message);
+    }
+
+    closeAuthorModal();
+    getAuthors();
   };
 
   // AUTHOR
