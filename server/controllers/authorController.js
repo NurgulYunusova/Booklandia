@@ -89,7 +89,7 @@ const authorController = {
       if (!updatedAuthor) {
         return res.status(404).json({ message: "Author not found" });
       }
-      res.status(200).json(updatedAuthor);
+      res.status(200).json({ message: "Author updated" });
     } catch (error) {
       res.status(400).json({ message: "Failed to update author", error });
     }
