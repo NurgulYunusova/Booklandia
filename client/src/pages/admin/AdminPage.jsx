@@ -692,7 +692,7 @@ function AdminPage() {
                             <th>ID</th>
                             <th>NAME & AUTHOR</th>
                             <th>CATEGORY</th>
-                            <th>RATING</th>
+                            <th>IMAGE</th>
                             <th>PRICE</th>
                           </tr>
                         </thead>
@@ -719,7 +719,13 @@ function AdminPage() {
                                   <p>{book.author.name}</p>
                                 </td>
                                 <td>{book.category.name}</td>
-                                <td>{book.averageRating}</td>
+                                <td>
+                                  <img
+                                    src={`http://localhost:8080/${book.image}`}
+                                    alt={book.name}
+                                    className="bookImage"
+                                  />
+                                </td>
                                 <td>${book.price}</td>
                               </tr>
                             ))}
@@ -929,7 +935,11 @@ function AdminPage() {
                                 <td>{author._id}</td>
                                 <td>{author.name}</td>
                                 <td>
-                                  <img src={author.image} alt={author.name} />
+                                  <img
+                                    src={author.image}
+                                    alt={author.name}
+                                    className="authorImage"
+                                  />
                                 </td>
                                 <td>
                                   {author.authorBooks.map((q) => (

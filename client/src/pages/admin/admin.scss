@@ -222,12 +222,14 @@
                   }
                 }
 
-                td {
-                  img {
-                    width: 100px;
-                    height: 100px;
-                    object-fit: cover;
-                  }
+                .authorImage {
+                  width: 100px;
+                  height: 100px;
+                }
+
+                .bookImage {
+                  width: 100px;
+                  height: 150px;
                 }
               }
             }
