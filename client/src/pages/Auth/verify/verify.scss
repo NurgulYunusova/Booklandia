@@ -65,3 +65,33 @@
     }
   }
 }
+
+@media screen and (min-width: 320px) and (max-width: 991px) {
+  .verify {
+    &Container {
+      width: 85%;
+
+      .image {
+        display: none;
+      }
+
+      .form {
+        width: 80%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 991px) and (max-width: 1439px) {
+  .verify {
+    &Container {
+      width: 85%;
+
+      .image {
+        img {
+          width: 350px;
+        }
+      }
+    }
+  }
+}
