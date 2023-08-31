@@ -21,6 +21,7 @@ export const routes = [
   {
     path: "/",
     element: <HomePage />,
+    // DONE
   },
   {
     path: "/wishlist",
@@ -37,30 +38,37 @@ export const routes = [
   {
     path: "/contactUs",
     element: <ContactUsPage />,
+    // DONE
   },
   {
     path: "/aboutUs",
     element: <AboutUsPage />,
+    // DONE
   },
   {
     path: "/login",
     element: <LoginPage />,
+    // DONE
   },
   {
     path: "/register",
     element: <RegisterPage />,
+    // DONE
   },
   {
     path: "/verify",
     element: <VerifyPage />,
+    // DONE
   },
   {
     path: "/forgotPassword",
     element: <ForgotPasswordPage />,
+    // DONE
   },
   {
     path: "/changePassword",
     element: <ChangePasswordPage />,
+    // DONE
   },
   {
     path: "/booksDetails/:id",
