@@ -286,3 +286,131 @@
     }
   }
 }
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .booksDetails {
+    &Container {
+      width: 85%;
+      margin: 0 auto;
+
+      .middle {
+        flex-direction: column;
+        gap: 20px;
+
+        .right {
+          .details {
+            .bookName {
+              h1 {
+                font-size: 30px;
+              }
+            }
+
+            .description {
+              font-size: 13px;
+            }
+
+            .quantity {
+              .quantityDiv {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+
+                .quantityComponent {
+                  width: 95px;
+
+                  button {
+                    font-size: 15px;
+                    width: 28px;
+                    height: 28px;
+                  }
+
+                  span {
+                    font-size: 13px;
+                  }
+                }
+
+                .cart {
+                  font-size: 12px;
+                  padding: 5px 13px;
+                }
+
+                .wishlist {
+                  font-size: 11px;
+                  padding: 0;
+                }
+              }
+            }
+
+            .information {
+              h4 {
+                font-size: 13px;
+                letter-spacing: 0.6px;
+              }
+            }
+
+            .socialMediaIcons {
+              ul {
+                gap: 10px;
+
+                li {
+                  font-size: 15px;
+                  width: 20px;
+                  height: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .relatedBooks {
+        .heading {
+          h1 {
+            font-size: 30px;
+          }
+
+          .divider {
+            display: none;
+          }
+        }
+
+        .books {
+          flex-direction: column;
+          gap: 15px;
+
+          .book {
+            padding: 15px;
+
+            .bookInfo {
+              .title {
+                font-size: 18px;
+              }
+
+              .author {
+                font-size: 12px;
+              }
+            }
+
+            .bookImage {
+              img {
+                width: 65%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 479px) and (max-width: 767px) {
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+}
+
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+}
+
+@media screen and (min-width: 1199px) and (max-width: 1439px) {
+}

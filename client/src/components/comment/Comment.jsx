@@ -70,6 +70,7 @@ function Comment() {
             <p>
               Your rating <span style={{ color: "#e40000" }}>*</span>
             </p>
+
             <Rating
               name="book-rating"
               precision={0.5}
@@ -113,10 +114,7 @@ function Comment() {
               reviews.map((q, key) => (
                 <div className="review" key={key}>
                   <div className="leftSide">
-                    <i
-                      className="fa-solid fa-circle-user"
-                      style={{ fontSize: "40px" }}
-                    ></i>
+                    <i className="fa-solid fa-circle-user"></i>
                   </div>
 
                   <div className="rightSide">
@@ -126,6 +124,7 @@ function Comment() {
                         {moment(q.createdAt).format("MMMM D, YYYY")}
                       </h5>
                     </div>
+
                     <div className="ratingAndDeleteIcon">
                       <Rating
                         name="book-rating"
@@ -147,7 +146,10 @@ function Comment() {
 
                       <div className="deleteIcon">
                         {user._id === q.user._id && (
-                          <DeleteIcon onClick={() => handleDelete(q._id)} />
+                          <DeleteIcon
+                            onClick={() => handleDelete(q._id)}
+                            className="delete"
+                          />
                         )}
                       </div>
                     </div>
