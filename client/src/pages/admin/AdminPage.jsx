@@ -389,7 +389,7 @@ function AdminPage() {
 
     if (response.status == 200) {
       alert(response.data.message);
-      setIsClickedCategory(false);
+      setIsClickedAuthor(false);
       setAuthorName("");
       setAuthorAbout("");
       setAuthorImage(null);
@@ -424,21 +424,25 @@ function AdminPage() {
     setAuthorEditOpen(false);
   };
 
+  const handleAuthorFileChange = (e) => {
+    const selectedFile = e.target.files[0];
+    setEditedAuthorImage(selectedFile);
+  };
+
   const handleEditAuthorSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedData = {
-      name: editedAuthorName,
-      about: editedAuthorAbout,
-      // image: editedAuthorImage.name,
-    };
+    const formData = new FormData();
+
+    formData.append("name", editedAuthorName);
+    formData.append("about", editedAuthorAbout);
+    formData.append("photo", { image: editedAuthorImage });
 
     const response = await axios.put(
       `http://localhost:8080/api/author/${editingAuthorId}`,
-      updatedData
+      formData
     );
 
-    console.log(response);
     if (response.status === 200) {
       alert(response.data.message);
     }
@@ -1008,9 +1012,7 @@ function AdminPage() {
                           <input
                             type="file"
                             accept="image/*"
-                            onChange={(e) =>
-                              setEditedAuthorImage(e.target.files[0])
-                            }
+                            onChange={handleAuthorFileChange}
                           />
 
                           <br />

@@ -45,7 +45,6 @@ function ProfilePage() {
 
   const handleFileChange = (e) => {
     const selectedFile = e.target.files[0];
-    console.log(selectedFile);
     setFieldValue("profileImage", selectedFile);
   };
 

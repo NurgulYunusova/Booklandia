@@ -78,21 +78,61 @@ const authorController = {
     }
   },
   updateAuthor: async (req, res) => {
+    let file = req.files?.photo;
     const authorId = req.params.id;
-    const updatedData = req.body;
-    try {
-      const updatedAuthor = await Author.findByIdAndUpdate(
-        authorId,
-        updatedData,
-        { new: true }
-      );
-      if (!updatedAuthor) {
-        return res.status(404).json({ message: "Author not found" });
+
+    const author = await Author.findById(authorId);
+
+    if (author) {
+      const uploadFile = () => {
+        return new Promise((resolve, reject) => {
+          if (!file) {
+            resolve(null);
+            return;
+          }
+
+          const path = "authorImages/" + file.name;
+
+          file.mv(path, function (err) {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(path);
+            }
+          });
+        });
+      };
+
+      const imagePath = await uploadFile();
+
+      author.name = req.body.name || author.name;
+      author.about = req.body.about || author.about;
+
+      if (imagePath) {
+        author.image = imagePath;
       }
+
+      await author.save();
+
       res.status(200).json({ message: "Author updated" });
-    } catch (error) {
-      res.status(400).json({ message: "Failed to update author", error });
+    } else {
+      res.status(404);
+      throw new Error("User not found");
     }
+
+    // try {
+    //   const updatedAuthor = await Author.findByIdAndUpdate(
+    //     authorId,
+    //     updatedData,
+    //     { new: true }
+    //   );
+    //   if (!updatedAuthor) {
+    //     return res.status(404).json({ message: "Author not found" });
+    //   }
+    //   res.status(200).json({ message: "Author updated" });
+    // } catch (error) {
+    //   res.status(400).json({ message: "Failed to update author", error });
+    // }
   },
   deleteAuthor: async (req, res) => {
     const authorId = req.params.id;
