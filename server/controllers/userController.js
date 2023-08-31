@@ -130,6 +130,7 @@ const userController = {
           }
 
           const path = "userProfileImages/" + file.name;
+
           file.mv(path, function (err) {
             if (err) {
               reject(err);
