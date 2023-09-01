@@ -78,47 +78,42 @@ const authorController = {
     }
   },
   updateAuthor: async (req, res) => {
-    let file = req.files?.photo;
-    const authorId = req.params.id;
+    try {
+      let file = req.files?.photo;
+      const authorId = req.params.id;
+      const { name, about } = req.body;
 
-    const author = await Author.findById(authorId);
+      let path = file.name;
 
-    if (author) {
-      const uploadFile = () => {
-        return new Promise((resolve, reject) => {
-          if (!file) {
-            resolve(null);
-            return;
+      const author = await Author.findById(authorId);
+
+      if (author) {
+        file.mv("authorImages/" + path, function (err) {
+          if (err) {
+            return res
+              .status(500)
+              .json({ error: "Failed to upload photo", err });
           }
 
-          const path = "authorImages/" + file.name;
+          author.name = req.body.name || author.name;
+          author.about = req.body.about || author.about;
 
-          file.mv(path, function (err) {
-            if (err) {
-              reject(err);
-            } else {
-              resolve(path);
-            }
-          });
+          author.image = path;
+
+          author.save();
+
+          res.status(200).json({ message: "Author updated successfully" });
         });
-      };
-
-      const imagePath = await uploadFile();
-
-      author.name = req.body.name || author.name;
-      author.about = req.body.about || author.about;
-
-      if (imagePath) {
-        author.image = imagePath;
       }
-
-      await author.save();
-
-      res.status(200).json({ message: "Author updated" });
-    } else {
-      res.status(404);
-      throw new Error("User not found");
+    } catch (error) {
+      res.status(400).json({ message: "Failed to update author", error });
     }
+
+    //   res.status(200).json({ message: "Author updated" });
+    // } else {
+    //   res.status(404);
+    //   throw new Error("User not found");
+    // }
 
     // try {
     //   const updatedAuthor = await Author.findByIdAndUpdate(

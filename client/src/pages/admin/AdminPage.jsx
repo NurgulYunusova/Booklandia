@@ -173,6 +173,7 @@ function AdminPage() {
       .get("http://localhost:8080/api/author")
       .then((response) => {
         setAuthors(response.data);
+        console.log(authors);
       })
       .catch((error) => {
         console.error("Error fetching authors", error);
@@ -424,11 +425,6 @@ function AdminPage() {
     setAuthorEditOpen(false);
   };
 
-  const handleAuthorFileChange = (e) => {
-    const selectedFile = e.target.files[0];
-    setEditedAuthorImage(selectedFile);
-  };
-
   const handleEditAuthorSubmit = async (e) => {
     e.preventDefault();
 
@@ -436,7 +432,7 @@ function AdminPage() {
 
     formData.append("name", editedAuthorName);
     formData.append("about", editedAuthorAbout);
-    formData.append("photo", { image: editedAuthorImage });
+    formData.append("photo", editedAuthorImage);
 
     const response = await axios.put(
       `http://localhost:8080/api/author/${editingAuthorId}`,
@@ -1012,7 +1008,9 @@ function AdminPage() {
                           <input
                             type="file"
                             accept="image/*"
-                            onChange={handleAuthorFileChange}
+                            onChange={(e) =>
+                              setEditedAuthorImage(e.target.files[0])
+                            }
                           />
 
                           <br />
