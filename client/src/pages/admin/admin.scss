@@ -238,7 +238,7 @@
               display: flex;
               flex-direction: column;
               gap: 5px;
-              width: 400px;
+              width: 100%;
 
               input,
               textarea {
@@ -253,6 +253,55 @@
                   font-size: 14px;
                   font-family: $base-font2;
                   font-weight: 500;
+                }
+              }
+
+              .nameAndDescription,
+              .isbnAndPrice,
+              .pageAndLanguage {
+                @include center(
+                  $align-items: flex-start,
+                  $justify-content: flex-start
+                );
+                gap: 50px;
+              }
+
+              .selectedDivs {
+                @include center(
+                  $align-items: flex-start,
+                  $justify-content: flex-start
+                );
+                gap: 50px;
+              }
+
+              .selectedDiv {
+                @include center($justify-content: flex-start);
+                gap: 5px;
+
+                select {
+                  font-family: $base-font2;
+                  font-weight: 500;
+                  border: 1px solid #ccc;
+                  outline: 0;
+                  background: transparent;
+                  color: $base-color3;
+                  cursor: pointer;
+                  font-size: 15px;
+                  padding: 10px 15px;
+                  width: 200px;
+
+                  option {
+                    color: $base-color1;
+                    background-color: transparent;
+                  }
+
+                  &:focus {
+                    outline: none;
+                  }
+
+                  &::-ms-expand {
+                    display: none;
+                  }
                 }
               }
 

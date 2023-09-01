@@ -108,26 +108,6 @@ const authorController = {
     } catch (error) {
       res.status(400).json({ message: "Failed to update author", error });
     }
-
-    //   res.status(200).json({ message: "Author updated" });
-    // } else {
-    //   res.status(404);
-    //   throw new Error("User not found");
-    // }
-
-    // try {
-    //   const updatedAuthor = await Author.findByIdAndUpdate(
-    //     authorId,
-    //     updatedData,
-    //     { new: true }
-    //   );
-    //   if (!updatedAuthor) {
-    //     return res.status(404).json({ message: "Author not found" });
-    //   }
-    //   res.status(200).json({ message: "Author updated" });
-    // } catch (error) {
-    //   res.status(400).json({ message: "Failed to update author", error });
-    // }
   },
   deleteAuthor: async (req, res) => {
     const authorId = req.params.id;

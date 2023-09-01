@@ -53,6 +53,12 @@ function AdminPage() {
   const [bookEditOpen, setBookEditOpen] = useState(false);
   const [editedBookName, setEditedBookName] = useState("");
   const [editedBookDescription, setEditedBookDescription] = useState("");
+  const [editedBookIsbn, setEditedBookIsbn] = useState(0);
+  const [editedBookPages, setEditedBookPages] = useState(0);
+  const [editedBookPrice, setEditedBookPrice] = useState(0);
+  const [editedBookLanguage, setEditedBookLanguage] = useState("");
+  const [selectedEditedAuthor, setSelectedEditedAuthor] = useState("");
+  const [selectedEditedCategory, setSelectedEditedCategory] = useState("");
   const [editingBookId, setEditingBookId] = useState(null);
   const [editedBookImage, setEditedBookImage] = useState(null);
   // USER
@@ -338,6 +344,12 @@ function AdminPage() {
   const openBookModal = (book) => {
     setEditedBookName(book.name);
     setEditedBookDescription(book.description);
+    setEditedBookIsbn(book.isbn);
+    setEditedBookPages(book.pages);
+    setEditedBookPrice(book.price);
+    setEditedBookLanguage(book.language);
+    setSelectedEditedAuthor(book.author);
+    setSelectedEditedCategory(book.category);
     setEditedBookImage(book.image);
     setEditingBookId(book._id);
     setBookEditOpen(true);
@@ -752,56 +764,226 @@ function AdminPage() {
                   </div>
 
                   <div className="bottom">
-                    <h2>Products List</h2>
-                    <div className="table">
-                      <table>
-                        <thead>
-                          <tr>
-                            <th>DELETE</th>
-                            <th>EDIT</th>
-                            <th>ID</th>
-                            <th>NAME & AUTHOR</th>
-                            <th>CATEGORY</th>
-                            <th>IMAGE</th>
-                            <th>PRICE</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          {books &&
-                            books.map((book) => (
-                              <tr key={book._id}>
-                                <td className="deleteColumn">
-                                  <button
-                                    onClick={() => deleteProduct(book._id)}
-                                    className="delete"
-                                  >
-                                    <DeleteIcon />
-                                  </button>
-                                </td>
-                                <td className="editColumn">
-                                  <button className="edit">
-                                    <EditIcon />
-                                  </button>
-                                </td>
-                                <td>{book._id}</td>
-                                <td>
-                                  <p>{book.name}</p>
-                                  <p>{book.author.name}</p>
-                                </td>
-                                <td>{book.category.name}</td>
-                                <td>
-                                  <img
-                                    src={`http://localhost:8080/${book.image}`}
-                                    alt={book.name}
-                                    className="bookImage"
-                                  />
-                                </td>
-                                <td>${book.price}</td>
+                    {bookEditOpen ? (
+                      <>
+                        <h2>Edit Book</h2>
+                        <form onSubmit={handleEditAuthorSubmit}>
+                          <div className="nameAndDescription">
+                            <input
+                              type="text"
+                              name="name"
+                              id="name"
+                              placeholder="Book Name *"
+                              required
+                              value={editedBookName}
+                              onChange={(e) =>
+                                setEditedBookName(e.target.value)
+                              }
+                            />
+
+                            <textarea
+                              name="description"
+                              id="description"
+                              cols="120"
+                              rows="10"
+                              required
+                              value={editedBookDescription}
+                              placeholder="Description *"
+                              onChange={(e) =>
+                                setEditedBookDescription(e.target.value)
+                              }
+                            ></textarea>
+                          </div>
+
+                          <br />
+
+                          <div className="selectedDivs">
+                            <div className="selectedDiv">
+                              <label htmlFor="categories">Category: </label>
+
+                              <select
+                                onChange={(e) =>
+                                  setSelectedEditedCategory(e.target.value)
+                                }
+                                value={selectedEditedCategory}
+                                name="categories"
+                                id="categories"
+                              >
+                                {categories &&
+                                  categories.map((q) => (
+                                    <option value={q._id} key={q._id}>
+                                      {q.name}
+                                    </option>
+                                  ))}
+                              </select>
+                            </div>
+
+                            <div className="selectedDiv">
+                              <label htmlFor="authors">Author: </label>
+
+                              <select
+                                onChange={(e) =>
+                                  setSelectedEditedAuthor(e.target.value)
+                                }
+                                value={selectedEditedAuthor}
+                                name="authors"
+                                id="authors"
+                              >
+                                {authors &&
+                                  authors.map((q) => (
+                                    <option value={q._id} key={q._id}>
+                                      {q.name}
+                                    </option>
+                                  ))}
+                              </select>
+                            </div>
+                          </div>
+
+                          <br />
+
+                          <div className="isbnAndPrice">
+                            <div className="isbn">
+                              <label htmlFor="isbn">ISBN: </label>
+                              <input
+                                type="number"
+                                name="isbn"
+                                id="isbn"
+                                placeholder="ISBN *"
+                                required
+                                value={editedBookIsbn}
+                                onChange={(e) =>
+                                  setEditedBookIsbn(e.target.value)
+                                }
+                              />
+                            </div>
+
+                            <div className="price">
+                              <label htmlFor="price">Price: </label>
+                              <input
+                                type="number"
+                                name="price"
+                                id="price"
+                                placeholder="Price *"
+                                required
+                                value={editedBookPrice}
+                                onChange={(e) =>
+                                  setEditedBookPrice(e.target.value)
+                                }
+                              />
+                            </div>
+                          </div>
+
+                          <br />
+
+                          <div className="pageAndLanguage">
+                            <div className="page">
+                              <label htmlFor="pages">Pages: </label>
+                              <input
+                                type="number"
+                                name="pages"
+                                id="pages"
+                                placeholder="Pages *"
+                                required
+                                value={editedBookPages}
+                                onChange={(e) =>
+                                  setEditedBookPages(e.target.value)
+                                }
+                              />
+                            </div>
+
+                            <br />
+
+                            <div className="language">
+                              <label htmlFor="language">Language: </label>
+                              <input
+                                type="text"
+                                name="language"
+                                id="language"
+                                placeholder="Language *"
+                                required
+                                value={editedBookLanguage}
+                                onChange={(e) =>
+                                  setEditedBookLanguage(e.target.value)
+                                }
+                              />
+                            </div>
+                          </div>
+
+                          <br />
+
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={(e) =>
+                              setEditedBookImage(e.target.files[0])
+                            }
+                          />
+
+                          <br />
+
+                          <div className="buttons">
+                            <a onClick={closeAuthorModal}>cancel</a>
+                            <button type="submit">SAVE</button>
+                          </div>
+                        </form>{" "}
+                      </>
+                    ) : (
+                      <>
+                        <h2>Products List</h2>
+                        <div className="table">
+                          <table>
+                            <thead>
+                              <tr>
+                                <th>DELETE</th>
+                                <th>EDIT</th>
+                                <th>ID</th>
+                                <th>NAME & AUTHOR</th>
+                                <th>CATEGORY</th>
+                                <th>IMAGE</th>
+                                <th>PRICE</th>
                               </tr>
-                            ))}
-                        </tbody>
-                      </table>
-                    </div>
+                            </thead>
+                            <tbody>
+                              {books &&
+                                books.map((book) => (
+                                  <tr key={book._id}>
+                                    <td className="deleteColumn">
+                                      <button
+                                        onClick={() => deleteProduct(book._id)}
+                                        className="delete"
+                                      >
+                                        <DeleteIcon />
+                                      </button>
+                                    </td>
+                                    <td className="editColumn">
+                                      <button
+                                        className="edit"
+                                        onClick={() => openBookModal(book)}
+                                      >
+                                        <EditIcon />
+                                      </button>
+                                    </td>
+                                    <td>{book._id}</td>
+                                    <td>
+                                      <p>{book.name}</p>
+                                      <p>{book.author.name}</p>
+                                    </td>
+                                    <td>{book.category.name}</td>
+                                    <td>
+                                      <img
+                                        src={`http://localhost:8080/${book.image}`}
+                                        alt={book.name}
+                                        className="bookImage"
+                                      />
+                                    </td>
+                                    <td>${book.price}</td>
+                                  </tr>
+                                ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </>
+                    )}
                   </div>
                 </div>
               )}
