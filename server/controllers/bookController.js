@@ -119,19 +119,42 @@ const bookController = {
     }
   },
   updateBook: async (req, res) => {
-    const bookId = req.params.id;
-    const updatedData = req.body;
-
     try {
-      const updatedBook = await Book.findByIdAndUpdate(bookId, updatedData, {
-        new: true,
-      });
-      if (!updatedBook) {
-        return res.status(404).json({ message: "Book not found" });
-      }
-      res.status(200).json(updatedBook);
-    } catch (error) {
-      res.status(400).json({ message: "Failed to update book", error });
+      let file = req.files?.photo;
+      const bookId = req.params.id;
+
+      const book = await Book.findById(bookId);
+
+      const uploadFile = () => {
+        return new Promise((resolve, reject) => {
+          const path = "bookImages/" + file.name;
+          file.mv(path, function (err) {
+            if (err) {
+              reject(err);
+            } else {
+              resolve(path);
+            }
+          });
+        });
+      };
+
+      const imagePath = await uploadFile();
+
+      book.name = req.body.name || book.name;
+      book.author = req.body.author || book.author;
+      book.description = req.body.description || book.description;
+      book.category = req.body.category || book.category;
+      book.isbn = req.body.isbn || book.isbn;
+      book.pages = req.body.pages || book.pages;
+      book.price = req.body.price || book.price;
+      book.language = req.body.language || book.language;
+
+      book.image = imagePath;
+
+      book.save();
+      res.status(200).json({ message: "Book updated successfully" });
+    } catch {
+      res.status(400).json({ message: "Failed to update book" });
     }
   },
   deleteBook: async (req, res) => {

@@ -12,6 +12,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import * as Yup from "yup";
 import { useFormik } from "formik";
+// import mongoose from "mongoose";
 
 function AdminPage() {
   const { books, getBooks } = useContext(BookContext);
@@ -179,7 +180,6 @@ function AdminPage() {
       .get("http://localhost:8080/api/author")
       .then((response) => {
         setAuthors(response.data);
-        console.log(authors);
       })
       .catch((error) => {
         console.error("Error fetching authors", error);
@@ -302,6 +302,8 @@ function AdminPage() {
 
     const formData = new FormData();
 
+    console.log(selectedAuthor);
+
     formData.append("name", bookName);
     formData.append("author", selectedAuthor);
     formData.append("description", bookDescription);
@@ -348,8 +350,8 @@ function AdminPage() {
     setEditedBookPages(book.pages);
     setEditedBookPrice(book.price);
     setEditedBookLanguage(book.language);
-    setSelectedEditedAuthor(book.author);
-    setSelectedEditedCategory(book.category);
+    setSelectedEditedAuthor(book.author._id);
+    setSelectedEditedCategory(book.category._id);
     setEditedBookImage(book.image);
     setEditingBookId(book._id);
     setBookEditOpen(true);
@@ -366,24 +368,29 @@ function AdminPage() {
   const handleEditBookSubmit = async (e) => {
     e.preventDefault();
 
-    const updatedData = {
-      name: editedBookName,
-      description: editedBookDescription,
-      // image: editedAuthorImage.name,
-    };
+    const formData = new FormData();
+
+    formData.append("name", editedBookName);
+    formData.append("author", selectedEditedAuthor);
+    formData.append("description", editedBookDescription);
+    formData.append("category", selectedEditedCategory);
+    formData.append("isbn", +editedBookIsbn);
+    formData.append("pages", +editedBookPages);
+    formData.append("price", +editedBookPrice);
+    formData.append("language", editedBookLanguage);
+    formData.append("photo", editedBookImage);
 
     const response = await axios.put(
-      `http://localhost:8080/api/author/${editingAuthorId}`,
-      updatedData
+      `http://localhost:8080/api/book/${editingBookId}`,
+      formData
     );
 
-    console.log(response);
     if (response.status === 200) {
       alert(response.data.message);
     }
 
-    closeAuthorModal();
-    getAuthors();
+    closeBookModal();
+    getBooks();
   };
 
   // AUTHOR
@@ -767,7 +774,7 @@ function AdminPage() {
                     {bookEditOpen ? (
                       <>
                         <h2>Edit Book</h2>
-                        <form onSubmit={handleEditAuthorSubmit}>
+                        <form onSubmit={handleEditBookSubmit}>
                           <div className="nameAndDescription">
                             <input
                               type="text"
@@ -806,8 +813,8 @@ function AdminPage() {
                                   setSelectedEditedCategory(e.target.value)
                                 }
                                 value={selectedEditedCategory}
-                                name="categories"
-                                id="categories"
+                                name="categoriess"
+                                id="categoriess"
                               >
                                 {categories &&
                                   categories.map((q) => (
@@ -826,8 +833,8 @@ function AdminPage() {
                                   setSelectedEditedAuthor(e.target.value)
                                 }
                                 value={selectedEditedAuthor}
-                                name="authors"
-                                id="authors"
+                                name="authorss"
+                                id="authorss"
                               >
                                 {authors &&
                                   authors.map((q) => (
@@ -891,8 +898,6 @@ function AdminPage() {
                               />
                             </div>
 
-                            <br />
-
                             <div className="language">
                               <label htmlFor="language">Language: </label>
                               <input
@@ -922,7 +927,7 @@ function AdminPage() {
                           <br />
 
                           <div className="buttons">
-                            <a onClick={closeAuthorModal}>cancel</a>
+                            <a onClick={closeBookModal}>cancel</a>
                             <button type="submit">SAVE</button>
                           </div>
                         </form>{" "}
