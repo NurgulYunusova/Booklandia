@@ -81,7 +81,6 @@ const authorController = {
     try {
       let file = req.files?.photo;
       const authorId = req.params.id;
-      const { name, about } = req.body;
 
       let path = file.name;
 
