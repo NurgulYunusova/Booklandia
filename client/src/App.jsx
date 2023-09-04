@@ -4,9 +4,12 @@ import { useContext } from "react";
 import AdminRoute from "./routes/AdminRoute";
 import AdminPage from "./pages/admin/AdminPage";
 import { UserContext } from "./context/UserContext";
+import UserRoute from "./routes/UserRoute";
+import WishlistPage from "./pages/wishlist/WishlistPage";
+import BasketPage from "./pages/basket/BasketPage";
 
 function App() {
-  const { user } = useContext(UserContext);
+  const { user, isLoggedIn } = useContext(UserContext);
 
   return (
     <>
@@ -23,6 +26,22 @@ function App() {
             <AdminRoute isAdmin={user?.isAdmin}>
               <AdminPage />
             </AdminRoute>
+          }
+        />
+        <Route
+          path="/wishlist"
+          element={
+            <UserRoute isLoggedIn={isLoggedIn}>
+              <WishlistPage />
+            </UserRoute>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <UserRoute isLoggedIn={isLoggedIn}>
+              <BasketPage />
+            </UserRoute>
           }
         />
       </Routes>
