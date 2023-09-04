@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 // import NotFoundPage from "../pages/NotFoundPage";
 import ChangePasswordPage from "../pages/Auth/changePassword/ChangePasswordPage";
 import ForgotPasswordPage from "../pages/Auth/forgotPassword/ForgotPasswordPage";
@@ -16,20 +17,13 @@ import QuizPage from "../pages/quiz/QuizPage";
 import WishlistPage from "../pages/wishlist/WishlistPage";
 import NotFoundPage from "../pages/notFound/NotFoundPage";
 import OrderPage from "../pages/order/OrderPage";
+import UserRoute from "./UserRoute";
 
 export const routes = [
   {
     path: "/",
     element: <HomePage />,
     // DONE
-  },
-  {
-    path: "/wishlist",
-    element: <WishlistPage />,
-  },
-  {
-    path: "/cart",
-    element: <BasketPage />,
   },
   {
     path: "/books",

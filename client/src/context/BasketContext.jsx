@@ -231,7 +231,7 @@ export const BasketProvider = ({ children }) => {
           severity="warning"
           sx={{ width: "100%" }}
         >
-          You need to log in to add books to your wishlist
+          You need to log in to add books to your basket
         </MuiAlert>
       </Snackbar>
     </BasketContext.Provider>
