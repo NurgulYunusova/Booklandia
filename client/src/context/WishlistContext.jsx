@@ -13,11 +13,17 @@ export const WishlistProvider = ({ children }) => {
   const { user } = useContext(UserContext);
   const [wishlistTrueAlertOpen, setWishlistTrueAlertOpen] = useState(false);
   const [wishlistRemoveAlertOpen, setWishlistRemoveAlertOpen] = useState(false);
-
   const [wishlistFalseAlertOpen, setWishlistFalseAlertOpen] = useState(false);
+  const [wishlistNeedLoginAlertOpen, setWishlistNeedLoginAlertOpen] =
+    useState(false);
 
   const addToWishlist = async (bookId) => {
     try {
+      if (!user) {
+        setWishlistNeedLoginAlertOpen(true);
+        return;
+      }
+
       const response = await axios.post("http://localhost:8080/api/wishlist", {
         userId: user._id,
         bookId: bookId,
@@ -59,6 +65,13 @@ export const WishlistProvider = ({ children }) => {
       return;
     }
     setWishlistFalseAlertOpen(false);
+  };
+
+  const handleCloseNeedLoginWishlistAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setWishlistNeedLoginAlertOpen(false);
   };
 
   const removeFromWishlist = async (bookId) => {
@@ -161,6 +174,24 @@ export const WishlistProvider = ({ children }) => {
           sx={{ width: "100%" }}
         >
           Book already in wishlist!
+        </MuiAlert>
+      </Snackbar>
+
+      <Snackbar
+        open={wishlistNeedLoginAlertOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseNeedLoginWishlistAlert}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+      >
+        <MuiAlert
+          onClose={handleCloseNeedLoginWishlistAlert}
+          severity="warning"
+          sx={{ width: "100%" }}
+        >
+          You need to log in to add books to your wishlist
         </MuiAlert>
       </Snackbar>
     </WishlistContext.Provider>
