@@ -15,9 +15,16 @@ export const BasketProvider = ({ children }) => {
   const [basketTrueAlertOpen, setBasketTrueAlertOpen] = useState(false);
   const [basketRemoveAlertOpen, setBasketRemoveAlertOpen] = useState(false);
   const [basketFalseAlertOpen, setBasketFalseAlertOpen] = useState(false);
+  const [basketNeedLoginAlertOpen, setBasketNeedLoginAlertOpen] =
+    useState(false);
 
   const addToBasket = async (bookId, quantity) => {
     try {
+      if (!user) {
+        setBasketNeedLoginAlertOpen(true);
+        return;
+      }
+
       const response = await axios.post("http://localhost:8080/api/basket", {
         userId: user._id,
         bookId: bookId,
@@ -90,6 +97,13 @@ export const BasketProvider = ({ children }) => {
     } catch (error) {
       console.error("Error updating quantity on server:", error);
     }
+  };
+
+  const handleCloseNeedLoginBasketAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setBasketNeedLoginAlertOpen(false);
   };
 
   const removeFromBasket = async (bookId) => {
@@ -200,6 +214,24 @@ export const BasketProvider = ({ children }) => {
           sx={{ width: "100%" }}
         >
           Book already in cart!
+        </MuiAlert>
+      </Snackbar>
+
+      <Snackbar
+        open={basketNeedLoginAlertOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseNeedLoginBasketAlert}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+      >
+        <MuiAlert
+          onClose={handleCloseNeedLoginBasketAlert}
+          severity="warning"
+          sx={{ width: "100%" }}
+        >
+          You need to log in to add books to your wishlist
         </MuiAlert>
       </Snackbar>
     </BasketContext.Provider>
