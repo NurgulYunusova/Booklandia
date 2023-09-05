@@ -72,7 +72,7 @@ const userController = {
     const user = await User.findOne({ email: email });
 
     if (user) {
-      if (!user.isActive) {
+      if (!user.isActive && (await user.matchPassword(password))) {
         const confirmCode = Math.floor(Math.random() * 10000);
         const codeExpire = moment().add(89, "seconds");
 

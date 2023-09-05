@@ -5,11 +5,14 @@ import { loginSchema } from "../validations";
 import axios from "axios";
 import { useFormik } from "formik";
 import { UserContext } from "../../../context/UserContext";
-import { useContext } from "react";
+import { useContext, useState } from "react";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 
 function LoginPage() {
   const navigate = useNavigate();
   const { setIsLoggedIn } = useContext(UserContext);
+  const [loginFalseAlertOpen, setLoginFalseAlertOpen] = useState(false);
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
@@ -27,24 +30,28 @@ function LoginPage() {
           }
         );
 
-        console.log(response);
         if (response.status === 203) {
-          alert(response.data.message);
           navigate("/verify", {
             state: email,
           });
         } else if (response.status == 200) {
-          alert("You login successfully");
           const token = response.data;
           localStorage.setItem("token", token);
           setIsLoggedIn(true);
           navigate("/");
         }
       } catch (error) {
-        alert("Invalid email or password");
+        setLoginFalseAlertOpen(true);
       }
     },
   });
+
+  const handleCloseFalseLoginAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setLoginFalseAlertOpen(false);
+  };
 
   return (
     <>
@@ -86,6 +93,24 @@ function LoginPage() {
 
               <button type="submit">LOGIN</button>
             </form>
+
+            <Snackbar
+              open={loginFalseAlertOpen}
+              autoHideDuration={3000}
+              onClose={handleCloseFalseLoginAlert}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+            >
+              <MuiAlert
+                onClose={handleCloseFalseLoginAlert}
+                severity="error"
+                sx={{ width: "100%" }}
+              >
+                Invalid email or password!
+              </MuiAlert>
+            </Snackbar>
 
             <p className="forgotPasswordLink">
               <a onClick={() => navigate("/forgotPassword")}>

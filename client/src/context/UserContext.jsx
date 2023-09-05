@@ -4,6 +4,8 @@
 import CircularProgress from "@mui/material/CircularProgress";
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 
 export const UserContext = createContext();
 
@@ -11,6 +13,7 @@ export const UserProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [loginTrueAlertOpen, setLoginTrueAlertOpen] = useState(false);
 
   const token = localStorage.getItem("token");
 
@@ -24,6 +27,7 @@ export const UserProvider = ({ children }) => {
         })
         .then((response) => {
           setUser(response.data);
+          setLoginTrueAlertOpen(true);
         })
         .catch((error) => {
           console.error("Error fetching user profile", error);
@@ -31,6 +35,13 @@ export const UserProvider = ({ children }) => {
 
       setIsLoggedIn(true);
     }
+  };
+
+  const handleCloseTrueLoginAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setLoginTrueAlertOpen(false);
   };
 
   useEffect(() => {
@@ -42,6 +53,24 @@ export const UserProvider = ({ children }) => {
       value={{ user, setUser, isLoggedIn, setIsLoggedIn, updateUser }}
     >
       {children}
+
+      <Snackbar
+        open={loginTrueAlertOpen}
+        autoHideDuration={3000}
+        onClose={handleCloseTrueLoginAlert}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+      >
+        <MuiAlert
+          onClose={handleCloseTrueLoginAlert}
+          severity="success"
+          sx={{ width: "100%" }}
+        >
+          You login successfully!
+        </MuiAlert>
+      </Snackbar>
     </UserContext.Provider>
   );
 };
