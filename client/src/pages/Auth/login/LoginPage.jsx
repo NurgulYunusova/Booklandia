@@ -12,6 +12,7 @@ import MuiAlert from "@mui/material/Alert";
 function LoginPage() {
   const navigate = useNavigate();
   const { setIsLoggedIn } = useContext(UserContext);
+  const [loginTrueAlertOpen, setLoginTrueAlertOpen] = useState(false);
   const [loginFalseAlertOpen, setLoginFalseAlertOpen] = useState(false);
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
@@ -38,13 +39,23 @@ function LoginPage() {
           const token = response.data;
           localStorage.setItem("token", token);
           setIsLoggedIn(true);
-          navigate("/");
+          setLoginTrueAlertOpen(true);
+          setTimeout(() => {
+            navigate("/");
+          }, 1500);
         }
       } catch (error) {
         setLoginFalseAlertOpen(true);
       }
     },
   });
+
+  const handleCloseTrueLoginAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setLoginTrueAlertOpen(false);
+  };
 
   const handleCloseFalseLoginAlert = (event, reason) => {
     if (reason === "clickaway") {
@@ -93,6 +104,24 @@ function LoginPage() {
 
               <button type="submit">LOGIN</button>
             </form>
+
+            <Snackbar
+              open={loginTrueAlertOpen}
+              autoHideDuration={3000}
+              onClose={handleCloseTrueLoginAlert}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+            >
+              <MuiAlert
+                onClose={handleCloseTrueLoginAlert}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                You have successfully logged in!
+              </MuiAlert>
+            </Snackbar>
 
             <Snackbar
               open={loginFalseAlertOpen}

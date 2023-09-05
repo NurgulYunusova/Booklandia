@@ -6,13 +6,16 @@ import { verifySchema } from "../validations";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./verify.scss";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../../context/UserContext";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 
 function VerifyPage() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const { setIsLoggedIn } = useContext(UserContext);
+  const [verifyTrueAlertOpen, setVerifyTrueAlertOpen] = useState(false);
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
@@ -29,16 +32,25 @@ function VerifyPage() {
           }
         );
 
-        alert("You verified successfully");
         const token = response.data;
         localStorage.setItem("token", token);
         setIsLoggedIn(true);
-        navigate("/");
+        setVerifyTrueAlertOpen(true);
+        setTimeout(() => {
+          navigate("/");
+        }, 1500);
       } catch (error) {
         console.log(error);
       }
     },
   });
+
+  const handleCloseTrueVerifyAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setVerifyTrueAlertOpen(false);
+  };
 
   return (
     <>
@@ -53,8 +65,8 @@ function VerifyPage() {
             <p className="info">
               We've sent a verification code to your email.{" "}
               <span style={{ fontWeight: 600 }}>
-                If you don't see the verify code, check your spam folder. Verify
-                code is valid for 90 seconds.
+                If you don't see the verification code, check your spam folder.
+                Verification code is valid for 90 seconds.
               </span>
             </p>
 
@@ -72,6 +84,24 @@ function VerifyPage() {
 
               <button type="submit">SUBMIT</button>
             </form>
+
+            <Snackbar
+              open={verifyTrueAlertOpen}
+              autoHideDuration={3000}
+              onClose={handleCloseTrueVerifyAlert}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+            >
+              <MuiAlert
+                onClose={handleCloseTrueVerifyAlert}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                You have been successfully verified!
+              </MuiAlert>
+            </Snackbar>
           </div>
         </div>
       </div>
