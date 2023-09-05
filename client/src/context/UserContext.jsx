@@ -68,7 +68,7 @@ export const UserProvider = ({ children }) => {
           severity="success"
           sx={{ width: "100%" }}
         >
-          You login successfully!
+          You have successfully logged in!
         </MuiAlert>
       </Snackbar>
     </UserContext.Provider>
