@@ -5,9 +5,13 @@ import { useNavigate } from "react-router-dom";
 import { registerSchema } from "../validations";
 import { useFormik } from "formik";
 import axios from "axios";
+import { useState } from "react";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 
 function RegisterPage() {
   const navigate = useNavigate();
+  const [registerTrueAlertOpen, setRegisterTrueAlertOpen] = useState(false);
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
@@ -26,15 +30,23 @@ function RegisterPage() {
         })
         .then((res) => {
           if (res.status == 200) {
-            alert("You registered successfully");
+            setRegisterTrueAlertOpen(true);
+            setTimeout(() => {
+              navigate("/verify", {
+                state: email,
+              });
+            }, 2000);
           }
         });
-
-      navigate("/verify", {
-        state: email,
-      });
     },
   });
+
+  const handleCloseTrueRegisterAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setRegisterTrueAlertOpen(false);
+  };
 
   return (
     <>
@@ -103,6 +115,25 @@ function RegisterPage() {
 
               <button type="submit">REGISTER</button>
             </form>
+
+            <Snackbar
+              open={registerTrueAlertOpen}
+              autoHideDuration={3000}
+              onClose={handleCloseTrueRegisterAlert}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+            >
+              <MuiAlert
+                onClose={handleCloseTrueRegisterAlert}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                You have successfully registered! Please check your email for
+                the verification code.
+              </MuiAlert>
+            </Snackbar>
 
             <p className="loginLink">
               Already have an account?{" "}

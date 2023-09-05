@@ -10,6 +10,8 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { BookContext } from "../../context/BookContext";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 
 function Header() {
   const navigate = useNavigate();
@@ -18,11 +20,13 @@ function Header() {
   const [searchValue, setSearchValue] = useState("");
   const [filteredBooks, setFilteredBooks] = useState([]);
   const [searchClick, setSearchClick] = useState(false);
+  const [logoutAlertOpen, setLogoutAlertOpen] = useState(false);
 
   const handleLogOut = () => {
     localStorage.removeItem("token");
     setIsLoggedIn(false);
     navigate("/");
+    setLogoutAlertOpen(true);
     window.scrollTo(0, 0);
   };
 
@@ -61,6 +65,13 @@ function Header() {
   const handleWishlistClick = () => {
     navigate("/wishlist");
     window.scrollTo(0, 0);
+  };
+
+  const handleCloseLogoutAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setLogoutAlertOpen(false);
   };
 
   return (
@@ -166,6 +177,24 @@ function Header() {
               </button>
             </div>
           )}
+
+          <Snackbar
+            open={logoutAlertOpen}
+            autoHideDuration={3000}
+            onClose={handleCloseLogoutAlert}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+          >
+            <MuiAlert
+              onClose={handleCloseLogoutAlert}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              You have successfully logged out!
+            </MuiAlert>
+          </Snackbar>
         </div>
       </header>
     </>
