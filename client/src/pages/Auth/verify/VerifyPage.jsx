@@ -16,6 +16,7 @@ function VerifyPage() {
   const navigate = useNavigate();
   const { setIsLoggedIn } = useContext(UserContext);
   const [verifyTrueAlertOpen, setVerifyTrueAlertOpen] = useState(false);
+  // const [verifyFalseAlertOpen, setVerifyFalseAlertOpen] = useState(false);
 
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
@@ -32,15 +33,19 @@ function VerifyPage() {
           }
         );
 
-        const token = response.data;
-        localStorage.setItem("token", token);
-        setIsLoggedIn(true);
-        setVerifyTrueAlertOpen(true);
-        setTimeout(() => {
-          navigate("/");
-        }, 1500);
+        console.log(response);
+
+        if (response.status === 201) {
+          const token = response.data;
+          localStorage.setItem("token", token);
+          setIsLoggedIn(true);
+          setVerifyTrueAlertOpen(true);
+          setTimeout(() => {
+            navigate("/");
+          }, 1500);
+        }
       } catch (error) {
-        console.log(error);
+        console.log("error", error);
       }
     },
   });
@@ -51,6 +56,13 @@ function VerifyPage() {
     }
     setVerifyTrueAlertOpen(false);
   };
+
+  // const handleCloseFalseVerifyAlert = (event, reason) => {
+  //   if (reason === "clickaway") {
+  //     return;
+  //   }
+  //   setVerifyFalseAlertOpen(false);
+  // };
 
   return (
     <>
@@ -102,6 +114,24 @@ function VerifyPage() {
                 You have been successfully verified!
               </MuiAlert>
             </Snackbar>
+
+            {/* <Snackbar
+              open={verifyFalseAlertOpen}
+              autoHideDuration={3000}
+              onClose={handleCloseFalseVerifyAlert}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+            >
+              <MuiAlert
+                onClose={handleCloseFalseVerifyAlert}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                helllllll
+              </MuiAlert>
+            </Snackbar> */}
           </div>
         </div>
       </div>

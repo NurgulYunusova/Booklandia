@@ -1,15 +1,20 @@
 import axios from "axios";
 import image from "../../../assets/images/changePassword.png";
 import "./changePassword.scss";
-import { UserContext } from "../../../context/UserContext";
-import { useContext } from "react";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
+import { useState } from "react";
 
 function ChangePasswordPage() {
-  const { user } = useContext(UserContext);
+  const { search } = useLocation();
+  const URLSearch = new URLSearchParams(search);
+  const userId = URLSearch.get("userId");
   const navigate = useNavigate();
+  const [changePasswordTrueAlertOpen, setChangePasswordTrueAlertOpen] =
+    useState(false);
 
   const changePasswordSchema = Yup.object({
     password: Yup.string()
@@ -24,6 +29,8 @@ function ChangePasswordPage() {
     ),
   });
 
+  console.log(userId);
+
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
       password: "",
@@ -34,19 +41,28 @@ function ChangePasswordPage() {
       const response = await axios.post(
         "http://localhost:8080/api/user/changePassword",
         {
-          userId: user._id,
+          userId: userId,
           password: password,
         }
       );
 
       if (response.status === 200) {
-        alert(response.data);
-        navigate("/login");
+        setChangePasswordTrueAlertOpen(true);
+        setTimeout(() => {
+          navigate("/login");
+        }, 2000);
       } else {
         alert("Password and confirm password must be same");
       }
     },
   });
+
+  const handleCloseTrueChangePasswordAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setChangePasswordTrueAlertOpen(false);
+  };
 
   return (
     <>
@@ -59,6 +75,7 @@ function ChangePasswordPage() {
             <form onSubmit={handleSubmit}>
               <input
                 type="password"
+                name="password"
                 id="password"
                 placeholder="Password"
                 onChange={handleChange}
@@ -76,6 +93,7 @@ function ChangePasswordPage() {
 
               <input
                 type="password"
+                name="confirmPassword"
                 id="confirmPassword"
                 placeholder="Confirm Password"
                 onChange={handleChange}
@@ -92,6 +110,24 @@ function ChangePasswordPage() {
               </p>
               <button type="submit">CHANGE YOUR PASSWORD</button>
             </form>
+
+            <Snackbar
+              open={changePasswordTrueAlertOpen}
+              autoHideDuration={3000}
+              onClose={handleCloseTrueChangePasswordAlert}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+            >
+              <MuiAlert
+                onClose={handleCloseTrueChangePasswordAlert}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                Password changed successfully!
+              </MuiAlert>
+            </Snackbar>
           </div>
 
           <div className="image">
