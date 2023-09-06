@@ -9,6 +9,8 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 import { UserContext } from "../../context/UserContext";
 import DeleteIcon from "@mui/icons-material/Delete";
+import { Snackbar } from "@mui/material";
+import MuiAlert from "@mui/material/Alert";
 
 function Comment() {
   const { id } = useParams();
@@ -16,6 +18,8 @@ function Comment() {
   const [rating, setRating] = useState(0);
   const [reviewText, setReviewText] = useState("");
   const { user } = useContext(UserContext);
+  const [reviewTrueAlertOpen, setReviewTrueAlertOpen] = useState(false);
+  const [reviewFalseAlertOpen, setReviewFalseAlertOpen] = useState(false);
 
   const getBooksReviews = async () => {
     try {
@@ -41,7 +45,7 @@ function Comment() {
         reviewText,
         user: userId,
       });
-      alert("Your review added succesfully");
+      setReviewTrueAlertOpen(true);
       setRating(0);
       setReviewText("");
       getBooksReviews();
@@ -50,14 +54,28 @@ function Comment() {
     }
   };
 
+  const handleCloseTrueReviewAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setReviewTrueAlertOpen(false);
+  };
+
   const handleDelete = async (reviewId) => {
     try {
       await axios.delete(`http://localhost:8080/api/review/${reviewId}`);
-      alert("Review deleted successfully");
+      setReviewFalseAlertOpen(true);
       getBooksReviews();
     } catch (error) {
       console.log(error);
     }
+  };
+
+  const handleCloseFalseReviewAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setReviewFalseAlertOpen(false);
   };
 
   return (
@@ -101,6 +119,42 @@ function Comment() {
             <button onClick={handleSubmit}>Add Comment</button>
           </div>
         </div>
+
+        <Snackbar
+          open={reviewTrueAlertOpen}
+          autoHideDuration={3000}
+          onClose={handleCloseTrueReviewAlert}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+        >
+          <MuiAlert
+            onClose={handleCloseTrueReviewAlert}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Your review has been successfully added!
+          </MuiAlert>
+        </Snackbar>
+
+        <Snackbar
+          open={reviewFalseAlertOpen}
+          autoHideDuration={3000}
+          onClose={handleCloseFalseReviewAlert}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+        >
+          <MuiAlert
+            onClose={handleCloseFalseReviewAlert}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Review successfully deleted!
+          </MuiAlert>
+        </Snackbar>
 
         <div className="allComments">
           <h3>{reviews.length} REVIEWS</h3>
