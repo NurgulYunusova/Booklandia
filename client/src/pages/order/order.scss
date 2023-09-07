@@ -108,3 +108,100 @@
     }
   }
 }
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .order {
+    &Container {
+      width: 85%;
+
+      .bottom {
+        .bottomLeft {
+          h2 {
+            font-size: 22px;
+          }
+
+          p {
+            font-size: 13px;
+          }
+
+          form {
+            gap: 1px;
+
+            #fullName,
+            #message {
+              width: 100%;
+            }
+
+            .addressCity,
+            .postalCodeCountry {
+              gap: 3%;
+            }
+
+            input,
+            textarea {
+              flex: 1;
+              font-size: 13px;
+              padding: 14px 16px;
+
+              &::placeholder {
+                font-size: 13px;
+              }
+            }
+
+            button {
+              padding: 6px 12px;
+              font-size: 13px;
+            }
+          }
+        }
+
+        .bottomRight {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1199px) {
+  .order {
+    &Container {
+      width: 85%;
+
+      .bottom {
+        .bottomLeft {
+          h2 {
+            font-size: 24px;
+          }
+
+          form {
+            gap: 1px;
+
+            #fullName,
+            #message {
+              width: 100%;
+            }
+
+            input,
+            textarea {
+              flex: 1;
+              padding: 14px 16px;
+            }
+          }
+        }
+
+        .bottomRight {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1199px) and (max-width: 1439px) {
+  .order {
+    &Container {
+      width: 85%;
+    }
+  }
+}
