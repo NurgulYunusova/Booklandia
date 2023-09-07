@@ -128,3 +128,181 @@
     }
   }
 }
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .quiz {
+    &Container {
+      width: 85%;
+      padding: 30px 40px;
+
+      .userGreeting {
+        p {
+          font-size: 18px;
+          margin-bottom: 20px;
+        }
+      }
+
+      .buttonDiv {
+        .startButton {
+          padding: 5px 10px;
+          font-size: 13px;
+        }
+      }
+
+      .activeQuestionNo {
+        font-size: 34px;
+      }
+
+      .totalQuestion {
+        font-size: 14px;
+      }
+
+      h2 {
+        font-size: 16px;
+        margin: 15px 0;
+      }
+
+      ul {
+        li {
+          font-size: 13px;
+          padding: 10px 20px;
+          margin-top: 13px;
+        }
+      }
+
+      .next {
+        padding: 6px 16px;
+        font-size: 14px;
+      }
+
+      .result {
+        h3 {
+          font-size: 28px;
+          margin-bottom: 15px;
+        }
+
+        p {
+          font-size: 16px;
+
+          &:not(:last-child) {
+            margin-bottom: 10px;
+          }
+
+          span {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 479px) and (max-width: 767px) {
+  .quiz {
+    &Container {
+      width: 85%;
+      padding: 30px 40px;
+
+      .userGreeting {
+        p {
+          font-size: 20px;
+          margin-bottom: 20px;
+        }
+      }
+
+      .buttonDiv {
+        .startButton {
+          padding: 6px 12px;
+          font-size: 14px;
+        }
+      }
+
+      .activeQuestionNo {
+        font-size: 34px;
+      }
+
+      .totalQuestion {
+        font-size: 14px;
+      }
+
+      h2 {
+        font-size: 16px;
+        margin: 15px 0;
+      }
+
+      ul {
+        li {
+          font-size: 13px;
+          padding: 10px 20px;
+          margin-top: 13px;
+        }
+      }
+
+      .next {
+        padding: 6px 16px;
+        font-size: 14px;
+      }
+
+      .result {
+        h3 {
+          font-size: 30px;
+          margin-bottom: 15px;
+        }
+
+        p {
+          font-size: 18px;
+
+          &:not(:last-child) {
+            margin-bottom: 12px;
+          }
+
+          span {
+            font-size: 22px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .quiz {
+    &Container {
+      width: 85%;
+
+      .userGreeting {
+        p {
+          font-size: 22px;
+        }
+      }
+
+      .activeQuestionNo {
+        font-size: 36px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      ul {
+        li {
+          padding: 12px 20px;
+        }
+      }
+
+      .result {
+        h3 {
+          font-size: 32px;
+        }
+
+        p {
+          font-size: 19px;
+
+          span {
+            font-size: 23px;
+          }
+        }
+      }
+    }
+  }
+}
