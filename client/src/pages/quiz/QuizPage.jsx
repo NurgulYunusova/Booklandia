@@ -18,8 +18,6 @@ function QuizPage() {
     wrongAnswers: 0,
   });
 
-  console.log(quiz);
-
   useEffect(() => {
     axios
       .get("http://localhost:8080/api/quiz")
@@ -27,8 +25,6 @@ function QuizPage() {
   }, []);
 
   const questions = quiz.length > 0 ? quiz[0].questions : [];
-
-  console.log(questions);
 
   const totalQuestions = quiz.length > 0 ? quiz[0].totalQuestions : 0;
 

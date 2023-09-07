@@ -71,6 +71,7 @@ export const routes = [
   {
     path: "/authorDetails/:id",
     element: <AuthorDetailsPage />,
+    // DONE
   },
   {
     path: "/profilePage",
