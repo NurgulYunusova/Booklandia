@@ -11,9 +11,7 @@ import {
   DialogContent,
   DialogContentText,
   DialogTitle,
-  Snackbar,
 } from "@mui/material";
-import MuiAlert from "@mui/material/Alert";
 import { BasketContext } from "../../context/BasketContext";
 
 const WishlistTable = () => {
@@ -21,7 +19,6 @@ const WishlistTable = () => {
   const { addToBasket } = useContext(BasketContext);
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedItemId, setSelectedItemId] = useState(null);
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
 
   const handleDeleteClick = (itemId) => {
     setSelectedItemId(itemId);
@@ -37,13 +34,8 @@ const WishlistTable = () => {
     if (selectedItemId) {
       removeFromWishlist(selectedItemId);
       setSelectedItemId(null);
-      setShowSuccessAlert(true);
     }
     setOpenDialog(false);
-  };
-
-  const handleAlertClose = () => {
-    setShowSuccessAlert(false);
   };
 
   const handleAddToBasket = (id) => {
@@ -96,24 +88,6 @@ const WishlistTable = () => {
             ))}
         </tbody>
       </table>
-
-      <Snackbar
-        open={showSuccessAlert}
-        autoHideDuration={3000}
-        onClose={handleAlertClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "right",
-        }}
-      >
-        <MuiAlert
-          onClose={handleAlertClose}
-          severity="success"
-          sx={{ width: "100%" }}
-        >
-          Book removed from wishlist successfully!
-        </MuiAlert>
-      </Snackbar>
 
       <Dialog open={openDialog} onClose={handleCloseDialog}>
         <DialogTitle>Confirm Remove</DialogTitle>
