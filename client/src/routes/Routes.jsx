@@ -80,6 +80,7 @@ export const routes = [
   {
     path: "/quiz",
     element: <QuizPage />,
+    // DONE
   },
   {
     path: "/order",

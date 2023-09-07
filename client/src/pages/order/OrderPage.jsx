@@ -87,8 +87,8 @@ function OrderPage() {
 
   return (
     <>
-      <Header />
-      <Pages />
+      {/* <Header />
+      <Pages /> */}
       <div className="order">
         <div className="orderContainer">
           <div className="top">
@@ -196,7 +196,7 @@ function OrderPage() {
           </div>
         </div>
       </div>
-      <Footer />
+      {/* <Footer /> */}
     </>
   );
 }
