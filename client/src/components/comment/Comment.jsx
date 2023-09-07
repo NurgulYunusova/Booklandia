@@ -9,8 +9,16 @@ import { useParams } from "react-router-dom";
 import moment from "moment";
 import { UserContext } from "../../context/UserContext";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button,
+  Snackbar,
+} from "@mui/material";
 
 function Comment() {
   const { id } = useParams();
@@ -19,7 +27,9 @@ function Comment() {
   const [reviewText, setReviewText] = useState("");
   const { user } = useContext(UserContext);
   const [reviewTrueAlertOpen, setReviewTrueAlertOpen] = useState(false);
-  const [reviewFalseAlertOpen, setReviewFalseAlertOpen] = useState(false);
+  const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+  const [reviewToDelete, setReviewToDelete] = useState(null);
+  const [deleteSuccessAlertOpen, setDeleteSuccessAlertOpen] = useState(false);
 
   const getBooksReviews = async () => {
     try {
@@ -61,21 +71,30 @@ function Comment() {
     setReviewTrueAlertOpen(false);
   };
 
-  const handleDelete = async (reviewId) => {
+  const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8080/api/review/${reviewId}`);
-      setReviewFalseAlertOpen(true);
+      await axios.delete(`http://localhost:8080/api/review/${reviewToDelete}`);
+      setDeleteSuccessAlertOpen(true);
       getBooksReviews();
+      setReviewToDelete(null);
     } catch (error) {
       console.log(error);
     }
   };
 
-  const handleCloseFalseReviewAlert = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setReviewFalseAlertOpen(false);
+  // const handleDelete = async (reviewId) => {
+  //   try {
+  //     await axios.delete(`http://localhost:8080/api/review/${reviewId}`);
+  //     alert("review deleted");
+  //     getBooksReviews();
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
+
+  const handleDelete = (reviewId) => {
+    setReviewToDelete(reviewId);
+    setDeleteDialogOpen(true);
   };
 
   return (
@@ -135,24 +154,6 @@ function Comment() {
             sx={{ width: "100%" }}
           >
             Your review has been successfully added!
-          </MuiAlert>
-        </Snackbar>
-
-        <Snackbar
-          open={reviewFalseAlertOpen}
-          autoHideDuration={3000}
-          onClose={handleCloseFalseReviewAlert}
-          anchorOrigin={{
-            vertical: "bottom",
-            horizontal: "right",
-          }}
-        >
-          <MuiAlert
-            onClose={handleCloseFalseReviewAlert}
-            severity="success"
-            sx={{ width: "100%" }}
-          >
-            Review successfully deleted!
           </MuiAlert>
         </Snackbar>
 
@@ -216,6 +217,55 @@ function Comment() {
               ))
             )}
           </div>
+
+          <Dialog
+            open={deleteDialogOpen}
+            onClose={() => setDeleteDialogOpen(false)}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description"
+          >
+            <DialogTitle id="alert-dialog-title">Delete Review</DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-description">
+                Are you sure you want to delete this review?
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button
+                onClick={() => setDeleteDialogOpen(false)}
+                color="primary"
+              >
+                Cancel
+              </Button>
+              <Button
+                onClick={() => {
+                  setDeleteDialogOpen(false);
+                  handleConfirmDelete();
+                }}
+                color="primary"
+              >
+                Confirm
+              </Button>
+            </DialogActions>
+          </Dialog>
+
+          <Snackbar
+            open={deleteSuccessAlertOpen}
+            autoHideDuration={3000}
+            onClose={() => setDeleteSuccessAlertOpen(false)}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "right",
+            }}
+          >
+            <MuiAlert
+              onClose={() => setDeleteSuccessAlertOpen(false)}
+              severity="success"
+              sx={{ width: "100%" }}
+            >
+              Review deleted successfully!
+            </MuiAlert>
+          </Snackbar>
         </div>
       </div>
     </>
