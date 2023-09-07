@@ -40,8 +40,6 @@ function AuthorDetailsPage() {
     window.scrollTo(0, 0);
   };
 
-  console.log(author);
-
   return (
     <>
       {loading ? (
@@ -108,12 +106,14 @@ function AuthorDetailsPage() {
                             value={q.averageRating}
                             icon={
                               <StarRoundedIcon
-                                style={{ color: "#de723c", fontSize: "20px" }}
+                                style={{ color: "#de723c" }}
+                                className="stars"
                               />
                             }
                             emptyIcon={
                               <StarRoundedIcon
-                                style={{ color: "#bab6b6", fontSize: "20px" }}
+                                style={{ color: "#bab6b6" }}
+                                className="stars"
                               />
                             }
                             readOnly
