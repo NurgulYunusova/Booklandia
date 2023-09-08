@@ -408,13 +408,193 @@
 }
 
 @media screen and (min-width: 479px) and (max-width: 767px) {
+  .booksDetails {
+    &Container {
+      width: 85%;
+      margin: 0 auto;
+
+      .middle {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+
+        .right {
+          .details {
+            .stars {
+              font-size: 22px;
+            }
+
+            .description {
+              font-size: 14px;
+              line-height: 1.6;
+            }
+
+            .quantity {
+              .quantityDiv {
+                gap: 15px;
+
+                .quantityComponent {
+                  width: 95px;
+
+                  button {
+                    font-size: 15px;
+                    width: 28px;
+                    height: 28px;
+                  }
+
+                  span {
+                    font-size: 13px;
+                  }
+                }
+
+                .cart {
+                  font-size: 12px;
+                  padding: 5px 13px;
+                }
+
+                .wishlist {
+                  font-size: 11px;
+                  padding: 0;
+                }
+              }
+            }
+
+            .information {
+              h4 {
+                font-size: 14px;
+              }
+            }
+
+            .socialMediaIcons {
+              ul {
+                gap: 10px;
+
+                li {
+                  font-size: 15px;
+                  width: 20px;
+                  height: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .relatedBooks {
+        .heading {
+          h1 {
+            font-size: 30px;
+          }
+
+          .divider {
+            display: none;
+          }
+        }
+
+        .books {
+          row-gap: 25px;
+          column-gap: 50px;
+          justify-content: center;
+
+          .book {
+            padding: 5px 15px;
+
+            .bookInfo {
+              .title {
+                font-size: 18px;
+              }
+
+              .author {
+                font-size: 12px;
+              }
+            }
+
+            .bookImage {
+              img {
+                width: 67%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }
 
-@media screen and (min-width: 767px) and (max-width: 991px) {
-}
+@media screen and (min-width: 767px) and (max-width: 1199px) {
+  .booksDetails {
+    &Container {
+      width: 85%;
+      margin: 0 auto;
 
-@media screen and (min-width: 991px) and (max-width: 1199px) {
-}
+      .middle {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
 
-@media screen and (min-width: 1199px) and (max-width: 1439px) {
+        .right {
+          .details {
+            .stars {
+              font-size: 22px;
+            }
+
+            .description {
+              font-size: 14px;
+              line-height: 1.6;
+            }
+
+            .socialMediaIcons {
+              ul {
+                gap: 10px;
+
+                li {
+                  font-size: 15px;
+                  width: 20px;
+                  height: 20px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .relatedBooks {
+        .heading {
+          h1 {
+            font-size: 30px;
+          }
+
+          .divider {
+            display: none;
+          }
+        }
+
+        .books {
+          row-gap: 25px;
+          column-gap: 50px;
+          justify-content: center;
+
+          .book {
+            padding: 5px 15px;
+
+            .bookInfo {
+              .title {
+                font-size: 18px;
+              }
+
+              .author {
+                font-size: 12px;
+              }
+            }
+
+            .bookImage {
+              img {
+                width: 67%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
 }

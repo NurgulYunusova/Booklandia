@@ -67,6 +67,7 @@ export const routes = [
   {
     path: "/booksDetails/:id",
     element: <BooksDetailsPage />,
+    // DONE
   },
   {
     path: "/authorDetails/:id",
