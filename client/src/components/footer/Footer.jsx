@@ -81,37 +81,38 @@ function Footer() {
                 </div>
               </div>
 
-              <div className="exploreSection">
-                <h3 className="headingText">Explore</h3>
-                <ul>
-                  <li>About Us</li>
-                  <li>Sitemap</li>
-                  <li>Bookmarks</li>
-                  <li>Sign In/Sign Up</li>
-                </ul>
-              </div>
-
-              <div className="serviceSection">
-                <h3 className="headingText">Our Service</h3>
-                <ul>
-                  <li>Help Center</li>
-                  <li>Returns</li>
-                  <li>Product Recalls</li>
-                  <li>Accessibility</li>
-                  <li>Contact Us</li>
-                  <li>Store Pickup</li>
-                </ul>
-              </div>
-
-              <div className="categoriesSection">
-                <h3 className="headingText">Categories</h3>
-                <ul>
-                  <li>Romance</li>
-                  <li>Thriller</li>
-                  <li>Fantasy</li>
-                  <li>Self-Help</li>
-                  <li>History</li>
-                </ul>
+              <div className="three">
+                {" "}
+                <div className="exploreSection">
+                  <h3 className="headingText">Explore</h3>
+                  <ul>
+                    <li>About Us</li>
+                    <li>Sitemap</li>
+                    <li>Bookmarks</li>
+                    <li>Sign In/Sign Up</li>
+                  </ul>
+                </div>
+                <div className="serviceSection">
+                  <h3 className="headingText">Our Service</h3>
+                  <ul>
+                    <li>Help Center</li>
+                    <li>Returns</li>
+                    <li>Product Recalls</li>
+                    <li>Accessibility</li>
+                    <li>Contact Us</li>
+                    <li>Store Pickup</li>
+                  </ul>
+                </div>
+                <div className="categoriesSection">
+                  <h3 className="headingText">Categories</h3>
+                  <ul>
+                    <li>Romance</li>
+                    <li>Thriller</li>
+                    <li>Fantasy</li>
+                    <li>Self-Help</li>
+                    <li>History</li>
+                  </ul>
+                </div>
               </div>
             </div>
           </div>
@@ -121,7 +122,7 @@ function Footer() {
               Copyright &copy; {new Date().getFullYear()}{" "}
               <a href="/">Booklandia.</a> All rights reserved.
             </p>
-            <img src={footerImg} alt="" />
+            <img src={footerImg} alt="Cards" />
           </div>
         </div>
       </footer>

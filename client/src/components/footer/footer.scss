@@ -8,7 +8,6 @@ footer {
   .footerContainer {
     width: 80%;
     margin: 0 auto;
-    // color: #c4c4c4;
     color: #999;
     padding: 50px 0 20px;
     font-family: $base-font2;
@@ -65,11 +64,9 @@ footer {
       }
 
       .rightSide {
-        @include center(
-          $justify-content: space-between,
-          $align-items: flex-start
-        );
+        @include center($justify-content: flex-start, $align-items: flex-start);
         width: 80%;
+        gap: 60px;
 
         .headingText {
           font-size: 16px;
@@ -112,22 +109,30 @@ footer {
           }
         }
 
-        .exploreSection,
-        .serviceSection,
-        .categoriesSection {
-          ul {
-            list-style: none;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
+        .three {
+          @include center(
+            $justify-content: space-around,
+            $align-items: flex-start
+          );
+          width: 100%;
 
-            li {
-              font-size: 14px;
-              font-weight: 500;
-              cursor: pointer;
+          .exploreSection,
+          .serviceSection,
+          .categoriesSection {
+            ul {
+              list-style: none;
+              display: flex;
+              flex-direction: column;
+              gap: 10px;
 
-              &:nth-child(1) {
-                margin-top: 15px;
+              li {
+                font-size: 14px;
+                font-weight: 500;
+                cursor: pointer;
+
+                &:nth-child(1) {
+                  margin-top: 15px;
+                }
               }
             }
           }
@@ -147,6 +152,159 @@ footer {
         a {
           color: $base-color2;
           font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  footer {
+    .footerContainer {
+      width: 85%;
+      padding: 30px 0 20px;
+
+      .top {
+        flex-direction: column;
+        align-items: center;
+
+        .leftSide {
+          width: 100%;
+          text-align: center;
+          margin-bottom: 25px;
+          border-bottom: 1px solid #e7e6dd7b;
+          padding-bottom: 25px;
+
+          .socialMedias {
+            ul {
+              justify-content: center;
+            }
+          }
+        }
+
+        .rightSide {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 0;
+          width: 100%;
+
+          .helpSection {
+            border: none;
+            border-bottom: 1px solid #e7e6dd7b;
+            margin-bottom: 25px;
+            padding: 0 0 25px 0;
+            width: 100%;
+            text-align: center;
+
+            .number {
+              a {
+                font-size: 24px;
+              }
+            }
+          }
+
+          .three {
+            flex-direction: column;
+            align-items: center;
+
+            .exploreSection,
+            .serviceSection,
+            .categoriesSection {
+              text-align: center;
+
+              &:not(:last-child) {
+                margin-bottom: 25px;
+                border-bottom: 1px solid #e7e6dd7b;
+                padding-bottom: 25px;
+              }
+            }
+          }
+        }
+      }
+
+      .bottom {
+        flex-direction: column;
+        gap: 15px;
+
+        p {
+          font-size: 10px;
+        }
+
+        img {
+          width: 80%;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 479px) and (max-width: 1199px) {
+  footer {
+    .footerContainer {
+      width: 85%;
+      padding: 30px 0 20px;
+
+      .top {
+        flex-direction: column;
+        align-items: center;
+
+        .leftSide {
+          width: 100%;
+          text-align: center;
+          margin-bottom: 25px;
+          border-bottom: 1px solid #e7e6dd7b;
+          padding-bottom: 25px;
+
+          .socialMedias {
+            ul {
+              justify-content: center;
+            }
+          }
+        }
+
+        .rightSide {
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          gap: 0;
+          width: 100%;
+
+          .helpSection {
+            border: none;
+            border-bottom: 1px solid #e7e6dd7b;
+            margin-bottom: 25px;
+            padding: 0 0 25px 0;
+            width: 100%;
+            text-align: center;
+
+            .number {
+              a {
+                font-size: 24px;
+              }
+            }
+          }
+
+          .three {
+            .exploreSection,
+            .serviceSection,
+            .categoriesSection {
+              text-align: center;
+            }
+          }
+        }
+      }
+
+      .bottom {
+        flex-direction: column;
+        gap: 20px;
+
+        p {
+          font-size: 12px;
+        }
+
+        img {
+          width: 60%;
         }
       }
     }
