@@ -305,6 +305,10 @@
               }
             }
 
+            .stars {
+              font-size: 20px;
+            }
+
             .description {
               font-size: 13px;
             }
@@ -366,7 +370,7 @@
       .relatedBooks {
         .heading {
           h1 {
-            font-size: 30px;
+            font-size: 26px;
           }
 
           .divider {
@@ -379,7 +383,7 @@
           gap: 15px;
 
           .book {
-            padding: 15px;
+            padding: 5px 15px;
 
             .bookInfo {
               .title {
@@ -393,7 +397,7 @@
 
             .bookImage {
               img {
-                width: 65%;
+                width: 67%;
               }
             }
           }
