@@ -98,8 +98,8 @@ function BooksDetailsPage() {
         <Loading />
       ) : (
         <>
-          {/* <Header />
-          <Pages /> */}
+          <Header />
+          <Pages />
 
           <div className="booksDetails">
             <div className="booksDetailsContainer">
@@ -332,7 +332,7 @@ function BooksDetailsPage() {
             </div>
           </div>
 
-          {/* <Footer /> */}
+          <Footer />
         </>
       )}
     </>
