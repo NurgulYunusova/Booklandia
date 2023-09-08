@@ -114,12 +114,14 @@ function Comment() {
               value={rating}
               icon={
                 <StarRoundedIcon
-                  style={{ color: "#de723c", fontSize: "20px" }}
+                  style={{ color: "#de723c" }}
+                  className="stars"
                 />
               }
               emptyIcon={
                 <StarRoundedIcon
-                  style={{ color: "#bab6b6", fontSize: "20px" }}
+                  style={{ color: "#bab6b6" }}
+                  className="stars"
                 />
               }
               onChange={(event, newValue) => {
@@ -187,12 +189,14 @@ function Comment() {
                         value={q.rating}
                         icon={
                           <StarRoundedIcon
-                            style={{ color: "#de723c", fontSize: "20px" }}
+                            style={{ color: "#de723c" }}
+                            className="stars"
                           />
                         }
                         emptyIcon={
                           <StarRoundedIcon
-                            style={{ color: "#bab6b6", fontSize: "20px" }}
+                            style={{ color: "#bab6b6" }}
+                            className="stars"
                           />
                         }
                         style={{ margin: "8px -2px" }}

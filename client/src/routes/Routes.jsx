@@ -85,6 +85,7 @@ export const routes = [
   {
     path: "/order",
     element: <OrderPage />,
+    // DONE
   },
   {
     path: "*",

@@ -87,6 +87,10 @@
           .ratingAndDeleteIcon {
             @include center($justify-content: space-between);
 
+            .stars {
+              font-size: 20px;
+            }
+
             .deleteIcon {
               transition: all 0.2s ease-in-out;
               cursor: pointer;
@@ -117,6 +121,10 @@
           font-size: 15px;
         }
 
+        .stars {
+          font-size: 18px;
+        }
+
         textarea {
           margin: 15px 0;
         }
@@ -140,18 +148,20 @@
         .review {
           gap: 15px;
 
-          .fa-circle-user {
-            font-size: 30px;
+          .leftSide {
+            .fa-circle-user {
+              font-size: 30px;
+            }
           }
 
           .rightSide {
             .nameAndTime {
               .name {
-                font-size: 14px;
+                font-size: 13px;
               }
 
               .time {
-                font-size: 10px;
+                font-size: 9.5px;
               }
             }
 
@@ -161,12 +171,15 @@
                   font-size: 20px;
                 }
               }
+
+              .stars {
+                font-size: 16px;
+              }
             }
 
             .text {
               p {
-                font-size: 13px;
-                margin-top: 5px;
+                font-size: 12px;
               }
             }
           }

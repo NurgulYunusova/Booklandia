@@ -141,9 +141,17 @@ function BooksDetailsPage() {
                         name="book-rating"
                         precision={0.5}
                         value={book.averageRating}
-                        icon={<StarRoundedIcon style={{ color: "#de723c" }} />}
+                        icon={
+                          <StarRoundedIcon
+                            style={{ color: "#de723c" }}
+                            className="stars"
+                          />
+                        }
                         emptyIcon={
-                          <StarRoundedIcon style={{ color: "#bab6b6" }} />
+                          <StarRoundedIcon
+                            style={{ color: "#bab6b6" }}
+                            className="stars"
+                          />
                         }
                         readOnly
                       />
