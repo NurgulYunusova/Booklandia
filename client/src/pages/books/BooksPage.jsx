@@ -101,6 +101,7 @@ function BooksPage() {
         <>
           <Header />
           <Pages />
+
           <div className="books">
             <div className="booksContainer">
               <div className="top">
@@ -292,16 +293,16 @@ function BooksPage() {
                                     <StarRoundedIcon
                                       style={{
                                         color: "#de723c",
-                                        fontSize: "20px",
                                       }}
+                                      className="stars"
                                     />
                                   }
                                   emptyIcon={
                                     <StarRoundedIcon
                                       style={{
                                         color: "#bab6b6",
-                                        fontSize: "20px",
                                       }}
+                                      className="stars"
                                     />
                                   }
                                   readOnly
@@ -310,6 +311,7 @@ function BooksPage() {
                                 <p className="price">${q.price}</p>
                               </div>
                             </div>
+
                             <div className="buttons">
                               {!bookInBasket ? (
                                 <button
@@ -317,9 +319,7 @@ function BooksPage() {
                                   onClick={() => addToBasket(q._id, 1)}
                                   title="Add to cart"
                                 >
-                                  <AddShoppingCartOutlinedIcon
-                                    sx={{ fontSize: "25px" }}
-                                  />
+                                  <AddShoppingCartOutlinedIcon className="buttonsIcons" />
                                 </button>
                               ) : (
                                 <button
@@ -327,9 +327,7 @@ function BooksPage() {
                                   onClick={() => removeFromBasket(q._id, 1)}
                                   title="Remove from cart"
                                 >
-                                  <RemoveShoppingCartOutlinedIcon
-                                    sx={{ fontSize: "25px" }}
-                                  />
+                                  <RemoveShoppingCartOutlinedIcon className="buttonsIcons" />
                                 </button>
                               )}
 
@@ -339,9 +337,7 @@ function BooksPage() {
                                   onClick={() => addToWishlist(q._id)}
                                   title="Add to wishlist"
                                 >
-                                  <FavoriteBorderOutlinedIcon
-                                    sx={{ fontSize: "25px" }}
-                                  />
+                                  <FavoriteBorderOutlinedIcon className="buttonsIcons" />
                                 </button>
                               ) : (
                                 <button
@@ -349,7 +345,7 @@ function BooksPage() {
                                   onClick={() => removeFromWishlist(q._id)}
                                   title="Remove from wishlist"
                                 >
-                                  <FavoriteIcon sx={{ fontSize: "25px" }} />
+                                  <FavoriteIcon className="buttonsIcons" />
                                 </button>
                               )}
                             </div>
@@ -361,6 +357,7 @@ function BooksPage() {
               </div>
             </div>
           </div>
+
           <Footer />
         </>
       )}
