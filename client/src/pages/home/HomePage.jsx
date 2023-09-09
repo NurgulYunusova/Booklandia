@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import Intro from "../../components/intro/Intro";
 import Categories from "../../components/categories/Categories";
 import Bestsellers from "../../components/bestsellers/Bestsellers";
@@ -10,16 +9,21 @@ import WebsiteSuccess from "../../components/websiteSuccess/WebsiteSuccess";
 import Header from "../../components/header/Header";
 import Pages from "../../components/pages/Pages";
 import Footer from "../../components/footer/Footer";
-import { useContext } from "react";
-import { BookContext } from "../../context/BookContext";
+import { useEffect, useState } from "react";
 import Loading from "../../components/loading/Loading";
 
 function HomePage() {
-  const { isLoading } = useContext(BookContext);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setIsLoading(false);
+    }, 4000);
+  }, []);
 
   return (
     <>
-      {/* {isLoading ? (
+      {isLoading ? (
         <Loading />
       ) : (
         <>
@@ -35,19 +39,7 @@ function HomePage() {
           <WebsiteSuccess />
           <Footer />
         </>
-      )} */}
-
-      <Header />
-      <Pages />
-      <Intro />
-      <Categories />
-      <Bestsellers />
-      <IntermediatePart />
-      <NewBooks />
-      <Testimonials />
-      <PopularAuthors />
-      <WebsiteSuccess />
-      <Footer />
+      )}
     </>
   );
 }
