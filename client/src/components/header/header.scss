@@ -145,9 +145,19 @@ header {
         cursor: pointer;
         font-family: $base-font2;
         @include center($justify-content: space-between);
-        gap: 6px;
+        gap: 9px;
         font-size: 13px;
         font-weight: 400;
+
+        .MuiBadge-badge {
+          @include center();
+          background-color: $base-color2;
+          color: $base-color1;
+          font-size: 12px;
+          font-weight: 600;
+          border: 2px solid $base-color1;
+          margin-top: -2px;
+        }
       }
 
       .cart {
