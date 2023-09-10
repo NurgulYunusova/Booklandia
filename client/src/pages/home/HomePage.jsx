@@ -4,7 +4,7 @@ import Bestsellers from "../../components/bestsellers/Bestsellers";
 import IntermediatePart from "../../components/intermediatePart/IntermediatePart";
 import NewBooks from "../../components/newBooks/NewBooks";
 import PopularAuthors from "../../components/popularAuthors/PopularAuthors";
-import Testimonials from "../../components/testimonials/Testimonials";
+import Testimonials from "../../components/testimonial/Testimonials";
 import WebsiteSuccess from "../../components/websiteSuccess/WebsiteSuccess";
 import Header from "../../components/header/Header";
 import Pages from "../../components/pages/Pages";
