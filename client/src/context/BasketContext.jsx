@@ -25,11 +25,14 @@ export const BasketProvider = ({ children }) => {
         return;
       }
 
-      const response = await axios.post("http://localhost:8080/api/basket", {
-        userId: user._id,
-        bookId: bookId,
-        quantity: +quantity,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/api/basket`,
+        {
+          userId: user._id,
+          bookId: bookId,
+          quantity: +quantity,
+        }
+      );
 
       if (response.status === 201) {
         setBasket([...basket, { _id: bookId, productId: bookId }]);
@@ -86,9 +89,12 @@ export const BasketProvider = ({ children }) => {
 
       const basketId = basketItemToUpdate._id;
 
-      await axios.put(`http://localhost:8080/api/basket/${basketId}`, {
-        quantity: quantity,
-      });
+      await axios.put(
+        `${import.meta.env.VITE_SERVER_URL}/api/basket/${basketId}`,
+        {
+          quantity: quantity,
+        }
+      );
 
       setBookQuantities((prevQuantities) => ({
         ...prevQuantities,
@@ -109,7 +115,7 @@ export const BasketProvider = ({ children }) => {
   const removeFromBasket = async (bookId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/api/basket/${bookId}`,
+        `${import.meta.env.VITE_SERVER_URL}/api/basket/${bookId}`,
         {
           data: { userId: user._id },
         }
@@ -136,7 +142,7 @@ export const BasketProvider = ({ children }) => {
     try {
       if (user) {
         const response = await axios.get(
-          `http://localhost:8080/api/basket/${user._id}`
+          `${import.meta.env.VITE_SERVER_URL}/api/basket/${user._id}`
         );
         setBasket(response.data.basket);
       }

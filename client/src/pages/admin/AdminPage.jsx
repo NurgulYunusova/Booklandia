@@ -121,7 +121,10 @@ function AdminPage() {
         formData.append("photo", profileImage);
 
         await axios
-          .put(`http://localhost:8080/api/user/profile/${user._id}`, formData)
+          .put(
+            `${import.meta.env.VITE_SERVER_URL}/api/user/profile/${user._id}`,
+            formData
+          )
           .then((res) => {
             if (res.status == 200) {
               alert("Profile successfully edited");
@@ -136,7 +139,7 @@ function AdminPage() {
   // GET DATAS
   const getUsers = async () => {
     axios
-      .get("http://localhost:8080/api/user", {
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/user`, {
         headers: {
           Authorization: token,
         },
@@ -151,7 +154,7 @@ function AdminPage() {
 
   const getOrders = async () => {
     axios
-      .get("http://localhost:8080/api/order", {
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/order`, {
         headers: {
           Authorization: token,
         },
@@ -166,7 +169,7 @@ function AdminPage() {
 
   const getCategories = async () => {
     axios
-      .get("http://localhost:8080/api/category")
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/category`)
       .then((response) => {
         setCategories(response.data);
       })
@@ -177,7 +180,7 @@ function AdminPage() {
 
   const getAuthors = async () => {
     axios
-      .get("http://localhost:8080/api/author")
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/author`)
       .then((response) => {
         setAuthors(response.data);
       })
@@ -190,9 +193,12 @@ function AdminPage() {
   const handleCategorySubmit = async (e) => {
     e.preventDefault();
 
-    const response = await axios.post("http://localhost:8080/api/category", {
-      name: categoryName,
-    });
+    const response = await axios.post(
+      `${import.meta.env.VITE_SERVER_URL}/api/category`,
+      {
+        name: categoryName,
+      }
+    );
 
     if (response.status == 201) {
       alert("New category added succesfully");
@@ -204,7 +210,7 @@ function AdminPage() {
 
   const deleteCategory = async (id) => {
     const response = await axios.delete(
-      `http://localhost:8080/api/category/${id}`
+      `${import.meta.env.VITE_SERVER_URL}/api/category/${id}`
     );
 
     if (response.status == 200) {
@@ -233,7 +239,7 @@ function AdminPage() {
     };
 
     const response = await axios.put(
-      `http://localhost:8080/api/category/${editingCategoryId}`,
+      `${import.meta.env.VITE_SERVER_URL}/api/category/${editingCategoryId}`,
       updatedData
     );
 
@@ -249,7 +255,7 @@ function AdminPage() {
   // USER
   const deleteUser = async (id) => {
     const response = await axios.delete(
-      `http://localhost:8080/api/user/${id}`,
+      `${import.meta.env.VITE_SERVER_URL}/api/user/${id}`,
       {
         headers: {
           Authorization: token,
@@ -279,7 +285,7 @@ function AdminPage() {
     e.preventDefault();
 
     const response = await axios.put(
-      `http://localhost:8080/api/user/${editingUserId}`,
+      `${import.meta.env.VITE_SERVER_URL}/api/user/${editingUserId}`,
       { isAdmin: editedUserIsAdmin === "true" },
       {
         headers: {
@@ -315,7 +321,7 @@ function AdminPage() {
     formData.append("photo", bookImage);
 
     const response = await axios.post(
-      "http://localhost:8080/api/book",
+      `${import.meta.env.VITE_SERVER_URL}/api/book`,
       formData
     );
 
@@ -335,7 +341,9 @@ function AdminPage() {
   };
 
   const deleteProduct = async (id) => {
-    const response = await axios.delete(`http://localhost:8080/api/book/${id}`);
+    const response = await axios.delete(
+      `${import.meta.env.VITE_SERVER_URL}/api/book/${id}`
+    );
 
     if (response.status == 200) {
       alert(response.data.message);
@@ -381,7 +389,7 @@ function AdminPage() {
     formData.append("photo", editedBookImage);
 
     const response = await axios.put(
-      `http://localhost:8080/api/book/${editingBookId}`,
+      `${import.meta.env.VITE_SERVER_URL}/api/book/${editingBookId}`,
       formData
     );
 
@@ -403,7 +411,7 @@ function AdminPage() {
     formData.append("photo", authorImage);
 
     const response = await axios.post(
-      "http://localhost:8080/api/author",
+      `${import.meta.env.VITE_SERVER_URL}/api/author`,
       formData
     );
 
@@ -419,7 +427,7 @@ function AdminPage() {
 
   const deleteAuthor = async (id) => {
     const response = await axios.delete(
-      `http://localhost:8080/api/author/${id}`
+      `${import.meta.env.VITE_SERVER_URL}/api/author/${id}`
     );
 
     if (response.status == 200) {
@@ -454,7 +462,7 @@ function AdminPage() {
     formData.append("photo", editedAuthorImage);
 
     const response = await axios.put(
-      `http://localhost:8080/api/author/${editingAuthorId}`,
+      `${import.meta.env.VITE_SERVER_URL}/api/author/${editingAuthorId}`,
       formData
     );
 
@@ -976,7 +984,9 @@ function AdminPage() {
                                     <td>{book.category.name}</td>
                                     <td>
                                       <img
-                                        src={`http://localhost:8080/${book.image}`}
+                                        src={`${
+                                          import.meta.env.VITE_SERVER_URL
+                                        }/${book.image}`}
                                         alt={book.name}
                                         className="bookImage"
                                       />

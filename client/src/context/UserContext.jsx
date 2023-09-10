@@ -17,7 +17,7 @@ export const UserProvider = ({ children }) => {
   const updateUser = async () => {
     if (token) {
       axios
-        .get("http://localhost:8080/api/user/profile", {
+        .get(`${import.meta.env.VITE_SERVER_URL}/api/user/profile`, {
           headers: {
             Authorization: token,
           },

@@ -20,7 +20,7 @@ function AuthorDetailsPage() {
       setLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/author/${id}`
+          `${import.meta.env.VITE_SERVER_URL}/api/author/${id}`
         );
 
         if (response.status == 200) {
@@ -67,7 +67,7 @@ function AuthorDetailsPage() {
                 <div className="left">
                   <div className="authorImage">
                     <img
-                      src={`http://localhost:8080/${author.image}`}
+                      src={`${import.meta.env.VITE_SERVER_URL}/${author.image}`}
                       alt={author.name}
                     />
                   </div>
@@ -121,7 +121,9 @@ function AuthorDetailsPage() {
                         </div>
                         <div className="bookImage">
                           <img
-                            src={`http://localhost:8080/${q.image}`}
+                            src={`${import.meta.env.VITE_SERVER_URL}/${
+                              q.image
+                            }`}
                             alt={q.name}
                           />
                         </div>

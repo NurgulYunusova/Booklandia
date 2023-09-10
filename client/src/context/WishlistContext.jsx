@@ -24,10 +24,13 @@ export const WishlistProvider = ({ children }) => {
         return;
       }
 
-      const response = await axios.post("http://localhost:8080/api/wishlist", {
-        userId: user._id,
-        bookId: bookId,
-      });
+      const response = await axios.post(
+        `${import.meta.env.VITE_SERVER_URL}/api/wishlist`,
+        {
+          userId: user._id,
+          bookId: bookId,
+        }
+      );
 
       if (response.status === 201) {
         setWishlist([...wishlist, { _id: bookId, productId: bookId }]);
@@ -77,7 +80,7 @@ export const WishlistProvider = ({ children }) => {
   const removeFromWishlist = async (bookId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:8080/api/wishlist/${bookId}`,
+        `${import.meta.env.VITE_SERVER_URL}/api/wishlist/${bookId}`,
         {
           data: { userId: user._id },
         }
@@ -104,7 +107,7 @@ export const WishlistProvider = ({ children }) => {
     try {
       if (user) {
         const response = await axios.get(
-          `http://localhost:8080/api/wishlist/${user._id}`
+          `${import.meta.env.VITE_SERVER_URL}/api/wishlist/${user._id}`
         );
         setWishlist(response.data.wishlist);
       }

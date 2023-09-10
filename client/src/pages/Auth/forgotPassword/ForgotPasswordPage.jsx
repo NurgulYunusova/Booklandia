@@ -17,7 +17,7 @@ function ForgotPasswordPage() {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/user/forgotPassword",
+        `${import.meta.env.VITE_SERVER_URL}/api/user/forgotPassword`,
         {
           email: email,
         }
