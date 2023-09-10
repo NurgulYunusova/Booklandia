@@ -3,19 +3,23 @@ import Footer from "../../components/footer/Footer";
 import Header from "../../components/header/Header";
 import Pages from "../../components/pages/Pages";
 import "./order.scss";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { BasketContext } from "../../context/BasketContext";
 import order from "../../assets/images/order.png";
 import * as Yup from "yup";
 import { useFormik } from "formik";
 import { UserContext } from "../../context/UserContext";
 import axios from "axios";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 function OrderPage() {
   const navigate = useNavigate();
   const { basket, removeFromBasket } = useContext(BasketContext);
   const { user } = useContext(UserContext);
   const { state } = useLocation();
+  const [isSuccessAlertOpen, setIsSuccessAlertOpen] = useState(false);
+  const [isErrorAlertOpen, setIsErrorAlertOpen] = useState(false);
 
   function generateRandomNumberString(length) {
     let result = "";
@@ -52,6 +56,11 @@ function OrderPage() {
     validationSchema: orderSchema,
     onSubmit: async ({ address }) => {
       try {
+        if (basket.length === 0) {
+          setIsErrorAlertOpen(true);
+          return;
+        }
+
         const booksData = basket.map((item) => ({
           book: item.book._id,
           quantity: item.quantity,
@@ -66,14 +75,32 @@ function OrderPage() {
         });
 
         if (response.status === 201) {
-          alert(response.data.message);
-          clearBasket(booksData);
+          setIsSuccessAlertOpen(true);
+          setTimeout(() => {
+            clearBasket(booksData);
+          }, 3000);
         }
       } catch (error) {
-        alert(error);
+        console.log(error);
       }
     },
   });
+
+  const handleCloseSuccessAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setIsSuccessAlertOpen(false);
+  };
+
+  const handleCloseErrorAlert = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+
+    setIsErrorAlertOpen(false);
+  };
 
   const clearBasket = async (orderedBooks) => {
     try {
@@ -89,6 +116,7 @@ function OrderPage() {
     <>
       <Header />
       <Pages />
+
       <div className="order">
         <div className="orderContainer">
           <div className="top">
@@ -182,13 +210,44 @@ function OrderPage() {
                   Place Order
                 </button>
               </form>
-              {/* <div className="orderSummary">
-              <h2>Order Summary</h2>
-              <ul>
-                {basket && basket.map((q) => <li key={q.id}>{q.name}</li>)}
-              </ul>
-            </div> */}
             </div>
+
+            <Snackbar
+              open={isSuccessAlertOpen}
+              autoHideDuration={3000}
+              onClose={handleCloseSuccessAlert}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+            >
+              <MuiAlert
+                onClose={handleCloseSuccessAlert}
+                severity="success"
+                sx={{ width: "100%" }}
+              >
+                Order created successfully!
+              </MuiAlert>
+            </Snackbar>
+
+            <Snackbar
+              open={isErrorAlertOpen}
+              autoHideDuration={4000}
+              onClose={handleCloseErrorAlert}
+              anchorOrigin={{
+                vertical: "bottom",
+                horizontal: "right",
+              }}
+            >
+              <MuiAlert
+                onClose={handleCloseErrorAlert}
+                severity="error"
+                sx={{ width: "100%" }}
+              >
+                Please add at least one book to your basket before placing an
+                order.
+              </MuiAlert>
+            </Snackbar>
 
             <div className="bottomRight">
               <img src={order} alt="Order image" />
@@ -196,6 +255,7 @@ function OrderPage() {
           </div>
         </div>
       </div>
+
       <Footer />
     </>
   );

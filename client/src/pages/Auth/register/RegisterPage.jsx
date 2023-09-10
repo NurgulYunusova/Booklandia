@@ -45,6 +45,7 @@ function RegisterPage() {
     if (reason === "clickaway") {
       return;
     }
+
     setRegisterTrueAlertOpen(false);
   };
 

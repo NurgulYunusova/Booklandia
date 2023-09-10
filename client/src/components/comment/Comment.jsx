@@ -82,16 +82,6 @@ function Comment() {
     }
   };
 
-  // const handleDelete = async (reviewId) => {
-  //   try {
-  //     await axios.delete(`http://localhost:8080/api/review/${reviewId}`);
-  //     alert("review deleted");
-  //     getBooksReviews();
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
-
   const handleDelete = (reviewId) => {
     setReviewToDelete(reviewId);
     setDeleteDialogOpen(true);
