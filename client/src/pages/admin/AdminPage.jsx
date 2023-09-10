@@ -321,7 +321,7 @@ function AdminPage() {
     formData.append("photo", bookImage);
 
     const response = await axios.post(
-      "${import.meta.env.VITE_SERVER_URL}/api/book",
+      `${import.meta.env.VITE_SERVER_URL}/api/book`,
       formData
     );
 
