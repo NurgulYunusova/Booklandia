@@ -21,40 +21,107 @@ header {
         font-family: $base-font1;
         color: $base-color1;
         font-size: 36px;
+        cursor: pointer;
       }
     }
-
-    .searchBar {
+    .search {
       width: 35%;
-      background-color: #f0f0f0;
-      @include center();
-      padding: 10px 0;
+      position: relative;
+      display: flex;
+      flex-direction: column;
 
-      input {
-        width: 85%;
-        outline: none;
-        border: none;
-        font-size: 15px;
-        font-family: $base-font2;
+      .searchBar {
+        width: 100%;
         background-color: #f0f0f0;
-        color: $base-color1;
+        @include center($justify-content: space-between);
+        padding: 10px 20px;
 
-        &::placeholder {
+        input {
+          width: 85%;
+          outline: none;
+          border: none;
           font-size: 15px;
           font-family: $base-font2;
-          color: rgba(0, 51, 102, 0.7);
+          background-color: #f0f0f0;
+          color: $base-color1;
+
+          &::placeholder {
+            font-size: 15px;
+            font-family: $base-font2;
+            color: rgba(0, 51, 102, 0.7);
+          }
+        }
+
+        .icons {
+          @include center();
+          gap: 10px;
+
+          .fa-search {
+            font-size: 18px;
+            color: $base-color1;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+
+            &:hover {
+              color: #002255;
+            }
+          }
+
+          .fa-xmark {
+            font-size: 18px;
+            transition: all 0.2s ease-in-out;
+            cursor: pointer;
+            color: rgb(183, 28, 28);
+
+            &:hover {
+              color: rgb(153, 24, 24);
+            }
+          }
         }
       }
 
-      .fa-search {
-        margin-left: 5px;
-        font-size: 18px;
-        color: $base-color1;
-        transition: all 0.2s ease-in-out;
-        cursor: pointer;
+      .searchResult {
+        width: 100%;
+        background-color: #f0f0f0;
+        position: absolute;
+        top: 45px;
+        max-height: 450px;
+        overflow-y: scroll;
 
-        &:hover {
-          color: #002255;
+        ul {
+          list-style: none;
+          @include center($align-items: flex-start);
+          flex-direction: column;
+          gap: 10px;
+          font-family: $base-font2;
+
+          li {
+            @include center($justify-content: flex-start);
+            gap: 20px;
+            width: 100%;
+            cursor: pointer;
+            padding: 10px 15px;
+            color: $base-color3;
+            border-bottom: 1px solid #d6d6d6;
+
+            img {
+              width: 50px;
+            }
+
+            .infos {
+              .title {
+                font-size: 16px;
+                font-weight: 700;
+                color: $base-color3;
+              }
+
+              .author {
+                font-size: 13px;
+                margin: 3px 0 8px;
+                color: #001a409b;
+              }
+            }
+          }
         }
       }
     }
@@ -63,8 +130,8 @@ header {
       display: flex;
       gap: 15px;
 
-      .login,
-      .register {
+      .loginButton,
+      .registerButton {
         @include button();
       }
     }

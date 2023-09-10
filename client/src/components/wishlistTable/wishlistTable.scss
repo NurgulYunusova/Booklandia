@@ -1,13 +1,11 @@
 @import "../../assets/sass/variables.scss";
 @import "../../assets/sass/mixins.scss";
 
-// WishlistTable.scss
-
 .wishlistTable {
   width: 100%;
   border-collapse: collapse;
   font-family: $base-font2;
-  margin-bottom: 80px;
+  // margin-bottom: 80px;
 
   th,
   td {

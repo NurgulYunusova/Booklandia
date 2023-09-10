@@ -1,11 +1,16 @@
 import { useNavigate } from "react-router-dom";
 import "./contactUs.scss";
+import Footer from "../../components/footer/Footer";
+import Pages from "../../components/pages/Pages";
+import Header from "../../components/header/Header";
 
 function ContactUsPage() {
   const navigate = useNavigate();
 
   return (
     <>
+      <Header />
+      <Pages />
       <div className="contactUs">
         <div className="contactUsContainer">
           <div className="top">
@@ -40,8 +45,15 @@ function ContactUsPage() {
                 marked *
               </p>
               <form>
-                <input type="text" id="name" placeholder="Name *" /> <br />
-                <input type="email" id="email" placeholder="Email *" /> <br />
+                <input type="text" id="name" placeholder="Name *" required />{" "}
+                <br />
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Email *"
+                  required
+                />{" "}
+                <br />
                 <textarea
                   id="message"
                   rows="6"
@@ -54,6 +66,7 @@ function ContactUsPage() {
           </div>
         </div>
       </div>
+      <Footer />
     </>
   );
 }

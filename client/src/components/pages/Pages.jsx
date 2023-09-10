@@ -10,7 +10,7 @@ function Pages() {
         <div className="pagesContainer">
           <ul>
             <li>
-              <a href="#">HOME</a>
+              <a onClick={() => navigate("/")}>HOME</a>
             </li>
             <li>
               <a onClick={() => navigate("/aboutUs")}>ABOUT US</a>
@@ -20,6 +20,9 @@ function Pages() {
             </li>
             <li>
               <a onClick={() => navigate("/contactUs")}>CONTACT US</a>
+            </li>
+            <li>
+              <a onClick={() => navigate("/quiz")}>QUIZ</a>
             </li>
           </ul>
         </div>

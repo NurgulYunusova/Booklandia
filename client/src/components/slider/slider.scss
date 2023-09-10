@@ -1,6 +1,6 @@
 .swiper {
-  width: 320px;
-  height: 466px;
+  width: 300px;
+  height: auto;
 
   img {
     object-fit: cover;
@@ -9,31 +9,26 @@
   }
 }
 
-// .swiper-slide {
-//   border-radius: 10px;
-// }
+@media screen and (min-width: 479px) and (max-width: 767px) {
+  .swiper {
+    width: 150px;
+  }
+}
 
-// .swiper-slide:nth-child(1n) {
-//   background-image: url("../../assets/images/anna_karenina.jpg");
-//   background-size: cover;
-// }
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .swiper {
+    width: 180px;
+  }
+}
 
-// .swiper-slide:nth-child(2n) {
-//   background-image: url("../../assets/images/ay-isigi-sokagi.png");
-//   background-size: cover;
-// }
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+  .swiper {
+    width: 250px;
+  }
+}
 
-// .swiper-slide:nth-child(3n) {
-//   background-image: url("../../assets/images/bir-idam-mahkumunun-son-gunu.png");
-//   background-size: cover;
-// }
-
-// .swiper-slide:nth-child(4n) {
-//   background-image: url("../../assets/images/satranc.png");
-//   background-size: cover;
-// }
-
-// .swiper-slide:nth-child(5n) {
-//   background-image: url("../../assets/images/the-first-90-days.png");
-//   background-size: cover;
-// }
+@media screen and (min-width: 1199px) and (max-width: 1439px) {
+  .swiper {
+    width: 280px;
+  }
+}

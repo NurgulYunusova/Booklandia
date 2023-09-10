@@ -1,0 +1,253 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+.profile {
+  width: 100%;
+
+  &Container {
+    width: 80%;
+    margin: 0 auto 100px;
+
+    .top {
+      @include center($justify-content: space-between);
+      font-family: $base-font2;
+      padding: 30px 0;
+      color: $base-color3;
+
+      h1 {
+        font-size: 64px;
+      }
+
+      .breadCrumb {
+        @include center();
+        gap: 12px;
+        font-size: 16px;
+        font-weight: 600;
+
+        .fa-house,
+        p {
+          color: $base-color1;
+          font-size: 14px;
+          cursor: pointer;
+        }
+
+        .fa-angle-right {
+          font-size: 12px;
+          color: #555f66;
+        }
+
+        p {
+          font-family: "Open Sans", sans-serif;
+        }
+      }
+    }
+
+    .verticalTabsContainer {
+      @include center(
+        $justify-content: space-between,
+        $align-items: flex-start
+      );
+
+      .tabs {
+        width: 20%;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        padding: 30px;
+
+        .tab {
+          font-family: $base-font2;
+          color: $base-color3;
+          text-align: left;
+        }
+      }
+
+      .tabContent {
+        width: 75%;
+        font-family: $base-font2;
+        box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+        padding: 30px 50px;
+
+        .profile {
+          @include center(
+            $justify-content: space-between,
+            $align-items: flex-start
+          );
+
+          .leftSide {
+            .infos {
+              @include center();
+              gap: 30px;
+
+              .dataNames {
+                color: #001a40c6;
+                font-weight: 400;
+                line-height: 3;
+              }
+
+              .datas {
+                line-height: 3;
+                font-weight: 600;
+                color: $base-color3;
+                letter-spacing: 0.7;
+              }
+            }
+
+            form {
+              font-family: $base-font2;
+              color: $base-color3;
+              display: flex;
+              flex-direction: column;
+
+              input {
+                padding: 16px 22px;
+                font-size: 14px;
+                width: 300px;
+                outline: none;
+                background: transparent;
+                border: 1px solid #ccc;
+
+                &::placeholder {
+                  font-size: 14px;
+                  font-family: $base-font2;
+                  font-weight: 500;
+                }
+              }
+
+              button {
+                margin-top: 30px;
+                @include button();
+              }
+            }
+
+            .editButton {
+              button {
+                @include button();
+                margin-top: 30px;
+              }
+            }
+          }
+
+          .rightSide {
+            @include center();
+            flex-direction: column;
+
+            p {
+              color: #001a40c6;
+              font-weight: 400;
+              line-height: 2.5;
+            }
+
+            img {
+              width: 150px;
+              height: 150px;
+              margin: 10px 0 20px;
+              object-fit: cover;
+            }
+
+            button {
+              @include button();
+            }
+          }
+        }
+
+        .orders {
+          display: flex;
+          flex-direction: column;
+          gap: 30px;
+
+          .order {
+            border: 1px solid #b6b6b6;
+            padding: 20px;
+
+            .images {
+              @include center($justify-content: flex-start);
+              gap: 20px;
+              overflow: hidden;
+
+              img {
+                width: 80px;
+                height: 120px;
+              }
+            }
+
+            .infosAboutOrder {
+              @include center($justify-content: flex-start);
+              gap: 80px;
+              margin-top: 30px;
+              color: $base-color3;
+
+              h4 {
+                font-weight: 700;
+                letter-spacing: 0.3px;
+              }
+
+              p {
+                font-weight: 500;
+                font-size: 14px;
+                margin-top: 5px;
+                color: #001a40c6;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .profile {
+    &Container {
+      width: 85%;
+
+      .verticalTabsContainer {
+        flex-direction: column;
+        gap: 30px;
+
+        .tabs {
+          width: 100%;
+        }
+
+        .tabContent {
+          width: 100%;
+          padding: 15px 25px;
+
+          .profile {
+            flex-direction: column;
+
+            .leftSide {
+              .infos {
+                gap: 20px;
+
+                .dataNames {
+                  line-height: 3;
+
+                  p {
+                    font-size: 11px;
+                  }
+                }
+
+                .datas {
+                  p {
+                    font-size: 11px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 479px) and (max-width: 767px) {
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+}
+
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+}
+
+@media screen and (min-width: 1199px) and (max-width: 1439px) {
+}

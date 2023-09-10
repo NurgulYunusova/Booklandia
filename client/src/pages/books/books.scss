@@ -6,7 +6,7 @@
 
   &Container {
     width: 80%;
-    margin: 0 auto;
+    margin: 0 auto 100px;
 
     .top {
       @include center($justify-content: space-between);
@@ -38,6 +38,633 @@
 
         p {
           font-family: "Open Sans", sans-serif;
+        }
+      }
+    }
+
+    .bottom {
+      @include center(
+        $justify-content: space-between,
+        $align-items: flex-start
+      );
+
+      .leftSection {
+        width: 20%;
+        font-family: $base-font2;
+        color: $base-color3;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+
+        .genres,
+        .authors {
+          border: 1px solid #ccc;
+          padding: 15px 25px;
+
+          h3 {
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 24px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 15px;
+          }
+
+          .genresList,
+          .authorsList {
+            ul {
+              list-style: none;
+              line-height: 2.5;
+
+              li {
+                font-size: 14px;
+                @include center($justify-content: flex-start);
+                gap: 10px;
+                font-weight: 500;
+                cursor: pointer;
+                color: #001a40aa;
+                transition: all 0.1s ease-in-out;
+
+                .square {
+                  width: 15px;
+                  height: 15px;
+                  border: 1px solid #003366;
+                  transition: all 0.1s ease-in-out;
+                }
+              }
+            }
+          }
+        }
+
+        .filterByPrice {
+          border: 1px solid #ccc;
+          padding: 15px 25px;
+          font-family: $base-font2;
+
+          h3 {
+            margin-bottom: 15px;
+            font-weight: 700;
+            font-size: 24px;
+            border-bottom: 1px solid #ccc;
+            padding-bottom: 15px;
+          }
+
+          .minPrice {
+            margin-bottom: 15px;
+          }
+
+          input {
+            width: 100%;
+            padding: 16px 22px;
+            font-size: 15px;
+            outline: none;
+            background: transparent;
+            border: 1px solid #ccc;
+
+            &::placeholder {
+              font-size: 14px;
+              font-family: $base-font2;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+
+      .rightSection {
+        width: 76%;
+
+        .dropdown {
+          margin-bottom: 30px;
+          @include center($justify-content: flex-start);
+          gap: 15px;
+
+          h3 {
+            font-family: $base-font2;
+            font-size: 18px;
+            font-weight: 700;
+          }
+
+          select {
+            appearance: none;
+            font-family: $base-font2;
+            font-weight: 500;
+            border: 1px solid #ccc;
+            outline: 0;
+            background: transparent;
+            color: $base-color3;
+            cursor: pointer;
+            font-size: 15px;
+            padding: 10px 15px;
+            width: 200px;
+
+            option {
+              color: $base-color1;
+              background-color: transparent;
+            }
+
+            &:focus {
+              outline: none;
+            }
+
+            &::-ms-expand {
+              display: none;
+            }
+          }
+        }
+
+        .booksShop {
+          @include center(
+            $justify-content: space-between,
+            $align-items: flex-start
+          );
+          flex-wrap: wrap;
+          row-gap: 30px;
+
+          .booksAndButtons {
+            position: relative;
+
+            .book {
+              box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+              padding: 15px;
+              transition: all 0.2s ease-in-out;
+              cursor: pointer;
+              width: 290px;
+
+              &:hover {
+                box-shadow: rgba(0, 0, 0, 0.2) 0px 12px 28px 0px,
+                  rgba(0, 0, 0, 0.1) 0px 2px 4px 0px,
+                  rgba(255, 255, 255, 0.05) 0px 0px 0px 1px inset;
+              }
+
+              .bookImage {
+                img {
+                  width: 260px;
+                  height: 400px;
+                  margin-bottom: 10px;
+                }
+              }
+
+              .bookInfo {
+                font-family: $base-font2;
+                color: $base-color3;
+                @include center($align-items: flex-start);
+                flex-direction: column;
+                gap: 4px;
+                width: 100%;
+                overflow: hidden;
+
+                .bookTitle {
+                  font-weight: 600;
+                  font-size: 18px;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  max-width: 100%;
+                }
+
+                .stars {
+                  font-size: 20px;
+                }
+
+                .bookAuthor {
+                  font-size: 12px;
+                  font-weight: 600;
+                  color: #001a407b;
+                }
+
+                .price {
+                  font-size: 24px;
+                  font-weight: 700;
+                  letter-spacing: 0.5px;
+                  color: $base-color1;
+                }
+
+                .wishlist {
+                  @include center();
+                  gap: 5px;
+                  width: max-content;
+                  padding: 8px 0;
+                  font-family: $base-font2;
+                  color: $base-color1;
+                  border: none;
+                  font-weight: 500;
+                  background-color: transparent;
+                  font-size: 13px;
+                  cursor: pointer;
+                  color: #6f7275;
+                  transition: all 0.2s ease-in-out;
+
+                  &:hover {
+                    color: rgb(207, 24, 24);
+                  }
+                }
+              }
+            }
+
+            &:hover .buttons button {
+              opacity: 1;
+            }
+
+            .buttons {
+              @include center();
+              flex-direction: column;
+              position: absolute;
+              bottom: 0;
+              right: 0;
+              transition: all 0.2s ease-in-out;
+              padding: 10px 0;
+
+              button {
+                border: none;
+                outline: none;
+                padding: 7px 18px;
+                background: none;
+                cursor: pointer;
+                opacity: 0;
+                transition: all 0.3s ease-in-out;
+                color: $base-color3;
+
+                .buttonsIcons {
+                  font-size: 25px;
+                }
+              }
+
+              .cart:hover {
+                color: rgb(18, 95, 172);
+              }
+
+              .fav:hover {
+                color: rgb(207, 24, 24);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 767px) {
+  .books {
+    &Container {
+      width: 85%;
+
+      .bottom {
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+        width: 100%;
+
+        .leftSection {
+          width: 100%;
+          gap: 15px;
+
+          .genres,
+          .authors {
+            h3 {
+              font-size: 20px;
+            }
+
+            .genresList,
+            .authorsList {
+              ul {
+                line-height: 2;
+
+                li {
+                  font-size: 12px;
+
+                  .square {
+                    width: 13px;
+                    height: 13px;
+                  }
+                }
+              }
+            }
+          }
+
+          .filterByPrice {
+            h3 {
+              font-size: 20px;
+            }
+
+            input {
+              padding: 10px 15px;
+              font-size: 12px;
+
+              &::placeholder {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+
+        .rightSection {
+          width: 100%;
+
+          .dropdown {
+            justify-content: space-between;
+
+            select {
+              font-size: 12px;
+              width: 180px;
+            }
+          }
+
+          .booksShop {
+            width: 100%;
+
+            .booksAndButtons {
+              width: 100%;
+
+              .book {
+                width: 100%;
+                padding: 15px 20px;
+                @include center($align-items: flex-start);
+                gap: 15px;
+
+                .bookImage {
+                  height: 150px;
+
+                  img {
+                    width: 100px;
+                    height: 100%;
+                    margin: 0;
+                  }
+                }
+
+                .bookInfo {
+                  overflow: hidden;
+
+                  .bookTitle {
+                    font-size: 16px;
+                  }
+
+                  .stars {
+                    font-size: 18px;
+                  }
+
+                  .bookAuthor {
+                    font-size: 12px;
+                  }
+
+                  .price {
+                    font-size: 22px;
+                  }
+                }
+              }
+
+              .buttons {
+                padding: 0;
+                flex-direction: row;
+                padding-bottom: 15px;
+                padding-right: 10px;
+
+                button {
+                  opacity: 1;
+                  padding: 0 5px;
+
+                  .buttonsIcons {
+                    font-size: 20px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .books {
+    &Container {
+      width: 85%;
+
+      .bottom {
+        width: 100%;
+        gap: 5%;
+
+        .leftSection {
+          width: 30%;
+          gap: 15px;
+
+          .genres,
+          .authors {
+            h3 {
+              font-size: 20px;
+            }
+
+            .genresList,
+            .authorsList {
+              ul {
+                line-height: 2;
+
+                li {
+                  font-size: 12px;
+
+                  .square {
+                    width: 13px;
+                    height: 13px;
+                  }
+                }
+              }
+            }
+          }
+
+          .filterByPrice {
+            h3 {
+              font-size: 20px;
+            }
+
+            input {
+              padding: 10px 15px;
+              font-size: 12px;
+
+              &::placeholder {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+
+        .rightSection {
+          width: 65%;
+
+          .dropdown {
+            select {
+              font-size: 12px;
+              width: 180px;
+            }
+          }
+
+          .booksShop {
+            width: 100%;
+            row-gap: 20px;
+
+            .booksAndButtons {
+              .book {
+                width: 200px;
+
+                .bookImage {
+                  height: 260px;
+
+                  img {
+                    width: 170px;
+                    height: 100%;
+                  }
+                }
+
+                .bookInfo {
+                  margin-top: 15px;
+                }
+              }
+
+              .buttons {
+                padding: 0;
+                flex-direction: row;
+                padding-bottom: 15px;
+                padding-right: 10px;
+
+                button {
+                  opacity: 1;
+                  padding: 0 5px;
+
+                  .buttonsIcons {
+                    font-size: 20px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+  .books {
+    &Container {
+      width: 85%;
+
+      .bottom {
+        width: 100%;
+        gap: 5%;
+
+        .leftSection {
+          width: 30%;
+        }
+
+        .rightSection {
+          width: 65%;
+
+          .dropdown {
+            select {
+              font-size: 12px;
+              width: 180px;
+            }
+          }
+
+          .booksShop {
+            width: 100%;
+            row-gap: 20px;
+
+            .booksAndButtons {
+              .book {
+                width: 200px;
+
+                .bookImage {
+                  height: 260px;
+
+                  img {
+                    width: 170px;
+                    height: 100%;
+                  }
+                }
+
+                .bookInfo {
+                  margin-top: 15px;
+                }
+              }
+
+              .buttons {
+                padding: 0;
+                flex-direction: row;
+                padding-bottom: 15px;
+                padding-right: 10px;
+
+                button {
+                  opacity: 1;
+                  padding: 0 5px;
+
+                  .buttonsIcons {
+                    font-size: 20px;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1199px) and (max-width: 1439px) {
+  .books {
+    &Container {
+      width: 85%;
+
+      .bottom {
+        width: 100%;
+        gap: 5%;
+
+        .leftSection {
+          width: 25%;
+        }
+
+        .rightSection {
+          width: 70%;
+
+          .booksShop {
+            width: 100%;
+            gap: 20px;
+
+            .booksAndButtons {
+              .book {
+                width: 230px;
+
+                .bookImage {
+                  height: 300px;
+
+                  img {
+                    width: 200px;
+                    height: 100%;
+                  }
+                }
+
+                .bookInfo {
+                  margin-top: 15px;
+                }
+              }
+
+              .buttons {
+                padding: 0;
+                flex-direction: row;
+                padding-bottom: 15px;
+                padding-right: 10px;
+
+                button {
+                  opacity: 1;
+                  padding: 0 5px;
+
+                  .buttonsIcons {
+                    font-size: 20px;
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }

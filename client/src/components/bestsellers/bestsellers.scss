@@ -20,9 +20,7 @@
 
     .books {
       width: 75%;
-      color: $base-color3;
       @include center($justify-content: space-between);
-      flex-wrap: wrap;
 
       .book {
         @include center($align-items: flex-start);
@@ -34,17 +32,19 @@
         box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
         transition: all 0.3s ease-in-out;
         cursor: pointer;
+        color: $base-color3;
 
         .bookInfo {
           font-weight: 500;
 
           .title {
             font-size: 22px;
+            font-weight: 700;
           }
 
           .author {
             font-size: 14px;
-            margin: 2px 0 8px;
+            margin: 3px 0 8px;
           }
         }
 
@@ -60,6 +60,156 @@
 
         &:hover {
           box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .bestsellers {
+    &Container {
+      width: 85%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+
+      .heading {
+        width: 80%;
+
+        h1 {
+          text-align: center;
+        }
+      }
+
+      .books {
+        flex-direction: column;
+
+        gap: 35px;
+        width: 100%;
+
+        .book {
+          width: 80%;
+          padding: 25px;
+          height: auto;
+          gap: 15px;
+
+          .bookImage {
+            img {
+              width: 55%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 479px) and (max-width: 767px) {
+  .bestsellers {
+    &Container {
+      width: 85%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+
+      .heading {
+        width: 60%;
+
+        h1 {
+          text-align: center;
+          font-size: 34px;
+        }
+      }
+
+      .books {
+        flex-direction: column;
+
+        gap: 35px;
+        width: 100%;
+
+        .book {
+          width: 80%;
+          padding: 25px;
+          height: auto;
+          gap: 15px;
+          flex-direction: row;
+
+          .bookInfo {
+            .title {
+              font-size: 26px;
+            }
+
+            .author {
+              font-size: 18px;
+            }
+          }
+
+          .bookImage {
+            width: 50%;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 1199px) {
+  .bestsellers {
+    &Container {
+      width: 85%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+
+      .heading {
+        width: 50%;
+
+        h1 {
+          text-align: center;
+          font-size: 36px;
+        }
+      }
+
+      .books {
+        gap: 40px;
+        width: 100%;
+
+        .book {
+          height: auto;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1199px) and (max-width: 1439px) {
+  .bestsellers {
+    &Container {
+      width: 85%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+
+      .heading {
+        width: 40%;
+
+        h1 {
+          text-align: center;
+          font-size: 45px;
+        }
+      }
+
+      .books {
+        gap: 40px;
+        width: 100%;
+
+        .book {
+          height: auto;
         }
       }
     }
