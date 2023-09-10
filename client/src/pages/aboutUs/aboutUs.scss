@@ -1,0 +1,342 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+.aboutUs {
+  width: 100%;
+
+  &Container {
+    width: 80%;
+    margin: 0 auto 100px;
+    font-family: $base-font2;
+
+    .top {
+      @include center($justify-content: space-between);
+      font-family: $base-font2;
+      padding: 30px 0;
+      color: $base-color3;
+
+      h1 {
+        font-size: 64px;
+      }
+
+      .breadCrumb {
+        @include center();
+        gap: 12px;
+        font-size: 16px;
+        font-weight: 600;
+
+        .fa-house,
+        p {
+          color: $base-color1;
+          font-size: 14px;
+          cursor: pointer;
+        }
+
+        .fa-angle-right {
+          font-size: 12px;
+          color: #555f66;
+        }
+
+        p {
+          font-family: "Open Sans", sans-serif;
+        }
+      }
+    }
+
+    .topImage {
+      @include center();
+      margin-top: 30px;
+    }
+
+    .heading {
+      h2 {
+        text-align: center;
+        width: 55%;
+        font-size: 24px;
+        font-weight: 700;
+        margin: 25px auto 50px;
+      }
+    }
+
+    .bookstoreImage {
+      width: 100%;
+
+      img {
+        width: 100%;
+        border-radius: 10px;
+        object-fit: cover;
+      }
+    }
+
+    .ourStory {
+      h2 {
+        font-size: 48px;
+        text-align: center;
+        margin: 50px 0 20px;
+      }
+
+      p {
+        font-size: 16px;
+        text-align: center;
+        font-weight: 400;
+        margin-bottom: 50px;
+      }
+    }
+
+    .missionVision {
+      @include center($justify-content: space-between);
+      gap: 60px;
+
+      h3 {
+        font-size: 24px;
+        text-align: center;
+        margin-bottom: 10px;
+      }
+
+      p {
+        font-size: 16px;
+        text-align: center;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .aboutUs {
+    &Container {
+      width: 85%;
+
+      .topImage {
+        img {
+          width: 40%;
+        }
+      }
+
+      .heading {
+        h2 {
+          font-size: 15px;
+          width: 100%;
+          margin-bottom: 25px;
+        }
+      }
+
+      .bookstoreImage {
+        img {
+          height: 150px;
+        }
+      }
+
+      .ourStory {
+        h2 {
+          font-size: 32px;
+          margin: 10px 0 15px;
+        }
+
+        p {
+          font-size: 14px;
+          margin-bottom: 30px;
+        }
+      }
+
+      .missionVision {
+        flex-direction: column;
+        gap: 30px;
+
+        h3 {
+          font-size: 20px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 479px) and (max-width: 767px) {
+  .aboutUs {
+    &Container {
+      width: 85%;
+
+      .topImage {
+        img {
+          width: 30%;
+        }
+      }
+
+      .heading {
+        h2 {
+          font-size: 15px;
+          width: 80%;
+          margin-bottom: 30px;
+        }
+      }
+
+      .ourStory {
+        h2 {
+          font-size: 36px;
+          margin: 25px 0 20px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+      }
+
+      .missionVision {
+        flex-direction: row;
+        gap: 35px;
+
+        h3 {
+          font-size: 20px;
+        }
+
+        p {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .aboutUs {
+    &Container {
+      width: 85%;
+
+      .topImage {
+        img {
+          width: 30%;
+        }
+      }
+
+      .heading {
+        h2 {
+          font-size: 23px;
+          width: 80%;
+          margin-bottom: 30px;
+        }
+      }
+
+      .ourStory {
+        h2 {
+          font-size: 36px;
+          margin: 25px 0 20px;
+        }
+
+        p {
+          font-size: 18px;
+        }
+      }
+
+      .missionVision {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 50px;
+
+        h3 {
+          font-size: 24px;
+        }
+
+        p {
+          font-size: 18px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+  .aboutUs {
+    &Container {
+      width: 85%;
+
+      .topImage {
+        img {
+          width: 30%;
+        }
+      }
+
+      .heading {
+        h2 {
+          font-size: 24px;
+          width: 80%;
+          margin-bottom: 30px;
+        }
+      }
+
+      .ourStory {
+        h2 {
+          font-size: 38px;
+          margin: 25px 0 20px;
+        }
+
+        p {
+          font-size: 20px;
+        }
+      }
+
+      .missionVision {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 50px;
+
+        h3 {
+          font-size: 26px;
+        }
+
+        p {
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1199px) and (max-width: 1439px) {
+  .aboutUs {
+    &Container {
+      width: 85%;
+
+      .topImage {
+        img {
+          width: 30%;
+        }
+      }
+
+      .heading {
+        h2 {
+          font-size: 26px;
+          width: 65%;
+          margin-bottom: 40px;
+        }
+      }
+
+      .ourStory {
+        h2 {
+          font-size: 42px;
+          margin: 35px 0 20px;
+        }
+
+        p {
+          font-size: 22px;
+        }
+      }
+
+      .missionVision {
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 50px;
+
+        h3 {
+          font-size: 38px;
+        }
+
+        p {
+          font-size: 22px;
+        }
+      }
+    }
+  }
+}

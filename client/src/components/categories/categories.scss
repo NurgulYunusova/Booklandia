@@ -1,0 +1,301 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+.categories {
+  width: 100%;
+  background-color: $base-color2;
+
+  &Container {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    padding: 40px 0;
+
+    .row {
+      @include center($justify-content: space-between);
+      width: 100%;
+
+      .col {
+        flex-basis: 30%;
+        height: 250px;
+
+        .box {
+          position: relative;
+          overflow: hidden;
+          background-size: cover;
+          background-repeat: no-repeat;
+          height: 100%;
+          cursor: pointer;
+          transition: all 0.2s ease-in-out;
+
+          &:hover:not(.explore) {
+            transform: scale(1.03);
+          }
+
+          h4 {
+            width: 100%;
+            height: 100%;
+            @include center($align-items: flex-end);
+            color: #fff;
+            font-family: $base-font2;
+            font-weight: 600;
+            font-size: 20px;
+            padding-bottom: 25px;
+            letter-spacing: 1px;
+            background-color: rgba(44, 44, 44, 0.7);
+          }
+        }
+
+        .explore {
+          @include center();
+          flex-direction: column;
+          color: $base-color3;
+          font-family: $base-font2;
+          font-weight: 600;
+          font-size: 28px;
+          text-align: center;
+          gap: 25px;
+          border: 2px solid $base-color1;
+
+          button {
+            @include button();
+          }
+        }
+
+        .romance {
+          background-image: url("../../assets/images/romance.png");
+        }
+
+        .thriller {
+          background-image: url("../../assets/images/thriller.png");
+          background-size: cover;
+        }
+
+        .fantasy {
+          background-image: url("../../assets/images/fantasy.png");
+          background-size: cover;
+        }
+
+        .history {
+          background-image: url("../../assets/images/history.jpg");
+          background-size: cover;
+        }
+
+        .selfHelp {
+          background-image: url("../../assets/images/selfHelp.jpg");
+          background-size: cover;
+        }
+      }
+
+      .big {
+        flex-basis: 35%;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .categories {
+    &Container {
+      width: 85%;
+      gap: 15px;
+
+      .row {
+        flex-direction: column;
+        gap: 15px;
+
+        .col {
+          width: 100%;
+
+          .box {
+            height: 80px;
+
+            h4 {
+              padding: 0;
+              align-items: center;
+            }
+          }
+        }
+
+        .first {
+          order: -1;
+
+          .explore {
+            gap: 10px;
+            height: 120px;
+
+            h3 {
+              font-size: 18px;
+              width: 75%;
+            }
+
+            button {
+              font-size: 12px;
+              padding: 5px 15px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 479px) and (max-width: 767px) {
+  .categories {
+    &Container {
+      width: 85%;
+      gap: 15px;
+
+      .row {
+        .col {
+          width: 100%;
+          height: auto;
+
+          .box {
+            height: 120px;
+
+            h4 {
+              padding: 0;
+              align-items: center;
+            }
+          }
+        }
+
+        .first {
+          .explore {
+            gap: 12px;
+
+            h3 {
+              font-size: 15px;
+              width: 75%;
+            }
+
+            button {
+              font-size: 11px;
+              padding: 3px 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .categories {
+    &Container {
+      width: 85%;
+      gap: 15px;
+
+      .row {
+        .col {
+          width: 100%;
+          height: auto;
+
+          .box {
+            height: 120px;
+
+            h4 {
+              padding: 0;
+              align-items: center;
+            }
+          }
+        }
+
+        .first {
+          .explore {
+            gap: 12px;
+
+            h3 {
+              font-size: 18px;
+              width: 75%;
+            }
+
+            button {
+              font-size: 11px;
+              padding: 3px 12px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+  .categories {
+    &Container {
+      width: 85%;
+      gap: 15px;
+
+      .row {
+        .col {
+          width: 100%;
+          height: auto;
+
+          .box {
+            height: 170px;
+
+            h4 {
+              padding-bottom: 20px;
+            }
+          }
+        }
+
+        .first {
+          .explore {
+            gap: 15px;
+
+            h3 {
+              font-size: 20px;
+              width: 75%;
+            }
+
+            button {
+              font-size: 13px;
+              padding: 5px 13px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1199px) and (max-width: 1439px) {
+  .categories {
+    &Container {
+      width: 85%;
+      gap: 15px;
+
+      .row {
+        .col {
+          width: 100%;
+          height: auto;
+
+          .box {
+            height: 220px;
+
+            h4 {
+              padding-bottom: 20px;
+            }
+          }
+        }
+
+        .first {
+          .explore {
+            gap: 25px;
+
+            h3 {
+              font-size: 28px;
+              width: 85%;
+            }
+          }
+        }
+      }
+    }
+  }
+}

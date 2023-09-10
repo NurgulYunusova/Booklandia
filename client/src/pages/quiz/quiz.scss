@@ -1,0 +1,308 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+.quiz {
+  width: 100%;
+  height: 100vh;
+  @include center();
+  background-image: url("../../assets/images/quizBackground.jpg");
+
+  &Container {
+    width: 80%;
+    max-width: 600px;
+    min-width: 300px;
+    background: #dfdfdf;
+    padding: 30px 60px;
+    font-family: $base-font2;
+
+    .userGreeting {
+      @include center();
+      flex-direction: column;
+      color: $base-color3;
+
+      p {
+        font-weight: 700;
+        font-size: 24px;
+        margin-bottom: 30px;
+      }
+    }
+
+    .buttonDiv {
+      @include center();
+
+      .startButton {
+        @include button();
+      }
+    }
+
+    .activeQuestionNo {
+      font-size: 38px;
+      font-weight: 500;
+      color: $base-color1;
+    }
+
+    .totalQuestion {
+      font-size: 16px;
+      font-weight: 500;
+      color: #0033667e;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 500;
+      margin: 15px 0 20px;
+      color: $base-color3;
+    }
+
+    ul {
+      li {
+        text-decoration: none;
+        list-style: none;
+        color: $base-color1;
+        font-size: 15px;
+        background: #dfdfdf;
+        border: 1px solid $base-color3;
+        padding: 15px 25px;
+        margin-top: 20px;
+        cursor: pointer;
+        transition: all 0.2s ease-in-out;
+
+        &:hover {
+          background-color: #cbcbcb;
+        }
+      }
+    }
+
+    .selectedAnswer {
+      background-color: #003366;
+      color: #e7e6dd;
+      border: 1px solid $base-color1;
+
+      &:hover {
+        background-color: #003366;
+      }
+    }
+
+    .next {
+      @include button();
+      margin-top: 20px;
+      font-size: 17px;
+
+      &:disabled {
+        background: #e7e8e9;
+        color: #9fa3a9;
+        border: 2px solid #cbcbcb;
+        cursor: not-allowed;
+      }
+    }
+
+    .flexRight {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .result {
+      h3 {
+        font-size: 34px;
+        text-align: center;
+        margin-bottom: 25px;
+        color: $base-color3;
+      }
+
+      p {
+        font-size: 21px;
+        font-weight: 500;
+        color: $base-color3;
+        letter-spacing: 0.5px;
+
+        &:not(:last-child) {
+          margin-bottom: 15px;
+        }
+
+        span {
+          color: $base-color1;
+          font-size: 24px;
+          font-weight: 700;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .quiz {
+    &Container {
+      width: 85%;
+      padding: 30px 40px;
+
+      .userGreeting {
+        p {
+          font-size: 18px;
+          margin-bottom: 20px;
+        }
+      }
+
+      .buttonDiv {
+        .startButton {
+          padding: 5px 10px;
+          font-size: 13px;
+        }
+      }
+
+      .activeQuestionNo {
+        font-size: 34px;
+      }
+
+      .totalQuestion {
+        font-size: 14px;
+      }
+
+      h2 {
+        font-size: 16px;
+        margin: 15px 0;
+      }
+
+      ul {
+        li {
+          font-size: 13px;
+          padding: 10px 20px;
+          margin-top: 13px;
+        }
+      }
+
+      .next {
+        padding: 6px 16px;
+        font-size: 14px;
+      }
+
+      .result {
+        h3 {
+          font-size: 28px;
+          margin-bottom: 15px;
+        }
+
+        p {
+          font-size: 16px;
+
+          &:not(:last-child) {
+            margin-bottom: 10px;
+          }
+
+          span {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 479px) and (max-width: 767px) {
+  .quiz {
+    &Container {
+      width: 85%;
+      padding: 30px 40px;
+
+      .userGreeting {
+        p {
+          font-size: 20px;
+          margin-bottom: 20px;
+        }
+      }
+
+      .buttonDiv {
+        .startButton {
+          padding: 6px 12px;
+          font-size: 14px;
+        }
+      }
+
+      .activeQuestionNo {
+        font-size: 34px;
+      }
+
+      .totalQuestion {
+        font-size: 14px;
+      }
+
+      h2 {
+        font-size: 16px;
+        margin: 15px 0;
+      }
+
+      ul {
+        li {
+          font-size: 13px;
+          padding: 10px 20px;
+          margin-top: 13px;
+        }
+      }
+
+      .next {
+        padding: 6px 16px;
+        font-size: 14px;
+      }
+
+      .result {
+        h3 {
+          font-size: 30px;
+          margin-bottom: 15px;
+        }
+
+        p {
+          font-size: 18px;
+
+          &:not(:last-child) {
+            margin-bottom: 12px;
+          }
+
+          span {
+            font-size: 22px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .quiz {
+    &Container {
+      width: 85%;
+
+      .userGreeting {
+        p {
+          font-size: 22px;
+        }
+      }
+
+      .activeQuestionNo {
+        font-size: 36px;
+      }
+
+      h2 {
+        font-size: 18px;
+      }
+
+      ul {
+        li {
+          padding: 12px 20px;
+        }
+      }
+
+      .result {
+        h3 {
+          font-size: 32px;
+        }
+
+        p {
+          font-size: 19px;
+
+          span {
+            font-size: 23px;
+          }
+        }
+      }
+    }
+  }
+}

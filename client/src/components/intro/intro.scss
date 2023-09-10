@@ -1,0 +1,183 @@
+@import "../../assets/sass/variables.scss";
+@import "../../assets/sass/mixins.scss";
+
+.intro {
+  width: 100%;
+  background-color: $base-color2;
+
+  &Container {
+    width: 80%;
+    margin: 0 auto;
+    @include center($justify-content: space-between);
+    padding: 60px 0 68px;
+
+    .firstSide {
+      width: 38%;
+      color: $base-color3;
+
+      h1 {
+        font-size: 72px;
+        font-family: $base-font1;
+      }
+
+      p {
+        font-size: 20px;
+        font-family: $base-font2;
+        letter-spacing: 1px;
+        margin: 15px 0 30px;
+      }
+
+      button {
+        @include center();
+        gap: 10px;
+        @include button();
+      }
+    }
+
+    .secondSide {
+      padding-right: 50px;
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .intro {
+    &Container {
+      width: 85%;
+      padding: 30px 0;
+
+      .firstSide {
+        width: 100%;
+        @include center();
+        flex-direction: column;
+
+        h1 {
+          font-size: 28px;
+          text-align: center;
+        }
+
+        p {
+          font-size: 16px;
+          text-align: center;
+          margin: 10px 0 20px;
+          letter-spacing: 0;
+        }
+
+        button {
+          padding: 6px 10px;
+          font-size: 12px;
+
+          .arrow {
+            font-size: 18px;
+          }
+        }
+      }
+
+      .secondSide {
+        display: none;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 479px) and (max-width: 767px) {
+  .intro {
+    &Container {
+      width: 85%;
+      padding: 30px 0;
+
+      .firstSide {
+        width: 45%;
+
+        h1 {
+          font-size: 28px;
+        }
+
+        p {
+          font-size: 16px;
+          margin: 15px 0 20px;
+          letter-spacing: 0;
+        }
+
+        button {
+          padding: 6px 10px;
+          font-size: 12px;
+
+          .arrow {
+            font-size: 18px;
+          }
+        }
+      }
+
+      .secondSide {
+        padding-right: 30px;
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .intro {
+    &Container {
+      width: 85%;
+      padding: 30px 0;
+
+      .firstSide {
+        width: 45%;
+
+        h1 {
+          font-size: 36px;
+        }
+
+        p {
+          font-size: 18px;
+          margin: 15px 0 20px;
+          letter-spacing: 0.5px;
+        }
+
+        button {
+          padding: 8px 12px;
+          font-size: 13px;
+
+          .arrow {
+            font-size: 18px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+  .intro {
+    &Container {
+      width: 85%;
+      padding: 30px 0;
+
+      .firstSide {
+        width: 45%;
+
+        h1 {
+          font-size: 48px;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1199px) and (max-width: 1439px) {
+  .intro {
+    &Container {
+      width: 85%;
+      padding: 30px 0;
+
+      .firstSide {
+        width: 45%;
+
+        h1 {
+          font-size: 48px;
+        }
+      }
+    }
+  }
+}
