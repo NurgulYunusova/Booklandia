@@ -148,27 +148,56 @@ function Header() {
           </div>
 
           {isLoggedIn ? (
-            <div className="userIcons">
-              <span onClick={() => handleWishlistClick()}>
-                <Badge badgeContent={wishlist.length}>
-                  <FavoriteBorderOutlinedIcon sx={{ fontSize: "20px" }} />
-                </Badge>
-                WISHLIST
-              </span>
-              <span className="cart" onClick={() => handleCartClick()}>
-                <Badge badgeContent={basket.length}>
-                  <AddShoppingCartOutlinedIcon sx={{ fontSize: "20px" }} />
-                </Badge>
-                CART
-              </span>
-              <span onClick={() => navigate("/profilePage")}>
-                <PersonOutlineOutlinedIcon sx={{ fontSize: "23px" }} />
-                ACCOUNT
-              </span>
-              <span onClick={() => handleLogOut()}>
-                <LogoutOutlinedIcon sx={{ fontSize: "30px" }} />
-              </span>
-            </div>
+            <>
+              <div className="userIcons desktop">
+                <span onClick={() => handleWishlistClick()}>
+                  <Badge badgeContent={wishlist.length}>
+                    <FavoriteBorderOutlinedIcon sx={{ fontSize: "20px" }} />
+                  </Badge>
+                  WISHLIST
+                </span>
+                <span className="cart" onClick={() => handleCartClick()}>
+                  <Badge badgeContent={basket.length}>
+                    <AddShoppingCartOutlinedIcon sx={{ fontSize: "20px" }} />
+                  </Badge>
+                  CART
+                </span>
+                <span onClick={() => navigate("/profilePage")}>
+                  <PersonOutlineOutlinedIcon sx={{ fontSize: "23px" }} />
+                  ACCOUNT
+                </span>
+                <span onClick={() => handleLogOut()}>
+                  <LogoutOutlinedIcon className="headerLogout" />
+                </span>
+              </div>
+
+              <div className="userIcons mobile">
+                <span onClick={() => handleWishlistClick()}>
+                  {wishlist.length > 0 ? (
+                    <Badge variant="dot">
+                      <FavoriteBorderOutlinedIcon className="headerFav" />
+                    </Badge>
+                  ) : (
+                    <FavoriteBorderOutlinedIcon className="headerFav" />
+                  )}
+                </span>
+                <span className="cart" onClick={() => handleCartClick()}>
+                  {basket.length > 0 ? (
+                    <Badge variant="dot">
+                      <AddShoppingCartOutlinedIcon className="headerCart" />
+                    </Badge>
+                  ) : (
+                    <AddShoppingCartOutlinedIcon className="headerCart" />
+                  )}
+                </span>
+                <span onClick={() => navigate("/profilePage")}>
+                  <PersonOutlineOutlinedIcon className="headerUser" />
+                </span>
+                <span onClick={() => handleLogOut()}>
+                  <LogoutOutlinedIcon className="headerLogout" />
+                </span>
+              </div>
+            </>
           ) : (
             <div className="authButtons">
               <button
