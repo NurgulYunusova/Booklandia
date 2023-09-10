@@ -32,7 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: "https://booklandia-sepia.vercel.app/",
+    origin: "https://booklandia-sepia.vercel.app",
     credentials: true,
   })
 );
