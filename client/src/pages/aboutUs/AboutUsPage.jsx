@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import "./aboutUs.scss";
 import about from "../../assets/images/about.png";
-import bookstoreImage from "../../assets/images/aboutBookstore.jpg";
+import bookstoreImage from "../../assets/images/AboutBookstore.jpg";
 import { useNavigate } from "react-router-dom";
 import Header from "../../components/header/Header";
 import Pages from "../../components/pages/Pages";
