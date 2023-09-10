@@ -70,7 +70,7 @@ function ProfilePage() {
         formData.append("photo", profileImage);
 
         const response = await axios.put(
-          `http://localhost:8080/api/user/profile/${user._id}`,
+          `${import.meta.env.VITE_SERVER_URL}/api/user/profile/${user._id}`,
           formData
         );
 
@@ -91,7 +91,7 @@ function ProfilePage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/order/${user?._id}`)
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/order/${user?._id}`)
       .then((res) => setOrders(res.data));
   }, [user]);
 

@@ -24,7 +24,7 @@ function LoginPage() {
     onSubmit: async ({ email, password }) => {
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/user/login",
+          `${import.meta.env.VITE_SERVER_URL}/api/user/login`,
           {
             email,
             password,

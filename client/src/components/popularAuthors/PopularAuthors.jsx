@@ -13,7 +13,7 @@ function PopularAuthors() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/author")
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/author`)
       .then((res) => setAuthors(res.data.slice(0, 6)));
   }, []);
 

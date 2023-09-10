@@ -66,13 +66,16 @@ function OrderPage() {
           quantity: item.quantity,
         }));
 
-        const response = await axios.post("http://localhost:8080/api/order", {
-          user: user._id,
-          books: booksData,
-          address: address,
-          totalPrice: state,
-          orderNumber: randomNumberString,
-        });
+        const response = await axios.post(
+          `${import.meta.env.VITE_SERVER_URL}/api/order`,
+          {
+            user: user._id,
+            books: booksData,
+            address: address,
+            totalPrice: state,
+            orderNumber: randomNumberString,
+          }
+        );
 
         if (response.status === 201) {
           setIsSuccessAlertOpen(true);
