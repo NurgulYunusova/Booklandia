@@ -10,7 +10,7 @@ import AuthorDetailsPage from "../pages/authorDetails/AuthorDetailsPage";
 import BasketPage from "../pages/basket/BasketPage";
 import BooksPage from "../pages/books/BooksPage";
 import BooksDetailsPage from "../pages/booksDetails/BooksDetailsPage";
-import ContactUsPage from "../pages/contactUs/ContactusPage";
+import ContactUsPage from "../pages/contactUs/ContactUsPage";
 import HomePage from "../pages/home/HomePage";
 import ProfilePage from "../pages/profile/ProfilePage";
 import QuizPage from "../pages/quiz/QuizPage";
