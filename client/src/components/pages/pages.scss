@@ -8,6 +8,7 @@
   margin-top: 88px;
 
   &Container {
+    width: 80%;
     margin: 0 auto;
     @include center();
 
@@ -29,6 +30,111 @@
           text-decoration: none;
           color: $base-color2;
           cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 320px) and (max-width: 479px) {
+  .pages {
+    margin-top: 55px;
+
+    &Container {
+      width: 85%;
+
+      ul {
+        li {
+          padding: 0 7px;
+          font-size: 10px;
+
+          a {
+            font-size: 10px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 479px) and (max-width: 767px) {
+  .pages {
+    margin-top: 55px;
+
+    &Container {
+      width: 85%;
+
+      ul {
+        li {
+          padding: 0 10px;
+          font-size: 11px;
+
+          a {
+            font-size: 11px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 767px) and (max-width: 991px) {
+  .pages {
+    margin-top: 63.6px;
+
+    &Container {
+      width: 85%;
+
+      ul {
+        li {
+          padding: 0 20px;
+          font-size: 12px;
+
+          a {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 991px) and (max-width: 1199px) {
+  .pages {
+    margin-top: 63.6px;
+
+    &Container {
+      width: 85%;
+
+      ul {
+        li {
+          padding: 0 25px;
+          font-size: 13px;
+
+          a {
+            font-size: 13px;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media screen and (min-width: 1199px) and (max-width: 1439px) {
+  .pages {
+    margin-top: 70px;
+
+    &Container {
+      width: 85%;
+
+      ul {
+        li {
+          padding: 0 35px;
+          font-size: 15px;
+
+          a {
+            font-size: 15px;
+          }
         }
       }
     }
