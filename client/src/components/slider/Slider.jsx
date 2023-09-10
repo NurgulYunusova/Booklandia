@@ -36,7 +36,10 @@ function Slider() {
             {sliderBooks &&
               sliderBooks.map((q, key) => (
                 <SwiperSlide key={key}>
-                  <img src={`http://localhost:8080/${q.image}`} alt={q.name} />
+                  <img
+                    src={`${import.meta.env.VITE_SERVER_URL}/${q.image}`}
+                    alt={q.name}
+                  />
                 </SwiperSlide>
               ))}
           </Swiper>

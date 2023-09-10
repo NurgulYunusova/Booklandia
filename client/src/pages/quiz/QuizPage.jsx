@@ -20,7 +20,7 @@ function QuizPage() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:8080/api/quiz")
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/quiz`)
       .then((res) => setQuiz(res.data));
   }, []);
 

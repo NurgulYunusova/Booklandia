@@ -23,7 +23,7 @@ function RegisterPage() {
     validationSchema: registerSchema,
     onSubmit: async ({ name, email, password }) => {
       await axios
-        .post("http://localhost:8080/api/user/register", {
+        .post(`${import.meta.env.VITE_SERVER_URL}/api/user/register`, {
           name,
           email,
           password,

@@ -61,7 +61,7 @@ function Bestsellers() {
                   </div>
                   <div className="bookImage">
                     <img
-                      src={`http://localhost:8080/${q.image}`}
+                      src={`${import.meta.env.VITE_SERVER_URL}/${q.image}`}
                       alt={q.name}
                     />
                   </div>

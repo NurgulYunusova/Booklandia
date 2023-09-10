@@ -107,7 +107,7 @@ function Header() {
                     filteredBooks.map((q, key) => (
                       <li key={key} onClick={() => handleBookClick(q._id)}>
                         <img
-                          src={`http://localhost:8080/${q.image}`}
+                          src={`${import.meta.env.VITE_SERVER_URL}/${q.image}`}
                           alt={q.name}
                         />
                         <div className="infos">

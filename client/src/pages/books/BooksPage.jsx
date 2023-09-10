@@ -72,13 +72,13 @@ function BooksPage() {
   useEffect(() => {
     async function getCategories() {
       await axios
-        .get("http://localhost:8080/api/category")
+        .get(`${import.meta.env.VITE_SERVER_URL}/api/category`)
         .then((res) => setCategories(res.data));
     }
 
     async function getAuthors() {
       await axios
-        .get("http://localhost:8080/api/author")
+        .get(`${import.meta.env.VITE_SERVER_URL}/api/author`)
         .then((res) => setAuthors(res.data));
     }
 
@@ -277,7 +277,9 @@ function BooksPage() {
                             >
                               <div className="bookImage">
                                 <img
-                                  src={`http://localhost:8080/${q.image}`}
+                                  src={`${import.meta.env.VITE_SERVER_URL}/${
+                                    q.image
+                                  }`}
                                   alt={q.name}
                                 />
                               </div>

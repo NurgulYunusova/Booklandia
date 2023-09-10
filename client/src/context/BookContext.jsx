@@ -14,7 +14,9 @@ export const BookProvider = ({ children }) => {
   }, []);
 
   const getBooks = async () => {
-    const response = await axios.get("http://localhost:8080/api/book");
+    const response = await axios.get(
+      `${import.meta.env.VITE_SERVER_URL}/api/book`
+    );
 
     if (response.status == 200) {
       setBooks(response.data);
