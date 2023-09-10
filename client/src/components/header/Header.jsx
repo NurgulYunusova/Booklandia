@@ -10,12 +10,16 @@ import { useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../../context/UserContext";
 import { BookContext } from "../../context/BookContext";
-import { Snackbar } from "@mui/material";
+import { WishlistContext } from "../../context/WishlistContext";
+import { BasketContext } from "../../context/BasketContext";
+import { Badge, Snackbar } from "@mui/material";
 import MuiAlert from "@mui/material/Alert";
 
 function Header() {
   const navigate = useNavigate();
   const { books } = useContext(BookContext);
+  const { basket } = useContext(BasketContext);
+  const { wishlist } = useContext(WishlistContext);
   const { isLoggedIn, setIsLoggedIn } = useContext(UserContext);
   const [searchValue, setSearchValue] = useState("");
   const [filteredBooks, setFilteredBooks] = useState([]);
@@ -146,11 +150,15 @@ function Header() {
           {isLoggedIn ? (
             <div className="userIcons">
               <span onClick={() => handleWishlistClick()}>
-                <FavoriteBorderOutlinedIcon sx={{ fontSize: "20px" }} />
+                <Badge badgeContent={wishlist.length}>
+                  <FavoriteBorderOutlinedIcon sx={{ fontSize: "20px" }} />
+                </Badge>
                 WISHLIST
               </span>
               <span className="cart" onClick={() => handleCartClick()}>
-                <AddShoppingCartOutlinedIcon sx={{ fontSize: "20px" }} />
+                <Badge badgeContent={basket.length}>
+                  <AddShoppingCartOutlinedIcon sx={{ fontSize: "20px" }} />
+                </Badge>
                 CART
               </span>
               <span onClick={() => navigate("/profilePage")}>
