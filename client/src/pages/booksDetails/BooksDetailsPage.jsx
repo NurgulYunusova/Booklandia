@@ -2,7 +2,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
-import "./booksdetails.scss";
+import "./booksDetails.scss";
 import { useContext, useEffect, useState } from "react";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import RemoveShoppingCartOutlinedIcon from "@mui/icons-material/RemoveShoppingCartOutlined";
