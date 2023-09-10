@@ -29,8 +29,6 @@ function ChangePasswordPage() {
     ),
   });
 
-  console.log(userId);
-
   const { handleSubmit, handleChange, values, errors } = useFormik({
     initialValues: {
       password: "",
@@ -51,8 +49,6 @@ function ChangePasswordPage() {
         setTimeout(() => {
           navigate("/login");
         }, 2000);
-      } else {
-        alert("Password and confirm password must be same");
       }
     },
   });
@@ -80,6 +76,7 @@ function ChangePasswordPage() {
                 placeholder="Password"
                 onChange={handleChange}
                 value={values.password}
+                required
               />
               <p
                 style={{
@@ -98,6 +95,7 @@ function ChangePasswordPage() {
                 placeholder="Confirm Password"
                 onChange={handleChange}
                 value={values.confirmPassword}
+                required
               />
               <p
                 style={{

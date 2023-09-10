@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unescaped-entities */
 import { useNavigate } from "react-router-dom";
 import "./profile.scss";
@@ -11,6 +12,8 @@ import * as Yup from "yup";
 import { useFormik } from "formik";
 import axios from "axios";
 import moment from "moment";
+import Snackbar from "@mui/material/Snackbar";
+import MuiAlert from "@mui/material/Alert";
 
 function ProfilePage() {
   const navigate = useNavigate();
@@ -18,6 +21,7 @@ function ProfilePage() {
   const [activeTab, setActiveTab] = useState(0);
   const [isEditMode, setIsEditMode] = useState(false);
   const [orders, setOrders] = useState([]);
+  const [isSuccessAlertOpen, setIsSuccessAlertOpen] = useState(false);
 
   const userProfileSchema = Yup.object({
     name: Yup.string().max(20, "Maximum 30 character"),
@@ -65,19 +69,22 @@ function ProfilePage() {
         formData.append("password", password);
         formData.append("photo", profileImage);
 
-        await axios
-          .put(`http://localhost:8080/api/user/profile/${user._id}`, formData)
-          .then((res) => {
-            if (res.status == 200) {
-              alert("Profile successfully edited");
-              setIsEditMode(false);
-              updateUser();
-              console.log(res.data);
-            }
-          });
+        const response = await axios.put(
+          `http://localhost:8080/api/user/profile/${user._id}`,
+          formData
+        );
+
+        if (response.status === 200) {
+          setIsEditMode(false);
+          updateUser();
+          setIsSuccessAlertOpen(true);
+        }
       },
     });
 
+  const handleCloseSuccessAlert = () => {
+    setIsSuccessAlertOpen(false);
+  };
   const handleTabChange = (event, newTab) => {
     setActiveTab(newTab);
   };
@@ -88,14 +95,11 @@ function ProfilePage() {
       .then((res) => setOrders(res.data));
   }, [user]);
 
-  if (orders) {
-    console.log(orders);
-  }
-
   return (
     <>
-      <Header />
-      <Pages />
+      {/* <Header />
+      <Pages /> */}
+
       <div className="profile">
         <div className="profileContainer">
           <div className="top">
@@ -147,92 +151,94 @@ function ProfilePage() {
                   <div className="profile">
                     <div className="leftSide">
                       {isEditMode ? (
-                        <form onSubmit={handleSubmit}>
-                          <input
-                            type="text"
-                            id="name"
-                            placeholder="Name"
-                            onChange={handleChange}
-                            value={values.name}
-                          />
-                          <p
-                            style={{
-                              color: "red",
-                              fontSize: "12px",
-                              marginTop: "10px",
-                            }}
-                          >
-                            {errors?.name}
-                          </p>
-
-                          <br />
-
-                          <input
-                            type="email"
-                            id="email"
-                            placeholder="Email"
-                            onChange={handleChange}
-                            value={values.email}
-                          />
-                          <p
-                            style={{
-                              color: "red",
-                              fontSize: "12px",
-                              marginTop: "10px",
-                            }}
-                          >
-                            {errors?.email}
-                          </p>
-
-                          <br />
-
-                          <input
-                            type="password"
-                            id="password"
-                            placeholder="Password"
-                            onChange={handleChange}
-                            value={values.password}
-                          />
-                          <p
-                            style={{
-                              color: "red",
-                              fontSize: "12px",
-                              marginTop: "10px",
-                            }}
-                          >
-                            {errors?.password}
-                          </p>
-
-                          <br />
-
-                          <input
-                            type="password"
-                            id="confirmPassword"
-                            placeholder="Confirm Password"
-                            onChange={handleChange}
-                            value={values.confirmPassword}
-                          />
-                          <p
-                            style={{
-                              color: "red",
-                              fontSize: "12px",
-                              marginTop: "10px",
-                            }}
-                          >
-                            {errors?.confirmPassword}
-                          </p>
-
-                          <div>
-                            <p>Profile image</p>
+                        <>
+                          <form onSubmit={handleSubmit}>
                             <input
-                              type="file"
-                              accept="image/*"
-                              onChange={handleFileChange}
+                              type="text"
+                              id="name"
+                              placeholder="Name"
+                              onChange={handleChange}
+                              value={values.name}
                             />
-                          </div>
+                            <p
+                              style={{
+                                color: "red",
+                                fontSize: "12px",
+                                marginTop: "10px",
+                              }}
+                            >
+                              {errors?.name}
+                            </p>
 
-                          <button type="submit">Save</button>
-                        </form>
+                            <br />
+
+                            <input
+                              type="email"
+                              id="email"
+                              placeholder="Email"
+                              onChange={handleChange}
+                              value={values.email}
+                            />
+                            <p
+                              style={{
+                                color: "red",
+                                fontSize: "12px",
+                                marginTop: "10px",
+                              }}
+                            >
+                              {errors?.email}
+                            </p>
+
+                            <br />
+
+                            <input
+                              type="password"
+                              id="password"
+                              placeholder="Password"
+                              onChange={handleChange}
+                              value={values.password}
+                            />
+                            <p
+                              style={{
+                                color: "red",
+                                fontSize: "12px",
+                                marginTop: "10px",
+                              }}
+                            >
+                              {errors?.password}
+                            </p>
+
+                            <br />
+
+                            <input
+                              type="password"
+                              id="confirmPassword"
+                              placeholder="Confirm Password"
+                              onChange={handleChange}
+                              value={values.confirmPassword}
+                            />
+                            <p
+                              style={{
+                                color: "red",
+                                fontSize: "12px",
+                                marginTop: "10px",
+                              }}
+                            >
+                              {errors?.confirmPassword}
+                            </p>
+
+                            <div>
+                              <p>Profile image</p>
+                              <input
+                                type="file"
+                                accept="image/*"
+                                onChange={handleFileChange}
+                              />
+                            </div>
+
+                            <button type="submit">Save</button>
+                          </form>
+                        </>
                       ) : (
                         <div className="infos">
                           <div className="dataNames">
@@ -314,8 +320,27 @@ function ProfilePage() {
             </div>
           </div>
         </div>
+
+        <Snackbar
+          open={isSuccessAlertOpen}
+          autoHideDuration={3000}
+          onClose={handleCloseSuccessAlert}
+          anchorOrigin={{
+            vertical: "bottom",
+            horizontal: "right",
+          }}
+        >
+          <MuiAlert
+            onClose={handleCloseSuccessAlert}
+            severity="success"
+            sx={{ width: "100%" }}
+          >
+            Profile updated successfully!
+          </MuiAlert>
+        </Snackbar>
       </div>
-      <Footer />
+
+      {/* <Footer /> */}
     </>
   );
 }
