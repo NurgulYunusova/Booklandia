@@ -97,8 +97,8 @@ function ProfilePage() {
 
   return (
     <>
-      {/* <Header />
-      <Pages /> */}
+      <Header />
+      <Pages />
 
       <div className="profile">
         <div className="profileContainer">
@@ -340,7 +340,7 @@ function ProfilePage() {
         </Snackbar>
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
