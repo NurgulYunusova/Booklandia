@@ -208,6 +208,16 @@ header {
         display: none;
       }
 
+      .authButtons {
+        gap: 10px;
+
+        .loginButton,
+        .registerButton {
+          font-size: 10px;
+          padding: 2.5px 8px;
+        }
+      }
+
       .userIcons.desktop {
         display: none;
       }
@@ -311,6 +321,16 @@ header {
               }
             }
           }
+        }
+      }
+
+      .authButtons {
+        gap: 10px;
+
+        .loginButton,
+        .registerButton {
+          font-size: 10px;
+          padding: 3px 8px;
         }
       }
 
@@ -433,6 +453,14 @@ header {
               }
             }
           }
+        }
+      }
+
+      .authButtons {
+        .loginButton,
+        .registerButton {
+          font-size: 12px;
+          padding: 5px 10px;
         }
       }
 

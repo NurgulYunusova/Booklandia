@@ -74,6 +74,7 @@
       justify-content: center;
       align-items: center;
       gap: 30px;
+      margin: 30px auto;
 
       .heading {
         width: 80%;
@@ -95,9 +96,21 @@
           height: auto;
           gap: 15px;
 
+          .bookInfo {
+            width: 100%;
+
+            .title {
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;
+              max-width: 100%;
+            }
+          }
+
           .bookImage {
             img {
-              width: 55%;
+              width: 90px;
+              height: 115px;
             }
           }
         }
@@ -114,6 +127,7 @@
       justify-content: center;
       align-items: center;
       gap: 30px;
+      margin: 10px auto;
 
       .heading {
         width: 60%;
@@ -136,9 +150,16 @@
           height: auto;
           gap: 15px;
           flex-direction: row;
+          justify-content: space-between;
 
           .bookInfo {
+            width: 50%;
+
             .title {
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;
+              max-width: 100%;
               font-size: 26px;
             }
 
@@ -148,7 +169,12 @@
           }
 
           .bookImage {
-            width: 50%;
+            width: 40%;
+
+            img {
+              width: 100%;
+              aspect-ratio: 2/2.5;
+            }
           }
         }
       }
@@ -175,11 +201,29 @@
       }
 
       .books {
-        gap: 40px;
+        gap: 30px;
         width: 100%;
 
         .book {
           height: auto;
+          width: 30%;
+
+          .bookInfo {
+            width: 100%;
+
+            .title {
+              text-overflow: ellipsis;
+              white-space: nowrap;
+              overflow: hidden;
+              max-width: 100%;
+              font-size: 26px;
+            }
+          }
+
+          .bookImage {
+            width: 100%;
+            aspect-ratio: 2/2.5;
+          }
         }
       }
     }
@@ -193,7 +237,8 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      gap: 30px;
+      gap: 40px;
+      margin: 30px auto 15px;
 
       .heading {
         width: 40%;
