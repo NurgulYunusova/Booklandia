@@ -12,7 +12,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import * as Yup from "yup";
 import { useFormik } from "formik";
-// import mongoose from "mongoose";
 
 function AdminPage() {
   const { books, getBooks } = useContext(BookContext);
