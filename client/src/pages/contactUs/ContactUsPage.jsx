@@ -56,7 +56,7 @@ function ContactUsPage() {
                 <br />
                 <textarea
                   id="message"
-                  rows="6"
+                  rows="5"
                   placeholder="Message"
                 ></textarea>{" "}
                 <br />
