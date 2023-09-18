@@ -101,7 +101,7 @@ const userController = {
     }
   },
   getUserProfile: async (req, res) => {
-    const userId = req.userId;
+    const userId = req?.userId;
 
     try {
       const user = await User.findById(userId).select("-password  ");
