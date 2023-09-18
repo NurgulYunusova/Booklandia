@@ -28,16 +28,17 @@ export const UserProvider = ({ children }) => {
 
         if (response.status === 200) {
           setUser(response.data);
-        } else if (response.status === 401) {
-          setIsLoggedIn(false);
-          setUser(null);
-          localStorage.removeItem("token");
-          navigate("/");
         }
 
         setIsLoggedIn(true);
       }
     } catch (error) {
+      if (error.response.status === 401) {
+        setIsLoggedIn(false);
+        localStorage.removeItem("token");
+        setUser(null);
+        navigate("/");
+      }
       console.error("An error occurred:", error);
     }
   };
