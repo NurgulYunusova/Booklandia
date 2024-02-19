@@ -54,7 +54,7 @@ function OrderPage() {
       message: "",
     },
     validationSchema: orderSchema,
-    onSubmit: async ({ address }) => {
+    onSubmit: async ({ address }, { resetForm }) => {
       try {
         if (basket.length === 0) {
           setIsErrorAlertOpen(true);
@@ -79,6 +79,7 @@ function OrderPage() {
 
         if (response.status === 201) {
           setIsSuccessAlertOpen(true);
+          resetForm();
           setTimeout(() => {
             clearBasket(booksData);
           }, 3000);
