@@ -211,16 +211,24 @@
           .books {
             .book {
               .bookImage {
+                height: auto;
+
                 img {
                   width: 90px;
+                  aspect-ratio: 2/3;
                 }
               }
 
               .bookInfo {
                 gap: 5px;
+                width: 100%;
 
                 .bookTitle {
                   font-size: 15px;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  max-width: 100%;
                 }
 
                 .bookAuthor {
@@ -299,8 +307,11 @@
           .books {
             .book {
               .bookImage {
+                height: auto;
+
                 img {
                   width: 90px;
+                  aspect-ratio: 2/3;
                 }
               }
 
@@ -338,7 +349,7 @@
         }
 
         .divider {
-          width: 55%;
+          width: 35%;
         }
 
         button {
@@ -380,27 +391,43 @@
 
             .textsRightSide {
               align-items: center;
-              margin-top: 30px;
+              margin-top: 10px;
             }
           }
         }
 
         .rightSide {
+          flex-basis: 100%;
+          width: 100%;
+
           .books {
             @include center();
+            gap: 1%;
 
             .book {
+              width: 33%;
+              gap: 15px;
+              padding: 5px 10px;
+
               .bookImage {
+                height: 125px;
+
                 img {
-                  width: 90px;
+                  width: 80px;
+                  aspect-ratio: 2/3;
                 }
               }
 
               .bookInfo {
                 gap: 5px;
+                width: 53%;
 
                 .bookTitle {
                   font-size: 15px;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  max-width: 100%;
                 }
 
                 .bookAuthor {
@@ -408,7 +435,7 @@
                 }
 
                 .price {
-                  font-size: 26px;
+                  font-size: 22px;
                 }
               }
 
@@ -488,16 +515,24 @@
 
             .book {
               .bookImage {
+                height: auto;
+
                 img {
                   width: 90px;
+                  aspect-ratio: 2/3;
                 }
               }
 
               .bookInfo {
                 gap: 5px;
+                width: 55%;
 
                 .bookTitle {
                   font-size: 15px;
+                  text-overflow: ellipsis;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  max-width: 100%;
                 }
 
                 .bookAuthor {
@@ -537,9 +572,14 @@
         .rightSide {
           .books {
             .book {
+              padding: 15px 20px;
+
               .bookImage {
+                height: 135px;
+
                 img {
                   width: 90px;
+                  aspect-ratio: 2/3;
                 }
               }
 

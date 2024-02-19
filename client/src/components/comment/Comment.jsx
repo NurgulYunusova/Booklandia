@@ -34,7 +34,7 @@ function Comment() {
   const getBooksReviews = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:8080/api/review/${id}`
+        `${import.meta.env.VITE_SERVER_URL}/api/review/${id}`
       );
       setReviews(response.data.reviews);
     } catch (error) {
@@ -50,7 +50,7 @@ function Comment() {
     const userId = user._id;
 
     try {
-      await axios.post(`http://localhost:8080/api/review/${id}`, {
+      await axios.post(`${import.meta.env.VITE_SERVER_URL}/api/review/${id}`, {
         rating,
         reviewText,
         user: userId,
@@ -73,7 +73,9 @@ function Comment() {
 
   const handleConfirmDelete = async () => {
     try {
-      await axios.delete(`http://localhost:8080/api/review/${reviewToDelete}`);
+      await axios.delete(
+        `${import.meta.env.VITE_SERVER_URL}/api/review/${reviewToDelete}`
+      );
       setDeleteSuccessAlertOpen(true);
       getBooksReviews();
       setReviewToDelete(null);

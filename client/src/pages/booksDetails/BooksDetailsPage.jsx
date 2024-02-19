@@ -2,7 +2,7 @@
 import { useNavigate, useParams } from "react-router-dom";
 import Rating from "@mui/material/Rating";
 import StarRoundedIcon from "@mui/icons-material/StarRounded";
-import "./booksdetails.scss";
+import "./booksDetails.scss";
 import { useContext, useEffect, useState } from "react";
 import AddShoppingCartOutlinedIcon from "@mui/icons-material/AddShoppingCartOutlined";
 import RemoveShoppingCartOutlinedIcon from "@mui/icons-material/RemoveShoppingCartOutlined";
@@ -47,7 +47,7 @@ function BooksDetailsPage() {
       setLoading(true);
       try {
         const response = await axios.get(
-          `http://localhost:8080/api/book/${id}`
+          `${import.meta.env.VITE_SERVER_URL}/api/book/${id}`
         );
 
         if (response.status == 200) {
@@ -64,7 +64,7 @@ function BooksDetailsPage() {
 
   useEffect(() => {
     if (book) {
-      axios.get("http://localhost:8080/api/book").then((res) => {
+      axios.get(`${import.meta.env.VITE_SERVER_URL}/api/book`).then((res) => {
         const filteredRelatedBooks = res.data.filter(
           (relatedBook) =>
             relatedBook.category._id === book.category._id &&
@@ -120,7 +120,7 @@ function BooksDetailsPage() {
                 <div className="left">
                   <div className="bookImage">
                     <img
-                      src={`http://localhost:8080/${book.image}`}
+                      src={`${import.meta.env.VITE_SERVER_URL}/${book.image}`}
                       alt={book.name}
                     />
                   </div>
@@ -321,7 +321,9 @@ function BooksDetailsPage() {
                         </div>
                         <div className="bookImage">
                           <img
-                            src={`http://localhost:8080/${q.image}`}
+                            src={`${import.meta.env.VITE_SERVER_URL}/${
+                              q.image
+                            }`}
                             alt={q.name}
                           />
                         </div>

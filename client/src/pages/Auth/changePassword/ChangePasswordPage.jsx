@@ -37,7 +37,7 @@ function ChangePasswordPage() {
     validationSchema: changePasswordSchema,
     onSubmit: async ({ password }) => {
       const response = await axios.post(
-        "http://localhost:8080/api/user/changePassword",
+        `${import.meta.env.VITE_SERVER_URL}/api/user/changePassword`,
         {
           userId: userId,
           password: password,

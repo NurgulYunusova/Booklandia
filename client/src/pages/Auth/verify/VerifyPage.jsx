@@ -26,7 +26,7 @@ function VerifyPage() {
     onSubmit: async ({ confirmCode }) => {
       try {
         const response = await axios.post(
-          "http://localhost:8080/api/user/confirm",
+          `${import.meta.env.VITE_SERVER_URL}/api/user/confirm`,
           {
             confirmCode,
             email: state,

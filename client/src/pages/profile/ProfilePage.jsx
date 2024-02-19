@@ -70,7 +70,7 @@ function ProfilePage() {
         formData.append("photo", profileImage);
 
         const response = await axios.put(
-          `http://localhost:8080/api/user/profile/${user._id}`,
+          `${import.meta.env.VITE_SERVER_URL}/api/user/profile/${user._id}`,
           formData
         );
 
@@ -91,14 +91,14 @@ function ProfilePage() {
 
   useEffect(() => {
     axios
-      .get(`http://localhost:8080/api/order/${user?._id}`)
+      .get(`${import.meta.env.VITE_SERVER_URL}/api/order/${user?._id}`)
       .then((res) => setOrders(res.data));
   }, [user]);
 
   return (
     <>
-      {/* <Header />
-      <Pages /> */}
+      <Header />
+      <Pages />
 
       <div className="profile">
         <div className="profileContainer">
@@ -266,8 +266,10 @@ function ProfilePage() {
                         <></>
                       ) : (
                         <>
+                          {console.log(user.profileImage)}
                           <p>Profile image</p>
-                          {user?.profileImage !== null ? (
+                          {user.profileImage !==
+                          "http://localhost:8080/undefined" ? (
                             <img src={user?.profileImage} alt={user?.name} />
                           ) : (
                             <img
@@ -283,7 +285,12 @@ function ProfilePage() {
 
                 {activeTab === 1 && (
                   <div className="orders">
-                    {orders &&
+                    {orders.length === 0 ? (
+                      <>
+                        <h2>You don't have any orders</h2>
+                      </>
+                    ) : (
+                      orders &&
                       orders.map((q) => (
                         <div className="order" key={q._id}>
                           <div className="images">
@@ -313,7 +320,8 @@ function ProfilePage() {
                             </div>
                           </div>
                         </div>
-                      ))}
+                      ))
+                    )}
                   </div>
                 )}
               </div>
@@ -340,7 +348,7 @@ function ProfilePage() {
         </Snackbar>
       </div>
 
-      {/* <Footer /> */}
+      <Footer />
     </>
   );
 }
