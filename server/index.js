@@ -32,10 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(
   cors({
-    origin: [
-      "http://localhost:5173",
-      "https://booklandia-llnnxlou1-nurgulyunusova.vercel.app",
-    ],
+    origin: ["http://localhost:5173", "https://booklandiawebsite.vercel.app"],
     credentials: true,
   })
 );
