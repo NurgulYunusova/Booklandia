@@ -259,7 +259,11 @@ function BooksPage() {
                   </div>
 
                   <div className="booksShop">
-                    {filteredItems &&
+                    {filteredItems.length === 0 ? (
+                      <p className="noBooksMessage">
+                        No books found for the selected criteria
+                      </p>
+                    ) : (
                       filteredItems.map((q, key) => {
                         const bookInBasket = basket.some(
                           (item) => item.book?._id === q._id
@@ -353,7 +357,8 @@ function BooksPage() {
                             </div>
                           </div>
                         );
-                      })}
+                      })
+                    )}
                   </div>
                 </div>
               </div>
