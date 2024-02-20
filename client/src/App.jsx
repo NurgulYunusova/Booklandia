@@ -7,6 +7,8 @@ import { UserContext } from "./context/UserContext";
 import UserRoute from "./routes/UserRoute";
 import WishlistPage from "./pages/wishlist/WishlistPage";
 import BasketPage from "./pages/basket/BasketPage";
+import OrderPage from "./pages/order/OrderPage";
+import ProfilePage from "./pages/profile/ProfilePage";
 
 function App() {
   const { user, isLoggedIn } = useContext(UserContext);
@@ -20,6 +22,7 @@ function App() {
               <Route key={key} path={route.path} element={route.element} />
             );
           })}
+
         <Route
           path="/admin"
           element={
@@ -28,6 +31,7 @@ function App() {
             </AdminRoute>
           }
         />
+
         <Route
           path="/wishlist"
           element={
@@ -36,11 +40,30 @@ function App() {
             </UserRoute>
           }
         />
+
         <Route
           path="/cart"
           element={
             <UserRoute isLoggedIn={isLoggedIn}>
               <BasketPage />
+            </UserRoute>
+          }
+        />
+
+        <Route
+          path="/order"
+          element={
+            <UserRoute isLoggedIn={isLoggedIn}>
+              <OrderPage />
+            </UserRoute>
+          }
+        />
+
+        <Route
+          path="/profilePage"
+          element={
+            <UserRoute isLoggedIn={isLoggedIn}>
+              <ProfilePage />
             </UserRoute>
           }
         />

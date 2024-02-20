@@ -7,17 +7,12 @@ import RegisterPage from "../pages/Auth/register/RegisterPage";
 import VerifyPage from "../pages/Auth/verify/VerifyPage";
 import AboutUsPage from "../pages/aboutUs/AboutUsPage";
 import AuthorDetailsPage from "../pages/authorDetails/AuthorDetailsPage";
-import BasketPage from "../pages/basket/BasketPage";
 import BooksPage from "../pages/books/BooksPage";
 import BooksDetailsPage from "../pages/booksDetails/BooksDetailsPage";
 import ContactUsPage from "../pages/contactUs/ContactUsPage";
 import HomePage from "../pages/home/HomePage";
-import ProfilePage from "../pages/profile/ProfilePage";
 import QuizPage from "../pages/quiz/QuizPage";
-import WishlistPage from "../pages/wishlist/WishlistPage";
 import NotFoundPage from "../pages/notFound/NotFoundPage";
-import OrderPage from "../pages/order/OrderPage";
-import UserRoute from "./UserRoute";
 
 export const routes = [
   {
@@ -76,17 +71,8 @@ export const routes = [
     // DONE
   },
   {
-    path: "/profilePage",
-    element: <ProfilePage />,
-  },
-  {
     path: "/quiz",
     element: <QuizPage />,
-    // DONE
-  },
-  {
-    path: "/order",
-    element: <OrderPage />,
     // DONE
   },
   {
